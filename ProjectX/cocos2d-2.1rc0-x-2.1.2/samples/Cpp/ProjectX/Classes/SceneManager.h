@@ -3,6 +3,27 @@
 
 #include "cocos2d.h"
 
+USING_NS_CC;
+
+#define LINE_SPACE          40
+
+enum
+{
+    MainMenu_A = 0,
+    MainMenu_B,
+    MainMenu_C,
+	MainMenu_D,
+
+	MainMenu_Count,
+};
+
+const std::string g_MainMenuNames[MainMenu_Count] = {
+"A",
+"B",
+"C",
+"D"
+};
+
 class StartLayer : public cocos2d::CCLayer
 {
 public:
@@ -19,14 +40,18 @@ public:
     CREATE_FUNC(StartLayer);
 };
 
-class SceneManager
+class SceneManager : public cocos2d::CCLayer
 {
+
 public:
-	void init();
+	SceneManager();
 
-    // there's no 'id' in cpp, so we recommend returning the class instance pointer
-    static cocos2d::CCScene* scene();
+	void menuCallback(CCObject * pSender);
+    void closeCallback(CCObject * pSender);
 
+private:
+    CCPoint m_tBeginPos;
+    CCMenu* m_pItemMenu;
 };
 
 #endif // __StartLayer_SCENE_H__
