@@ -3,6 +3,7 @@
 #include "ResourceDefines.h"
 #include "VisibleRect.h"
 #include "SceneGame.h"
+#include "SceneCredits.h"
 
 USING_NS_CC;
 
@@ -17,7 +18,7 @@ static SceneBase* CreateScene(int nIdx)
     case MainMenu_Game:
         pScene = new SceneGame(); break;
     case MainMenu_Credits:
-        pScene = new SceneGame(); break;
+        pScene = new SceneCredits(); break;
      case MainMenu_Option:
          pScene = new SceneGame(); break;
     default:
