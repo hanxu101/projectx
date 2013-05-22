@@ -41,7 +41,8 @@ SceneManager::SceneManager()
     m_pItemMenu = CCMenu::create();
     for (int i = 0; i < MainMenu_Count; ++i)
     {
-        CCLabelTTF* label = CCLabelTTF::create(g_MainMenuNames[i].c_str(), "Arial", 20);     
+        CCLabelTTF* label = CCLabelTTF::create(g_MainMenuNames[i].c_str(), "Arial", 20);
+		label->setColor(ccMAGENTA);
         CCMenuItemLabel* pMenuItem = CCMenuItemLabel::create(label, this, menu_selector(SceneManager::menuCallback));
 
         m_pItemMenu->addChild(pMenuItem, i + 10000);
@@ -56,17 +57,18 @@ SceneManager::SceneManager()
 
     addChild(pMenu, 1);
 
-	CCLabelTTF* pLabel = CCLabelTTF::create("ProjectX", "Arial", TITLE_FONT_SIZE);
-    
+	CCLabelTTF* pLabel = CCLabelTTF::create("Project", "Arial", TITLE_FONT_SIZE);
+	pLabel->setColor(ccGRAY);
+
     // position the label on the center of the screen
-    pLabel->setPosition(ccp(VisibleRect::center().x,
-                            (VisibleRect::top().y - LINE_SPACE)));
+    pLabel->setPosition(ccp(VisibleRect::center().x - 10,
+                            (VisibleRect::top().y - 2*LINE_SPACE)));
 
     // add the label as a child to this layer
     addChild(pLabel, 1);
 
 	// add splash screen"
-    CCSprite* pSprite = CCSprite::create("HelloWorld.png");
+    CCSprite* pSprite = CCSprite::create("projectx.png");
 
     // position the sprite on the center of the screen
     pSprite->setPosition(ccp(VisibleRect::center().x, VisibleRect::center().y));
