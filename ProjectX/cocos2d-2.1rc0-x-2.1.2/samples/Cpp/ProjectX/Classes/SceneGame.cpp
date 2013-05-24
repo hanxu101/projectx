@@ -2,12 +2,7 @@
 #include "ResourceDefines.h"
 #include "cocos2d.h"
 #include "GameObject/MainCharacter.h"
-
-#define FIX_POS(_pos, _min, _max) \
-	if (_pos < _min)        \
-	_pos = _min;        \
-else if (_pos > _max)   \
-	_pos = _max;        \
+#include "GameObject\FireBall.h"
 
 //------------------------------------------------------------------
 //
@@ -15,15 +10,23 @@ else if (_pos > _max)   \
 //
 //------------------------------------------------------------------
 GameLayer::GameLayer(void)
-	: m_fLastTime(0.0)
-	, m_pBall(NULL)
-	, m_pMainCharacter(NULL)
+	: m_pMainCharacter(NULL)
+	, m_pFireBall(NULL)
 {
 }
 
 GameLayer::~GameLayer(void)
 {
-	//m_pBall->release();
+}
+
+bool GameLayer::init()
+{
+    if (CCLayer::init())
+    {
+        setTouchEnabled(true);
+        return true;
+    }
+    return false;
 }
 
 std::string GameLayer::title()
@@ -35,65 +38,76 @@ void GameLayer::onEnter()
 {
 	CCLayer::onEnter();
 
-	setAccelerometerEnabled(true);
-
-
 	CCLabelTTF* label = CCLabelTTF::create(title().c_str(), "Arial", 32);
 	addChild(label, 1);
 	label->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y-50) );
 
-	//  m_pBall = CCSprite::create("ball.png");
-	// 	m_pBall->retain();
-	// 	m_pBall->setPosition(ccp(VisibleRect::center().x, VisibleRect::center().y));
-	//  addChild(m_pBall);
+	CCLabelTTF* infolabel = CCLabelTTF::create("Tap to Fire", "Arial", 10);
+	addChild(infolabel , 1);
+	infolabel ->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y-70) );
 
 	m_pMainCharacter = new MainCharacter();
 	m_pMainCharacter->setPosition(ccp(VisibleRect::center().x, VisibleRect::center().y));
 	addChild(m_pMainCharacter);
 }
 
-void GameLayer::didAccelerate(CCAcceleration* pAccelerationValue)
+
+static CCDictionary s_dic;
+
+void GameLayer::registerWithTouchDispatcher(void)
 {
-	//     double fNow = pAccelerationValue->timestamp;
-	// 
-	//     if (m_fLastTime > 0.0)
-	//     {
-	//         CCPoint ptNow = convertToUI
-	//     }
-	// 
-	//     m_fLastTime = fNow;
+    CCDirector::sharedDirector()->getTouchDispatcher()->addStandardDelegate(this, 0);
+}
 
-	CCDirector* pDir = CCDirector::sharedDirector();
+void GameLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
+{
+    CCSetIterator iter = pTouches->begin();
+    for (; iter != pTouches->end(); iter++)
+    {
+        CCTouch* pTouch = (CCTouch*)(*iter);
+        CCPoint location = pTouch->getLocation();
+		location.x += 1.0f;
 
-	/*FIXME: Testing on the Nexus S sometimes m_pBall is NULL */
-	if ( m_pBall == NULL ) {
-		return;
-	}
+		m_pFireBall = new FireBall();
+		m_pFireBall->setPosition(location);
+		addChild(m_pFireBall);
+    }
+    
 
-	CCSize ballSize  = m_pBall->getContentSize();
+}
 
-	CCPoint ptNow  = m_pBall->getPosition();
-	CCPoint ptTemp = pDir->convertToUI(ptNow);
+void GameLayer::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
+{
+    CCSetIterator iter = pTouches->begin();
+    for (; iter != pTouches->end(); iter++)
+    {
+        CCTouch* pTouch = (CCTouch*)(*iter);
+        CCPoint location = pTouch->getLocation();
+        location.x += 1.0f;
+    }
+}
 
-	ptTemp.x += pAccelerationValue->x * 9.81f;
-	ptTemp.y -= pAccelerationValue->y * 9.81f;
+void GameLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
+{
+    CCSetIterator iter = pTouches->begin();
+    for (; iter != pTouches->end(); iter++)
+    {
+    }
+}
 
-	CCPoint ptNext = pDir->convertToGL(ptTemp);
-	FIX_POS(ptNext.x, (VisibleRect::left().x+ballSize.width / 2.0), (VisibleRect::right().x - ballSize.width / 2.0));
-	FIX_POS(ptNext.y, (VisibleRect::bottom().y+ballSize.height / 2.0), (VisibleRect::top().y - ballSize.height / 2.0));
-	m_pBall->setPosition(ptNext);
+void GameLayer::ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent)
+{
+    ccTouchesEnded(pTouches, pEvent);
 }
 
 //------------------------------------------------------------------
 //
-// AccelerometerTestScene
+// GameScene
 //
 //------------------------------------------------------------------
 void SceneGame::runThisTest()
 {
-	CCLayer* pLayer = new GameLayer();
-	addChild(pLayer);
-	pLayer->release();
-
+	GameLayer* pLayer = GameLayer::create();
+	addChild(pLayer, 0);
 	CCDirector::sharedDirector()->replaceScene(this);
 }
