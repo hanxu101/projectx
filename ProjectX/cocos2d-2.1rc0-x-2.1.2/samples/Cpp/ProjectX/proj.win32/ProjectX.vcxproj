@@ -120,6 +120,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\GameObject\FireBall.cpp" />
+    <ClCompile Include="..\Classes\GameObject\MainCharacter.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\SceneBase.cpp" />
     <ClCompile Include="..\Classes\SceneCredits.cpp" />
@@ -131,12 +133,22 @@
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\AppMacros.h" />
+    <ClInclude Include="..\Classes\FSM\Fsm.h" />
+    <ClInclude Include="..\Classes\FSM\Fsm.hpp" />
+    <ClInclude Include="..\Classes\FSM\FsmInclude.h" />
+    <ClInclude Include="..\Classes\FSM\FsmMacros.h" />
+    <ClInclude Include="..\Classes\FSM\StateMacros.h" />
+    <ClInclude Include="..\Classes\FSM\TransitionClusterMacros.h" />
+    <ClInclude Include="..\Classes\FSM\TransitionMacros.h" />
+    <ClInclude Include="..\Classes\GameObject\FireBall.h" />
+    <ClInclude Include="..\Classes\GameObject\MainCharacter.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\ResourceDefines.h" />
     <ClInclude Include="..\Classes\SceneBase.h" />
     <ClInclude Include="..\Classes\SceneCredits.h" />
     <ClInclude Include="..\Classes\SceneGame.h" />
     <ClInclude Include="..\Classes\SceneManager.h" />
+    <ClInclude Include="..\Classes\utilities\Utilities.h" />
     <ClInclude Include="..\Classes\VisibleRect.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
