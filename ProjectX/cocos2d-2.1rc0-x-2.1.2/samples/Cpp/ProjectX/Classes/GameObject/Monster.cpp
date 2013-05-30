@@ -1,43 +1,59 @@
-#include "GameObject/FireBall.h"
-#include "Utilities/Utilities.h"
+#include "GameObject/Monster.h"
 #include "VisibleRect.h"
 
-FireBall::FireBall()
+Monster::Monster()
     : m_pMainSprite(NULL)
-    , m_speed(100)
+    , m_speed(150.0f)
+    , m_deltaTime(0.0f)
 {
 }
 
-FireBall::~FireBall()
+Monster::~Monster()
 {
 }
 
-void FireBall::onEnter()
+void Monster::onEnter()
 {
     CCNode::onEnter();
-    m_pMainSprite = CCSprite::create("ball.png");
-    m_pMainSprite->setScale(4.0f);
+    m_pMainSprite = CCSprite::create("Hero01_0.png");
 
     addChild(m_pMainSprite);
 
-    CCDirector::sharedDirector()->getScheduler()->scheduleSelector(schedule_selector(FireBall::StateUpdate), this, 0, false);
+    CCDirector::sharedDirector()->getScheduler()->scheduleSelector(schedule_selector(Monster::StateUpdate), this, 0, false);
     MMR_INIT_FSM(Idle);
 }
 
-void FireBall::onExit()
+void Monster::onExit()
 {
 
 }
 
-void FireBall::StateUpdate(float deltaTime)
+void Monster::StateUpdate(float deltaTime)
 {
     m_deltaTime = deltaTime;
     GetFsm().Update();
 }
 
+void Monster::PlayMonsterWalkAnimation()
+{
+    CCAnimation* pAnim = CCAnimation::create();
+    char str[20];
+
+    for (UINT i = 0; i < 6; ++i)
+    {
+        sprintf(str,"Hero01_%d.png",i);
+        pAnim->addSpriteFrameWithFileName(str);
+    }
+
+    pAnim->setDelayPerUnit(0.1f);
+    pAnim->setRestoreOriginalFrame(true);
+
+    m_pMainSprite->runAction(CCRepeatForever::create(CCAnimate::create(pAnim)));
+}
+
 //////////////////////////////////////////////////////////////////////////
 
-MMR_IMPLEMENT_STATE_BEGIN(FireBall, Idle)
+MMR_IMPLEMENT_STATE_BEGIN(Monster, Idle)
 {
     MMR_STATE_CONSTRUCTOR_BEGIN
     {
@@ -45,7 +61,7 @@ MMR_IMPLEMENT_STATE_BEGIN(FireBall, Idle)
     MMR_STATE_CONSTRUCTOR_END
 
         MMR_STATE_UPDATE_BEGIN
-    {
+    {      
         MMR_SWITCH_TO_STATE(Move);
     }
     MMR_STATE_UPDATE_END
@@ -57,11 +73,13 @@ MMR_IMPLEMENT_STATE_BEGIN(FireBall, Idle)
 }
 MMR_IMPLEMENT_STATE_END
 
-    MMR_IMPLEMENT_STATE_BEGIN(FireBall, Move)
+    MMR_IMPLEMENT_STATE_BEGIN(Monster, Move)
 {
     MMR_STATE_CONSTRUCTOR_BEGIN
     {
-        m_targetPos = CCPoint(RandomFloat(VisibleRect::left().x, VisibleRect::right().x), RandomFloat(VisibleRect::bottom().y, VisibleRect::top().y));
+        PlayMonsterWalkAnimation();
+
+        m_targetPos = CCPoint(getPosition().x, VisibleRect::bottom().y);
         m_direction = ccpSub(m_targetPos, getPosition());
         m_direction = ccpNormalize(m_direction);
     }
@@ -83,7 +101,7 @@ MMR_IMPLEMENT_STATE_END
 }
 MMR_IMPLEMENT_STATE_END
 
-    MMR_IMPLEMENT_STATE_BEGIN(FireBall, Dead)
+    MMR_IMPLEMENT_STATE_BEGIN(Monster, Dead)
 {
     MMR_STATE_CONSTRUCTOR_BEGIN
     {
