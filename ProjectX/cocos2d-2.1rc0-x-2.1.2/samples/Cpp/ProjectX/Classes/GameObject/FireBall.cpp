@@ -35,6 +35,11 @@ void FireBall::StateUpdate(float deltaTime)
     GetFsm().Update();
 }
 
+void FireBall::SetDirection(CCPoint direction)
+{
+    m_direction = direction;
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 MMR_IMPLEMENT_STATE_BEGIN(FireBall, Idle)
@@ -61,8 +66,6 @@ MMR_IMPLEMENT_STATE_END
 {
     MMR_STATE_CONSTRUCTOR_BEGIN
     {
-        m_targetPos = CCPoint(RandomFloat(VisibleRect::left().x, VisibleRect::right().x), RandomFloat(VisibleRect::bottom().y, VisibleRect::top().y));
-        m_direction = ccpSub(m_targetPos, getPosition());
         m_direction = ccpNormalize(m_direction);
     }
     MMR_STATE_CONSTRUCTOR_END

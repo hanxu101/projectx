@@ -11,6 +11,7 @@
 //
 //------------------------------------------------------------------
 GameLayer::GameLayer(void)
+    : m_fireSlideThreshold(50.0f)
 {
 }
 
@@ -68,10 +69,14 @@ void GameLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
     for (; iter != pTouches->end(); iter++)
     {
         CCTouch* pTouch = (CCTouch*)(*iter);
-        CCPoint location = pTouch->getLocation();
-        location.x += 1.0f;
+        m_touchBeginLocation = pTouch->getLocation();
 
-        SpawnObjectViaTouchPoint(location);
+        if (m_touchBeginLocation.y > VisibleRect::top().y / 2)
+        {
+            Monster* pMonster = new Monster();
+            pMonster->setPosition(m_touchBeginLocation.x, VisibleRect::top().y);
+            addChild(pMonster);
+        }
     }
 }
 
@@ -91,28 +96,21 @@ void GameLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
     CCSetIterator iter = pTouches->begin();
     for (; iter != pTouches->end(); iter++)
     {
+        CCTouch* pTouch = (CCTouch*)(*iter);
+        CCPoint location = pTouch->getLocation();
+        if (ccpDistanceSQ(location, m_touchBeginLocation) > m_fireSlideThreshold)
+        {
+            FireBall* fireBall = new FireBall();
+            fireBall->setPosition(location);
+            fireBall->SetDirection(ccpNormalize(ccpSub(location, m_touchBeginLocation)));
+            addChild(fireBall);
+        }
     }
 }
 
 void GameLayer::ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent)
 {
     ccTouchesEnded(pTouches, pEvent);
-}
-
-void GameLayer::SpawnObjectViaTouchPoint( const CCPoint& touchPoint )
-{
-    if (touchPoint.y < VisibleRect::top().y / 2)
-    {
-        FireBall* fireBall = new FireBall();
-        fireBall->setPosition(touchPoint);
-        addChild(fireBall);
-    }
-    else
-    {
-        Monster* pMonster = new Monster();
-        pMonster->setPosition(touchPoint.x, VisibleRect::top().y);
-        addChild(pMonster);
-    }
 }
 
 //------------------------------------------------------------------

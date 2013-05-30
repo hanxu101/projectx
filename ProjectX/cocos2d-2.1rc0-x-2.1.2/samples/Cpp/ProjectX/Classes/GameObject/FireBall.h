@@ -17,6 +17,7 @@ public:
 
     void StateUpdate(float deltaTime);
 
+    void SetDirection(CCPoint direction);
 private:
     MMR_DECLARE_FSM(FireBall);
     MMR_DECLARE_STATE(Idle);

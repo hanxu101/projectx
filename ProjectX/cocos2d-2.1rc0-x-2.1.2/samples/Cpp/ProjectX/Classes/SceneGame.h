@@ -24,7 +24,9 @@ public:
     CREATE_FUNC(GameLayer)
 
 private:
-    void SpawnObjectViaTouchPoint(const CCPoint& touchPoint);
+    float m_fireSlideThreshold;
+    CCPoint m_touchBeginLocation;
+
 };
 
 class SceneGame : public SceneBase
