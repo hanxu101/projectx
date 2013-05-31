@@ -18,6 +18,12 @@
     <Filter Include="Classes\Utilities">
       <UniqueIdentifier>{af905ea3-2da3-431c-928f-333eaf587170}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\GameLogic">
+      <UniqueIdentifier>{90d5b97a-a9e3-4314-baa8-d0f7b7146644}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject\GameObjectManager">
+      <UniqueIdentifier>{af77f817-9b21-4eae-8431-7b4265347b4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -51,6 +57,15 @@
       <Filter>Classes\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameObject\Monster.cpp">
+      <Filter>Classes\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameLogic\MonsterGroupLogic.cpp">
+      <Filter>Classes\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\GameObjectManager\GameObjectManager.cpp">
+      <Filter>Classes\GameObject\GameObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\GameObject.cpp">
       <Filter>Classes\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,6 +131,18 @@
       <Filter>Classes\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameObject\Monster.h">
+      <Filter>Classes\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameLogic\MonsterGroupLogic.h">
+      <Filter>Classes\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\GameObjectManager\GameObjectManager.h">
+      <Filter>Classes\GameObject\GameObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\GameObject.h">
+      <Filter>Classes\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\GameObjectEnum.h">
       <Filter>Classes\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
