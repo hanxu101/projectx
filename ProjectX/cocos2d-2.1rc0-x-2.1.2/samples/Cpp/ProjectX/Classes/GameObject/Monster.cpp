@@ -2,7 +2,8 @@
 #include "VisibleRect.h"
 
 Monster::Monster()
-    : m_pMainSprite(NULL)
+    : GameObject(10.0f, eGOT_Monster)
+    , m_pMainSprite(NULL)
     , m_speed(150.0f)
     , m_deltaTime(0.0f)
 {
@@ -14,18 +15,17 @@ Monster::~Monster()
 
 void Monster::onEnter()
 {
-    CCNode::onEnter();
+    GameObject::onEnter();
     m_pMainSprite = CCSprite::create("Hero01_0.png");
 
     addChild(m_pMainSprite);
 
-    CCDirector::sharedDirector()->getScheduler()->scheduleSelector(schedule_selector(Monster::StateUpdate), this, 0, false);
     MMR_INIT_FSM(Idle);
 }
 
 void Monster::onExit()
 {
-
+    GameObject::onExit();
 }
 
 void Monster::StateUpdate(float deltaTime)
@@ -57,6 +57,10 @@ MMR_IMPLEMENT_STATE_BEGIN(Monster, Idle)
 {
     MMR_STATE_CONSTRUCTOR_BEGIN
     {
+        // Set suitable position.
+        const float monsterRoadSizeRate = 0.2f;
+        const float offset = 0.5f;
+        setPosition((int(getPosition().x / (VisibleRect::right().x * monsterRoadSizeRate)) + offset) * VisibleRect::right().x * monsterRoadSizeRate, getPosition().y);
     }
     MMR_STATE_CONSTRUCTOR_END
 
@@ -105,8 +109,7 @@ MMR_IMPLEMENT_STATE_END
 {
     MMR_STATE_CONSTRUCTOR_BEGIN
     {
-        // Del this object.
-        removeFromParent();
+        Unspawn();
     }
     MMR_STATE_CONSTRUCTOR_END
 

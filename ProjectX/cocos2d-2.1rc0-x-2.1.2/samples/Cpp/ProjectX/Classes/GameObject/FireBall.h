@@ -1,12 +1,11 @@
 #ifndef  _APP_FireBall_H_
 #define  _APP_FireBall_H_
 
-#include "cocos2d.h"
-#include "FSM/FsmInclude.h"
+#include "GameObject/GameObject.h"
 
 USING_NS_CC;
 
-class FireBall : public CCNode, public CCTargetedTouchDelegate 
+class FireBall : public GameObject, public CCTargetedTouchDelegate 
 {
 public:
     FireBall();

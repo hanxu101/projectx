@@ -3,7 +3,8 @@
 #include "VisibleRect.h"
 
 FireBall::FireBall()
-    : m_pMainSprite(NULL)
+    : GameObject(0.0f, eGOT_Bullet)
+    , m_pMainSprite(NULL)
     , m_speed(100)
 {
 }
@@ -14,19 +15,18 @@ FireBall::~FireBall()
 
 void FireBall::onEnter()
 {
-    CCNode::onEnter();
+    GameObject::onEnter();
     m_pMainSprite = CCSprite::create("ball.png");
     m_pMainSprite->setScale(4.0f);
 
     addChild(m_pMainSprite);
 
-    CCDirector::sharedDirector()->getScheduler()->scheduleSelector(schedule_selector(FireBall::StateUpdate), this, 0, false);
     MMR_INIT_FSM(Idle);
 }
 
 void FireBall::onExit()
 {
-
+    GameObject::onExit();
 }
 
 void FireBall::StateUpdate(float deltaTime)
@@ -90,8 +90,7 @@ MMR_IMPLEMENT_STATE_END
 {
     MMR_STATE_CONSTRUCTOR_BEGIN
     {
-        // Del this object.
-        removeFromParent();
+        Unspawn();
     }
     MMR_STATE_CONSTRUCTOR_END
 

@@ -4,6 +4,8 @@
 #include "GameObject/MainCharacter.h"
 #include "GameObject/FireBall.h"
 #include "GameObject/Monster.h"
+#include "GameObject/GameObjectManager/GameObjectManager.h"
+#include "GameLogic/MonsterGroupLogic.h"
 
 //------------------------------------------------------------------
 //
@@ -12,6 +14,7 @@
 //------------------------------------------------------------------
 GameLayer::GameLayer(void)
     : m_fireSlideThreshold(50.0f)
+    , m_pMonsterGroupLogic(NULL)
 {
 }
 
@@ -38,6 +41,8 @@ void GameLayer::onEnter()
 {
     CCLayer::onEnter();
 
+    CCDirector::sharedDirector()->getScheduler()->scheduleSelector(schedule_selector(GameLayer::Update), this, 0, false);
+
     CCLabelTTF* label = CCLabelTTF::create(title().c_str(), "Arial", 32);
     addChild(label, 1);
     label->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y-50) );
@@ -46,13 +51,15 @@ void GameLayer::onEnter()
     addChild(infolabel , 1);
     infolabel ->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y-70) );
 
-//  Test code...
-//     m_pMainCharacter = new MainCharacter();
-//     m_pMainCharacter->setPosition(ccp(VisibleRect::center().x, VisibleRect::center().y));
-//     addChild(m_pMainCharacter);
-//     m_pMainCharacter = new Monster();
-//     m_pMainCharacter->setPosition(ccp(VisibleRect::center().x, VisibleRect::center().y));
-//     addChild(m_pMainCharacter);
+    m_pMonsterGroupLogic = new MonsterGroupLogic();
+    m_pMonsterGroupLogic->autorelease();
+    addChild(m_pMonsterGroupLogic);
+}
+
+void GameLayer::Update(float dt)
+{
+    m_pMonsterGroupLogic->StateUpdate(dt);
+    GameObjectManager::Get().Update(dt);
 }
 
 

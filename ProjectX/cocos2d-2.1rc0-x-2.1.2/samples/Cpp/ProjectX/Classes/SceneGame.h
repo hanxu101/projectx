@@ -5,6 +5,8 @@
 
 USING_NS_CC;
 
+class MonsterGroupLogic;
+
 class GameLayer: public CCLayer
 {
 public:
@@ -24,9 +26,12 @@ public:
     CREATE_FUNC(GameLayer)
 
 private:
-    float m_fireSlideThreshold;
+    void Update(float dt);  
+
+	float m_fireSlideThreshold;
     CCPoint m_touchBeginLocation;
 
+    MonsterGroupLogic* m_pMonsterGroupLogic;
 };
 
 class SceneGame : public SceneBase

@@ -1,12 +1,11 @@
 #ifndef  _APP_Monster_H_
 #define  _APP_Monster_H_
 
-#include "cocos2d.h"
-#include "FSM/FsmInclude.h"
+#include "GameObject/GameObject.h"
 
 USING_NS_CC;
 
-class Monster : public CCNode 
+class Monster : public GameObject 
 {
 public:
     Monster();

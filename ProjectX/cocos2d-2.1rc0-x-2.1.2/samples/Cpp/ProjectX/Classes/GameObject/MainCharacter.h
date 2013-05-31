@@ -1,30 +1,28 @@
 #ifndef  _APP_MainCharacter_H_
 #define  _APP_MainCharacter_H_
 
-#include "cocos2d.h"
-#include "FSM/FsmInclude.h"
+#include "GameObject/GameObject.h"
 
 USING_NS_CC;
- 
-class MainCharacter : public CCNode, public CCTargetedTouchDelegate 
+
+class MainCharacter : public GameObject, public CCTargetedTouchDelegate 
 {
 public:
-	MainCharacter();
-	virtual ~MainCharacter();
+    MainCharacter();
+    virtual ~MainCharacter();
 
-	virtual void onEnter();
-	virtual void onExit();
+    virtual void onEnter();
+    virtual void onExit();
 
-	void StateUpdate(float deltaTime);
+    void StateUpdate(float deltaTime);
 
 private:
-	void PlayHeroTestAnimation();
+    void PlayHeroTestAnimation();
 
-	MMR_DECLARE_FSM(MainCharacter);
+    MMR_DECLARE_FSM(MainCharacter);
+    MMR_DECLARE_STATE(Idle);
 
-	MMR_DECLARE_STATE(Idle);
-
-	CCSprite* m_pMainSprite;
+    CCSprite* m_pMainSprite;
 };
 
 #endif // _APP_MainCharacter_H_
