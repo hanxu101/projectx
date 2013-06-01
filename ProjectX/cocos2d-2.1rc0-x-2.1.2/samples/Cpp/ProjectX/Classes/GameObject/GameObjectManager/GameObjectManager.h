@@ -14,27 +14,29 @@ typedef std::map< EGameObjectType, TGameObjectList > TGameObjectMap;
 class GameObjectManager
 {
 public:
-    static GameObjectManager& Get()
-    {
-        static GameObjectManager catalog;
-        return catalog;
-    }
+	static GameObjectManager& Get()
+	{
+		static GameObjectManager catalog;
+		return catalog;
+	}
 
-    void Update(float dt);
+	void Update(float dt);
 
-    void RegisterGameObject(GameObject* pObj);
-    void UnregisterGameObject(GameObject* pObj);
+	void RegisterGameObject(GameObject* pObj);
+	void UnregisterGameObject(GameObject* pObj);
+
+	void GetGameObjectList(EGameObjectType objType, TGameObjectList& objectList);
 
 private:
-    GameObjectManager();
-    ~GameObjectManager();
+	GameObjectManager();
+	~GameObjectManager();
 
-    void AddGameObject(GameObject* pObj);
-    void DelGameObject(GameObject* pObj);
+	void AddGameObject(GameObject* pObj);
+	void DelGameObject(GameObject* pObj);
 
-    TGameObjectMap m_gameObjMap;
-    TGameObjectVector m_addPendingList;
-    TGameObjectVector m_delPendingList;    
+	TGameObjectMap m_gameObjMap;
+	TGameObjectVector m_addPendingList;
+	TGameObjectVector m_delPendingList;    
 };
 
 #endif //_APP_GAMEOBJECTCATALOG_H_

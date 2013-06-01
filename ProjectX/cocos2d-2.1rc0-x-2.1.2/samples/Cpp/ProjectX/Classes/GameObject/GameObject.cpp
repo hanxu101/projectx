@@ -2,14 +2,16 @@
 #include "GameObject/GameObjectManager/GameObjectManager.h"
 
 GameObject::GameObject()
-    : m_hp(0.0f)
-    , m_type(eGOT_Invalid)
+	: m_hp(0.0f)
+	, m_type(eGOT_Invalid)
+	, m_collisionRadius(0.0f)
 {
 }
 
-GameObject::GameObject( float hp, EGameObjectType type )
-    : m_hp(hp)
-    , m_type(type)
+GameObject::GameObject( float hp, EGameObjectType type, float collisonRadius )
+	: m_hp(hp)
+	, m_type(type)
+	, m_collisionRadius(collisonRadius)
 {
 }
 
@@ -19,21 +21,21 @@ GameObject::~GameObject()
 
 void GameObject::onEnter()
 {
-    CCNode::onEnter();
+	CCNode::onEnter();
 
-    GameObjectManager::Get().RegisterGameObject(this);
+	GameObjectManager::Get().RegisterGameObject(this);
 }
 
 void GameObject::onExit()
 {
-    GameObjectManager::Get().UnregisterGameObject(this);
+	GameObjectManager::Get().UnregisterGameObject(this);
 
-    CCNode::onExit();
+	CCNode::onExit();
 }
 
 void GameObject::Unspawn()
 {
-    removeFromParent();
+	removeFromParent();
 }
 
 void GameObject::StateUpdate(float deltaTime)
@@ -42,10 +44,15 @@ void GameObject::StateUpdate(float deltaTime)
 
 const EGameObjectType& GameObject::GetGameObjectType()
 {
-    return m_type;
+	return m_type;
 }
 
 int GameObject::GetDetailTypeIndex()
 {
-    return static_cast<int>(m_type);
+	return static_cast<int>(m_type);
+}
+
+float GameObject::GetCollisionRadius() const
+{
+	return m_collisionRadius;
 }
