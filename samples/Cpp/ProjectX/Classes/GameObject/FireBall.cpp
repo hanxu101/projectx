@@ -49,6 +49,16 @@ void FireBall::SetSpeedFactor( float slideSpeed )
     m_speed = m_maxSpeed * slideSpeed;
 }
 
+void FireBall::SetAbort()
+{
+    GetFsm().SwitchState(MMR_STATE(Abort));
+}
+
+void FireBall::SetMove()
+{
+    GetFsm().SwitchState(MMR_STATE(Move));
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 MMR_IMPLEMENT_STATE_BEGIN(FireBall, Idle)
@@ -58,13 +68,12 @@ MMR_IMPLEMENT_STATE_BEGIN(FireBall, Idle)
 	}
 	MMR_STATE_CONSTRUCTOR_END
 
-		MMR_STATE_UPDATE_BEGIN
+	MMR_STATE_UPDATE_BEGIN
 	{
-		MMR_SWITCH_TO_STATE(Move);
 	}
 	MMR_STATE_UPDATE_END
 
-		MMR_STATE_DESTRUCTOR_BEGIN
+	MMR_STATE_DESTRUCTOR_BEGIN
 	{
 	}
 	MMR_STATE_DESTRUCTOR_END
@@ -127,4 +136,25 @@ MMR_IMPLEMENT_STATE_END
 	}
 	MMR_STATE_DESTRUCTOR_END
 }
+MMR_IMPLEMENT_STATE_END
+
+MMR_IMPLEMENT_STATE_BEGIN(FireBall, Abort)
+{
+    MMR_STATE_CONSTRUCTOR_BEGIN
+    {
+        Unspawn();
+    }
+    MMR_STATE_CONSTRUCTOR_END
+
+        MMR_STATE_UPDATE_BEGIN
+    {      
+    }
+    MMR_STATE_UPDATE_END
+
+        MMR_STATE_DESTRUCTOR_BEGIN
+    {
+    }
+    MMR_STATE_DESTRUCTOR_END
+}
+
 MMR_IMPLEMENT_STATE_END

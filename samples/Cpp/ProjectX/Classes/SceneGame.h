@@ -6,6 +6,7 @@
 USING_NS_CC;
 
 class MonsterGroupLogic;
+class FireBall;
 
 class GameLayer: public CCLayer
 {
@@ -29,7 +30,7 @@ private:
     void Update(float dt);  
 
     float CalculateSlideSpeedFactor(float slideDistance); 
-    void UpdatePreviousTouchPositions();
+    void UpdateTouchInfo(float dt);
     CCPoint GetPreviousTouchPos( UINT rollbackFrameNum );
 
 private:
@@ -44,6 +45,9 @@ private:
     const static CCPoint INVALID_TOUCHPOSITION;
     const static float FIRE_SLIDE_DISTANCE_MAX;
     const static float FIRE_SLIDE_DISTANCE_MIN;
+    const static float FIRE_TOUCH_TIME_THRESHOLD;
+    float m_touchTimer;
+    FireBall* m_fireBall;
 };
 
 class SceneGame : public SceneBase

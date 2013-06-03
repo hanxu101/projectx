@@ -15,11 +15,14 @@
 const CCPoint GameLayer::INVALID_TOUCHPOSITION = CCPoint(-1.0f, -1.0f);
 const float GameLayer::FIRE_SLIDE_DISTANCE_MAX = 20.0f;
 const float GameLayer::FIRE_SLIDE_DISTANCE_MIN = 5.0f;
+const float GameLayer::FIRE_TOUCH_TIME_THRESHOLD = 0.0167f * 5.0f;
 
 GameLayer::GameLayer(void)
     : m_pMonsterGroupLogic(NULL)
     , m_isTouching(false)
     , m_touchFrameCount(0)
+    , m_touchTimer(0.0f)
+    , m_fireBall(NULL)
 {
     m_previousTouchPosVec.resize(PREVIOUS_TOUCHPOSITION_CACHE_NUM+1);
 }
@@ -66,12 +69,12 @@ void GameLayer::Update(float dt)
 {
     m_pMonsterGroupLogic->StateUpdate(dt);
     
-    UpdatePreviousTouchPositions();
+    UpdateTouchInfo(dt);
 
     GameObjectManager::Get().Update(dt);
 }
 
-void GameLayer::UpdatePreviousTouchPositions()
+void GameLayer::UpdateTouchInfo(float dt)
 {
     for (UINT8 i = 1; i < PREVIOUS_TOUCHPOSITION_CACHE_NUM+1; ++i)
     {
@@ -80,6 +83,7 @@ void GameLayer::UpdatePreviousTouchPositions()
 
     m_previousTouchPosVec[PREVIOUS_TOUCHPOSITION_CACHE_NUM] = m_isTouching ? m_currentTouchLocation : INVALID_TOUCHPOSITION;
     m_touchFrameCount = m_isTouching ? ++m_touchFrameCount : 0;
+    m_touchTimer = m_isTouching ? (m_touchFrameCount + dt) : 0.0f;
 }
 
 CCPoint GameLayer::GetPreviousTouchPos( UINT rollbackFrameNum )
@@ -113,6 +117,12 @@ void GameLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
             pMonster->setPosition(m_currentTouchLocation.x, VisibleRect::top().y);
             addChild(pMonster);
         }
+        else
+        {
+            m_fireBall = new FireBall();
+            m_fireBall->setPosition(m_currentTouchLocation);
+            addChild(m_fireBall);
+        }
     }
 }
 
@@ -124,6 +134,8 @@ void GameLayer::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
         CCTouch* pTouch = (CCTouch*)(*iter);
         m_currentTouchLocation = pTouch->getLocation();
         m_previousTouchPosVec[PREVIOUS_TOUCHPOSITION_CACHE_NUM] = m_currentTouchLocation;
+
+        m_fireBall->setPosition(m_currentTouchLocation);
     }
 }
 
@@ -140,15 +152,19 @@ void GameLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
 
         CCPoint previousTouchPoint = GetPreviousTouchPos(m_touchFrameCount);
         float offset = ccpDistance(m_currentTouchLocation, previousTouchPoint);
-        if (offset > FIRE_SLIDE_DISTANCE_MIN)
+        if (offset > FIRE_SLIDE_DISTANCE_MIN && m_touchTimer > FIRE_TOUCH_TIME_THRESHOLD)
         {
-            FireBall* fireBall = new FireBall();
-            fireBall->setPosition(m_currentTouchLocation);
-            fireBall->SetDirection(ccpNormalize(ccpSub(m_currentTouchLocation, previousTouchPoint)));
-            fireBall->SetSpeedFactor(CalculateSlideSpeedFactor(offset));
-            addChild(fireBall);
+            m_fireBall->SetDirection(ccpNormalize(ccpSub(m_currentTouchLocation, previousTouchPoint)));
+            m_fireBall->SetSpeedFactor(CalculateSlideSpeedFactor(offset));
+            m_fireBall->SetMove();
+        }
+        else
+        {
+            m_fireBall->SetAbort();
         }
     }
+
+    m_fireBall = NULL;
 }
 
 void GameLayer::ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent)

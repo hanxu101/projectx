@@ -19,11 +19,16 @@ public:
     void SetDirection(CCPoint direction);
     void SetSpeedFactor(float slideSpeed);
 
+    // State
+    void SetAbort();
+    void SetMove();
+
 private:
     MMR_DECLARE_FSM(FireBall);
     MMR_DECLARE_STATE(Idle);
     MMR_DECLARE_STATE(Move);
     MMR_DECLARE_STATE(Dead);
+    MMR_DECLARE_STATE(Abort);
 
     CCSprite* m_pMainSprite;
     CCPoint m_targetPos;
