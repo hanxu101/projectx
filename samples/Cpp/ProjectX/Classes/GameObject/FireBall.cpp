@@ -7,7 +7,8 @@
 FireBall::FireBall()
 	: GameObject(0.0f, eGOT_Bullet,10.0f)
 	, m_pMainSprite(NULL)
-	, m_speed(400)
+	, m_speed(0.0f)
+    , m_maxSpeed(400.0f)
 {
 }
 
@@ -41,6 +42,11 @@ void FireBall::StateUpdate(float deltaTime)
 void FireBall::SetDirection(CCPoint direction)
 {
 	m_direction = direction;
+}
+
+void FireBall::SetSpeedFactor( float slideSpeed )
+{
+    m_speed = m_maxSpeed * slideSpeed;
 }
 
 //////////////////////////////////////////////////////////////////////////

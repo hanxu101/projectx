@@ -28,10 +28,22 @@ public:
 private:
     void Update(float dt);  
 
-	float m_fireSlideThreshold;
-    CCPoint m_touchBeginLocation;
+    float CalculateSlideSpeedFactor(float slideDistance); 
+    void UpdatePreviousTouchPositions();
+    CCPoint GetPreviousTouchPos( UINT rollbackFrameNum );
+
+private:
+    CCPoint m_currentTouchLocation;
+    bool m_isTouching;
+    UINT m_touchFrameCount;
 
     MonsterGroupLogic* m_pMonsterGroupLogic;
+
+    std::vector<CCPoint> m_previousTouchPosVec;
+    const static UINT8 PREVIOUS_TOUCHPOSITION_CACHE_NUM = 3;
+    const static CCPoint INVALID_TOUCHPOSITION;
+    const static float FIRE_SLIDE_DISTANCE_MAX;
+    const static float FIRE_SLIDE_DISTANCE_MIN;
 };
 
 class SceneGame : public SceneBase

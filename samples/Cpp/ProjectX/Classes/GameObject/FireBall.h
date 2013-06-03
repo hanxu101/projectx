@@ -17,6 +17,8 @@ public:
     void StateUpdate(float deltaTime);
 
     void SetDirection(CCPoint direction);
+    void SetSpeedFactor(float slideSpeed);
+
 private:
     MMR_DECLARE_FSM(FireBall);
     MMR_DECLARE_STATE(Idle);
@@ -28,6 +30,9 @@ private:
     CCPoint m_direction;
     float m_speed;
     float m_deltaTime;
+
+    // configurable variables
+    float m_maxSpeed;
 };
 
 #endif // _APP_FireBall_H_
