@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Classes">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="win32">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Classes\FSM">
+      <UniqueIdentifier>{bc1e172a-ab97-4e31-b263-400c442a22fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject">
+      <UniqueIdentifier>{574060e2-461a-4c03-863f-0a321546aca9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Utilities">
+      <UniqueIdentifier>{af905ea3-2da3-431c-928f-333eaf587170}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameLogic">
+      <UniqueIdentifier>{90d5b97a-a9e3-4314-baa8-d0f7b7146644}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject\GameObjectManager">
+      <UniqueIdentifier>{af77f817-9b21-4eae-8431-7b4265347b4f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SceneManager.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\VisibleRect.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SceneBase.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SceneGame.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SceneCredits.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\MainCharacter.cpp">
+      <Filter>Classes\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\FireBall.cpp">
+      <Filter>Classes\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Monster.cpp">
+      <Filter>Classes\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameLogic\MonsterGroupLogic.cpp">
+      <Filter>Classes\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\GameObjectManager\GameObjectManager.cpp">
+      <Filter>Classes\GameObject\GameObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\GameObject.cpp">
+      <Filter>Classes\GameObject</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelloWorldScene.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppMacros.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SceneManager.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ResourceDefines.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\VisibleRect.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SceneBase.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SceneGame.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SceneCredits.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FSM\FsmMacros.h">
+      <Filter>Classes\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FSM\StateMacros.h">
+      <Filter>Classes\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FSM\TransitionClusterMacros.h">
+      <Filter>Classes\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FSM\TransitionMacros.h">
+      <Filter>Classes\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FSM\Fsm.h">
+      <Filter>Classes\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FSM\Fsm.hpp">
+      <Filter>Classes\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FSM\FsmInclude.h">
+      <Filter>Classes\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\MainCharacter.h">
+      <Filter>Classes\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\FireBall.h">
+      <Filter>Classes\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utilities\Utilities.h">
+      <Filter>Classes\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Monster.h">
+      <Filter>Classes\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameLogic\MonsterGroupLogic.h">
+      <Filter>Classes\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\GameObjectManager\GameObjectManager.h">
+      <Filter>Classes\GameObject\GameObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\GameObject.h">
+      <Filter>Classes\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\GameObjectEnum.h">
+      <Filter>Classes\GameObject</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
