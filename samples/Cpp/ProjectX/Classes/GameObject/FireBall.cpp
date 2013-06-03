@@ -18,6 +18,7 @@ FireBall::~FireBall()
 void FireBall::onEnter()
 {
 	GameObject::onEnter();
+
 	m_pMainSprite = CCSprite::create("ball.png");
 	m_pMainSprite->setScale(4.0f);
 
