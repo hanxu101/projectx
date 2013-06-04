@@ -18,6 +18,7 @@ public:
 
     void SetDirection(CCPoint direction);
     void SetSpeedFactor(float slideSpeed);
+    void SetForce(CCPoint force);
 
     // State
     void SetAbort();
@@ -35,6 +36,7 @@ private:
     CCPoint m_direction;
     float m_speed;
     float m_deltaTime;
+    CCPoint m_force;
 
     // configurable variables
     float m_maxSpeed;

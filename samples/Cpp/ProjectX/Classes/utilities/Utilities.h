@@ -22,9 +22,4 @@ inline float RandomFloat(float lo, float hi)
 	return r;
 }
 
-inline float GetDistance(float point1x, float point1y, float point2x, float point2y)
-{
-	return std::sqrt((std::abs(point1x - point2x) * std::abs(point1x - point2x)) + (std::abs(point1y - point2y) * std::abs(point1y - point2y)));
-}
-
 #endif

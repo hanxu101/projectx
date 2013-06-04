@@ -7,7 +7,11 @@
 FireBall::FireBall()
 	: GameObject(0.0f, eGOT_Bullet,10.0f)
 	, m_pMainSprite(NULL)
+    , m_targetPos()
+    , m_direction(CCPoint(0.0f, 0.0f))
 	, m_speed(0.0f)
+    , m_deltaTime(0.0f)
+    , m_force(CCPoint(0.0f, 0.0f))
     , m_maxSpeed(400.0f)
 {
 }
@@ -49,6 +53,14 @@ void FireBall::SetSpeedFactor( float slideSpeed )
     m_speed = m_maxSpeed * slideSpeed;
 }
 
+void FireBall::SetForce(CCPoint force)
+{
+    m_force = force;
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+// Switch State
 void FireBall::SetAbort()
 {
     GetFsm().SwitchState(MMR_STATE(Abort));
@@ -60,7 +72,7 @@ void FireBall::SetMove()
 }
 
 //////////////////////////////////////////////////////////////////////////
-
+// States
 MMR_IMPLEMENT_STATE_BEGIN(FireBall, Idle)
 {
 	MMR_STATE_CONSTRUCTOR_BEGIN
@@ -99,9 +111,9 @@ MMR_IMPLEMENT_STATE_END
 		for (TGameObjectList::iterator iter = objectList.begin(); iter != objectList.end(); ++iter)
 		{
 			float maxCollisionDis = (*iter)->GetCollisionRadius() + GetCollisionRadius();
-			float distance = GetDistance((*iter)->getPositionX(), (*iter)->getPositionY(), getPositionX(), getPositionY());
-
-			if (distance < maxCollisionDis)
+			//float distance = GetDistance((*iter)->getPositionX(), (*iter)->getPositionY(), getPositionX(), getPositionY());
+            float distanceSQ = ccpDistanceSQ((*iter)->getPosition(), getPosition());
+			if (distanceSQ < maxCollisionDis * maxCollisionDis)
 			{
 				(*iter)->Unspawn();
 			}
