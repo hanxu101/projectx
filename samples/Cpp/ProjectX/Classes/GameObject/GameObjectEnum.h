@@ -11,9 +11,25 @@ enum EGameObjectType
     eGOT_Invalid
 };
 
+enum EElementType
+{
+    eET_Earth,
+    eET_Water,
+    eET_Fire,
+    eET_Air,
+
+    eET_Count,
+    eET_Invalid
+};
+
 enum EMonsterType
 {
-    eMT_Normal,
+    eMT_StoneMan,
+    eMT_Titan,
+    eMT_CrazyZombie,
+    eMT_WaterElement,
+    eMT_Fisherman,
+    eMT_Naga,
 
     eMT_Count,
     eMT_Invalid

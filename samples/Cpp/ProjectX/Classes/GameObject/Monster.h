@@ -14,22 +14,7 @@ public:
     virtual void onEnter();
     virtual void onExit();
 
-    void StateUpdate(float deltaTime);
-
-private:
-    void PlayMonsterWalkAnimation();
-
-    MMR_DECLARE_FSM(Monster);
-    MMR_DECLARE_STATE(Idle);
-    MMR_DECLARE_STATE(Move);
-    MMR_DECLARE_STATE(Dead);
-
-    CCSprite* m_pMainSprite;
-
-    CCPoint m_targetPos;
-    CCPoint m_direction;
-    float m_speed;
-    float m_deltaTime;
+    virtual void StateUpdate(float deltaTime);
 };
 
 #endif // _APP_Monster_H_

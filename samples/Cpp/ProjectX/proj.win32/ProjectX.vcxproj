@@ -126,6 +126,8 @@
     <ClCompile Include="..\Classes\GameObject\GameObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="..\Classes\GameObject\MainCharacter.cpp" />
     <ClCompile Include="..\Classes\GameObject\Monster.cpp" />
+    <ClCompile Include="..\Classes\GameObject\Monsters\AirMonster\CrazyZombie.cpp" />
+    <ClCompile Include="..\Classes\GameObject\Monsters\EarthMonster\StoneMan.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\SceneBase.cpp" />
     <ClCompile Include="..\Classes\SceneCredits.cpp" />
@@ -151,6 +153,8 @@
     <ClInclude Include="..\Classes\GameObject\GameObjectManager\GameObjectManager.h" />
     <ClInclude Include="..\Classes\GameObject\MainCharacter.h" />
     <ClInclude Include="..\Classes\GameObject\Monster.h" />
+    <ClInclude Include="..\Classes\GameObject\Monsters\AirMonster\CrazyZombie.h" />
+    <ClInclude Include="..\Classes\GameObject\Monsters\EarthMonster\StoneMan.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\ResourceDefines.h" />
     <ClInclude Include="..\Classes\SceneBase.h" />

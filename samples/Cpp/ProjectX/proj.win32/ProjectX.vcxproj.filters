@@ -24,6 +24,15 @@
     <Filter Include="Classes\GameObject\GameObjectManager">
       <UniqueIdentifier>{af77f817-9b21-4eae-8431-7b4265347b4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\GameObject\Monsters">
+      <UniqueIdentifier>{6a01f2ae-6653-4f8f-8b0e-11bd7f99bb47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject\Monsters\EarthMonster">
+      <UniqueIdentifier>{efb5374f-44eb-4449-a9c6-24716b5ccfb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject\Monsters\AirMonster">
+      <UniqueIdentifier>{ac25be39-d43a-45b0-a1e6-2afc780a0c34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -67,6 +76,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameObject\GameObject.cpp">
       <Filter>Classes\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Monsters\AirMonster\CrazyZombie.cpp">
+      <Filter>Classes\GameObject\Monsters\AirMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Monsters\EarthMonster\StoneMan.cpp">
+      <Filter>Classes\GameObject\Monsters\EarthMonster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +159,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameObject\GameObjectEnum.h">
       <Filter>Classes\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Monsters\AirMonster\CrazyZombie.h">
+      <Filter>Classes\GameObject\Monsters\AirMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Monsters\EarthMonster\StoneMan.h">
+      <Filter>Classes\GameObject\Monsters\EarthMonster</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

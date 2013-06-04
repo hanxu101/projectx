@@ -10,26 +10,26 @@ USING_NS_CC;
 class GameObject : public CCNode
 {
 public:
-	GameObject();
-	GameObject(float hp, EGameObjectType type, float collisonRadius);
-	virtual ~GameObject();
+    GameObject();
+    GameObject(float hp, EGameObjectType type, float collisonRadius);
+    virtual ~GameObject();
 
-	virtual void onEnter();
-	virtual void onExit();
+    virtual void onEnter();
+    virtual void onExit();
 
-	void Unspawn();
+    void Unspawn();
 
-	virtual void StateUpdate(float deltaTime);
+    virtual void StateUpdate(float deltaTime);
 
-	const EGameObjectType& GetGameObjectType();
-	virtual int GetDetailTypeIndex();
+    const EGameObjectType& GetGameObjectType();
+    virtual int GetDetailTypeIndex();
 
-	float GetCollisionRadius() const;
+    float GetCollisionRadius() const;
 
 protected:
-	float m_hp;
-	EGameObjectType m_type;
-	float m_collisionRadius;
+    float m_hp;
+    EGameObjectType m_type;
+    float m_collisionRadius;
 };
 
 #endif // _APP_MainCharacter_H_
