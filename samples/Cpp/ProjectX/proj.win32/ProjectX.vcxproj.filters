@@ -33,30 +33,18 @@
     <Filter Include="Classes\GameObject\Monsters\AirMonster">
       <UniqueIdentifier>{ac25be39-d43a-45b0-a1e6-2afc780a0c34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Scene">
+      <UniqueIdentifier>{1a24267c-c5d1-4f6b-9b6c-dd6867256996}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\SceneManager.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\VisibleRect.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SceneBase.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SceneGame.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SceneCredits.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameObject\MainCharacter.cpp">
@@ -83,12 +71,21 @@
     <ClCompile Include="..\Classes\GameObject\Monsters\EarthMonster\StoneMan.cpp">
       <Filter>Classes\GameObject\Monsters\EarthMonster</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Scene\SceneBase.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\SceneCredits.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\SceneGame.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\SceneManager.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="main.h">
@@ -97,22 +94,10 @@
     <ClInclude Include="..\Classes\AppMacros.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\SceneManager.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\ResourceDefines.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\VisibleRect.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SceneBase.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SceneGame.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SceneCredits.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\FSM\FsmMacros.h">
@@ -165,6 +150,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameObject\Monsters\EarthMonster\StoneMan.h">
       <Filter>Classes\GameObject\Monsters\EarthMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\SceneBase.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\SceneCredits.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\SceneGame.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\SceneManager.h">
+      <Filter>Classes\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

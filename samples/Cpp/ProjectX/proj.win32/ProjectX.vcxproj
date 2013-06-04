@@ -128,11 +128,10 @@
     <ClCompile Include="..\Classes\GameObject\Monster.cpp" />
     <ClCompile Include="..\Classes\GameObject\Monsters\AirMonster\CrazyZombie.cpp" />
     <ClCompile Include="..\Classes\GameObject\Monsters\EarthMonster\StoneMan.cpp" />
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
-    <ClCompile Include="..\Classes\SceneBase.cpp" />
-    <ClCompile Include="..\Classes\SceneCredits.cpp" />
-    <ClCompile Include="..\Classes\SceneGame.cpp" />
-    <ClCompile Include="..\Classes\SceneManager.cpp" />
+    <ClCompile Include="..\Classes\Scene\SceneBase.cpp" />
+    <ClCompile Include="..\Classes\Scene\SceneCredits.cpp" />
+    <ClCompile Include="..\Classes\Scene\SceneGame.cpp" />
+    <ClCompile Include="..\Classes\Scene\SceneManager.cpp" />
     <ClCompile Include="..\Classes\VisibleRect.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -155,12 +154,11 @@
     <ClInclude Include="..\Classes\GameObject\Monster.h" />
     <ClInclude Include="..\Classes\GameObject\Monsters\AirMonster\CrazyZombie.h" />
     <ClInclude Include="..\Classes\GameObject\Monsters\EarthMonster\StoneMan.h" />
-    <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\ResourceDefines.h" />
-    <ClInclude Include="..\Classes\SceneBase.h" />
-    <ClInclude Include="..\Classes\SceneCredits.h" />
-    <ClInclude Include="..\Classes\SceneGame.h" />
-    <ClInclude Include="..\Classes\SceneManager.h" />
+    <ClInclude Include="..\Classes\Scene\SceneBase.h" />
+    <ClInclude Include="..\Classes\Scene\SceneCredits.h" />
+    <ClInclude Include="..\Classes\Scene\SceneGame.h" />
+    <ClInclude Include="..\Classes\Scene\SceneManager.h" />
     <ClInclude Include="..\Classes\utilities\Utilities.h" />
     <ClInclude Include="..\Classes\VisibleRect.h" />
     <ClInclude Include="main.h" />

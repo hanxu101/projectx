@@ -3,8 +3,7 @@
 #include <vector>
 #include <string>
 
-#include "SceneManager.h"
-#include "HelloWorldScene.h"
+#include "Scene/SceneManager.h"
 #include "AppMacros.h"
 
 USING_NS_CC;
