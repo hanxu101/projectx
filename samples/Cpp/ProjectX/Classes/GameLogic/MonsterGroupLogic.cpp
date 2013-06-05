@@ -3,6 +3,8 @@
 #include "GameObject/Monsters/EarthMonster/StoneMan.h"
 #include "GameObject/Monsters/AirMonster/CrazyZombie.h"
 #include "VisibleRect.h"
+#include "GameObject/GameObjectManager/GameObjectManager.h"
+#include "GameObject/Monsters/MonsterFactory/MonsterFactory.h"
 
 MonsterGroupLogic::MonsterGroupLogic()
     : m_pTimer(NULL)
@@ -33,13 +35,13 @@ void MonsterGroupLogic::InitMonsterData()
 {
     for (UINT i = 0; i < 15; ++i)
     {
-        AddOneLine(true,false,false,false,false);
-        AddOneLine(false,true,false,false,false);
-        AddOneLine(false,false,false,false,true);
-        AddOneLine(false,false,false,true,false);
-        AddOneLine(true,false,true,false,false);
-        AddOneLine(false,true,false,false,false);
-        AddOneLine(false,false,true,false,false);
+        AddOneLine(eMT_CrazyZombie,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid);
+        AddOneLine(eMT_Invalid,eMT_CrazyZombie,eMT_Invalid,eMT_Invalid,eMT_Invalid);
+        AddOneLine(eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan);
+        AddOneLine(eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_CrazyZombie,eMT_Invalid);
+        AddOneLine(eMT_CrazyZombie,eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid);
+        AddOneLine(eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid);
+        AddOneLine(eMT_Invalid,eMT_Invalid,eMT_CrazyZombie,eMT_Invalid,eMT_Invalid);
     }
 
     m_monsterLineWaveCount = m_monsterData.size();
@@ -103,39 +105,33 @@ MMR_IMPLEMENT_STATE_END
     void MonsterGroupLogic::MonsterLineWave( float /*dt*/ )
 {
     // Temp. (Can cocos2dx stop this schedule?)
-    if ( GetFsm().IsCurrentState( MMR_STATE(Activate) ))
+    if ( GetFsm().IsCurrentState( MMR_STATE(Activate) ) && !GameObjectManager::Get().CheckIsUnderPause(eGOT_Monster))
     {
         if (m_monsterLineWaveCount != 0)
         {
-            const std::vector<bool>& monData = m_monsterData[--m_monsterLineWaveCount];
+            const std::vector<EMonsterType>& monData = m_monsterData[--m_monsterLineWaveCount];
 
             if (monData.size() == 5)
             {
-                if (monData[0])
-                    SpawnMonster(48.0f);
-                if (monData[1])
-                    SpawnMonster(144.0f);
-                if (monData[2])
-                    SpawnMonster(240.0f);
-                if (monData[3])
-                    SpawnMonster(336.0f);
-                if (monData[4])
-                    SpawnMonster(432.0f);
+                SpawnMonster(48.0f, monData[0]);
+                SpawnMonster(144.0f, monData[1]);
+                SpawnMonster(240.0f, monData[2]);
+                SpawnMonster(336.0f, monData[3]);
+                SpawnMonster(432.0f, monData[4]);
             }
         }
     }
 }
 
-void MonsterGroupLogic::SpawnMonster( float positionX )
+void MonsterGroupLogic::SpawnMonster( float positionX, EMonsterType type )
 {
-    Monster* pMonster = new CrazyZombie();
-    pMonster->setPosition(positionX, VisibleRect::top().y);
-    addChild(pMonster);
+    if (type != eMT_Invalid)
+        MonsterFactory::Get().CreateMonster(this, type, ccp(positionX, VisibleRect::top().y));
 }
 
-void MonsterGroupLogic::AddOneLine( bool line1, bool line2, bool line3, bool line4, bool line5 )
+void MonsterGroupLogic::AddOneLine( EMonsterType line1, EMonsterType line2, EMonsterType line3, EMonsterType line4, EMonsterType line5 )
 {
-    std::vector<bool> monData;
+    std::vector<EMonsterType> monData;
     monData.push_back(line1);
     monData.push_back(line2);
     monData.push_back(line3);

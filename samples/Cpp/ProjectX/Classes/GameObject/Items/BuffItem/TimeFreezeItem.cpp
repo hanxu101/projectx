@@ -1,22 +1,23 @@
-#include "GameObject/Monsters/EarthMonster/StoneMan.h"
+#include "GameObject/Items/BuffItem/TimeFreezeItem.h"
 #include "VisibleRect.h"
+#include "Buff/Buff.h"
 
-StoneMan::StoneMan()
+TimeFreezeItem::TimeFreezeItem()
     : m_pMainSprite(NULL)
-    , m_speed(100.0f)
+    , m_speed(20.0f)
     , m_deltaTime(0.0f)
 {
 
 }
 
-StoneMan::~StoneMan()
+TimeFreezeItem::~TimeFreezeItem()
 {
 
 }
 
-void StoneMan::onEnter()
+void TimeFreezeItem::onEnter()
 {
-    Monster::onEnter();
+    Item::onEnter();
 
     m_pMainSprite = CCSprite::create("Hero01_0.png");
     addChild(m_pMainSprite);
@@ -24,28 +25,23 @@ void StoneMan::onEnter()
     MMR_INIT_FSM(Idle);
 }
 
-void StoneMan::onExit()
+void TimeFreezeItem::onExit()
 {
-    Monster::onExit();
+    Item::onExit();
 }
 
-void StoneMan::StateUpdate(float deltaTime)
+void TimeFreezeItem::StateUpdate(float deltaTime)
 {
     m_deltaTime = deltaTime;
     GetFsm().Update();
 }
 
-void StoneMan::Killed()
-{
-    Unspawn();
-}
-
-int StoneMan::GetDetailTypeIndex()
+int TimeFreezeItem::GetDetailTypeIndex()
 {
     return static_cast<int>(eMT_StoneMan);
 }
 
-void StoneMan::PlayMonsterWalkAnimation()
+void TimeFreezeItem::PlayMonsterWalkAnimation()
 {
     CCAnimation* pAnim = CCAnimation::create();
     char str[20];
@@ -62,17 +58,22 @@ void StoneMan::PlayMonsterWalkAnimation()
     m_pMainSprite->runAction(CCRepeatForever::create(CCAnimate::create(pAnim)));
 }
 
+void TimeFreezeItem::ItemTouchesEnded()
+{
+    GetFsm().SwitchState(MMR_STATE(Dead));
+}
+
 //////////////////////////////////////////////////////////////////////////
 
-MMR_IMPLEMENT_STATE_BEGIN(StoneMan, Idle)
+MMR_IMPLEMENT_STATE_BEGIN(TimeFreezeItem, Idle)
 {
     MMR_STATE_CONSTRUCTOR_BEGIN
     {
         // Set suitable position.
         const float monsterRoadSizeRate = 0.2f;
         const float offset = 0.5f;
-        setPosition((int(getPosition().x / (VisibleRect::right().x * monsterRoadSizeRate)) + offset) * VisibleRect::right().x * monsterRoadSizeRate, getPosition().y);
-        setScale(4.0f);
+        setPosition((int(getPosition().x / (VisibleRect::right().x * monsterRoadSizeRate)) + offset) * VisibleRect::right().x * monsterRoadSizeRate + 10, getPosition().y);
+        setScale(2.0f);
     }
     MMR_STATE_CONSTRUCTOR_END
 
@@ -89,7 +90,7 @@ MMR_IMPLEMENT_STATE_BEGIN(StoneMan, Idle)
 }
 MMR_IMPLEMENT_STATE_END
 
-    MMR_IMPLEMENT_STATE_BEGIN(StoneMan, Move)
+    MMR_IMPLEMENT_STATE_BEGIN(TimeFreezeItem, Move)
 {
     MMR_STATE_CONSTRUCTOR_BEGIN
     {
@@ -117,10 +118,13 @@ MMR_IMPLEMENT_STATE_END
 }
 MMR_IMPLEMENT_STATE_END
 
-    MMR_IMPLEMENT_STATE_BEGIN(StoneMan, Dead)
+    MMR_IMPLEMENT_STATE_BEGIN(TimeFreezeItem, Dead)
 {
     MMR_STATE_CONSTRUCTOR_BEGIN
     {
+        Buff* pBuff = new Buff(eBT_Good, 5.0f);
+        getParent()->addChild(pBuff);
+
         Unspawn();
     }
     MMR_STATE_CONSTRUCTOR_END

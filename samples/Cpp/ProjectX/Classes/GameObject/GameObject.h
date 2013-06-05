@@ -17,6 +17,7 @@ public:
     virtual void onEnter();
     virtual void onExit();
 
+    virtual void Killed();
     void Unspawn();
 
     virtual void StateUpdate(float deltaTime);
@@ -25,6 +26,9 @@ public:
     virtual int GetDetailTypeIndex();
 
     float GetCollisionRadius() const;
+
+    void ReduceHp(float hp);
+    void IncreaseHp(float hp);
 
 protected:
     float m_hp;

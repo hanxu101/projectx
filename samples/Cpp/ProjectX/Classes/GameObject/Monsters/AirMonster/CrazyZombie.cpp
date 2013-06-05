@@ -1,5 +1,6 @@
 #include "GameObject/Monsters/AirMonster/CrazyZombie.h"
 #include "VisibleRect.h"
+#include "GameObject/Items/BuffItem/TimeFreezeItem.h"
 
 CrazyZombie::CrazyZombie()
     : m_pMainSprite(NULL)
@@ -19,7 +20,8 @@ void CrazyZombie::onEnter()
 {
     Monster::onEnter();
 
-    m_pMainSprite = CCSprite::create("Hero01_0.png");
+    float scaleFactor = CCDirector::sharedDirector()->getContentScaleFactor();
+    m_pMainSprite = CCSprite::create("CrazyZombie.png",CCRectMake(0, 0, 32 / scaleFactor, 48 / scaleFactor));
     addChild(m_pMainSprite);
 
     MMR_INIT_FSM(Idle);
@@ -36,6 +38,15 @@ void CrazyZombie::StateUpdate(float deltaTime)
     GetFsm().Update();
 }
 
+void CrazyZombie::Killed()
+{
+    TimeFreezeItem* pItem = new TimeFreezeItem();
+    pItem->setPosition(getPosition());
+    getParent()->addChild(pItem);
+
+    Unspawn();
+}
+
 int CrazyZombie::GetDetailTypeIndex()
 {
     return static_cast<int>(eMT_CrazyZombie);
@@ -43,17 +54,24 @@ int CrazyZombie::GetDetailTypeIndex()
 
 void CrazyZombie::PlayMonsterWalkAnimation()
 {
-    CCAnimation* pAnim = CCAnimation::create();
-    char str[20];
+    float scaleFactor = CCDirector::sharedDirector()->getContentScaleFactor();
 
-    for (UINT i = 0; i < 6; ++i)
-    {
-        sprintf(str,"Hero01_%d.png",i);
-        pAnim->addSpriteFrameWithFileName(str);
-    }
+    float x = 32 / scaleFactor;
+    float y = 48 / scaleFactor;
 
-    pAnim->setDelayPerUnit(0.1f);
-    pAnim->setRestoreOriginalFrame(true);
+    CCSpriteFrame *frame0=CCSpriteFrame::create("CrazyZombie.png",CCRectMake(0, 0, x, y)); 
+    CCSpriteFrame *frame1=CCSpriteFrame::create("CrazyZombie.png",CCRectMake(x, 0, x, y)); 
+    CCSpriteFrame *frame2=CCSpriteFrame::create("CrazyZombie.png",CCRectMake(x*2, 0, x, y)); 
+    CCSpriteFrame *frame3=CCSpriteFrame::create("CrazyZombie.png",CCRectMake(x*3, 0, x, y)); 
+
+    CCArray *animFrames = new CCArray; 
+    animFrames->addObject(frame0); 
+    animFrames->addObject(frame1); 
+    animFrames->addObject(frame2); 
+    animFrames->addObject(frame3); 
+
+    CCAnimation *pAnim = CCAnimation::createWithSpriteFrames(animFrames, 0.4f); 
+    animFrames->release();
 
     m_pMainSprite->runAction(CCRepeatForever::create(CCAnimate::create(pAnim)));
 }
@@ -68,7 +86,7 @@ MMR_IMPLEMENT_STATE_BEGIN(CrazyZombie, Idle)
         const float monsterRoadSizeRate = 0.2f;
         const float offset = 0.5f;
         setPosition((int(getPosition().x / (VisibleRect::right().x * monsterRoadSizeRate)) + offset) * VisibleRect::right().x * monsterRoadSizeRate, getPosition().y);
-        setScale(4.0f);
+        setScale(3.0f);
     }
     MMR_STATE_CONSTRUCTOR_END
 

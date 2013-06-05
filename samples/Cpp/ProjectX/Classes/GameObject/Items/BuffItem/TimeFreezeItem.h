@@ -1,29 +1,29 @@
-#ifndef  _APP_EarthMonster_H_
-#define  _APP_EarthMonster_H_
+#ifndef  _APP_TimeFreezeItem_H_
+#define  _APP_TimeFreezeItem_H_
 
-#include "GameObject/Monster.h"
+#include "GameObject/Items/Item.h"
 
 USING_NS_CC;
 
-class StoneMan : public Monster 
+class TimeFreezeItem : public Item
 {
 public:
-    StoneMan();
-    virtual ~StoneMan();
+    TimeFreezeItem();
+    virtual ~TimeFreezeItem();
 
     virtual void onEnter();
     virtual void onExit();
 
     virtual void StateUpdate(float deltaTime);
 
-    virtual void Killed();
-
     virtual int GetDetailTypeIndex();
+
+    virtual void ItemTouchesEnded();
 
 private:
     void PlayMonsterWalkAnimation();
 
-    MMR_DECLARE_FSM(StoneMan);
+    MMR_DECLARE_FSM(TimeFreezeItem);
     MMR_DECLARE_STATE(Idle);
     MMR_DECLARE_STATE(Move);
     MMR_DECLARE_STATE(Dead);
@@ -36,4 +36,4 @@ private:
     float m_deltaTime;
 };
 
-#endif // _APP_EarthMonster_H_
+#endif // _APP_TimeFreezeItem_H_

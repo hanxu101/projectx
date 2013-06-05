@@ -3,10 +3,11 @@
 
 #include "cocos2d.h"
 #include "FSM/FsmInclude.h"
+#include "GameObject/GameObjectEnum.h"
 
 USING_NS_CC;
 
-typedef std::vector< std::vector<bool> > TMonsterDataVec;
+typedef std::vector< std::vector<EMonsterType> > TMonsterDataVec;
 
 class MonsterGroupLogic : public CCNode
 {
@@ -25,10 +26,10 @@ private:
     MMR_DECLARE_STATE(Activate);
 
     void MonsterLineWave(float dt);
-    void SpawnMonster(float positionX);
+    void SpawnMonster(float positionX, EMonsterType type);
 
     void InitMonsterData();
-    void AddOneLine(bool line1, bool line2, bool line3, bool line4, bool line5);
+    void AddOneLine(EMonsterType line1, EMonsterType line2, EMonsterType line3, EMonsterType line4, EMonsterType line5);
 
     CCTimer* m_pTimer;
 

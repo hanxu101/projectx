@@ -4,6 +4,11 @@
 
 #define    RAND_LIMIT    32767
 
+#define BIT_SET(a,b) ((a) |= (1<<(b)))
+#define BIT_CLEAR(a,b) ((a) &= ~(1<<(b)))
+#define BIT_FLIP(a,b) ((a) ^= (1<<(b)))
+#define BIT_CHECK(a,b) ((a) & (1<<(b)))
+
 /// Random number in range [-1,1]
 inline float RandomFloat()
 {

@@ -35,4 +35,12 @@ enum EMonsterType
     eMT_Invalid
 };
 
+enum EItemType
+{
+    eIT_TimeFreezeItem,
+
+    eIT_Count,
+    eIT_Invalid
+};
+
 #endif //_APP_GameObjectEnum_H_

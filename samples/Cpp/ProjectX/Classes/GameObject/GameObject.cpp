@@ -56,3 +56,20 @@ float GameObject::GetCollisionRadius() const
 {
     return m_collisionRadius;
 }
+
+void GameObject::ReduceHp( float hp )
+{
+    m_hp -= hp;
+
+    if (m_hp <= 0)
+        Killed();
+}
+
+void GameObject::IncreaseHp( float hp )
+{
+    m_hp += hp;
+}
+
+void GameObject::Killed()
+{
+}

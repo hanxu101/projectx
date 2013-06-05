@@ -33,6 +33,24 @@
     <Filter Include="Classes\GameObject\Monsters\AirMonster">
       <UniqueIdentifier>{ac25be39-d43a-45b0-a1e6-2afc780a0c34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\GameObject\Items">
+      <UniqueIdentifier>{cc9575cc-e220-4c18-a040-c56bfe8de058}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject\Items\BuffItem">
+      <UniqueIdentifier>{afa79031-443b-45cc-831f-4c5e748f6ffe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Buff">
+      <UniqueIdentifier>{60e03cc7-8233-4381-9710-ce4a0bf56106}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Buff\Time">
+      <UniqueIdentifier>{8e02e9f6-d39e-4c1c-9f04-54b9575a7165}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Buff\BuffManager">
+      <UniqueIdentifier>{d4505b4a-7b6b-4899-b2ff-8626da15977a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject\Monsters\MonsterFactory">
+      <UniqueIdentifier>{55658071-0881-47c1-932a-267c73bab66c}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Classes\Scene">
       <UniqueIdentifier>{1a24267c-c5d1-4f6b-9b6c-dd6867256996}</UniqueIdentifier>
     </Filter>
@@ -70,6 +88,21 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameObject\Monsters\EarthMonster\StoneMan.cpp">
       <Filter>Classes\GameObject\Monsters\EarthMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Items\Item.cpp">
+      <Filter>Classes\GameObject\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Items\BuffItem\TimeFreezeItem.cpp">
+      <Filter>Classes\GameObject\Items\BuffItem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Buff\Buff.cpp">
+      <Filter>Classes\Buff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Buff\BuffManager\BuffManager.cpp">
+      <Filter>Classes\Buff\BuffManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Monsters\MonsterFactory\MonsterFactory.cpp">
+      <Filter>Classes\GameObject\Monsters\MonsterFactory</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Scene\SceneBase.cpp">
       <Filter>Classes\Scene</Filter>
@@ -150,6 +183,24 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameObject\Monsters\EarthMonster\StoneMan.h">
       <Filter>Classes\GameObject\Monsters\EarthMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Items\Item.h">
+      <Filter>Classes\GameObject\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Items\BuffItem\TimeFreezeItem.h">
+      <Filter>Classes\GameObject\Items\BuffItem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Buff\Buff.h">
+      <Filter>Classes\Buff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Buff\BuffManager\BuffManager.h">
+      <Filter>Classes\Buff\BuffManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Buff\BuffEnum.h">
+      <Filter>Classes\Buff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Monsters\MonsterFactory\MonsterFactory.h">
+      <Filter>Classes\GameObject\Monsters\MonsterFactory</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\SceneBase.h">
       <Filter>Classes\Scene</Filter>

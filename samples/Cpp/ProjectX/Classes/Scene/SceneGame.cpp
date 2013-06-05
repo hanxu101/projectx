@@ -7,6 +7,7 @@
 #include "GameObject/Monster.h"
 #include "GameObject/GameObjectManager/GameObjectManager.h"
 #include "GameLogic/MonsterGroupLogic.h"
+#include "Buff/BuffManager/BuffManager.h"
 
 //------------------------------------------------------------------
 //
@@ -79,6 +80,7 @@ void GameLayer::Update(float dt)
     UpdateTouchInfo(dt);
 
     GameObjectManager::Get().Update(dt);
+	BuffManager::Get().Update(dt);
 }
 
 void GameLayer::UpdateTouchInfo(float dt)
