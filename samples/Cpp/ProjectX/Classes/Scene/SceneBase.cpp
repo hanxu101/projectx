@@ -1,5 +1,6 @@
 #include "SceneBase.h"
 #include "SceneManager.h"
+#include "AppMacros.h"
 
 SceneBase::SceneBase(bool bPortrait)
 {
@@ -10,6 +11,7 @@ void SceneBase::onEnter()
 {
     CCScene::onEnter();
 
+#ifndef DEBUG_NO_BACK_TO_MAIN_MENU
     //add the menu item for back to main menu
     CCLabelTTF* label = CCLabelTTF::create("MainMenu", "Arial", 20);
 
@@ -21,6 +23,7 @@ void SceneBase::onEnter()
     pMenuItem->setPosition( ccp( VisibleRect::right().x - 50, VisibleRect::bottom().y + 25) );
 
     addChild(pMenu, 1);
+#endif
 }
 
 void SceneBase::MainMenuCallback(CCObject* pSender)

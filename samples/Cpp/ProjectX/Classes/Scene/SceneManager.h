@@ -27,6 +27,7 @@ class SceneManager : public cocos2d::CCLayer
 
 public:
 	SceneManager();
+    virtual void onEnter();
 
 	void menuCallback(CCObject * pSender);
     void closeCallback(CCObject * pSender);

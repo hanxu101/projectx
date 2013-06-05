@@ -19,6 +19,8 @@ public:
     void SetDirection(CCPoint direction);
     void SetSpeedFactor(float slideSpeed);
     void SetForce(CCPoint force);
+    const CCPoint& GetDirection() const;
+    const CCPoint& GetForce() const;
 
     // State
     void SetAbort();
@@ -30,7 +32,7 @@ private:
     MMR_DECLARE_STATE(Move);
     MMR_DECLARE_STATE(Dead);
     MMR_DECLARE_STATE(Abort);
-
+   
     CCSprite* m_pMainSprite;
     CCPoint m_targetPos;
     CCPoint m_direction;

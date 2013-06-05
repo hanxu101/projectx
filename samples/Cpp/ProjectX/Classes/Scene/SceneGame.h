@@ -28,11 +28,13 @@ public:
 
 private:
     void Update(float dt);  
-
+    CCPoint CalculateDirection();
+    CCPoint CalculateSpinForce();
     float CalculateSlideSpeedFactor(float slideDistance); 
     void UpdateTouchInfo(float dt);
-    CCPoint GetPreviousTouchPos( UINT rollbackFrameNum );
+    UINT GetPreviousTouchPosIndex( UINT rollbackFrameNum, UINT maxCacheNumber );
 
+    void PrintMoveInfo(); // Debug
 private:
     CCPoint m_currentTouchLocation;
     bool m_isTouching;
@@ -41,7 +43,9 @@ private:
     MonsterGroupLogic* m_pMonsterGroupLogic;
 
     std::vector<CCPoint> m_previousTouchPosVec;
-    const static UINT8 PREVIOUS_TOUCHPOSITION_CACHE_NUM = 3;
+    const static UINT8 PREVIOUS_TOUCHPOSITION_CACHE_NUM = 5;
+    const static UINT8 SLIDE_DIRECTION_ROLLBACK_FRAME_NUM = 5;
+    //const static UINT8 SLIDE_SPIN_ROLLBACK_FRAME_NUM = 5;
     const static CCPoint INVALID_TOUCHPOSITION;
     const static float FIRE_SLIDE_DISTANCE_MAX;
     const static float FIRE_SLIDE_DISTANCE_MIN;

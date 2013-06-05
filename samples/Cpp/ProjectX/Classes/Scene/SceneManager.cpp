@@ -99,3 +99,18 @@ void SceneManager::closeCallback(CCObject * pSender)
     exit(0);
 #endif
 }
+
+void SceneManager::onEnter()
+{
+    CCLayer::onEnter();
+
+#ifdef DEBUG_HIDE_TEXT
+    // directly goto Game Scene
+    SceneBase* pScene = CreateScene(0);
+    if (pScene)
+    {
+        pScene->runThisTest();
+        pScene->release();
+    }
+#endif
+}

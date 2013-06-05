@@ -48,6 +48,11 @@ void FireBall::SetDirection(CCPoint direction)
 	m_direction = direction;
 }
 
+const CCPoint& FireBall::GetDirection() const
+{
+    return m_direction;
+}
+
 void FireBall::SetSpeedFactor( float slideSpeed )
 {
     m_speed = m_maxSpeed * slideSpeed;
@@ -58,6 +63,10 @@ void FireBall::SetForce(CCPoint force)
     m_force = force;
 }
 
+const CCPoint& FireBall::GetForce() const
+{
+    return m_force;
+}
 
 //////////////////////////////////////////////////////////////////////////
 // Switch State
@@ -102,8 +111,9 @@ MMR_IMPLEMENT_STATE_END
 
 		MMR_STATE_UPDATE_BEGIN
 	{      
-		CCPoint newPos =  ccpAdd( getPosition(), ccpMult(ccpMult(m_direction, m_speed), m_deltaTime) );
-		setPosition(newPos);
+        CCPoint offset(ccpAdd(ccpMult(ccpMult(m_direction, m_speed), m_deltaTime), ccpMult(m_force, m_deltaTime)));
+		CCPoint newPos = ccpAdd(getPosition(), offset);
+        setPosition(newPos);
 
 		//Temp. Check collision.
 		TGameObjectList objectList;

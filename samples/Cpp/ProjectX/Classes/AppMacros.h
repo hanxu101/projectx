@@ -53,4 +53,12 @@ static cocos2d::CCSize designResolutionSize = cocos2d::CCSizeMake(2048, 1536);
 // The font size 24 is designed for small resolution, so we should change it to fit for current design resolution
 #define TITLE_FONT_SIZE  (cocos2d::CCEGLView::sharedOpenGLView()->getDesignResolutionSize().width / smallResource.size.width * 24)
 
+
+// These are the switchers to debug game
+//#define DEBUG_SKIP_MAIN_MENU
+//#define DEBUG_HIDE_TEXT
+//#define DEBUG_NO_MONSTER
+//#define DEBUG_NO_TITLE
+//#define DEBUG_NO_BACK_TO_MAIN_MENU
+
 #endif /* __APPMACROS_H__ */
