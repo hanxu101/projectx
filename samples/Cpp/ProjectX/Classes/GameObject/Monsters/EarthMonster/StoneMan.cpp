@@ -106,7 +106,7 @@ MMR_IMPLEMENT_STATE_END
         CCPoint newPos =  ccpAdd( getPosition(), ccpMult(ccpMult(m_direction, m_speed), m_deltaTime) );
         setPosition(newPos);
 
-        MMR_TRANSIT_TO_STATE( !VisibleRect::getVisibleRect().containsPoint(newPos), NoTransitionAction, Dead );
+        MMR_TRANSIT_TO_STATE( !VisibleRect::getVisibleRect().containsPoint(newPos), NoTransitionAction, ArrivedBottomSafe );
     }
     MMR_STATE_UPDATE_END
 
@@ -117,7 +117,7 @@ MMR_IMPLEMENT_STATE_END
 }
 MMR_IMPLEMENT_STATE_END
 
-    MMR_IMPLEMENT_STATE_BEGIN(StoneMan, Dead)
+    MMR_IMPLEMENT_STATE_BEGIN(StoneMan, ArrivedBottomSafe)
 {
     MMR_STATE_CONSTRUCTOR_BEGIN
     {

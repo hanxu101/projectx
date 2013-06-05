@@ -99,7 +99,7 @@ UINT GameLayer::GetPreviousTouchPosIndex( UINT rollbackFrameNum, UINT maxCacheNu
 {
     CCAssert(rollbackFrameNum >= 0, "The Rollback Frame Num must >= 0 .");
 
-    return rollbackFrameNum > maxCacheNumber ? 0 : (maxCacheNumber - rollbackFrameNum - 1);
+    return rollbackFrameNum >= maxCacheNumber ? 0 : (maxCacheNumber - rollbackFrameNum - 1);
 }
 
 static CCDictionary s_dic;

@@ -14,7 +14,7 @@ inline float RandomFloat()
 {
 	float r = (float)(std::rand() & (RAND_LIMIT));
 	r /= RAND_LIMIT;
-	r = 2.0f * r - 1.0f;
+	//r = 2.0f * r - 1.0f;
 	return r;
 }
 

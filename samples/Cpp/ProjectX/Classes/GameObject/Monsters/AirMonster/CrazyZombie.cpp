@@ -1,6 +1,7 @@
 #include "GameObject/Monsters/AirMonster/CrazyZombie.h"
 #include "VisibleRect.h"
 #include "GameObject/Items/BuffItem/TimeFreezeItem.h"
+#include "utilities/Utilities.h"
 
 CrazyZombie::CrazyZombie()
     : m_pMainSprite(NULL)
@@ -40,9 +41,14 @@ void CrazyZombie::StateUpdate(float deltaTime)
 
 void CrazyZombie::Killed()
 {
-    TimeFreezeItem* pItem = new TimeFreezeItem();
-    pItem->setPosition(getPosition());
-    getParent()->addChild(pItem);
+    const float dropRate = 0.3f;
+
+	if (RandomFloat() < dropRate)
+	{
+		TimeFreezeItem* pItem = new TimeFreezeItem();
+		pItem->setPosition(getPosition());
+		getParent()->addChild(pItem);
+	}
 
     Unspawn();
 }
@@ -125,7 +131,7 @@ MMR_IMPLEMENT_STATE_END
         CCPoint newPos =  ccpAdd( getPosition(), ccpMult(ccpMult(m_direction, m_speed), m_deltaTime) );
         setPosition(newPos);
 
-        MMR_TRANSIT_TO_STATE( !VisibleRect::getVisibleRect().containsPoint(newPos), NoTransitionAction, Dead );
+        MMR_TRANSIT_TO_STATE( !VisibleRect::getVisibleRect().containsPoint(newPos), NoTransitionAction, ArrivedBottomSafe );
     }
     MMR_STATE_UPDATE_END
 
@@ -137,7 +143,7 @@ MMR_IMPLEMENT_STATE_END
 }
 MMR_IMPLEMENT_STATE_END
 
-    MMR_IMPLEMENT_STATE_BEGIN(CrazyZombie, Dead)
+    MMR_IMPLEMENT_STATE_BEGIN(CrazyZombie, ArrivedBottomSafe)
 {
     MMR_STATE_CONSTRUCTOR_BEGIN
     {

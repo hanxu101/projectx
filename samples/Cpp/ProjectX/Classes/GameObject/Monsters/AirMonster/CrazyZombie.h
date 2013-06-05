@@ -26,7 +26,7 @@ private:
     MMR_DECLARE_FSM(CrazyZombie);
     MMR_DECLARE_STATE(Idle);
     MMR_DECLARE_STATE(Move);
-    MMR_DECLARE_STATE(Dead);
+    MMR_DECLARE_STATE(ArrivedBottomSafe);
 
     CCSprite* m_pMainSprite;
 
