@@ -19,7 +19,7 @@ void TimeFreezeItem::onEnter()
 {
     Item::onEnter();
 
-    m_pMainSprite = CCSprite::create("Hero01_0.png");
+    m_pMainSprite = CCSprite::create("Clock.png");
     addChild(m_pMainSprite);
 
     MMR_INIT_FSM(Idle);
@@ -43,19 +43,19 @@ int TimeFreezeItem::GetDetailTypeIndex()
 
 void TimeFreezeItem::PlayMonsterWalkAnimation()
 {
-    CCAnimation* pAnim = CCAnimation::create();
-    char str[20];
-
-    for (UINT i = 0; i < 6; ++i)
-    {
-        sprintf(str,"Hero01_%d.png",i);
-        pAnim->addSpriteFrameWithFileName(str);
-    }
-
-    pAnim->setDelayPerUnit(0.1f);
-    pAnim->setRestoreOriginalFrame(true);
-
-    m_pMainSprite->runAction(CCRepeatForever::create(CCAnimate::create(pAnim)));
+//     CCAnimation* pAnim = CCAnimation::create();
+//     char str[20];
+// 
+//     for (UINT i = 0; i < 6; ++i)
+//     {
+//         sprintf(str,"Hero01_%d.png",i);
+//         pAnim->addSpriteFrameWithFileName(str);
+//     }
+// 
+//     pAnim->setDelayPerUnit(0.1f);
+//     pAnim->setRestoreOriginalFrame(true);
+// 
+//     m_pMainSprite->runAction(CCRepeatForever::create(CCAnimate::create(pAnim)));
 }
 
 void TimeFreezeItem::ItemTouchesEnded()
@@ -76,7 +76,6 @@ MMR_IMPLEMENT_STATE_BEGIN(TimeFreezeItem, Idle)
         const float monsterRoadSizeRate = 0.2f;
         const float offset = 0.5f;
         setPosition((int(getPosition().x / (VisibleRect::right().x * monsterRoadSizeRate)) + offset) * VisibleRect::right().x * monsterRoadSizeRate + 10, getPosition().y);
-        setScale(2.0f);
     }
     MMR_STATE_CONSTRUCTOR_END
 
