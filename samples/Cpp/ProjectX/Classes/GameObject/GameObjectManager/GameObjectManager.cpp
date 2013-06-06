@@ -43,6 +43,11 @@ void GameObjectManager::Update(float dt)
     }
 }
 
+void GameObjectManager::Reset()
+{
+	m_updateExceptionSign = 0;
+}
+
 void GameObjectManager::RegisterGameObject( GameObject* pObj )
 {
     if (!pObj)

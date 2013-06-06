@@ -17,6 +17,7 @@ public:
 
     virtual std::string title();
     virtual void onEnter();
+	virtual void onExit();
 
     virtual void registerWithTouchDispatcher(void);
     virtual void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);

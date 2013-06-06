@@ -71,6 +71,12 @@ void GameLayer::onEnter()
 #endif
 }
 
+void GameLayer::onExit()
+{
+	GameObjectManager::Get().Reset();
+	CCLayer::onExit();
+}
+
 void GameLayer::Update(float dt)
 {
 #ifndef DEBUG_NO_MONSTER
