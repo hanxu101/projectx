@@ -16,6 +16,7 @@ FireBall::FireBall()
     , m_forceDirection(CCPoint(0.0f, 0.0f))
     , m_maxSpeed(400.0f)
     , m_forceFactor(1.0f)
+    , m_attackPoint(10.0f)
 {
 }
 
@@ -71,6 +72,22 @@ const CCPoint& FireBall::GetForce() const
     return m_force;
 }
 
+void FireBall::Attack()
+{    
+    TGameObjectList objectList;
+    GameObjectManager::Get().GetGameObjectList(eGOT_Monster, objectList);
+    for (TGameObjectList::iterator iter = objectList.begin(); iter != objectList.end(); ++iter)
+    {
+        float maxCollisionDis = (*iter)->GetCollisionRadius() + GetCollisionRadius();
+        float distanceSQ = ccpDistanceSQ((*iter)->getPosition(), getPosition());
+
+        if (distanceSQ < maxCollisionDis * maxCollisionDis)
+        {
+            (*iter)->ReduceHp(m_attackPoint);
+        }
+    }
+}
+
 //////////////////////////////////////////////////////////////////////////
 // Switch State
 void FireBall::SetAbort()
@@ -124,19 +141,9 @@ MMR_IMPLEMENT_STATE_END
 
         CCPoint newPos = ccpAdd(getPosition(), offset);
         setPosition(newPos);
-        //Temp. Check collision.
-        TGameObjectList objectList;
-        GameObjectManager::Get().GetGameObjectList(eGOT_Monster, objectList);
-        for (TGameObjectList::iterator iter = objectList.begin(); iter != objectList.end(); ++iter)
-        {
-            float maxCollisionDis = (*iter)->GetCollisionRadius() + GetCollisionRadius();
-            float distanceSQ = ccpDistanceSQ((*iter)->getPosition(), getPosition());
 
-            if (distanceSQ < maxCollisionDis * maxCollisionDis)
-            {
-                (*iter)->ReduceHp(10.0f);
-            }
-        }
+        Attack();
+
         MMR_TRANSIT_TO_STATE( !VisibleRect::getVisibleRect().containsPoint(newPos), NoTransitionAction, Dead );
     }
     MMR_STATE_UPDATE_END

@@ -5,7 +5,7 @@
 
 USING_NS_CC;
 
-class FireBall : public GameObject, public CCTargetedTouchDelegate 
+class FireBall : public GameObject
 {
 public:
     FireBall();
@@ -26,13 +26,15 @@ public:
     void SetAbort();
     void SetMove();
 
-private:
+protected:
+    void Attack();
+
     MMR_DECLARE_FSM(FireBall);
-    MMR_DECLARE_STATE(Idle);
-    MMR_DECLARE_STATE(Move);
-    MMR_DECLARE_STATE(Dead);
-    MMR_DECLARE_STATE(Abort);
-   
+    MMR_DECLARE_VIRTUAL_STATE(Idle);
+    MMR_DECLARE_VIRTUAL_STATE(Move);
+    MMR_DECLARE_VIRTUAL_STATE(Dead);
+    MMR_DECLARE_VIRTUAL_STATE(Abort);
+
     CCSprite* m_pMainSprite;
     CCPoint m_targetPos;
     CCPoint m_direction;
@@ -48,6 +50,7 @@ private:
     // configurable variables
     float m_maxSpeed;
     float m_forceFactor;
+    float m_attackPoint;
 };
 
 #endif // _APP_FireBall_H_
