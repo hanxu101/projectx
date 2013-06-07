@@ -168,19 +168,35 @@ void GameLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
             m_currentTouchLocation = pTouch->getLocation();
             m_previousTouchPosVec[PREVIOUS_TOUCHPOSITION_CACHE_NUM-1] = m_currentTouchLocation;
 
-            CCPoint previousTouchPoint = m_previousTouchPosVec[GetPreviousTouchPosIndex(m_touchFrameCount, SLIDE_DIRECTION_ROLLBACK_FRAME_NUM)];
-            float offset = ccpDistance(m_currentTouchLocation, previousTouchPoint);
-            if (offset > FIRE_SLIDE_DISTANCE_MIN && m_touchTimer > FIRE_TOUCH_TIME_THRESHOLD)
+#ifdef DEBUG_FAKE_FIREBALL_INPUT
+            //Debug code
+            FakeInput();
+#endif
+
+            bool canFire = false;
+
+            if (m_touchFrameCount >= PREVIOUS_TOUCHPOSITION_CACHE_NUM)
             {
-                m_fireBall->SetDirection(CalculateDirection());
-                m_fireBall->SetSpeedFactor(CalculateSlideSpeedFactor(offset));
-                m_fireBall->SetForce(CalculateSpinForce());
-                m_fireBall->SetMove();
+                CCPoint previousTouchPoint = m_previousTouchPosVec[GetPreviousTouchPosIndex(m_touchFrameCount, PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
+                float offset = ccpDistance(m_currentTouchLocation, previousTouchPoint);
+                if (offset > FIRE_SLIDE_DISTANCE_MIN && m_touchTimer > FIRE_TOUCH_TIME_THRESHOLD)
+                {
+                    canFire = true;
+
+                    m_fireBall->SetDirection(CalculateDirection());
+                    m_fireBall->SetSpeedFactor(CalculateSlideSpeedFactor(offset));
+                    m_fireBall->SetForce(CalculateSpinForce());
+                    m_fireBall->SetMove();
+
+                    PrintMoveInfo();
+                }
             }
-            else
+
+            if (!canFire)
             {
                 m_fireBall->SetAbort();
             }
+            
         }
 
         m_fireBall = NULL;
@@ -194,16 +210,17 @@ void GameLayer::ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent)
 
 CCPoint GameLayer::CalculateDirection()
 {
-    UINT index = GetPreviousTouchPosIndex(m_touchFrameCount, SLIDE_DIRECTION_ROLLBACK_FRAME_NUM);
+    UINT index = GetPreviousTouchPosIndex(m_touchFrameCount, PREVIOUS_TOUCHPOSITION_CACHE_NUM);
     CCPoint previousTouchPoint1 = m_previousTouchPosVec[index];
-    CCPoint previousTouchPoint2 = m_previousTouchPosVec[index+1];
-    return ccpNormalize(ccpSub(previousTouchPoint2, previousTouchPoint1));
+    CCPoint previousTouchPoint2 = m_previousTouchPosVec[index+PREVIOUS_TOUCHPOSITION_CACHE_NUM/2];
+    //return ccpNormalize(ccpSub(previousTouchPoint2, previousTouchPoint1));
+    return ccpSub(previousTouchPoint2, previousTouchPoint1);
 }
 
 CCPoint GameLayer::CalculateSpinForce()
 {
-    CCPoint previousTouchPoint1 = m_previousTouchPosVec[GetPreviousTouchPosIndex(0, SLIDE_DIRECTION_ROLLBACK_FRAME_NUM)];
-    CCPoint previousTouchPoint2 = m_previousTouchPosVec[GetPreviousTouchPosIndex(1, SLIDE_DIRECTION_ROLLBACK_FRAME_NUM)];
+    CCPoint previousTouchPoint1 = m_previousTouchPosVec[GetPreviousTouchPosIndex(0, PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
+    CCPoint previousTouchPoint2 = m_previousTouchPosVec[GetPreviousTouchPosIndex(PREVIOUS_TOUCHPOSITION_CACHE_NUM/2, PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
     return ccpSub(previousTouchPoint1, previousTouchPoint2);
 }
 
@@ -219,16 +236,55 @@ void GameLayer::PrintMoveInfo()
 {
     if (m_fireBall)
     {
-        CCLOG("DIRECTION: (%.2f, %.2f)", m_fireBall->GetDirection().x, m_fireBall->GetDirection().y);
-        CCLOG("FORCE:     (%.2f, .2%f)", m_fireBall->GetForce().x, m_fireBall->GetForce().y);
+        CCLOG("DIRECTION :  (%.2f, %.2f)", m_fireBall->GetDirection().x, m_fireBall->GetDirection().y);
+        CCLOG("FORCE :      (%.2f, %.2f)", m_fireBall->GetForce().x, m_fireBall->GetForce().y);
+        
+        CCPoint previousTouchPoint1 = m_previousTouchPosVec[GetPreviousTouchPosIndex(0, PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
+        CCPoint previousTouchPoint2 = m_previousTouchPosVec[GetPreviousTouchPosIndex(PREVIOUS_TOUCHPOSITION_CACHE_NUM/2, PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
+        CCLOG("Force Points: (%.2f, %.2f), (%.2f, %.2f)", previousTouchPoint1.x, previousTouchPoint1.y, previousTouchPoint2.x, previousTouchPoint2.y);
     }
 
+    CCLOG("TouchFrameCount : %d)", m_touchFrameCount);
+    
     for (UINT8 i = 0; i < PREVIOUS_TOUCHPOSITION_CACHE_NUM; ++i)
     {
-        CCLOG("TouchPoint%d :(%.2f, .2%f)", i, m_previousTouchPosVec[i].x, m_previousTouchPosVec[i].y);
+        CCLOG("TouchPoint%d :(%.2f, %.2f)", i, m_previousTouchPosVec[i].x, m_previousTouchPosVec[i].y);
     }
+
+    // for Excel format
+    CCLOG("Excel format of Pos:");
+    string strForX, strForY;
+    for (UINT8 i = 0; i < PREVIOUS_TOUCHPOSITION_CACHE_NUM; ++i)
+    {
+        strForX += CCString::createWithFormat("%.2f\t", m_previousTouchPosVec[i].x)->m_sString;
+        strForY += CCString::createWithFormat("%.2f\t", m_previousTouchPosVec[i].y)->m_sString;
+    }
+    CCLOG((strForX + "\n" + strForY).c_str());
 }
 
+void GameLayer::FakeInput()
+{
+    // A spin curve to top right
+    /*m_previousTouchPosVec[0] = CCPoint(139.87f, 39.49f);
+    m_previousTouchPosVec[1] = CCPoint(148.2f, 71.73f);
+    m_previousTouchPosVec[2] = CCPoint(161.2f, 89.93f);
+    m_previousTouchPosVec[3] = CCPoint(195.0f, 112.81f);
+    m_previousTouchPosVec[4] = CCPoint(222.04f, 115.41f);
+    */
+    // Move forward
+    /*m_previousTouchPosVec[0] = CCPoint(0.0f, 0.0f);
+    m_previousTouchPosVec[1] = CCPoint(0.0f, 71.73f);
+    m_previousTouchPosVec[2] = CCPoint(0.0f, 89.93f);
+    m_previousTouchPosVec[3] = CCPoint(0.0f, 112.81f);
+    m_previousTouchPosVec[4] = CCPoint(0.0f, 115.41f);
+    */
+    // Boomerang
+    m_previousTouchPosVec[0] = CCPoint(0.0f, 0.0f);
+    m_previousTouchPosVec[1] = CCPoint(0.0f, 10.73f);
+    m_previousTouchPosVec[2] = CCPoint(0.0f, 20.93f);
+    m_previousTouchPosVec[3] = CCPoint(0.0f, 9.73f);
+    m_previousTouchPosVec[4] = CCPoint(0.0f, 0.0f);
+};
 //------------------------------------------------------------------
 //
 // GameScene

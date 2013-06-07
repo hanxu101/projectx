@@ -12,7 +12,10 @@ FireBall::FireBall()
     , m_speed(0.0f)
     , m_deltaTime(0.0f)
     , m_force(CCPoint(0.0f, 0.0f))
+    , m_forceLength(0.0f)
+    , m_forceDirection(CCPoint(0.0f, 0.0f))
     , m_maxSpeed(400.0f)
+    , m_forceFactor(1.0f)
 {
 }
 
@@ -104,13 +107,21 @@ MMR_IMPLEMENT_STATE_END
 {
     MMR_STATE_CONSTRUCTOR_BEGIN
     {
+        m_moveForce = ccpNormalize(m_force);
+
         m_direction = ccpNormalize(m_direction);
+        m_forceLength = ccpLength(m_force);
+        m_forceDirection = ccpNormalize(m_force);
+        m_forceDirectionSpeed = 0.0f;
     }
     MMR_STATE_CONSTRUCTOR_END
 
         MMR_STATE_UPDATE_BEGIN
     {
-        CCPoint offset(ccpAdd(ccpMult(ccpMult(m_direction, m_speed), m_deltaTime), ccpMult(m_force, m_deltaTime)));
+        m_forceDirectionSpeed += m_forceLength*m_forceFactor;
+        CCPoint offset(ccpAdd(ccpMult(m_direction, m_speed), ccpMult(m_moveForce, m_forceDirectionSpeed)));
+        offset = ccpMult(ccpNormalize(offset), m_speed * m_deltaTime); // make speed constant
+
         CCPoint newPos = ccpAdd(getPosition(), offset);
         setPosition(newPos);
         //Temp. Check collision.

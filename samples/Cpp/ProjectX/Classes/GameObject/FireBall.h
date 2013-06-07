@@ -39,9 +39,15 @@ private:
     float m_speed;
     float m_deltaTime;
     CCPoint m_force;
+    float m_forceLength;
+    CCPoint m_forceDirection;
+    float m_forceDirectionSpeed;
+
+    CCPoint m_moveForce;
 
     // configurable variables
     float m_maxSpeed;
+    float m_forceFactor;
 };
 
 #endif // _APP_FireBall_H_
