@@ -43,21 +43,12 @@ void CrazyZombie::Killed()
 {
     const float dropRate = 0.2f;
 
-<<<<<<< .mine
-	if (RandomFloat(0.0f, 1.0f) < dropRate)
-	{
-		TimeFreezeItem* pItem = new TimeFreezeItem();
-		pItem->setPosition(getPosition());
-		getParent()->addChild(pItem);
-	}
-=======
     if (RandomFloat(0.0f, 1.0f) < dropRate)
     {
         TimeFreezeItem* pItem = new TimeFreezeItem();
         pItem->setPosition(getPosition());
         getParent()->addChild(pItem);
     }
->>>>>>> .r33
 
     Unspawn();
 }
