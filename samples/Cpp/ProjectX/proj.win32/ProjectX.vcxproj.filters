@@ -54,6 +54,9 @@
     <Filter Include="Classes\Scene">
       <UniqueIdentifier>{1a24267c-c5d1-4f6b-9b6c-dd6867256996}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\GameObject\FireBall">
+      <UniqueIdentifier>{d9f8d84d-fcb9-4934-838b-70f181bfef9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -115,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Scene\SceneManager.cpp">
       <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\FireBall\Boomerang.cpp">
+      <Filter>Classes\GameObject\FireBall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +219,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\SceneManager.h">
       <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\FireBall\Boomerang.h">
+      <Filter>Classes\GameObject\FireBall</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
