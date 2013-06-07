@@ -41,14 +41,14 @@ void CrazyZombie::StateUpdate(float deltaTime)
 
 void CrazyZombie::Killed()
 {
-    const float dropRate = 0.3f;
+    const float dropRate = 0.2f;
 
-	if (RandomFloat() < dropRate)
-	{
-		TimeFreezeItem* pItem = new TimeFreezeItem();
-		pItem->setPosition(getPosition());
-		getParent()->addChild(pItem);
-	}
+    if (RandomFloat(0.0f, 1.0f) < dropRate)
+    {
+        TimeFreezeItem* pItem = new TimeFreezeItem();
+        pItem->setPosition(getPosition());
+        getParent()->addChild(pItem);
+    }
 
     Unspawn();
 }
