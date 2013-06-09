@@ -123,8 +123,8 @@
     <ClCompile Include="..\Classes\Buff\Buff.cpp" />
     <ClCompile Include="..\Classes\Buff\BuffManager\BuffManager.cpp" />
     <ClCompile Include="..\Classes\GameLogic\MonsterGroupLogic.cpp" />
-    <ClCompile Include="..\Classes\GameObject\FireBall.cpp" />
     <ClCompile Include="..\Classes\GameObject\FireBall\Boomerang.cpp" />
+    <ClCompile Include="..\Classes\GameObject\FireBall\FireBall.cpp" />
     <ClCompile Include="..\Classes\GameObject\GameObject.cpp" />
     <ClCompile Include="..\Classes\GameObject\GameObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="..\Classes\GameObject\Items\BuffItem\TimeFreezeItem.cpp" />
@@ -155,8 +155,8 @@
     <ClInclude Include="..\Classes\FSM\TransitionClusterMacros.h" />
     <ClInclude Include="..\Classes\FSM\TransitionMacros.h" />
     <ClInclude Include="..\Classes\GameLogic\MonsterGroupLogic.h" />
-    <ClInclude Include="..\Classes\GameObject\FireBall.h" />
     <ClInclude Include="..\Classes\GameObject\FireBall\Boomerang.h" />
+    <ClInclude Include="..\Classes\GameObject\FireBall\FireBall.h" />
     <ClInclude Include="..\Classes\GameObject\GameObject.h" />
     <ClInclude Include="..\Classes\GameObject\GameObjectEnum.h" />
     <ClInclude Include="..\Classes\GameObject\GameObjectManager\GameObjectManager.h" />

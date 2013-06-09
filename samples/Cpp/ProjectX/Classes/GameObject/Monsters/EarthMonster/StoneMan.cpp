@@ -2,16 +2,12 @@
 #include "VisibleRect.h"
 
 StoneMan::StoneMan()
-    : m_pMainSprite(NULL)
-    , m_speed(100.0f)
-    , m_deltaTime(0.0f)
 {
-
+    m_speed = 100.0f;
 }
 
 StoneMan::~StoneMan()
 {
-
 }
 
 void StoneMan::onEnter()
@@ -20,19 +16,11 @@ void StoneMan::onEnter()
 
     m_pMainSprite = CCSprite::create("Hero01_0.png");
     addChild(m_pMainSprite);
-
-    MMR_INIT_FSM(Idle);
 }
 
 void StoneMan::onExit()
 {
     Monster::onExit();
-}
-
-void StoneMan::StateUpdate(float deltaTime)
-{
-    m_deltaTime = deltaTime;
-    GetFsm().Update();
 }
 
 void StoneMan::Killed()
@@ -64,31 +52,6 @@ void StoneMan::PlayMonsterWalkAnimation()
 
 //////////////////////////////////////////////////////////////////////////
 
-MMR_IMPLEMENT_STATE_BEGIN(StoneMan, Idle)
-{
-    MMR_STATE_CONSTRUCTOR_BEGIN
-    {
-        // Set suitable position.
-        const float monsterRoadSizeRate = 0.2f;
-        const float offset = 0.5f;
-        setPosition((int(getPosition().x / (VisibleRect::right().x * monsterRoadSizeRate)) + offset) * VisibleRect::right().x * monsterRoadSizeRate, getPosition().y);
-        setScale(4.0f);
-    }
-    MMR_STATE_CONSTRUCTOR_END
-
-        MMR_STATE_UPDATE_BEGIN
-    {      
-        MMR_SWITCH_TO_STATE(Move);
-    }
-    MMR_STATE_UPDATE_END
-
-        MMR_STATE_DESTRUCTOR_BEGIN
-    {
-    }
-    MMR_STATE_DESTRUCTOR_END
-}
-MMR_IMPLEMENT_STATE_END
-
     MMR_IMPLEMENT_STATE_BEGIN(StoneMan, Move)
 {
     MMR_STATE_CONSTRUCTOR_BEGIN
@@ -115,24 +78,4 @@ MMR_IMPLEMENT_STATE_END
     }
     MMR_STATE_DESTRUCTOR_END
 }
-MMR_IMPLEMENT_STATE_END
-
-    MMR_IMPLEMENT_STATE_BEGIN(StoneMan, ArrivedBottomSafe)
-{
-    MMR_STATE_CONSTRUCTOR_BEGIN
-    {
-        Unspawn();
-    }
-    MMR_STATE_CONSTRUCTOR_END
-
-        MMR_STATE_UPDATE_BEGIN
-    {      
-    }
-    MMR_STATE_UPDATE_END
-
-        MMR_STATE_DESTRUCTOR_BEGIN
-    {
-    }
-    MMR_STATE_DESTRUCTOR_END
-}
-MMR_IMPLEMENT_STATE_END
+    MMR_IMPLEMENT_STATE_END

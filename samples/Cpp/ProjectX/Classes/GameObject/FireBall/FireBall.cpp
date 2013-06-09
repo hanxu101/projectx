@@ -1,4 +1,4 @@
-#include "GameObject/FireBall.h"
+#include "GameObject/FireBall/FireBall.h"
 #include "Utilities/Utilities.h"
 #include "VisibleRect.h"
 #include "GameObject/GameObjectManager/GameObjectManager.h"

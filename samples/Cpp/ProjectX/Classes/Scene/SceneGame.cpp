@@ -3,7 +3,7 @@
 #include "ResourceDefines.h"
 #include "cocos2d.h"
 #include "GameObject/MainCharacter.h"
-#include "GameObject/FireBall.h"
+#include "GameObject/FireBall/FireBall.h"
 #include "GameObject/Monster.h"
 #include "GameObject/GameObjectManager/GameObjectManager.h"
 #include "GameLogic/MonsterGroupLogic.h"

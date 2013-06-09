@@ -71,9 +71,6 @@
     <ClCompile Include="..\Classes\GameObject\MainCharacter.cpp">
       <Filter>Classes\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameObject\FireBall.cpp">
-      <Filter>Classes\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\GameObject\Monster.cpp">
       <Filter>Classes\GameObject</Filter>
     </ClCompile>
@@ -122,6 +119,9 @@
     <ClCompile Include="..\Classes\GameObject\FireBall\Boomerang.cpp">
       <Filter>Classes\GameObject\FireBall</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\FireBall\FireBall.cpp">
+      <Filter>Classes\GameObject\FireBall</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -161,9 +161,6 @@
       <Filter>Classes\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameObject\MainCharacter.h">
-      <Filter>Classes\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameObject\FireBall.h">
       <Filter>Classes\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\utilities\Utilities.h">
@@ -221,6 +218,9 @@
       <Filter>Classes\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameObject\FireBall\Boomerang.h">
+      <Filter>Classes\GameObject\FireBall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\FireBall\FireBall.h">
       <Filter>Classes\GameObject\FireBall</Filter>
     </ClInclude>
   </ItemGroup>

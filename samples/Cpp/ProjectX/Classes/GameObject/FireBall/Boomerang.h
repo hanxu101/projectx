@@ -1,7 +1,7 @@
 #ifndef  _APP_BOOMERANG_H_
 #define  _APP_BOOMERANG_H_
 
-#include "GameObject/FireBall.h"
+#include "GameObject/FireBall/FireBall.h"
 
 USING_NS_CC;
 
