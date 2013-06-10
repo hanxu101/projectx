@@ -19,7 +19,6 @@ public:
     virtual void onEnter();
 	virtual void onExit();
 
-    virtual void registerWithTouchDispatcher(void);
     virtual void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
     virtual void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
     virtual void ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
@@ -53,6 +52,7 @@ private:
     const static float FIRE_TOUCH_TIME_THRESHOLD;
     float m_touchTimer;
     FireBall* m_fireBall;
+    CCMotionStreak* m_pStreak;
 };
 
 class SceneGame : public SceneBase

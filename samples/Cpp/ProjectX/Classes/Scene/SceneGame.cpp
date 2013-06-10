@@ -69,6 +69,8 @@ void GameLayer::onEnter()
     m_pMonsterGroupLogic->autorelease();
     addChild(m_pMonsterGroupLogic);
 #endif
+
+    setTouchEnabled(true);
 }
 
 void GameLayer::onExit()
@@ -108,13 +110,6 @@ UINT GameLayer::GetPreviousTouchPosIndex( UINT rollbackFrameNum, UINT maxCacheNu
     return rollbackFrameNum >= maxCacheNumber ? 0 : (maxCacheNumber - rollbackFrameNum - 1);
 }
 
-static CCDictionary s_dic;
-
-void GameLayer::registerWithTouchDispatcher(void)
-{
-    CCDirector::sharedDirector()->getTouchDispatcher()->addStandardDelegate(this, 0);
-}
-
 void GameLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
 {
     m_isTouching = true;
@@ -136,6 +131,9 @@ void GameLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
             m_fireBall = new FireBall();
             m_fireBall->setPosition(m_currentTouchLocation);
             addChild(m_fireBall);
+
+            m_pStreak = CCMotionStreak::create(1.0f, 3.0f, 10.0f, ccWHITE, "streak.png");
+            addChild(m_pStreak);
         }
     }
 }
@@ -152,6 +150,7 @@ void GameLayer::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
             m_previousTouchPosVec[PREVIOUS_TOUCHPOSITION_CACHE_NUM-1] = m_currentTouchLocation;
 
             m_fireBall->setPosition(m_currentTouchLocation);
+            m_pStreak->setPosition(m_currentTouchLocation);
         }
     }
 }
