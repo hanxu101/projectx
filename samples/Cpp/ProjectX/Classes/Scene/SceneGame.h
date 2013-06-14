@@ -8,6 +8,8 @@ USING_NS_CC;
 class MonsterGroupLogic;
 class FireBall;
 
+namespace cs{class CocoPanel;}
+
 class GameLayer: public CCLayer
 {
 public:
@@ -53,6 +55,8 @@ private:
     float m_touchTimer;
     FireBall* m_fireBall;
     CCMotionStreak* m_pStreak;
+
+	cs::CocoPanel* m_pGameUI;
 };
 
 class SceneGame : public SceneBase

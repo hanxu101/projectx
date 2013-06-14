@@ -8,6 +8,10 @@
 #include "GameObject/GameObjectManager/GameObjectManager.h"
 #include "GameLogic/MonsterGroupLogic.h"
 #include "Buff/BuffManager/BuffManager.h"
+#include "UISystem.h"
+#include "CocoLoadingBar.h"
+#include "CocoPanel.h"
+#include "Gamelogic/MainPlayerLogic.h"
 
 //------------------------------------------------------------------
 //
@@ -25,6 +29,7 @@ GameLayer::GameLayer(void)
     , m_touchFrameCount(0)
     , m_touchTimer(0.0f)
     , m_fireBall(NULL)
+	, m_pGameUI(NULL)
 {
     m_previousTouchPosVec.resize(PREVIOUS_TOUCHPOSITION_CACHE_NUM);
 }
@@ -38,6 +43,7 @@ bool GameLayer::init()
     if (CCLayer::init())
     {
         setTouchEnabled(true);
+
         return true;
     }
     return false;
@@ -62,6 +68,18 @@ void GameLayer::onEnter()
     CCLabelTTF* infolabel = CCLabelTTF::create("Tap to Fire", "Arial", 10);
     addChild(infolabel , 1);
     infolabel ->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y-70) );
+
+	// Init UI.
+	COCOUISYSTEM->resetSystem(this);
+
+	m_pGameUI = cs::CocoPanel::create();
+	COCOUISYSTEM->getCurScene()->addWidget(m_pGameUI);
+
+	cs::CocoWidget* pWidget = COCOUISYSTEM->createWidgetFromFile_json("UIGame.json");
+	m_pGameUI->addChild(pWidget);
+
+	cs::CocoLoadingBar* pHpBar = dynamic_cast<cs::CocoLoadingBar*>(pWidget->getChildByName("HpBar"));
+	MainPlayerLogic::Get().Init(pHpBar);
 #endif
 
 #ifndef DEBUG_NO_MONSTER
@@ -76,6 +94,7 @@ void GameLayer::onEnter()
 void GameLayer::onExit()
 {
 	GameObjectManager::Get().Reset();
+	MainPlayerLogic::Get().Uninit();
 	CCLayer::onExit();
 }
 

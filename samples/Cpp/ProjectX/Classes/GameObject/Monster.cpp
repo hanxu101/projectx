@@ -1,5 +1,6 @@
 #include "GameObject/Monster.h"
 #include "VisibleRect.h"
+#include "Gamelogic/MainPlayerLogic.h"
 
 Monster::Monster()
     : GameObject(10.0f, eGOT_Monster,10.0f)
@@ -81,6 +82,7 @@ MMR_IMPLEMENT_STATE_END
 {
     MMR_STATE_CONSTRUCTOR_BEGIN
     {
+		MainPlayerLogic::Get().ReduceHp(1);
         Unspawn();
     }
     MMR_STATE_CONSTRUCTOR_END

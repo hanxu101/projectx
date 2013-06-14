@@ -287,6 +287,9 @@
     <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\UIElements\UITextField.cpp">
       <Filter>CocoGUILIB\UIElements</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GameLogic\MainPlayerLogic.cpp">
+      <Filter>Classes\GameLogic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -540,6 +543,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\UIElements\UITextField.h">
       <Filter>CocoGUILIB\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameLogic\MainPlayerLogic.h">
+      <Filter>Classes\GameLogic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
