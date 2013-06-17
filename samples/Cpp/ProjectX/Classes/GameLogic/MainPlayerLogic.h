@@ -3,16 +3,13 @@
 
 #include "cocos2d.h"
 #include "CocoLoadingBar.h"
+#include "utilities/Singleton.h"
 
 class MainPlayerLogic
 {
-public:
-    static MainPlayerLogic& Get()
-    {
-        static MainPlayerLogic mainplayer;
-        return mainplayer;
-    }
+    DECLARE_SINGLETON(MainPlayerLogic);
 
+public:
     void Init(cs::CocoLoadingBar* pHpBar);
     void Uninit();
 
@@ -22,9 +19,6 @@ public:
     void IncreaseHp(int increaseHp);
 
 private:
-    MainPlayerLogic();
-    ~MainPlayerLogic();
-
     void AdjustHpBar();
 
     cs::CocoLoadingBar* m_pHpBar;

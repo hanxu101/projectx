@@ -81,7 +81,8 @@ void GameLayer::onEnter()
 
     // Init player logic.
     cs::CocoLoadingBar* pHpBar = dynamic_cast<cs::CocoLoadingBar*>(pWidget->getChildByName("HpBar"));
-    MainPlayerLogic::Get().Init(pHpBar);
+    MainPlayerLogic::CreateSingleton();
+    MainPlayerLogic::Singleton().Init(pHpBar);
 #endif
 
 #ifndef DEBUG_NO_MONSTER
@@ -97,7 +98,9 @@ void GameLayer::onEnter()
 void GameLayer::onExit()
 {
     GameObjectManager::Get().Reset();
-    MainPlayerLogic::Get().Uninit();
+    MainPlayerLogic::Singleton().Uninit();
+    MainPlayerLogic::DestroySingleton();
+
     CCLayer::onExit();
 }
 

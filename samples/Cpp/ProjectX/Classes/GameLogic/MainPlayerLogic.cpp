@@ -2,6 +2,8 @@
 
 const int g_mainPlayerTotalHp = 10;
 
+IMPLEMENT_SINGLETON(MainPlayerLogic);
+
 MainPlayerLogic::MainPlayerLogic()
     : m_pHpBar(NULL)
     , m_originalHp(0)

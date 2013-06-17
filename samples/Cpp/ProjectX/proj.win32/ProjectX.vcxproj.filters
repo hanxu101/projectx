@@ -553,6 +553,9 @@
     <ClInclude Include="..\Classes\utilities\FSM\Fsm.hpp">
       <Filter>Classes\Utilities\FSM</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\utilities\Singleton.h">
+      <Filter>Classes\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\lib_json\json_internalarray.inl">

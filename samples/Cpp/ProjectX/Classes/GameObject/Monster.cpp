@@ -82,7 +82,7 @@ IMPLEMENT_STATE_END
 {
     STATE_CONSTRUCTOR_BEGIN
     {
-		MainPlayerLogic::Get().ReduceHp(1);
+		MainPlayerLogic::Singleton().ReduceHp(1);
         Unspawn();
     }
     STATE_CONSTRUCTOR_END
