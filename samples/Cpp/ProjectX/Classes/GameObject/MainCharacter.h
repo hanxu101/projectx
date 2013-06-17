@@ -19,8 +19,8 @@ public:
 private:
     void PlayHeroTestAnimation();
 
-    MMR_DECLARE_FSM(MainCharacter);
-    MMR_DECLARE_STATE(Idle);
+    DECLARE_FSM(MainCharacter);
+    DECLARE_STATE(Idle);
 
     CCSprite* m_pMainSprite;
 };

@@ -28,7 +28,7 @@ void MonsterGroupLogic::onEnter()
     m_pTimer->autorelease();
     m_pTimer->retain();
 
-    MMR_INIT_FSM(Idle);
+    INIT_FSM(Idle);
 }
 
 void MonsterGroupLogic::InitMonsterData()
@@ -60,52 +60,52 @@ void MonsterGroupLogic::StateUpdate( float deltaTime )
 }
 
 
-MMR_IMPLEMENT_STATE_BEGIN(MonsterGroupLogic, Idle)
+IMPLEMENT_STATE_BEGIN(MonsterGroupLogic, Idle)
 {
-    MMR_STATE_CONSTRUCTOR_BEGIN
+    STATE_CONSTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_CONSTRUCTOR_END
+    STATE_CONSTRUCTOR_END
 
-        MMR_STATE_UPDATE_BEGIN
+        STATE_UPDATE_BEGIN
     {      
-        MMR_SWITCH_TO_STATE(Activate);
+        SWITCH_TO_STATE(Activate);
     }
-    MMR_STATE_UPDATE_END
+    STATE_UPDATE_END
 
-        MMR_STATE_DESTRUCTOR_BEGIN
+        STATE_DESTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_DESTRUCTOR_END
+    STATE_DESTRUCTOR_END
 }
-MMR_IMPLEMENT_STATE_END
+IMPLEMENT_STATE_END
 
-    MMR_IMPLEMENT_STATE_BEGIN(MonsterGroupLogic, Activate)
+    IMPLEMENT_STATE_BEGIN(MonsterGroupLogic, Activate)
 {
-    MMR_STATE_CONSTRUCTOR_BEGIN
+    STATE_CONSTRUCTOR_BEGIN
     {
         // TODO: Check the usage of timer.
         schedule(schedule_selector(MonsterGroupLogic::MonsterLineWave), 0.8f);
     }
-    MMR_STATE_CONSTRUCTOR_END
+    STATE_CONSTRUCTOR_END
 
-        MMR_STATE_UPDATE_BEGIN
+        STATE_UPDATE_BEGIN
     {
     }
-    MMR_STATE_UPDATE_END
+    STATE_UPDATE_END
 
-        MMR_STATE_DESTRUCTOR_BEGIN
+        STATE_DESTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_DESTRUCTOR_END
+    STATE_DESTRUCTOR_END
 }
-MMR_IMPLEMENT_STATE_END
+IMPLEMENT_STATE_END
 
 
     void MonsterGroupLogic::MonsterLineWave( float /*dt*/ )
 {
     // Temp. (Can cocos2dx stop this schedule?)
-    if ( GetFsm().IsCurrentState( MMR_STATE(Activate) ) && !GameObjectManager::Get().CheckIsUnderPause(eGOT_Monster))
+    if ( GetFsm().IsCurrentState( STATE(Activate) ) && !GameObjectManager::Get().CheckIsUnderPause(eGOT_Monster))
     {
         if (m_monsterLineWaveCount != 0)
         {

@@ -20,7 +20,7 @@ void Monster::onEnter()
 {
     GameObject::onEnter();
 
-    MMR_INIT_FSM(Idle);
+    INIT_FSM(Idle);
 }
 
 void Monster::onExit()
@@ -34,9 +34,9 @@ void Monster::StateUpdate( float deltaTime )
     GetFsm().Update();
 }
 
-MMR_IMPLEMENT_STATE_BEGIN(Monster, Idle)
+IMPLEMENT_STATE_BEGIN(Monster, Idle)
 {
-    MMR_STATE_CONSTRUCTOR_BEGIN
+    STATE_CONSTRUCTOR_BEGIN
     {
         // Set suitable position.
         const float monsterRoadSizeRate = 0.2f;
@@ -44,57 +44,57 @@ MMR_IMPLEMENT_STATE_BEGIN(Monster, Idle)
         setPosition((int(getPosition().x / (VisibleRect::right().x * monsterRoadSizeRate)) + offset) * VisibleRect::right().x * monsterRoadSizeRate, getPosition().y);
         setScale(4.0f);
     }
-    MMR_STATE_CONSTRUCTOR_END
+    STATE_CONSTRUCTOR_END
 
-        MMR_STATE_UPDATE_BEGIN
+        STATE_UPDATE_BEGIN
     {      
-        MMR_SWITCH_TO_STATE(Move);
+        SWITCH_TO_STATE(Move);
     }
-    MMR_STATE_UPDATE_END
+    STATE_UPDATE_END
 
-        MMR_STATE_DESTRUCTOR_BEGIN
+        STATE_DESTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_DESTRUCTOR_END
+    STATE_DESTRUCTOR_END
 }
-MMR_IMPLEMENT_STATE_END
+IMPLEMENT_STATE_END
 
-    MMR_IMPLEMENT_STATE_BEGIN(Monster, Move)
+    IMPLEMENT_STATE_BEGIN(Monster, Move)
 {
-    MMR_STATE_CONSTRUCTOR_BEGIN
+    STATE_CONSTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_CONSTRUCTOR_END
+    STATE_CONSTRUCTOR_END
 
-        MMR_STATE_UPDATE_BEGIN
+        STATE_UPDATE_BEGIN
     {  
     }
-    MMR_STATE_UPDATE_END
+    STATE_UPDATE_END
 
-        MMR_STATE_DESTRUCTOR_BEGIN
+        STATE_DESTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_DESTRUCTOR_END
+    STATE_DESTRUCTOR_END
 }
-MMR_IMPLEMENT_STATE_END
+IMPLEMENT_STATE_END
 
-    MMR_IMPLEMENT_STATE_BEGIN(Monster, ArrivedBottomSafe)
+    IMPLEMENT_STATE_BEGIN(Monster, ArrivedBottomSafe)
 {
-    MMR_STATE_CONSTRUCTOR_BEGIN
+    STATE_CONSTRUCTOR_BEGIN
     {
 		MainPlayerLogic::Get().ReduceHp(1);
         Unspawn();
     }
-    MMR_STATE_CONSTRUCTOR_END
+    STATE_CONSTRUCTOR_END
 
-        MMR_STATE_UPDATE_BEGIN
+        STATE_UPDATE_BEGIN
     {      
     }
-    MMR_STATE_UPDATE_END
+    STATE_UPDATE_END
 
-        MMR_STATE_DESTRUCTOR_BEGIN
+        STATE_DESTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_DESTRUCTOR_END
+    STATE_DESTRUCTOR_END
 }
-MMR_IMPLEMENT_STATE_END
+IMPLEMENT_STATE_END

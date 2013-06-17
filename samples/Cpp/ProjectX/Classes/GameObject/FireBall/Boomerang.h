@@ -14,8 +14,8 @@ public:
     virtual void onEnter();
 
 private:
-    MMR_OVERLOAD_FSM(Boomerang);
-    MMR_DECLARE_VIRTUAL_STATE(Move);
+    OVERLOAD_FSM(Boomerang);
+    DECLARE_VIRTUAL_STATE(Move);
 
 private:
     float m_acceleration;

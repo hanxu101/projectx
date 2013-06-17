@@ -22,7 +22,7 @@ void TimeFreezeItem::onEnter()
     m_pMainSprite = CCSprite::create("Clock.png");
     addChild(m_pMainSprite);
 
-    MMR_INIT_FSM(Idle);
+    INIT_FSM(Idle);
 }
 
 void TimeFreezeItem::onExit()
@@ -68,33 +68,33 @@ void TimeFreezeItem::ItemTouchesEnded()
 
 //////////////////////////////////////////////////////////////////////////
 
-MMR_IMPLEMENT_STATE_BEGIN(TimeFreezeItem, Idle)
+IMPLEMENT_STATE_BEGIN(TimeFreezeItem, Idle)
 {
-    MMR_STATE_CONSTRUCTOR_BEGIN
+    STATE_CONSTRUCTOR_BEGIN
     {
         // Set suitable position.
         const float monsterRoadSizeRate = 0.2f;
         const float offset = 0.5f;
         setPosition((int(getPosition().x / (VisibleRect::right().x * monsterRoadSizeRate)) + offset) * VisibleRect::right().x * monsterRoadSizeRate + 10, getPosition().y);
     }
-    MMR_STATE_CONSTRUCTOR_END
+    STATE_CONSTRUCTOR_END
 
-        MMR_STATE_UPDATE_BEGIN
+        STATE_UPDATE_BEGIN
     {      
-        MMR_SWITCH_TO_STATE(Move);
+        SWITCH_TO_STATE(Move);
     }
-    MMR_STATE_UPDATE_END
+    STATE_UPDATE_END
 
-        MMR_STATE_DESTRUCTOR_BEGIN
+        STATE_DESTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_DESTRUCTOR_END
+    STATE_DESTRUCTOR_END
 }
-MMR_IMPLEMENT_STATE_END
+IMPLEMENT_STATE_END
 
-    MMR_IMPLEMENT_STATE_BEGIN(TimeFreezeItem, Move)
+    IMPLEMENT_STATE_BEGIN(TimeFreezeItem, Move)
 {
-    MMR_STATE_CONSTRUCTOR_BEGIN
+    STATE_CONSTRUCTOR_BEGIN
     {
         PlayMonsterWalkAnimation();
 
@@ -102,40 +102,40 @@ MMR_IMPLEMENT_STATE_END
         m_direction = ccpSub(m_targetPos, getPosition());
         m_direction = ccpNormalize(m_direction);
     }
-    MMR_STATE_CONSTRUCTOR_END
+    STATE_CONSTRUCTOR_END
 
-        MMR_STATE_UPDATE_BEGIN
+        STATE_UPDATE_BEGIN
     {      
         CCPoint newPos =  ccpAdd( getPosition(), ccpMult(ccpMult(m_direction, m_speed), m_deltaTime) );
         setPosition(newPos);
 
-        MMR_TRANSIT_TO_STATE( !VisibleRect::getVisibleRect().containsPoint(newPos), NoTransitionAction, ArrivedBottomSafe );
+        TRANSIT_TO_STATE( !VisibleRect::getVisibleRect().containsPoint(newPos), NoTransitionAction, ArrivedBottomSafe );
     }
-    MMR_STATE_UPDATE_END
+    STATE_UPDATE_END
 
-        MMR_STATE_DESTRUCTOR_BEGIN
+        STATE_DESTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_DESTRUCTOR_END
+    STATE_DESTRUCTOR_END
 }
-MMR_IMPLEMENT_STATE_END
+IMPLEMENT_STATE_END
 
-    MMR_IMPLEMENT_STATE_BEGIN(TimeFreezeItem, ArrivedBottomSafe)
+    IMPLEMENT_STATE_BEGIN(TimeFreezeItem, ArrivedBottomSafe)
 {
-    MMR_STATE_CONSTRUCTOR_BEGIN
+    STATE_CONSTRUCTOR_BEGIN
     {
         Unspawn();
     }
-    MMR_STATE_CONSTRUCTOR_END
+    STATE_CONSTRUCTOR_END
 
-        MMR_STATE_UPDATE_BEGIN
+        STATE_UPDATE_BEGIN
     {      
     }
-    MMR_STATE_UPDATE_END
+    STATE_UPDATE_END
 
-        MMR_STATE_DESTRUCTOR_BEGIN
+        STATE_DESTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_DESTRUCTOR_END
+    STATE_DESTRUCTOR_END
 }
-MMR_IMPLEMENT_STATE_END
+IMPLEMENT_STATE_END

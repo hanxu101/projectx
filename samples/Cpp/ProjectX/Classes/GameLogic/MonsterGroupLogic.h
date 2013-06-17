@@ -2,7 +2,7 @@
 #define  _APP_MonsterGroupLogic_H_
 
 #include "cocos2d.h"
-#include "FSM/FsmInclude.h"
+#include "utilities/FSM/FsmInclude.h"
 #include "GameObject/GameObjectEnum.h"
 
 USING_NS_CC;
@@ -21,9 +21,9 @@ public:
     void StateUpdate(float deltaTime);
 
 private:
-    MMR_DECLARE_FSM(MonsterGroupLogic);
-    MMR_DECLARE_STATE(Idle);
-    MMR_DECLARE_STATE(Activate);
+    DECLARE_FSM(MonsterGroupLogic);
+    DECLARE_STATE(Idle);
+    DECLARE_STATE(Activate);
 
     void MonsterLineWave(float dt);
     void SpawnMonster(float positionX, EMonsterType type);

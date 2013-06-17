@@ -23,10 +23,10 @@ public:
 private:
     void PlayMonsterWalkAnimation();
 
-    MMR_DECLARE_FSM(TimeFreezeItem);
-    MMR_DECLARE_STATE(Idle);
-    MMR_DECLARE_STATE(Move);
-    MMR_DECLARE_STATE(ArrivedBottomSafe);
+    DECLARE_FSM(TimeFreezeItem);
+    DECLARE_STATE(Idle);
+    DECLARE_STATE(Move);
+    DECLARE_STATE(ArrivedBottomSafe);
 
     CCSprite* m_pMainSprite;
 

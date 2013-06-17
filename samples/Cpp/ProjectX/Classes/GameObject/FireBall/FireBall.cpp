@@ -33,7 +33,7 @@ void FireBall::onEnter()
 
     addChild(m_pMainSprite);
 
-    MMR_INIT_FSM(Idle);
+    INIT_FSM(Idle);
 }
 
 void FireBall::onExit()
@@ -92,37 +92,37 @@ void FireBall::Attack()
 // Switch State
 void FireBall::SetAbort()
 {
-    GetFsm().SwitchState(MMR_STATE(Abort));
+    GetFsm().SwitchState(STATE(Abort));
 }
 
 void FireBall::SetMove()
 {
-    GetFsm().SwitchState(MMR_STATE(Move));
+    GetFsm().SwitchState(STATE(Move));
 }
 
 //////////////////////////////////////////////////////////////////////////
 // States
-MMR_IMPLEMENT_STATE_BEGIN(FireBall, Idle)
+IMPLEMENT_STATE_BEGIN(FireBall, Idle)
 {
-    MMR_STATE_CONSTRUCTOR_BEGIN
+    STATE_CONSTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_CONSTRUCTOR_END
+    STATE_CONSTRUCTOR_END
 
-        MMR_STATE_UPDATE_BEGIN
+        STATE_UPDATE_BEGIN
     {
     }
-    MMR_STATE_UPDATE_END
-        MMR_STATE_DESTRUCTOR_BEGIN
+    STATE_UPDATE_END
+        STATE_DESTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_DESTRUCTOR_END
+    STATE_DESTRUCTOR_END
 }
-MMR_IMPLEMENT_STATE_END
+IMPLEMENT_STATE_END
 
-    MMR_IMPLEMENT_STATE_BEGIN(FireBall, Move)
+    IMPLEMENT_STATE_BEGIN(FireBall, Move)
 {
-    MMR_STATE_CONSTRUCTOR_BEGIN
+    STATE_CONSTRUCTOR_BEGIN
     {
         m_moveForce = ccpNormalize(m_force);
 
@@ -131,9 +131,9 @@ MMR_IMPLEMENT_STATE_END
         m_forceDirection = ccpNormalize(m_force);
         m_forceDirectionSpeed = 0.0f;
     }
-    MMR_STATE_CONSTRUCTOR_END
+    STATE_CONSTRUCTOR_END
 
-        MMR_STATE_UPDATE_BEGIN
+        STATE_UPDATE_BEGIN
     {
         m_forceDirectionSpeed += m_forceLength*m_forceFactor;
         CCPoint offset(ccpAdd(ccpMult(m_direction, m_speed), ccpMult(m_moveForce, m_forceDirectionSpeed)));
@@ -144,54 +144,54 @@ MMR_IMPLEMENT_STATE_END
 
         Attack();
 
-        MMR_TRANSIT_TO_STATE( !VisibleRect::getVisibleRect().containsPoint(newPos), NoTransitionAction, Dead );
+        TRANSIT_TO_STATE( !VisibleRect::getVisibleRect().containsPoint(newPos), NoTransitionAction, Dead );
     }
-    MMR_STATE_UPDATE_END
+    STATE_UPDATE_END
 
-        MMR_STATE_DESTRUCTOR_BEGIN
+        STATE_DESTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_DESTRUCTOR_END
+    STATE_DESTRUCTOR_END
 }
-MMR_IMPLEMENT_STATE_END
+IMPLEMENT_STATE_END
 
-    MMR_IMPLEMENT_STATE_BEGIN(FireBall, Dead)
+    IMPLEMENT_STATE_BEGIN(FireBall, Dead)
 {
-    MMR_STATE_CONSTRUCTOR_BEGIN
+    STATE_CONSTRUCTOR_BEGIN
     {
         Unspawn();
     }
-    MMR_STATE_CONSTRUCTOR_END
+    STATE_CONSTRUCTOR_END
 
-        MMR_STATE_UPDATE_BEGIN
+        STATE_UPDATE_BEGIN
     {      
     }
-    MMR_STATE_UPDATE_END
+    STATE_UPDATE_END
 
-        MMR_STATE_DESTRUCTOR_BEGIN
+        STATE_DESTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_DESTRUCTOR_END
+    STATE_DESTRUCTOR_END
 }
-MMR_IMPLEMENT_STATE_END
+IMPLEMENT_STATE_END
 
-    MMR_IMPLEMENT_STATE_BEGIN(FireBall, Abort)
+    IMPLEMENT_STATE_BEGIN(FireBall, Abort)
 {
-    MMR_STATE_CONSTRUCTOR_BEGIN
+    STATE_CONSTRUCTOR_BEGIN
     {
         Unspawn();
     }
-    MMR_STATE_CONSTRUCTOR_END
+    STATE_CONSTRUCTOR_END
 
-        MMR_STATE_UPDATE_BEGIN
+        STATE_UPDATE_BEGIN
     {      
     }
-    MMR_STATE_UPDATE_END
+    STATE_UPDATE_END
 
-        MMR_STATE_DESTRUCTOR_BEGIN
+        STATE_DESTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_DESTRUCTOR_END
+    STATE_DESTRUCTOR_END
 }
 
-MMR_IMPLEMENT_STATE_END
+IMPLEMENT_STATE_END

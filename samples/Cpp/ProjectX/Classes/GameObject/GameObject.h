@@ -2,7 +2,7 @@
 #define  _APP_GameObject_H_
 
 #include "cocos2d.h"
-#include "FSM/FsmInclude.h"
+#include "utilities/FSM/FsmInclude.h"
 #include "GameObject/GameObjectEnum.h"
 
 USING_NS_CC;

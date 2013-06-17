@@ -19,7 +19,7 @@ void MainCharacter::onEnter()
 
     addChild(m_pMainSprite);
 
-    MMR_INIT_FSM(Idle);
+    INIT_FSM(Idle);
 }
 
 void MainCharacter::onExit()
@@ -81,22 +81,22 @@ void MainCharacter::PlayHeroTestAnimation()
 
 //////////////////////////////////////////////////////////////////////////
 
-MMR_IMPLEMENT_STATE_BEGIN(MainCharacter, Idle)
+IMPLEMENT_STATE_BEGIN(MainCharacter, Idle)
 {
-    MMR_STATE_CONSTRUCTOR_BEGIN
+    STATE_CONSTRUCTOR_BEGIN
     {
         PlayHeroTestAnimation();
     }
-    MMR_STATE_CONSTRUCTOR_END
+    STATE_CONSTRUCTOR_END
 
-        MMR_STATE_UPDATE_BEGIN
+        STATE_UPDATE_BEGIN
     {      
     }
-    MMR_STATE_UPDATE_END
+    STATE_UPDATE_END
 
-        MMR_STATE_DESTRUCTOR_BEGIN
+        STATE_DESTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_DESTRUCTOR_END
+    STATE_DESTRUCTOR_END
 }
-MMR_IMPLEMENT_STATE_END
+IMPLEMENT_STATE_END

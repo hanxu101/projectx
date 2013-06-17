@@ -21,8 +21,8 @@ public:
 private:
     void PlayMonsterWalkAnimation();
 
-    MMR_OVERLOAD_FSM(StoneMan);
-    MMR_DECLARE_VIRTUAL_STATE(Move);
+    OVERLOAD_FSM(StoneMan);
+    DECLARE_VIRTUAL_STATE(Move);
 };
 
 #endif // _APP_EarthMonster_H_

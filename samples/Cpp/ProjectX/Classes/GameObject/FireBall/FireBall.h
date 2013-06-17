@@ -29,11 +29,11 @@ public:
 protected:
     void Attack();
 
-    MMR_DECLARE_FSM(FireBall);
-    MMR_DECLARE_VIRTUAL_STATE(Idle);
-    MMR_DECLARE_VIRTUAL_STATE(Move);
-    MMR_DECLARE_VIRTUAL_STATE(Dead);
-    MMR_DECLARE_VIRTUAL_STATE(Abort);
+    DECLARE_FSM(FireBall);
+    DECLARE_VIRTUAL_STATE(Idle);
+    DECLARE_VIRTUAL_STATE(Move);
+    DECLARE_VIRTUAL_STATE(Dead);
+    DECLARE_VIRTUAL_STATE(Abort);
 
     CCSprite* m_pMainSprite;
     CCPoint m_targetPos;

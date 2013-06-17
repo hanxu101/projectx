@@ -17,10 +17,10 @@ public:
     virtual void StateUpdate(float deltaTime);
 
 protected:
-    MMR_DECLARE_FSM(Monster);
-    MMR_DECLARE_VIRTUAL_STATE(Idle);
-    MMR_DECLARE_VIRTUAL_STATE(Move);
-    MMR_DECLARE_VIRTUAL_STATE(ArrivedBottomSafe);
+    DECLARE_FSM(Monster);
+    DECLARE_VIRTUAL_STATE(Idle);
+    DECLARE_VIRTUAL_STATE(Move);
+    DECLARE_VIRTUAL_STATE(ArrivedBottomSafe);
 
     CCSprite* m_pMainSprite;
 

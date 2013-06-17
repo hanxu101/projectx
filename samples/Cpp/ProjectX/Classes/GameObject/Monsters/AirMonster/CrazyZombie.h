@@ -21,8 +21,8 @@ public:
 private:
     void PlayMonsterWalkAnimation();
 
-    MMR_OVERLOAD_FSM(CrazyZombie);
-    MMR_DECLARE_VIRTUAL_STATE(Move);
+    OVERLOAD_FSM(CrazyZombie);
+    DECLARE_VIRTUAL_STATE(Move);
 
     float m_timeElapsed;
 };

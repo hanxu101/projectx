@@ -52,9 +52,9 @@ void StoneMan::PlayMonsterWalkAnimation()
 
 //////////////////////////////////////////////////////////////////////////
 
-    MMR_IMPLEMENT_STATE_BEGIN(StoneMan, Move)
+    IMPLEMENT_STATE_BEGIN(StoneMan, Move)
 {
-    MMR_STATE_CONSTRUCTOR_BEGIN
+    STATE_CONSTRUCTOR_BEGIN
     {
         PlayMonsterWalkAnimation();
 
@@ -62,20 +62,20 @@ void StoneMan::PlayMonsterWalkAnimation()
         m_direction = ccpSub(m_targetPos, getPosition());
         m_direction = ccpNormalize(m_direction);
     }
-    MMR_STATE_CONSTRUCTOR_END
+    STATE_CONSTRUCTOR_END
 
-        MMR_STATE_UPDATE_BEGIN
+        STATE_UPDATE_BEGIN
     {      
         CCPoint newPos =  ccpAdd( getPosition(), ccpMult(ccpMult(m_direction, m_speed), m_deltaTime) );
         setPosition(newPos);
 
-        MMR_TRANSIT_TO_STATE( !VisibleRect::getVisibleRect().containsPoint(newPos), NoTransitionAction, ArrivedBottomSafe );
+        TRANSIT_TO_STATE( !VisibleRect::getVisibleRect().containsPoint(newPos), NoTransitionAction, ArrivedBottomSafe );
     }
-    MMR_STATE_UPDATE_END
+    STATE_UPDATE_END
 
-        MMR_STATE_DESTRUCTOR_BEGIN
+        STATE_DESTRUCTOR_BEGIN
     {
     }
-    MMR_STATE_DESTRUCTOR_END
+    STATE_DESTRUCTOR_END
 }
-    MMR_IMPLEMENT_STATE_END
+    IMPLEMENT_STATE_END
