@@ -22,7 +22,7 @@ public:
 
     void Update(float dt);
 
-	void Reset();
+    void Reset();
 
     void RegisterGameObject(GameObject* pObj);
     void UnregisterGameObject(GameObject* pObj);

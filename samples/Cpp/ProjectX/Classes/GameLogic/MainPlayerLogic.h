@@ -7,29 +7,29 @@
 class MainPlayerLogic
 {
 public:
-	static MainPlayerLogic& Get()
-	{
-		static MainPlayerLogic mainplayer;
-		return mainplayer;
-	}
+    static MainPlayerLogic& Get()
+    {
+        static MainPlayerLogic mainplayer;
+        return mainplayer;
+    }
 
-	void Init(cs::CocoLoadingBar* pHpBar);
-	void Uninit();
+    void Init(cs::CocoLoadingBar* pHpBar);
+    void Uninit();
 
-	void Reset();
+    void Reset();
 
-	void ReduceHp(int reduceHp);
-	void IncreaseHp(int increaseHp);
+    void ReduceHp(int reduceHp);
+    void IncreaseHp(int increaseHp);
 
 private:
-	MainPlayerLogic();
-	~MainPlayerLogic();
+    MainPlayerLogic();
+    ~MainPlayerLogic();
 
-	void AdjustHpBar();
+    void AdjustHpBar();
 
-	cs::CocoLoadingBar* m_pHpBar;
-	int m_originalHp;
-	int m_currentHp;
+    cs::CocoLoadingBar* m_pHpBar;
+    int m_originalHp;
+    int m_currentHp;
 };
 
 #endif //_APP_GAMEOBJECTMANAGER_H_

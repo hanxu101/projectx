@@ -42,9 +42,6 @@
     <Filter Include="Classes\Buff">
       <UniqueIdentifier>{60e03cc7-8233-4381-9710-ce4a0bf56106}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Buff\Time">
-      <UniqueIdentifier>{8e02e9f6-d39e-4c1c-9f04-54b9575a7165}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Buff\BuffManager">
       <UniqueIdentifier>{d4505b4a-7b6b-4899-b2ff-8626da15977a}</UniqueIdentifier>
     </Filter>
@@ -89,6 +86,9 @@
     </Filter>
     <Filter Include="CocoGUILIB\UIElements">
       <UniqueIdentifier>{8293d949-2cc1-4671-ae3d-fcbe2b774db8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Buff\TimeBuff">
+      <UniqueIdentifier>{8e02e9f6-d39e-4c1c-9f04-54b9575a7165}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -289,6 +289,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameLogic\MainPlayerLogic.cpp">
       <Filter>Classes\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Buff\TimeBuff\TimeBuff.cpp">
+      <Filter>Classes\Buff\TimeBuff</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -546,6 +549,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameLogic\MainPlayerLogic.h">
       <Filter>Classes\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Buff\TimeBuff\TimeBuff.h">
+      <Filter>Classes\Buff\TimeBuff</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

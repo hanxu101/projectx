@@ -3,8 +3,7 @@
 
 enum EBuffType
 {
-    eBT_Good,
-    eBT_Bad,
+    eBT_TimeBuff,
 
     eBT_Count,
     eBT_Invalid

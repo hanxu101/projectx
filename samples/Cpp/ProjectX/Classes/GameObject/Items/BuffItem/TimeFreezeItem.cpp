@@ -1,6 +1,6 @@
 #include "GameObject/Items/BuffItem/TimeFreezeItem.h"
 #include "VisibleRect.h"
-#include "Buff/Buff.h"
+#include "Buff/TimeBuff/TimeBuff.h"
 
 TimeFreezeItem::TimeFreezeItem()
     : m_pMainSprite(NULL)
@@ -43,27 +43,27 @@ int TimeFreezeItem::GetDetailTypeIndex()
 
 void TimeFreezeItem::PlayMonsterWalkAnimation()
 {
-//     CCAnimation* pAnim = CCAnimation::create();
-//     char str[20];
-// 
-//     for (UINT i = 0; i < 6; ++i)
-//     {
-//         sprintf(str,"Hero01_%d.png",i);
-//         pAnim->addSpriteFrameWithFileName(str);
-//     }
-// 
-//     pAnim->setDelayPerUnit(0.1f);
-//     pAnim->setRestoreOriginalFrame(true);
-// 
-//     m_pMainSprite->runAction(CCRepeatForever::create(CCAnimate::create(pAnim)));
+    //     CCAnimation* pAnim = CCAnimation::create();
+    //     char str[20];
+    // 
+    //     for (UINT i = 0; i < 6; ++i)
+    //     {
+    //         sprintf(str,"Hero01_%d.png",i);
+    //         pAnim->addSpriteFrameWithFileName(str);
+    //     }
+    // 
+    //     pAnim->setDelayPerUnit(0.1f);
+    //     pAnim->setRestoreOriginalFrame(true);
+    // 
+    //     m_pMainSprite->runAction(CCRepeatForever::create(CCAnimate::create(pAnim)));
 }
 
 void TimeFreezeItem::ItemTouchesEnded()
 {
-	Buff* pBuff = new Buff(eBT_Good, 5.0f);
-	getParent()->addChild(pBuff);
+    TimeBuff* pBuff = new TimeBuff(3.0f);
+    getParent()->addChild(pBuff);
 
-	Unspawn();
+    Unspawn();
 }
 
 //////////////////////////////////////////////////////////////////////////

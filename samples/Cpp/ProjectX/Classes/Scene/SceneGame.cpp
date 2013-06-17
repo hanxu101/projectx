@@ -29,7 +29,7 @@ GameLayer::GameLayer(void)
     , m_touchFrameCount(0)
     , m_touchTimer(0.0f)
     , m_fireBall(NULL)
-	, m_pGameUI(NULL)
+    , m_pGameUI(NULL)
 {
     m_previousTouchPosVec.resize(PREVIOUS_TOUCHPOSITION_CACHE_NUM);
 }
@@ -64,25 +64,28 @@ void GameLayer::onEnter()
     CCLabelTTF* label = CCLabelTTF::create(title().c_str(), "Arial", 32);
     addChild(label, 1);
     label->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y-50) );
- 
+
     CCLabelTTF* infolabel = CCLabelTTF::create("Tap to Fire", "Arial", 10);
     addChild(infolabel , 1);
     infolabel ->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y-70) );
 
-	// Init UI.
-	COCOUISYSTEM->resetSystem(this);
+    // Init UI.
+    COCOUISYSTEM->resetSystem(this);
 
-	m_pGameUI = cs::CocoPanel::create();
-	COCOUISYSTEM->getCurScene()->addWidget(m_pGameUI);
+    m_pGameUI = cs::CocoPanel::create();
+    COCOUISYSTEM->getCurScene()->addWidget(m_pGameUI);
 
-	cs::CocoWidget* pWidget = COCOUISYSTEM->createWidgetFromFile_json("UIGame.json");
-	m_pGameUI->addChild(pWidget);
+    cs::CocoWidget* pWidget = COCOUISYSTEM->createWidgetFromFile_json("UIGame.json");
+    m_pGameUI->addChild(pWidget);
 
-	cs::CocoLoadingBar* pHpBar = dynamic_cast<cs::CocoLoadingBar*>(pWidget->getChildByName("HpBar"));
-	MainPlayerLogic::Get().Init(pHpBar);
+
+    // Init player logic.
+    cs::CocoLoadingBar* pHpBar = dynamic_cast<cs::CocoLoadingBar*>(pWidget->getChildByName("HpBar"));
+    MainPlayerLogic::Get().Init(pHpBar);
 #endif
 
 #ifndef DEBUG_NO_MONSTER
+    // Init monster logic.
     m_pMonsterGroupLogic = new MonsterGroupLogic();
     m_pMonsterGroupLogic->autorelease();
     addChild(m_pMonsterGroupLogic);
@@ -93,9 +96,9 @@ void GameLayer::onEnter()
 
 void GameLayer::onExit()
 {
-	GameObjectManager::Get().Reset();
-	MainPlayerLogic::Get().Uninit();
-	CCLayer::onExit();
+    GameObjectManager::Get().Reset();
+    MainPlayerLogic::Get().Uninit();
+    CCLayer::onExit();
 }
 
 void GameLayer::Update(float dt)
@@ -107,7 +110,7 @@ void GameLayer::Update(float dt)
     UpdateTouchInfo(dt);
 
     GameObjectManager::Get().Update(dt);
-	BuffManager::Get().Update(dt);
+    BuffManager::Get().Update(dt);
 }
 
 void GameLayer::UpdateTouchInfo(float dt)
@@ -214,7 +217,7 @@ void GameLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
             {
                 m_fireBall->SetAbort();
             }
-            
+
         }
 
         m_fireBall = NULL;
@@ -256,14 +259,14 @@ void GameLayer::PrintMoveInfo()
     {
         CCLOG("DIRECTION :  (%.2f, %.2f)", m_fireBall->GetDirection().x, m_fireBall->GetDirection().y);
         CCLOG("FORCE :      (%.2f, %.2f)", m_fireBall->GetForce().x, m_fireBall->GetForce().y);
-        
+
         CCPoint previousTouchPoint1 = m_previousTouchPosVec[GetPreviousTouchPosIndex(0, PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
         CCPoint previousTouchPoint2 = m_previousTouchPosVec[GetPreviousTouchPosIndex(PREVIOUS_TOUCHPOSITION_CACHE_NUM/2, PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
         CCLOG("Force Points: (%.2f, %.2f), (%.2f, %.2f)", previousTouchPoint1.x, previousTouchPoint1.y, previousTouchPoint2.x, previousTouchPoint2.y);
     }
 
     CCLOG("TouchFrameCount : %d)", m_touchFrameCount);
-    
+
     for (UINT8 i = 0; i < PREVIOUS_TOUCHPOSITION_CACHE_NUM; ++i)
     {
         CCLOG("TouchPoint%d :(%.2f, %.2f)", i, m_previousTouchPosVec[i].x, m_previousTouchPosVec[i].y);

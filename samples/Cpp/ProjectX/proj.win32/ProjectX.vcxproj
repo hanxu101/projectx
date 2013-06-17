@@ -166,6 +166,7 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Buff\Buff.cpp" />
     <ClCompile Include="..\Classes\Buff\BuffManager\BuffManager.cpp" />
+    <ClCompile Include="..\Classes\Buff\TimeBuff\TimeBuff.cpp" />
     <ClCompile Include="..\Classes\GameLogic\MainPlayerLogic.cpp" />
     <ClCompile Include="..\Classes\GameLogic\MonsterGroupLogic.cpp" />
     <ClCompile Include="..\Classes\GameObject\FireBall\Boomerang.cpp" />
@@ -243,6 +244,7 @@
     <ClInclude Include="..\Classes\Buff\Buff.h" />
     <ClInclude Include="..\Classes\Buff\BuffEnum.h" />
     <ClInclude Include="..\Classes\Buff\BuffManager\BuffManager.h" />
+    <ClInclude Include="..\Classes\Buff\TimeBuff\TimeBuff.h" />
     <ClInclude Include="..\Classes\FSM\Fsm.h" />
     <ClInclude Include="..\Classes\FSM\Fsm.hpp" />
     <ClInclude Include="..\Classes\FSM\FsmInclude.h" />

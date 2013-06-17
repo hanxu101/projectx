@@ -10,7 +10,7 @@ class Buff : public CCNode
 {
 public:
     Buff();
-    Buff(EBuffType type, float lastTime);
+    Buff(EBuffType type, float lastTime, float elapsedTime);
     virtual ~Buff();
 
     virtual void onEnter();
@@ -20,6 +20,9 @@ public:
     virtual void Update(float deltaTime);
 
     EBuffType GetBuffType() const;
+
+    virtual void ExcuteBuff() = 0;
+    virtual void EndBuff() = 0;
 
 protected:
     EBuffType m_type;
