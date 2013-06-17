@@ -9,9 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Classes\FSM">
-      <UniqueIdentifier>{bc1e172a-ab97-4e31-b263-400c442a22fd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\GameObject">
       <UniqueIdentifier>{574060e2-461a-4c03-863f-0a321546aca9}</UniqueIdentifier>
     </Filter>
@@ -89,6 +86,9 @@
     </Filter>
     <Filter Include="Classes\Buff\TimeBuff">
       <UniqueIdentifier>{8e02e9f6-d39e-4c1c-9f04-54b9575a7165}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Utilities\FSM">
+      <UniqueIdentifier>{684ced4b-9ee5-4e34-8222-ca7249a04e9a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -309,27 +309,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\VisibleRect.h">
       <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\FSM\FsmMacros.h">
-      <Filter>Classes\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\FSM\StateMacros.h">
-      <Filter>Classes\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\FSM\TransitionClusterMacros.h">
-      <Filter>Classes\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\FSM\TransitionMacros.h">
-      <Filter>Classes\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\FSM\Fsm.h">
-      <Filter>Classes\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\FSM\Fsm.hpp">
-      <Filter>Classes\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\FSM\FsmInclude.h">
-      <Filter>Classes\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameObject\MainCharacter.h">
       <Filter>Classes\GameObject</Filter>
@@ -552,6 +531,27 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Buff\TimeBuff\TimeBuff.h">
       <Filter>Classes\Buff\TimeBuff</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utilities\FSM\FsmInclude.h">
+      <Filter>Classes\Utilities\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utilities\FSM\FsmMacros.h">
+      <Filter>Classes\Utilities\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utilities\FSM\StateMacros.h">
+      <Filter>Classes\Utilities\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utilities\FSM\TransitionClusterMacros.h">
+      <Filter>Classes\Utilities\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utilities\FSM\TransitionMacros.h">
+      <Filter>Classes\Utilities\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utilities\FSM\Fsm.h">
+      <Filter>Classes\Utilities\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utilities\FSM\Fsm.hpp">
+      <Filter>Classes\Utilities\FSM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

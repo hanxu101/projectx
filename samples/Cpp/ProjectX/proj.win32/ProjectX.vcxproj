@@ -245,13 +245,6 @@
     <ClInclude Include="..\Classes\Buff\BuffEnum.h" />
     <ClInclude Include="..\Classes\Buff\BuffManager\BuffManager.h" />
     <ClInclude Include="..\Classes\Buff\TimeBuff\TimeBuff.h" />
-    <ClInclude Include="..\Classes\FSM\Fsm.h" />
-    <ClInclude Include="..\Classes\FSM\Fsm.hpp" />
-    <ClInclude Include="..\Classes\FSM\FsmInclude.h" />
-    <ClInclude Include="..\Classes\FSM\FsmMacros.h" />
-    <ClInclude Include="..\Classes\FSM\StateMacros.h" />
-    <ClInclude Include="..\Classes\FSM\TransitionClusterMacros.h" />
-    <ClInclude Include="..\Classes\FSM\TransitionMacros.h" />
     <ClInclude Include="..\Classes\GameLogic\MainPlayerLogic.h" />
     <ClInclude Include="..\Classes\GameLogic\MonsterGroupLogic.h" />
     <ClInclude Include="..\Classes\GameObject\FireBall\Boomerang.h" />
@@ -271,6 +264,13 @@
     <ClInclude Include="..\Classes\Scene\SceneCredits.h" />
     <ClInclude Include="..\Classes\Scene\SceneGame.h" />
     <ClInclude Include="..\Classes\Scene\SceneManager.h" />
+    <ClInclude Include="..\Classes\utilities\FSM\Fsm.h" />
+    <ClInclude Include="..\Classes\utilities\FSM\Fsm.hpp" />
+    <ClInclude Include="..\Classes\utilities\FSM\FsmInclude.h" />
+    <ClInclude Include="..\Classes\utilities\FSM\FsmMacros.h" />
+    <ClInclude Include="..\Classes\utilities\FSM\StateMacros.h" />
+    <ClInclude Include="..\Classes\utilities\FSM\TransitionClusterMacros.h" />
+    <ClInclude Include="..\Classes\utilities\FSM\TransitionMacros.h" />
     <ClInclude Include="..\Classes\utilities\Utilities.h" />
     <ClInclude Include="..\Classes\VisibleRect.h" />
     <ClInclude Include="main.h" />
