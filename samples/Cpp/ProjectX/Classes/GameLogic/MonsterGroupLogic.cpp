@@ -104,6 +104,15 @@ IMPLEMENT_STATE_END
 
     void MonsterGroupLogic::MonsterLineWave( float /*dt*/ )
 {
+    float pathPosX[5];
+    float leftX = VisibleRect::left().x;
+    float screenWidth = VisibleRect::right().x - leftX;
+
+    for (UINT i = 0; i < 5; ++i)
+    {
+        pathPosX[i] = screenWidth * 0.2 * (i + 0.5) + leftX;
+    }
+
     // Temp. (Can cocos2dx stop this schedule?)
     if ( GetFsm().IsCurrentState( STATE(Activate) ) && GameObjectManager::IsSingletonCreated() &&!GameObjectManager::Singleton().CheckIsUnderPause(eGOT_Monster))
     {
@@ -113,11 +122,11 @@ IMPLEMENT_STATE_END
 
             if (monData.size() == 5)
             {
-                //SpawnMonster(48.0f, monData[0]);
-                //SpawnMonster(230.0f, monData[1]);
-                SpawnMonster(240.0f, monData[2]);
-                //SpawnMonster(336.0f, monData[3]);
-                //SpawnMonster(432.0f, monData[4]);
+                SpawnMonster(pathPosX[0], monData[0]);
+                SpawnMonster(pathPosX[1], monData[1]);
+                SpawnMonster(pathPosX[2], monData[2]);
+                SpawnMonster(pathPosX[3], monData[3]);
+                SpawnMonster(pathPosX[4], monData[4]);
             }
         }
     }

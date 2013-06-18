@@ -38,10 +38,7 @@ IMPLEMENT_STATE_BEGIN(Monster, Idle)
 {
     STATE_CONSTRUCTOR_BEGIN
     {
-        // Set suitable position.
-        const float monsterRoadSizeRate = 0.2f;
-        const float offset = 0.5f;
-        setPosition((int(getPosition().x / (VisibleRect::right().x * monsterRoadSizeRate)) + offset) * VisibleRect::right().x * monsterRoadSizeRate, getPosition().y);
+        // Set suitable size | postion.  TODO...
         setScale(2.0f);
     }
     STATE_CONSTRUCTOR_END
