@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 #include "GameObject/MainCharacter.h"
 #include "GameObject/FireBall/FireBall.h"
-#include "GameObject/Monster.h"
+#include "GameObject/Monsters/Monster.h"
 #include "GameObject/GameObjectManager/GameObjectManager.h"
 #include "GameLogic/MonsterGroupLogic.h"
 #include "Buff/BuffManager/BuffManager.h"
@@ -60,6 +60,9 @@ void GameLayer::onEnter()
 
     CCDirector::sharedDirector()->getScheduler()->scheduleSelector(schedule_selector(GameLayer::Update), this, 0, false);
 
+    GameObjectManager::CreateSingleton();
+    BuffManager::CreateSingleton();
+
 #ifndef DEBUG_HIDE_TEXT
     CCLabelTTF* label = CCLabelTTF::create(title().c_str(), "Arial", 32);
     addChild(label, 1);
@@ -97,11 +100,14 @@ void GameLayer::onEnter()
 
 void GameLayer::onExit()
 {
-    GameObjectManager::Get().Reset();
+    CCLayer::onExit();
+
+    // Destory singletons after base layer exit. (After all children exit)
+    GameObjectManager::DestroySingleton();
+    BuffManager::DestroySingleton();
+
     MainPlayerLogic::Singleton().Uninit();
     MainPlayerLogic::DestroySingleton();
-
-    CCLayer::onExit();
 }
 
 void GameLayer::Update(float dt)
@@ -112,8 +118,8 @@ void GameLayer::Update(float dt)
 
     UpdateTouchInfo(dt);
 
-    GameObjectManager::Get().Update(dt);
-    BuffManager::Get().Update(dt);
+    GameObjectManager::Singleton().Update(dt);
+    BuffManager::Singleton().Update(dt);
 }
 
 void GameLayer::UpdateTouchInfo(float dt)

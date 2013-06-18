@@ -24,7 +24,8 @@ void Buff::onEnter()
     CCNode::onEnter();
 
     // Record in manager.
-    BuffManager::Get().RegisterBuff(this);
+    if (BuffManager::IsSingletonCreated())
+        BuffManager::Singleton().RegisterBuff(this);
 
     ExcuteBuff();
 }
@@ -32,7 +33,8 @@ void Buff::onEnter()
 void Buff::onExit()
 {
     // Remove in manager.
-    BuffManager::Get().UnregisterBuff(this);
+    if (BuffManager::IsSingletonCreated())
+        BuffManager::Singleton().UnregisterBuff(this);
 
     CCNode::onExit();
 }

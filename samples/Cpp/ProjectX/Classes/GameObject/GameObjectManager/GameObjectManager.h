@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "GameObject/GameObjectEnum.h"
+#include "utilities/Singleton.h"
 
 class GameObject;
 
@@ -13,13 +14,9 @@ typedef std::map< EGameObjectType, TGameObjectList > TGameObjectMap;
 // Used for update gameObject state. Manage obj map.
 class GameObjectManager
 {
-public:
-    static GameObjectManager& Get()
-    {
-        static GameObjectManager catalog;
-        return catalog;
-    }
+    DECLARE_SINGLETON(GameObjectManager);
 
+public:
     void Update(float dt);
 
     void Reset();
@@ -35,11 +32,10 @@ public:
     bool CheckIsUnderPause(EGameObjectType type);
 
 private:
-    GameObjectManager();
-    ~GameObjectManager();
-
     void AddGameObject(GameObject* pObj);
     void DelGameObject(GameObject* pObj);
+
+    void ClearPendingList();
 
     TGameObjectMap m_gameObjMap;
     TGameObjectVector m_addPendingList;

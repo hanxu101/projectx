@@ -2,6 +2,8 @@
 #include "GameObject/GameObject.h"
 #include "utilities/Utilities.h"
 
+IMPLEMENT_SINGLETON(GameObjectManager);
+
 GameObjectManager::GameObjectManager()
     : m_updateExceptionSign(0)
 {
@@ -11,25 +13,14 @@ GameObjectManager::GameObjectManager()
 GameObjectManager::~GameObjectManager()
 {
     m_gameObjMap.clear();
-    m_addPendingList.clear();
-    m_delPendingList.clear();
+
+    ClearPendingList();
 }
 
 // Ensure safty while unregister.
 void GameObjectManager::Update(float dt)
 {
-    for (unsigned int i = 0; i < m_addPendingList.size(); ++i)
-    {
-        AddGameObject(m_addPendingList[i]);
-    }
-
-    for (unsigned int i = 0; i < m_delPendingList.size(); ++i)
-    {
-        DelGameObject(m_delPendingList[i]);
-    }
-
-    m_addPendingList.clear();
-    m_delPendingList.clear();
+    ClearPendingList();
 
     for (TGameObjectMap::iterator iter = m_gameObjMap.begin(); iter != m_gameObjMap.end(); ++iter)
     {
@@ -129,4 +120,20 @@ void GameObjectManager::DelGameObject( GameObject* pObj )
     }
 
     pObj->release();
+}
+
+void GameObjectManager::ClearPendingList()
+{
+    for (unsigned int i = 0; i < m_addPendingList.size(); ++i)
+    {
+        AddGameObject(m_addPendingList[i]);
+    }
+
+    for (unsigned int i = 0; i < m_delPendingList.size(); ++i)
+    {
+        DelGameObject(m_delPendingList[i]);
+    }
+
+    m_addPendingList.clear();
+    m_delPendingList.clear();
 }

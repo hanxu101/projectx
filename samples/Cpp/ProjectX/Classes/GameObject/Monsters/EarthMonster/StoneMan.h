@@ -1,7 +1,7 @@
 #ifndef  _APP_EarthMonster_H_
 #define  _APP_EarthMonster_H_
 
-#include "GameObject/Monster.h"
+#include "GameObject/Monsters/Monster.h"
 
 USING_NS_CC;
 

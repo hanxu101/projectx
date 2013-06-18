@@ -1,5 +1,5 @@
 #include "GameLogic/MonsterGroupLogic.h"
-#include "GameObject/Monster.h"
+#include "GameObject/Monsters/Monster.h"
 #include "GameObject/Monsters/EarthMonster/StoneMan.h"
 #include "GameObject/Monsters/AirMonster/CrazyZombie.h"
 #include "VisibleRect.h"
@@ -105,7 +105,7 @@ IMPLEMENT_STATE_END
     void MonsterGroupLogic::MonsterLineWave( float /*dt*/ )
 {
     // Temp. (Can cocos2dx stop this schedule?)
-    if ( GetFsm().IsCurrentState( STATE(Activate) ) && !GameObjectManager::Get().CheckIsUnderPause(eGOT_Monster))
+    if ( GetFsm().IsCurrentState( STATE(Activate) ) && GameObjectManager::IsSingletonCreated() &&!GameObjectManager::Singleton().CheckIsUnderPause(eGOT_Monster))
     {
         if (m_monsterLineWaveCount != 0)
         {
@@ -113,11 +113,11 @@ IMPLEMENT_STATE_END
 
             if (monData.size() == 5)
             {
-                SpawnMonster(48.0f, monData[0]);
-                SpawnMonster(144.0f, monData[1]);
+                //SpawnMonster(48.0f, monData[0]);
+                //SpawnMonster(230.0f, monData[1]);
                 SpawnMonster(240.0f, monData[2]);
-                SpawnMonster(336.0f, monData[3]);
-                SpawnMonster(432.0f, monData[4]);
+                //SpawnMonster(336.0f, monData[3]);
+                //SpawnMonster(432.0f, monData[4]);
             }
         }
     }

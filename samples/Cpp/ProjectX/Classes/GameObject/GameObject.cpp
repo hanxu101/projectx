@@ -23,12 +23,14 @@ void GameObject::onEnter()
 {
     CCNode::onEnter();
 
-    GameObjectManager::Get().RegisterGameObject(this);
+    if (GameObjectManager::IsSingletonCreated())
+        GameObjectManager::Singleton().RegisterGameObject(this);
 }
 
 void GameObject::onExit()
 {
-    GameObjectManager::Get().UnregisterGameObject(this);
+    if (GameObjectManager::IsSingletonCreated())
+        GameObjectManager::Singleton().UnregisterGameObject(this);
 
     CCNode::onExit();
 }

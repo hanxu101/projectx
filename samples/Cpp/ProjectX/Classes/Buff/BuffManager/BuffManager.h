@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Buff/BuffEnum.h"
+#include "utilities/Singleton.h"
 
 class Buff;
 
@@ -13,13 +14,9 @@ typedef std::map< EBuffType, TBuffList > TBuffMap;
 // Used for update Buff state. Manage buff map.
 class BuffManager
 {
-public:
-    static BuffManager& Get()
-    {
-        static BuffManager catalog;
-        return catalog;
-    }
+    DECLARE_SINGLETON(BuffManager);
 
+public:
     void Update(float dt);
 
     void RegisterBuff(Buff* pBuff);
@@ -28,11 +25,10 @@ public:
     void GetBuffList(EBuffType buffType, TBuffList& objectList);
 
 private:
-    BuffManager();
-    ~BuffManager();
-
     void AddBuff(Buff* pBuff);
     void DelBuff(Buff* pBuff);
+
+    void ClearPendingList();
 
     TBuffMap m_buffMap;
     TBuffVector m_addPendingList;

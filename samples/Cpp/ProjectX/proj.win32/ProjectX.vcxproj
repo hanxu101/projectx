@@ -178,9 +178,9 @@
     <ClCompile Include="..\Classes\GameObject\Items\BuffItem\TimeFreezeItem.cpp" />
     <ClCompile Include="..\Classes\GameObject\Items\Item.cpp" />
     <ClCompile Include="..\Classes\GameObject\MainCharacter.cpp" />
-    <ClCompile Include="..\Classes\GameObject\Monster.cpp" />
     <ClCompile Include="..\Classes\GameObject\Monsters\AirMonster\CrazyZombie.cpp" />
     <ClCompile Include="..\Classes\GameObject\Monsters\EarthMonster\StoneMan.cpp" />
+    <ClCompile Include="..\Classes\GameObject\Monsters\Monster.cpp" />
     <ClCompile Include="..\Classes\GameObject\Monsters\MonsterFactory\MonsterFactory.cpp" />
     <ClCompile Include="..\Classes\Scene\SceneBase.cpp" />
     <ClCompile Include="..\Classes\Scene\SceneCredits.cpp" />
@@ -259,9 +259,9 @@
     <ClInclude Include="..\Classes\GameObject\Items\BuffItem\TimeFreezeItem.h" />
     <ClInclude Include="..\Classes\GameObject\Items\Item.h" />
     <ClInclude Include="..\Classes\GameObject\MainCharacter.h" />
-    <ClInclude Include="..\Classes\GameObject\Monster.h" />
     <ClInclude Include="..\Classes\GameObject\Monsters\AirMonster\CrazyZombie.h" />
     <ClInclude Include="..\Classes\GameObject\Monsters\EarthMonster\StoneMan.h" />
+    <ClInclude Include="..\Classes\GameObject\Monsters\Monster.h" />
     <ClInclude Include="..\Classes\GameObject\Monsters\MonsterFactory\MonsterFactory.h" />
     <ClInclude Include="..\Classes\ResourceDefines.h" />
     <ClInclude Include="..\Classes\Scene\SceneBase.h" />

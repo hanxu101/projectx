@@ -1,5 +1,5 @@
 #include "GameLogic/GpeLogic.h"
-#include "GameObject/Monster.h"
+#include "GameObject/Monsters/Monster.h"
 #include "GameObject/Monsters/EarthMonster/StoneMan.h"
 #include "GameObject/Monsters/AirMonster/CrazyZombie.h"
 #include "VisibleRect.h"
@@ -105,7 +105,7 @@ IMPLEMENT_STATE_END
     void GpeLogic::MonsterLineWave( float /*dt*/ )
 {
     // Temp. (Can cocos2dx stop this schedule?)
-    if ( GetFsm().IsCurrentState( STATE(Activate) ) && !GameObjectManager::Get().CheckIsUnderPause(eGOT_Monster))
+    if ( GetFsm().IsCurrentState( STATE(Activate) ) && GameObjectManager::IsSingletonCreated() && !GameObjectManager::Singleton().CheckIsUnderPause(eGOT_Monster))
     {
         if (m_monsterLineWaveCount != 0)
         {

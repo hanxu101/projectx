@@ -17,10 +17,12 @@ TimeBuff::~TimeBuff()
 
 void TimeBuff::ExcuteBuff()
 {
-    GameObjectManager::Get().RegisterPauseUpdateGameObjectType(eGOT_Monster);
+    if (GameObjectManager::IsSingletonCreated())
+        GameObjectManager::Singleton().RegisterPauseUpdateGameObjectType(eGOT_Monster);
 }
 
 void TimeBuff::EndBuff()
 {
-    GameObjectManager::Get().UnregisterPauseUpdateGameObjectType(eGOT_Monster);
+    if (GameObjectManager::IsSingletonCreated())
+        GameObjectManager::Singleton().UnregisterPauseUpdateGameObjectType(eGOT_Monster);
 }

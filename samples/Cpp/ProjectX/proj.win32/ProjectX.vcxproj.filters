@@ -110,9 +110,6 @@
     <ClCompile Include="..\Classes\GameObject\MainCharacter.cpp">
       <Filter>Classes\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameObject\Monster.cpp">
-      <Filter>Classes\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\GameLogic\MonsterGroupLogic.cpp">
       <Filter>Classes\GameLogic</Filter>
     </ClCompile>
@@ -299,6 +296,9 @@
     <ClCompile Include="..\Classes\Buff\TimeBuff\TimeBuff.cpp">
       <Filter>Classes\Buff\TimeBuff</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Monsters\Monster.cpp">
+      <Filter>Classes\GameObject\Monsters</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\GameLogic\GpeLogic.cpp">
       <Filter>Classes\GameLogic</Filter>
     </ClCompile>
@@ -327,9 +327,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\utilities\Utilities.h">
       <Filter>Classes\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameObject\Monster.h">
-      <Filter>Classes\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameLogic\MonsterGroupLogic.h">
       <Filter>Classes\GameLogic</Filter>
@@ -567,6 +564,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\utilities\Singleton.h">
       <Filter>Classes\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Monsters\Monster.h">
+      <Filter>Classes\GameObject\Monsters</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameLogic\GpeLogic.h">
       <Filter>Classes\GameLogic</Filter>

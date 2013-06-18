@@ -1,7 +1,7 @@
 #ifndef  _APP_AirMonster_H_
 #define  _APP_AirMonster_H_
 
-#include "GameObject/Monster.h"
+#include "GameObject/Monsters/Monster.h"
 
 USING_NS_CC;
 

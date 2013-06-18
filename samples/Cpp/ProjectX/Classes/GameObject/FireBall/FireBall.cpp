@@ -75,7 +75,8 @@ const CCPoint& FireBall::GetForce() const
 void FireBall::Attack()
 {    
     TGameObjectList objectList;
-    GameObjectManager::Get().GetGameObjectList(eGOT_Monster, objectList);
+    if (GameObjectManager::IsSingletonCreated())
+        GameObjectManager::Singleton().GetGameObjectList(eGOT_Monster, objectList);
     for (TGameObjectList::iterator iter = objectList.begin(); iter != objectList.end(); ++iter)
     {
         float maxCollisionDis = (*iter)->GetCollisionRadius() + GetCollisionRadius();

@@ -1,6 +1,8 @@
 #include "Buff/BuffManager/BuffManager.h"
 #include "Buff/Buff.h"
 
+IMPLEMENT_SINGLETON(BuffManager);
+
 BuffManager::BuffManager()
 {
 
@@ -9,24 +11,12 @@ BuffManager::BuffManager()
 BuffManager::~BuffManager()
 {
     m_buffMap.clear();
-    m_addPendingList.clear();
-    m_delPendingList.clear();
+    ClearPendingList();
 }
 
 void BuffManager::Update(float dt)
 {
-    for (unsigned int i = 0; i < m_addPendingList.size(); ++i)
-    {
-        AddBuff(m_addPendingList[i]);
-    }
-
-    for (unsigned int i = 0; i < m_delPendingList.size(); ++i)
-    {
-        DelBuff(m_delPendingList[i]);
-    }
-
-    m_addPendingList.clear();
-    m_delPendingList.clear();
+    ClearPendingList();
 
     for (TBuffMap::iterator iter = m_buffMap.begin(); iter != m_buffMap.end(); ++iter)
     {
@@ -103,4 +93,20 @@ void BuffManager::DelBuff( Buff* pBuff )
     }
 
     pBuff->release();
+}
+
+void BuffManager::ClearPendingList()
+{
+    for (unsigned int i = 0; i < m_addPendingList.size(); ++i)
+    {
+        AddBuff(m_addPendingList[i]);
+    }
+
+    for (unsigned int i = 0; i < m_delPendingList.size(); ++i)
+    {
+        DelBuff(m_delPendingList[i]);
+    }
+
+    m_addPendingList.clear();
+    m_delPendingList.clear();
 }

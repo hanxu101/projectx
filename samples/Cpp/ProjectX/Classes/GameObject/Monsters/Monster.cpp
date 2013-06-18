@@ -1,4 +1,4 @@
-#include "GameObject/Monster.h"
+#include "GameObject/Monsters/Monster.h"
 #include "VisibleRect.h"
 #include "Gamelogic/MainPlayerLogic.h"
 
@@ -42,7 +42,7 @@ IMPLEMENT_STATE_BEGIN(Monster, Idle)
         const float monsterRoadSizeRate = 0.2f;
         const float offset = 0.5f;
         setPosition((int(getPosition().x / (VisibleRect::right().x * monsterRoadSizeRate)) + offset) * VisibleRect::right().x * monsterRoadSizeRate, getPosition().y);
-        setScale(4.0f);
+        setScale(2.0f);
     }
     STATE_CONSTRUCTOR_END
 
@@ -82,7 +82,7 @@ IMPLEMENT_STATE_END
 {
     STATE_CONSTRUCTOR_BEGIN
     {
-		MainPlayerLogic::Singleton().ReduceHp(1);
+        MainPlayerLogic::Singleton().ReduceHp(1);
         Unspawn();
     }
     STATE_CONSTRUCTOR_END
