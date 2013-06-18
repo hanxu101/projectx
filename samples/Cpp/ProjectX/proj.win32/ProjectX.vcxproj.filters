@@ -90,6 +90,12 @@
     <Filter Include="Classes\Utilities\FSM">
       <UniqueIdentifier>{684ced4b-9ee5-4e34-8222-ca7249a04e9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\GameObject\Gpe">
+      <UniqueIdentifier>{0a056f37-f8f7-4e4f-8631-31c2c6f019cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject\Gpe\ReboundWall">
+      <UniqueIdentifier>{ea7eaad5-c9a7-495c-b0f4-ec26913a0321}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -292,6 +298,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Buff\TimeBuff\TimeBuff.cpp">
       <Filter>Classes\Buff\TimeBuff</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameLogic\GpeLogic.cpp">
+      <Filter>Classes\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Gpe\ReboundWall\ReboundWall.cpp">
+      <Filter>Classes\GameObject\Gpe\ReboundWall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -555,6 +567,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\utilities\Singleton.h">
       <Filter>Classes\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameLogic\GpeLogic.h">
+      <Filter>Classes\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Gpe\ReboundWall\ReboundWall.h">
+      <Filter>Classes\GameObject\Gpe\ReboundWall</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
