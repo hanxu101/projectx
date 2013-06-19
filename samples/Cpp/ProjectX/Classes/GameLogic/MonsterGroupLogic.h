@@ -1,7 +1,6 @@
 #ifndef  _APP_MonsterGroupLogic_H_
 #define  _APP_MonsterGroupLogic_H_
 
-#include "cocos2d.h"
 #include "utilities/FSM/FsmInclude.h"
 #include "GameObject/GameObjectEnum.h"
 

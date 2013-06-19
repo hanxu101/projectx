@@ -1,7 +1,6 @@
 #ifndef  _APP_BUFF_H_
 #define  _APP_BUFF_H_
 
-#include "cocos2d.h"
 #include "Buff/BuffEnum.h"
 
 USING_NS_CC;

@@ -1,3 +1,5 @@
+#include "CommonHeaders.h"
+
 #include "Gamelogic/MainPlayerLogic.h"
 
 const int g_mainPlayerTotalHp = 10;

@@ -247,6 +247,7 @@
     <ClInclude Include="..\Classes\Buff\BuffEnum.h" />
     <ClInclude Include="..\Classes\Buff\BuffManager\BuffManager.h" />
     <ClInclude Include="..\Classes\Buff\TimeBuff\TimeBuff.h" />
+    <ClInclude Include="..\Classes\CommonHeaders.h" />
     <ClInclude Include="..\Classes\GameLogic\GpeLogic.h" />
     <ClInclude Include="..\Classes\GameLogic\MainPlayerLogic.h" />
     <ClInclude Include="..\Classes\GameLogic\MonsterGroupLogic.h" />

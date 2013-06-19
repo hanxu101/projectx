@@ -1,8 +1,9 @@
+#include "CommonHeaders.h"
+
 #include "GameLogic/GpeLogic.h"
 #include "GameObject/Monsters/Monster.h"
 #include "GameObject/Monsters/EarthMonster/StoneMan.h"
 #include "GameObject/Monsters/AirMonster/CrazyZombie.h"
-#include "VisibleRect.h"
 #include "GameObject/GameObjectManager/GameObjectManager.h"
 #include "GameObject/Monsters/MonsterFactory/MonsterFactory.h"
 

@@ -574,6 +574,9 @@
     <ClInclude Include="..\Classes\GameObject\Gpe\ReboundWall\ReboundWall.h">
       <Filter>Classes\GameObject\Gpe\ReboundWall</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\CommonHeaders.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\lib_json\json_internalarray.inl">

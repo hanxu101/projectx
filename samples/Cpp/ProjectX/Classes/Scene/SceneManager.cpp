@@ -1,7 +1,6 @@
+#include "CommonHeaders.h"
+
 #include "SceneManager.h"
-#include "AppMacros.h"
-#include "ResourceDefines.h"
-#include "VisibleRect.h"
 #include "SceneGame.h"
 #include "SceneCredits.h"
 #include "UISystem.h"

@@ -1,10 +1,11 @@
+#include "CommonHeaders.h"
+
 #include "AppDelegate.h"
 
 #include <vector>
 #include <string>
 
 #include "Scene/SceneManager.h"
-#include "AppMacros.h"
 
 USING_NS_CC;
 using namespace std;

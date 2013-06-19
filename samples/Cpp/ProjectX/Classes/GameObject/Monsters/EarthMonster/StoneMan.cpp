@@ -1,5 +1,6 @@
+#include "CommonHeaders.h"
+
 #include "GameObject/Monsters/EarthMonster/StoneMan.h"
-#include "VisibleRect.h"
 
 StoneMan::StoneMan()
 {

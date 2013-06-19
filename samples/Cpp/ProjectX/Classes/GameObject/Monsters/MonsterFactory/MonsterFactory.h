@@ -1,7 +1,6 @@
 #ifndef  _APP_MONSTERFACTORY_H_
 #define  _APP_MONSTERFACTORY_H_
 
-#include "cocos2d.h"
 #include "GameObject/GameObjectEnum.h"
 
 USING_NS_CC;

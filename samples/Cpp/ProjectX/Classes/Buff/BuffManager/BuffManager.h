@@ -1,7 +1,6 @@
 #ifndef  _APP_BUFFMANAGER_H_
 #define  _APP_BUFFMANAGER_H_
 
-#include "cocos2d.h"
 #include "Buff/BuffEnum.h"
 #include "utilities/Singleton.h"
 

@@ -1,7 +1,6 @@
-#include "AppMacros.h"
+#include "CommonHeaders.h"
+
 #include "SceneGame.h"
-#include "ResourceDefines.h"
-#include "cocos2d.h"
 #include "GameObject/MainCharacter.h"
 #include "GameObject/FireBall/FireBall.h"
 #include "GameObject/Monsters/Monster.h"

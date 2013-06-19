@@ -1,7 +1,7 @@
+#include "CommonHeaders.h"
+
 #include "GameObject/Monsters/AirMonster/CrazyZombie.h"
-#include "VisibleRect.h"
 #include "GameObject/Items/BuffItem/TimeFreezeItem.h"
-#include "utilities/Utilities.h"
 
 CrazyZombie::CrazyZombie()
     : m_timeElapsed(0.0f)

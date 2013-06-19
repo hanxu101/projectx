@@ -1,3 +1,5 @@
+#include "CommonHeaders.h"
+
 #include "VisibleRect.h"
 
 CCRect VisibleRect::s_visibleRect;

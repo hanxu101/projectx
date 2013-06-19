@@ -1,8 +1,6 @@
 #ifndef __SCENE_MANAGER_H__
 #define __SCENE_MANAGER_H__
 
-#include "cocos2d.h"
-
 USING_NS_CC;
 
 #define LINE_SPACE          40

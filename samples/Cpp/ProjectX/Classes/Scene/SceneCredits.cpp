@@ -1,7 +1,6 @@
-#include "SceneCredits.h"
-#include "ResourceDefines.h"
-#include "cocos2d.h"
+#include "CommonHeaders.h"
 
+#include "SceneCredits.h"
 
 //------------------------------------------------------------------
 //

@@ -1,7 +1,6 @@
+#include "CommonHeaders.h"
+
 #include "GameObject/Gpe/ReboundWall/ReboundWall.h"
-// #include "VisibleRect.h"
-// #include "GameObject/Items/BuffItem/TimeFreezeItem.h"
-//#include "utilities/Utilities.h"
 
 ReboundWall::ReboundWall()
     : m_pMainSprite(NULL)

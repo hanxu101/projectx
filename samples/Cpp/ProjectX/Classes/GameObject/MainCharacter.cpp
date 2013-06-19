@@ -1,3 +1,5 @@
+#include "CommonHeaders.h"
+
 #include "GameObject/MainCharacter.h"
 
 MainCharacter::MainCharacter()

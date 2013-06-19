@@ -1,5 +1,6 @@
+#include "CommonHeaders.h"
+
 #include "GameObject/Items/BuffItem/TimeFreezeItem.h"
-#include "VisibleRect.h"
 #include "Buff/TimeBuff/TimeBuff.h"
 
 TimeFreezeItem::TimeFreezeItem()

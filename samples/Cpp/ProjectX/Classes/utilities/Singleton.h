@@ -228,7 +228,7 @@
 \
     static void CreateSingleton CreatorSignature\
     {\
-        CCAssert(ms_singletonInstance == NULL, "The %s singleton is already created", #ClassName);\
+        XAssert(ms_singletonInstance == NULL, "The %s singleton is already created", #ClassName);\
 \
         ms_singletonInstance = new ClassName;\
     }
@@ -243,7 +243,7 @@
 \
     static void CreateSingleton CreatorSignature\
     {\
-        CCAssert(ms_singletonInstance == NULL, "The %s singleton is already created", #ClassName);\
+        XAssert(ms_singletonInstance == NULL, "The %s singleton is already created", #ClassName);\
 \
         static ClassName stub = ClassName ConstructorVariable;\
 \
@@ -264,7 +264,7 @@
     }\
     static ClassName & Singleton()\
     {\
-        CCAssert(ms_singletonInstance, "The %s singleton is not created", #ClassName);\
+        XAssert(ms_singletonInstance, "The %s singleton is not created", #ClassName);\
         return *ms_singletonInstance;\
     }\
     static const ClassName * ConstSingletonPtr()\
@@ -306,7 +306,7 @@
 \
     static void CreateSingletonFromMock( ClassName& mock )\
     {\
-        CCAssert(ms_singletonInstance == NULL, "The %s singleton is already created", #ClassName);\
+        XAssert(ms_singletonInstance == NULL, "The %s singleton is already created", #ClassName);\
 \
         ms_singletonInstance = &mock;\
         ms_singletonMocked = true;\
@@ -314,7 +314,7 @@
 \
     static ClassName* ReplaceSingletonWithMock( ClassName& mock )\
     {\
-        CCAssert(ms_singletonInstance != NULL, "The %s singleton is not created", #ClassName);\
+        XAssert(ms_singletonInstance != NULL, "The %s singleton is not created", #ClassName);\
 \
         ClassName* previousInstance = ms_singletonInstance;\
 \
@@ -334,8 +334,8 @@
 \
     static void InvalidateMockedSingleton()\
     {\
-        CCAssert(ms_singletonInstance, "The %s singleton instance is invalid.", #ClassName);\
-        CCAssert(ms_singletonMocked, "The %s singleton is not mocked.", #ClassName);\
+        XAssert(ms_singletonInstance, "The %s singleton instance is invalid.", #ClassName);\
+        XAssert(ms_singletonMocked, "The %s singleton is not mocked.", #ClassName);\
 \
         ms_singletonInstance = NULL;\
         ms_singletonMocked = false;\
@@ -343,7 +343,7 @@
 \
     static void RestoreMockedSingleton( ClassName* instance )\
     {\
-    CCAssert(instance, "The %s singleton instance is invalid.", #ClassName );\
+    XAssert(instance, "The %s singleton instance is invalid.", #ClassName );\
 \
         ms_singletonInstance = instance;\
         ms_singletonMocked = false;\

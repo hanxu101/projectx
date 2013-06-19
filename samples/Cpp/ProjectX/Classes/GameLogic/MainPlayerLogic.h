@@ -1,9 +1,7 @@
 #ifndef  _APP_MAINPLAYERLOGIC_H_
 #define  _APP_MAINPLAYERLOGIC_H_
 
-#include "cocos2d.h"
 #include "CocoLoadingBar.h"
-#include "utilities/Singleton.h"
 
 class MainPlayerLogic
 {

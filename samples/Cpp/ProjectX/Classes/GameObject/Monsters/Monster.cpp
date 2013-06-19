@@ -1,5 +1,4 @@
 #include "GameObject/Monsters/Monster.h"
-#include "VisibleRect.h"
 #include "Gamelogic/MainPlayerLogic.h"
 
 Monster::Monster()

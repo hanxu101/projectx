@@ -1,6 +1,7 @@
+#include "CommonHeaders.h"
+
 #include "GameObject/GameObjectManager/GameObjectManager.h"
 #include "GameObject/GameObject.h"
-#include "utilities/Utilities.h"
 
 IMPLEMENT_SINGLETON(GameObjectManager);
 

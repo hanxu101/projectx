@@ -1,4 +1,5 @@
 #include "main.h"
+#include "cocos2d.h"
 #include "../Classes/AppDelegate.h"
 #include "../Classes/AppMacros.h"
 #include "CCEGLView.h"

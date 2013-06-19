@@ -1,6 +1,7 @@
+#include "CommonHeaders.h"
+
 #include "SceneBase.h"
 #include "SceneManager.h"
-#include "AppMacros.h"
 
 SceneBase::SceneBase(bool bPortrait)
 {

@@ -1,7 +1,6 @@
 #ifndef  _APP_GAMEOBJECTMANAGER_H_
 #define  _APP_GAMEOBJECTMANAGER_H_
 
-#include "cocos2d.h"
 #include "GameObject/GameObjectEnum.h"
 #include "utilities/Singleton.h"
 
