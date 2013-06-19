@@ -96,6 +96,15 @@
     <Filter Include="Classes\GameObject\Gpe\ReboundWall">
       <UniqueIdentifier>{ea7eaad5-c9a7-495c-b0f4-ec26913a0321}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\GameObject\Generals">
+      <UniqueIdentifier>{784b1342-6fbd-4cfe-bc8d-6cb9ad079491}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject\Generals\QX_DiaoChan">
+      <UniqueIdentifier>{b277ef27-f4b0-47fd-a529-d6591b062120}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject\Generals\GeneralFactory">
+      <UniqueIdentifier>{365c4f8a-c7db-4cd6-bdcc-09d17b2ba1b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -304,6 +313,18 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameObject\Gpe\ReboundWall\ReboundWall.cpp">
       <Filter>Classes\GameObject\Gpe\ReboundWall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Generals\General.cpp">
+      <Filter>Classes\GameObject\Generals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Generals\QX_DiaoChan\DiaoChan.cpp">
+      <Filter>Classes\GameObject\Generals\QX_DiaoChan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameLogic\GeneralGroupLogic.cpp">
+      <Filter>Classes\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Generals\GeneralFactory\GeneralFactory.cpp">
+      <Filter>Classes\GameObject\Generals\GeneralFactory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -576,6 +597,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\CommonHeaders.h">
       <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Generals\General.h">
+      <Filter>Classes\GameObject\Generals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Generals\QX_DiaoChan\DiaoChan.h">
+      <Filter>Classes\GameObject\Generals\QX_DiaoChan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameLogic\GeneralGroupLogic.h">
+      <Filter>Classes\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Generals\GeneralFactory\GeneralFactory.h">
+      <Filter>Classes\GameObject\Generals\GeneralFactory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

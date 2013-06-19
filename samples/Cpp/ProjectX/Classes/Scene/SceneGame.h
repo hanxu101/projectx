@@ -6,6 +6,7 @@
 USING_NS_CC;
 
 class MonsterGroupLogic;
+class GeneralGroupLogic;
 class FireBall;
 
 namespace cs{class CocoPanel;}
@@ -19,7 +20,7 @@ public:
 
     virtual std::string title();
     virtual void onEnter();
-	virtual void onExit();
+    virtual void onExit();
 
     virtual void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
     virtual void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
@@ -45,6 +46,7 @@ private:
     UINT m_touchFrameCount;
 
     MonsterGroupLogic* m_pMonsterGroupLogic;
+    GeneralGroupLogic* m_pGeneralGroupLogic;
 
     std::vector<CCPoint> m_previousTouchPosVec;
     const static UINT8 PREVIOUS_TOUCHPOSITION_CACHE_NUM = 5;
@@ -56,7 +58,7 @@ private:
     FireBall* m_fireBall;
     CCMotionStreak* m_pStreak;
 
-	cs::CocoPanel* m_pGameUI;
+    cs::CocoPanel* m_pGameUI;
 };
 
 class SceneGame : public SceneBase

@@ -11,6 +11,7 @@
 #include "CocoLoadingBar.h"
 #include "CocoPanel.h"
 #include "Gamelogic/MainPlayerLogic.h"
+#include "GameLogic/GeneralGroupLogic.h"
 
 //------------------------------------------------------------------
 //
@@ -23,9 +24,10 @@ const float GameLayer::FIRE_SLIDE_DISTANCE_MIN = 5.0f;
 const float GameLayer::FIRE_TOUCH_TIME_THRESHOLD = 0.0167f * 5.0f;
 
 GameLayer::GameLayer(void)
-    : m_pMonsterGroupLogic(NULL)
-    , m_isTouching(false)
+    : m_isTouching(false)
     , m_touchFrameCount(0)
+    , m_pMonsterGroupLogic(NULL)
+    , m_pGeneralGroupLogic(NULL)
     , m_touchTimer(0.0f)
     , m_fireBall(NULL)
     , m_pGameUI(NULL)
@@ -93,6 +95,14 @@ void GameLayer::onEnter()
     m_pMonsterGroupLogic->autorelease();
     addChild(m_pMonsterGroupLogic);
 #endif
+
+    // Init general logic.
+    std::vector< EGeneralType > generalVec;
+    generalVec.push_back(eGT_DiaoChan);
+    generalVec.push_back(eGT_DiaoChan);
+    m_pGeneralGroupLogic = new GeneralGroupLogic(generalVec, m_pGameUI);
+    m_pGeneralGroupLogic->autorelease();
+    addChild(m_pGeneralGroupLogic);
 
     setTouchEnabled(true);
 }
@@ -314,6 +324,7 @@ void GameLayer::FakeInput()
     m_previousTouchPosVec[3] = CCPoint(0.0f, 9.73f);
     m_previousTouchPosVec[4] = CCPoint(0.0f, 0.0f);
 };
+
 //------------------------------------------------------------------
 //
 // GameScene

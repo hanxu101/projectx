@@ -6,6 +6,7 @@ enum EGameObjectType
     eGOT_Monster,
     eGOT_Bullet,
     eGOT_Item,
+    eGOT_General,
 
     eGOT_Count,
     eGOT_Invalid
@@ -33,6 +34,14 @@ enum EMonsterType
 
     eMT_Count,
     eMT_Invalid
+};
+
+enum EGeneralType
+{
+    eGT_DiaoChan,
+
+    eGT_Count,
+    eGT_Invalid
 };
 
 enum EItemType
