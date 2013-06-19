@@ -65,14 +65,6 @@ void GameLayer::onEnter()
     BuffManager::CreateSingleton();
 
 #ifndef DEBUG_HIDE_TEXT
-    CCLabelTTF* label = CCLabelTTF::create(title().c_str(), "Arial", 32);
-    addChild(label, 1);
-    label->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y-50) );
-
-    CCLabelTTF* infolabel = CCLabelTTF::create("Tap to Fire", "Arial", 10);
-    addChild(infolabel , 1);
-    infolabel ->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y-70) );
-
     // Init UI.
     COCOUISYSTEM->resetSystem(this);
 
