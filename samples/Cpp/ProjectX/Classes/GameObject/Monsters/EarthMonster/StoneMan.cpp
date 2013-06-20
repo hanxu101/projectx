@@ -4,7 +4,7 @@
 
 StoneMan::StoneMan()
 {
-    m_speed = 100.0f;
+    m_speed = 28.0f;
 }
 
 StoneMan::~StoneMan()
@@ -15,7 +15,8 @@ void StoneMan::onEnter()
 {
     Monster::onEnter();
 
-    m_pMainSprite = CCSprite::create("Hero01_0.png");
+    float scaleFactor = CCDirector::sharedDirector()->getContentScaleFactor();
+    m_pMainSprite = CCSprite::create("StoneMan.png",CCRectMake(0, 0, 32 / scaleFactor, 48 / scaleFactor));
     addChild(m_pMainSprite);
 }
 
@@ -36,17 +37,24 @@ int StoneMan::GetDetailTypeIndex()
 
 void StoneMan::PlayMonsterWalkAnimation()
 {
-    CCAnimation* pAnim = CCAnimation::create();
-    char str[20];
+    float scaleFactor = CCDirector::sharedDirector()->getContentScaleFactor();
 
-    for (UINT i = 0; i < 6; ++i)
-    {
-        sprintf(str,"Hero01_%d.png",i);
-        pAnim->addSpriteFrameWithFileName(str);
-    }
+    float x = 32 / scaleFactor;
+    float y = 48 / scaleFactor;
 
-    pAnim->setDelayPerUnit(0.1f);
-    pAnim->setRestoreOriginalFrame(true);
+    CCSpriteFrame *frame0=CCSpriteFrame::create("StoneMan.png",CCRectMake(0, 0, x, y)); 
+    CCSpriteFrame *frame1=CCSpriteFrame::create("StoneMan.png",CCRectMake(x, 0, x, y)); 
+    CCSpriteFrame *frame2=CCSpriteFrame::create("StoneMan.png",CCRectMake(x*2, 0, x, y)); 
+    CCSpriteFrame *frame3=CCSpriteFrame::create("StoneMan.png",CCRectMake(x*3, 0, x, y)); 
+
+    CCArray *animFrames = new CCArray; 
+    animFrames->addObject(frame0); 
+    animFrames->addObject(frame1); 
+    animFrames->addObject(frame2); 
+    animFrames->addObject(frame3); 
+
+    CCAnimation *pAnim = CCAnimation::createWithSpriteFrames(animFrames, 0.1f); 
+    animFrames->release();
 
     m_pMainSprite->runAction(CCRepeatForever::create(CCAnimate::create(pAnim)));
 }

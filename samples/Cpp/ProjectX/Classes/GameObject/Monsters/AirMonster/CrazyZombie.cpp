@@ -6,7 +6,7 @@
 CrazyZombie::CrazyZombie()
     : m_timeElapsed(0.0f)
 {
-    m_speed = 30.0f;
+    m_speed = 20.0f;
 }
 
 CrazyZombie::~CrazyZombie()

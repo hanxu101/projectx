@@ -36,13 +36,13 @@ void MonsterGroupLogic::InitMonsterData()
 {
     for (UINT i = 0; i < 15; ++i)
     {
-        AddOneLine(eMT_CrazyZombie,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid);
-        AddOneLine(eMT_Invalid,eMT_CrazyZombie,eMT_Invalid,eMT_Invalid,eMT_Invalid);
-        AddOneLine(eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan);
-        AddOneLine(eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_CrazyZombie,eMT_Invalid);
-        AddOneLine(eMT_CrazyZombie,eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid);
-        AddOneLine(eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid);
-        AddOneLine(eMT_Invalid,eMT_Invalid,eMT_CrazyZombie,eMT_Invalid,eMT_Invalid);
+        AddOneLine(eMT_CrazyZombie,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_CrazyZombie,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid);
+        AddOneLine(eMT_Invalid,eMT_CrazyZombie,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_CrazyZombie,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid);
+        AddOneLine(eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_CrazyZombie,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid);
+        AddOneLine(eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_CrazyZombie,eMT_Invalid,eMT_CrazyZombie,eMT_StoneMan,eMT_StoneMan,eMT_StoneMan,eMT_Invalid);
+        AddOneLine(eMT_CrazyZombie,eMT_StoneMan,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_CrazyZombie,eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid);
+        AddOneLine(eMT_Invalid,eMT_StoneMan,eMT_StoneMan,eMT_Invalid,eMT_StoneMan,eMT_CrazyZombie,eMT_StoneMan,eMT_StoneMan,eMT_StoneMan,eMT_Invalid);
+        AddOneLine(eMT_Invalid,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_Invalid);
     }
 
     m_monsterLineWaveCount = m_monsterData.size();
@@ -105,13 +105,15 @@ IMPLEMENT_STATE_END
 
     void MonsterGroupLogic::MonsterLineWave( float /*dt*/ )
 {
-    float pathPosX[5];
+    const UINT roadNum = 10;
+
+    float pathPosX[roadNum];
     float leftX = VisibleRect::left().x;
     float screenWidth = VisibleRect::right().x - leftX;
 
-    for (UINT i = 0; i < 5; ++i)
+    for (UINT i = 0; i < roadNum; ++i)
     {
-        pathPosX[i] = screenWidth * 0.2 * (i + 0.5) + leftX;
+        pathPosX[i] = screenWidth / roadNum * (i + 0.5) + leftX;
     }
 
     // Temp. (Can cocos2dx stop this schedule?)
@@ -121,13 +123,12 @@ IMPLEMENT_STATE_END
         {
             const std::vector<EMonsterType>& monData = m_monsterData[--m_monsterLineWaveCount];
 
-            if (monData.size() == 5)
+            if (monData.size() == roadNum)
             {
-                SpawnMonster(pathPosX[0], monData[0]);
-                SpawnMonster(pathPosX[1], monData[1]);
-                SpawnMonster(pathPosX[2], monData[2]);
-                SpawnMonster(pathPosX[3], monData[3]);
-                SpawnMonster(pathPosX[4], monData[4]);
+                for (UINT i = 0; i < roadNum; ++i)
+                {
+                    SpawnMonster(pathPosX[i], monData[i]);
+                }
             }
         }
     }
@@ -139,7 +140,7 @@ void MonsterGroupLogic::SpawnMonster( float positionX, EMonsterType type )
         MonsterFactory::Get().CreateMonster(this, type, ccp(positionX, VisibleRect::top().y));
 }
 
-void MonsterGroupLogic::AddOneLine( EMonsterType line1, EMonsterType line2, EMonsterType line3, EMonsterType line4, EMonsterType line5 )
+void MonsterGroupLogic::AddOneLine( EMonsterType line1, EMonsterType line2, EMonsterType line3, EMonsterType line4, EMonsterType line5, EMonsterType line6, EMonsterType line7, EMonsterType line8, EMonsterType line9, EMonsterType line10)
 {
     std::vector<EMonsterType> monData;
     monData.push_back(line1);
@@ -147,6 +148,11 @@ void MonsterGroupLogic::AddOneLine( EMonsterType line1, EMonsterType line2, EMon
     monData.push_back(line3);
     monData.push_back(line4);
     monData.push_back(line5);
+    monData.push_back(line6);
+    monData.push_back(line7);
+    monData.push_back(line8);
+    monData.push_back(line9);
+    monData.push_back(line10);
 
     m_monsterData.push_back(monData);
 }

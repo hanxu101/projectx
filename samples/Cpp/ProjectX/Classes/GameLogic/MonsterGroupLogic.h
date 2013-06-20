@@ -28,7 +28,7 @@ private:
     void SpawnMonster(float positionX, EMonsterType type);
 
     void InitMonsterData();
-    void AddOneLine(EMonsterType line1, EMonsterType line2, EMonsterType line3, EMonsterType line4, EMonsterType line5);
+    void AddOneLine(EMonsterType line1, EMonsterType line2, EMonsterType line3, EMonsterType line4, EMonsterType line5, EMonsterType line6, EMonsterType line7, EMonsterType line8, EMonsterType line9, EMonsterType line10);
 
     CCTimer* m_pTimer;
 
