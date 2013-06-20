@@ -7,6 +7,16 @@
 
 #include "UISystem.h"
 
+const char* NormalPng[] =
+{
+    "DiaoChan.png"
+};
+
+const char* SelectedPng[] =
+{
+    "DiaoChanSelect.png"
+};
+
 GeneralGroupLogic::GeneralGroupLogic()
     : m_pGameUI(NULL)
 {
@@ -35,11 +45,14 @@ void GeneralGroupLogic::onEnter()
             cs::CocoButton* pButton = cs::CocoButton::create();
             pButton->setWidgetTag(static_cast<int>(i));
             pButton->setWidgetZOrder(10);
-            pButton->setPosition(ccp(140, 60 * (1 + i)));
+            pButton->setPosition(ccp(130, 30 * (1 + i)));
             pButton->setBeTouchAble(true);
-            // Set relation ship between these picture with generalType.
-            pButton->setTextures("DiaoChan.png", "DiaoChanSelect.png", "DiaoChan.png");
+            // Set relationship between these picture with generalType.
+            EGeneralType type = m_generalData[i];
+            pButton->setTextures(NormalPng[type], SelectedPng[type], "");
+
             pButton->addReleaseEvent(this, coco_releaseselector(GeneralGroupLogic::GeneralBottonClicked));
+            pButton->setScale(0.5f);
 
             m_pGameUI->addChild(pButton);
         }
