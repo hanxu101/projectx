@@ -1,6 +1,7 @@
 #include "CommonHeaders.h"
 
 #include "GameObject/Generals/QX_DiaoChan/DiaoChan.h"
+#include "Gamelogic/MainPlayerLogic.h"
 
 DiaoChan::DiaoChan()
 {
@@ -31,6 +32,8 @@ IMPLEMENT_STATE_BEGIN(DiaoChan, CastSkill)
     {
         setScale(5.0f);
         m_elapasedTime = 0.0f;
+
+        MainPlayerLogic::Singleton().IncreaseHp(1);
     }
     STATE_CONSTRUCTOR_END
 

@@ -35,10 +35,10 @@ void GeneralGroupLogic::onEnter()
             cs::CocoButton* pButton = cs::CocoButton::create();
             pButton->setWidgetTag(static_cast<int>(i));
             pButton->setWidgetZOrder(10);
-            pButton->setPosition(ccp(150, 60 * (1 + i)));
+            pButton->setPosition(ccp(140, 60 * (1 + i)));
             pButton->setBeTouchAble(true);
             // Set relation ship between these picture with generalType.
-            pButton->setTextures("CloseNormal.png", "CloseSelected.png", "CloseSelected.png");
+            pButton->setTextures("DiaoChan.png", "DiaoChanSelect.png", "DiaoChan.png");
             pButton->addReleaseEvent(this, coco_releaseselector(GeneralGroupLogic::GeneralBottonClicked));
 
             m_pGameUI->addChild(pButton);
