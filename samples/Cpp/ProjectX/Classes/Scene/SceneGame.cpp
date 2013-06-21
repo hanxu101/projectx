@@ -12,6 +12,7 @@
 #include "CocoPanel.h"
 #include "Gamelogic/MainPlayerLogic.h"
 #include "GameLogic/GeneralGroupLogic.h"
+#include "GameLogic/GpeLogic.h"
 
 //------------------------------------------------------------------
 //
@@ -28,6 +29,7 @@ GameLayer::GameLayer(void)
     , m_touchFrameCount(0)
     , m_pMonsterGroupLogic(NULL)
     , m_pGeneralGroupLogic(NULL)
+    , m_pGpeLogic(NULL)
     , m_touchTimer(0.0f)
     , m_fireBall(NULL)
     , m_pGameUI(NULL)
@@ -79,6 +81,7 @@ void GameLayer::onEnter()
     cs::CocoLoadingBar* pHpBar = dynamic_cast<cs::CocoLoadingBar*>(pWidget->getChildByName("HpBar"));
     MainPlayerLogic::CreateSingleton();
     MainPlayerLogic::Singleton().Init(pHpBar);
+
 #endif
 
 #ifndef DEBUG_NO_MONSTER
@@ -95,6 +98,11 @@ void GameLayer::onEnter()
     m_pGeneralGroupLogic = new GeneralGroupLogic(generalVec, m_pGameUI);
     m_pGeneralGroupLogic->autorelease();
     addChild(m_pGeneralGroupLogic);
+
+    // Init Gpe logic.
+    m_pGpeLogic = new GpeLogic();
+    m_pGpeLogic->autorelease();
+    addChild(m_pGpeLogic);
 
     setTouchEnabled(true);
 }

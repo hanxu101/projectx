@@ -326,6 +326,9 @@
     <ClCompile Include="..\Classes\GameObject\Generals\GeneralFactory\GeneralFactory.cpp">
       <Filter>Classes\GameObject\Generals\GeneralFactory</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Gpe\Gpe.cpp">
+      <Filter>Classes\GameObject\Gpe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -609,6 +612,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameObject\Generals\GeneralFactory\GeneralFactory.h">
       <Filter>Classes\GameObject\Generals\GeneralFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Gpe\Gpe.h">
+      <Filter>Classes\GameObject\Gpe</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

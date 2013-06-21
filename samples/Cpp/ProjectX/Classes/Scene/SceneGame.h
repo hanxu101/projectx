@@ -7,6 +7,7 @@ USING_NS_CC;
 
 class MonsterGroupLogic;
 class GeneralGroupLogic;
+class GpeLogic;
 class FireBall;
 
 namespace cs{class CocoPanel;}
@@ -47,6 +48,7 @@ private:
 
     MonsterGroupLogic* m_pMonsterGroupLogic;
     GeneralGroupLogic* m_pGeneralGroupLogic;
+    GpeLogic*          m_pGpeLogic;
 
     std::vector<CCPoint> m_previousTouchPosVec;
     const static UINT8 PREVIOUS_TOUCHPOSITION_CACHE_NUM = 5;
