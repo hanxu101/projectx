@@ -101,6 +101,8 @@ void GameLayer::onEnter()
 
 void GameLayer::onExit()
 {
+    COCOUISYSTEM->cleanUIScene();
+
     CCLayer::onExit();
 
     // Destory singletons after base layer exit. (After all children exit)
