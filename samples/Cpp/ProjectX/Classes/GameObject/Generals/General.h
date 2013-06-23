@@ -3,6 +3,8 @@
 
 #include "GameObject/GameObject.h"
 
+namespace cs{class CocoImageView;}
+
 USING_NS_CC;
 
 class General : public GameObject 
@@ -24,6 +26,7 @@ protected:
     DECLARE_VIRTUAL_STATE(Dead);
 
     CCSprite* m_pMainSprite;
+    cs::CocoImageView* m_pProfileImage;
 
     float m_elapasedTime;
 };

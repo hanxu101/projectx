@@ -8,8 +8,7 @@
 #include "GameObject/Monsters/MonsterFactory/MonsterFactory.h"
 
 MonsterGroupLogic::MonsterGroupLogic()
-    : m_pTimer(NULL)
-    , m_monsterLineWaveCount(0)
+    : m_monsterLineWaveCount(0)
 {
 }
 
@@ -23,11 +22,6 @@ void MonsterGroupLogic::onEnter()
     CCNode::onEnter();
 
     InitMonsterData();
-
-    m_pTimer = new CCTimer();
-    m_pTimer->setInterval(1.0f);
-    m_pTimer->autorelease();
-    m_pTimer->retain();
 
     INIT_FSM(Idle);
 }
@@ -50,8 +44,6 @@ void MonsterGroupLogic::InitMonsterData()
 
 void MonsterGroupLogic::onExit()
 {
-    m_pTimer->release();
-
     CCNode::onExit();
 }
 

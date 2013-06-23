@@ -31,7 +31,7 @@ void CrazyZombie::onExit()
 
 void CrazyZombie::Killed()
 {
-    const float dropRate = 0.2f;
+    const float dropRate = 0.05f;
 
     if (RandomFloat(0.0f, 1.0f) < dropRate)
     {

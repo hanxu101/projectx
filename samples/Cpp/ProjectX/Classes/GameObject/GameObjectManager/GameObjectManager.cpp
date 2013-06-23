@@ -8,7 +8,10 @@ IMPLEMENT_SINGLETON(GameObjectManager);
 GameObjectManager::GameObjectManager()
     : m_updateExceptionSign(0)
 {
-
+    for (UINT i = 0; i < eGOT_Count; ++i)
+    {
+        m_exceptionSignCount[i] = 0;
+    }    
 }
 
 GameObjectManager::~GameObjectManager()
@@ -68,12 +71,18 @@ void GameObjectManager::GetGameObjectList( EGameObjectType objType, TGameObjectL
 
 void GameObjectManager::RegisterPauseUpdateGameObjectType( EGameObjectType type )
 {
+    ++m_exceptionSignCount[type];
     BIT_SET(m_updateExceptionSign, type);
 }
 
 void GameObjectManager::UnregisterPauseUpdateGameObjectType( EGameObjectType type )
 {
-    BIT_CLEAR(m_updateExceptionSign, type);
+    CCAssert(m_exceptionSignCount[type] != 0, "Did u register this before?!");
+
+    if (--m_exceptionSignCount[type] == 0)
+    {
+        BIT_CLEAR(m_updateExceptionSign, type);
+    }
 }
 
 bool GameObjectManager::CheckIsUnderPause( EGameObjectType type )

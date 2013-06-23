@@ -24,6 +24,11 @@ const float GameLayer::FIRE_SLIDE_DISTANCE_MAX = 20.0f;
 const float GameLayer::FIRE_SLIDE_DISTANCE_MIN = 5.0f;
 const float GameLayer::FIRE_TOUCH_TIME_THRESHOLD = 0.0167f * 5.0f;
 
+const int g_uiZOrder = 3;
+const int g_generalZOrder = 2;
+const int g_monsterZOder = 1;
+const int g_backGroundZOrder = -1;
+
 GameLayer::GameLayer(void)
     : m_isTouching(false)
     , m_touchFrameCount(0)
@@ -67,28 +72,40 @@ void GameLayer::onEnter()
     BuffManager::CreateSingleton();
 
 #ifndef DEBUG_HIDE_TEXT
-    // Init UI.
-    COCOUISYSTEM->resetSystem(this);
+    // Back ground.
+    CCSprite* pBackGround = CCSprite::create("backGround.jpg");
 
+    CCRect rect = pBackGround->getTextureRect();
+    float width = rect.getMaxX() - rect.getMinX();
+    pBackGround->setScaleX((VisibleRect::right().x - VisibleRect::left().x) / width);
+    float height = rect.getMaxY() - rect.getMinY();
+    pBackGround->setScaleY((VisibleRect::top().y - VisibleRect::bottom().y) / height);
+
+    pBackGround->setPosition(VisibleRect::center());
+    addChild(pBackGround, g_backGroundZOrder);
+#endif
+
+    CCNode* pUiNode = CCNode::create();
+    addChild(pUiNode, g_uiZOrder);
+
+    // Init UI.
+    COCOUISYSTEM->resetSystem(pUiNode);
     m_pGameUI = cs::CocoPanel::create();
     COCOUISYSTEM->getCurScene()->addWidget(m_pGameUI);
 
     cs::CocoWidget* pWidget = COCOUISYSTEM->createWidgetFromFile_json("UIGame.json");
     m_pGameUI->addChild(pWidget);
 
-
     // Init player logic.
     cs::CocoLoadingBar* pHpBar = dynamic_cast<cs::CocoLoadingBar*>(pWidget->getChildByName("HpBar"));
     MainPlayerLogic::CreateSingleton();
     MainPlayerLogic::Singleton().Init(pHpBar);
 
-#endif
-
 #ifndef DEBUG_NO_MONSTER
     // Init monster logic.
     m_pMonsterGroupLogic = new MonsterGroupLogic();
     m_pMonsterGroupLogic->autorelease();
-    addChild(m_pMonsterGroupLogic);
+    addChild(m_pMonsterGroupLogic, g_monsterZOder);
 #endif
 
     // Init general logic.
@@ -97,7 +114,7 @@ void GameLayer::onEnter()
     generalVec.push_back(eGT_DiaoChan);
     m_pGeneralGroupLogic = new GeneralGroupLogic(generalVec, m_pGameUI);
     m_pGeneralGroupLogic->autorelease();
-    addChild(m_pGeneralGroupLogic);
+    addChild(m_pGeneralGroupLogic, g_generalZOrder);
 
     // Init Gpe logic.
     m_pGpeLogic = new GpeLogic();

@@ -41,6 +41,8 @@ private:
     TGameObjectVector m_delPendingList;
 
     int m_updateExceptionSign;
+
+    int m_exceptionSignCount[eGOT_Count];
 };
 
 #endif //_APP_GAMEOBJECTMANAGER_H_
