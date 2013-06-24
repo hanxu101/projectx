@@ -7,6 +7,7 @@ enum EGameObjectType
     eGOT_Bullet,
     eGOT_Item,
     eGOT_General,
+    eGOT_MagicMatrix,
 
     eGOT_Count,
     eGOT_Invalid

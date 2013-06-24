@@ -105,6 +105,9 @@
     <Filter Include="Classes\GameObject\Generals\GeneralFactory">
       <UniqueIdentifier>{365c4f8a-c7db-4cd6-bdcc-09d17b2ba1b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\GameObject\MagicMatrix">
+      <UniqueIdentifier>{6a8b6090-c600-4c52-8a9b-d3aa836249d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -328,6 +331,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameObject\Gpe\Gpe.cpp">
       <Filter>Classes\GameObject\Gpe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\MagicMatrix\MagicCircle.cpp">
+      <Filter>Classes\GameObject\MagicMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\MagicMatrix\MagicPoint.cpp">
+      <Filter>Classes\GameObject\MagicMatrix</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -615,6 +624,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameObject\Gpe\Gpe.h">
       <Filter>Classes\GameObject\Gpe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\MagicMatrix\MagicCircle.h">
+      <Filter>Classes\GameObject\MagicMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\MagicMatrix\MagicPoint.h">
+      <Filter>Classes\GameObject\MagicMatrix</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
