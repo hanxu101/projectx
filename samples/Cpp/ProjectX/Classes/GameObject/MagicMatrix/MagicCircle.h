@@ -5,7 +5,7 @@
 
 USING_NS_CC;
 
-class MagicCircle : public GameObject, public CCStandardTouchDelegate
+class MagicCircle : public GameObject, public CCTargetedTouchDelegate
 {
     typedef std::vector<CCPoint> TPointVector;
 
@@ -19,6 +19,9 @@ public:
 
     virtual void StateUpdate(float deltaTime);
 
+    bool IsSucceed();
+    bool IsFailed();
+
 protected:
     DECLARE_FSM(MagicCircle);
     DECLARE_STATE(Idle);
@@ -27,7 +30,8 @@ protected:
     DECLARE_STATE(Failed);
     DECLARE_STATE(Dead);
 
-    virtual void ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent);
+    virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
+    virtual void ccTouchEnded(CCTouch *pTouche, CCEvent *pEvent);
 
     TPointVector m_magicPointVector;
     float m_elapsedTime;

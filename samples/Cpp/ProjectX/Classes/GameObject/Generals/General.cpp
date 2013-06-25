@@ -3,12 +3,14 @@
 #include "GameObject/Generals/General.h"
 #include "CocoImageView.h"
 #include "GameObject/GameObjectManager/GameObjectManager.h"
+#include "GameObject/MagicMatrix/MagicCircle.h"
 
 General::General()
     : GameObject(10.0f, eGOT_General,10.0f)
     , m_pMainSprite(NULL)
     , m_pProfileImage(NULL)
     , m_elapasedTime(0.0f)
+    , m_magicCircle(NULL)
 {
 }
 
@@ -43,7 +45,7 @@ IMPLEMENT_STATE_BEGIN(General, Idle)
 
         STATE_UPDATE_BEGIN
     {      
-        SWITCH_TO_STATE(ShowUp);
+        SWITCH_TO_STATE(ReadyToShowUp);
     }
     STATE_UPDATE_END
 
@@ -54,6 +56,29 @@ IMPLEMENT_STATE_BEGIN(General, Idle)
 }
 IMPLEMENT_STATE_END
 
+    IMPLEMENT_STATE_BEGIN(General, ReadyToShowUp)
+{
+    STATE_CONSTRUCTOR_BEGIN
+    {
+        m_magicCircle = new MagicCircle(m_magicPointVec, 2.0f);
+        m_magicCircle->setPosition(VisibleRect::center());
+        addChild(m_magicCircle);
+    }
+    STATE_CONSTRUCTOR_END
+
+        STATE_UPDATE_BEGIN
+    {      
+        TRANSIT_TO_STATE( m_magicCircle->IsFailed(), NoTransitionAction, Dead );
+        TRANSIT_TO_STATE( m_magicCircle->IsSucceed(), NoTransitionAction, ShowUp );
+    }
+    STATE_UPDATE_END
+
+        STATE_DESTRUCTOR_BEGIN
+    {
+    }
+    STATE_DESTRUCTOR_END
+}
+IMPLEMENT_STATE_END
 
     IMPLEMENT_STATE_BEGIN(General, ShowUp)
 {

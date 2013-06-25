@@ -50,7 +50,7 @@ bool GameLayer::init()
 {
     if (CCLayer::init())
     {
-        setTouchEnabled(true);
+        //setTouchEnabled(true);
 
         return true;
     }
@@ -121,12 +121,16 @@ void GameLayer::onEnter()
     m_pGpeLogic->autorelease();
     addChild(m_pGpeLogic);
 
-    setTouchEnabled(true);
+    //setTouchEnabled(true);
+
+    m_bTouchEnabled = true;
+    CCDirector::sharedDirector()->getTouchDispatcher()->addStandardDelegate(this, 2);
 }
 
 void GameLayer::onExit()
 {
     COCOUISYSTEM->cleanUIScene();
+    CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 
     CCLayer::onExit();
 

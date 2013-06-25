@@ -25,11 +25,15 @@ void DiaoChan::onEnter()
     m_pProfileImage->setTexture("DiaoChanEye.png");
     m_pProfileImage->setVisible(false);
 
+    m_magicPointVec.push_back(ccp(240, 100));
+    m_magicPointVec.push_back(ccp(240, 50));
+
     COCOUISYSTEM->getCurScene()->addWidget(m_pProfileImage);
 }
 
 void DiaoChan::onExit()
 {
+    m_magicPointVec.clear();
     General::onExit();
 }
 

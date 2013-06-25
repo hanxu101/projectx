@@ -3,9 +3,11 @@
 
 #include "GameObject/GameObject.h"
 
+namespace cs{class CocoImageView;}
+
 USING_NS_CC;
 
-class MagicPoint : public GameObject, public CCStandardTouchDelegate
+class MagicPoint : public GameObject, public CCTargetedTouchDelegate
 {
 public:
     MagicPoint();
@@ -15,7 +17,10 @@ public:
     virtual void onExit();
 
 protected:
-    virtual void ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent);
+    virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
+    virtual void ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent);
+    
+    cs::CocoImageView* m_pPointImage;
 };
 
 #endif // _APP_MagicPoint_H_

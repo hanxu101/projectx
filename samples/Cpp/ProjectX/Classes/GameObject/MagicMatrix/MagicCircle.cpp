@@ -24,7 +24,7 @@ MagicCircle::~MagicCircle()
 void MagicCircle::onEnter()
 {
     GameObject::onEnter();
-    CCDirector::sharedDirector()->getTouchDispatcher()->addStandardDelegate(this, 0);
+    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 1, true);
 
     INIT_FSM(Idle);
 }
@@ -41,12 +41,27 @@ void MagicCircle::StateUpdate( float deltaTime )
     GetFsm().Update();
 }
 
-void MagicCircle::ccTouchesEnded( CCSet* /*pTouches*/, CCEvent* /*pEvent*/ )
+bool MagicCircle::ccTouchBegan( CCTouch *pTouch, CCEvent *pEvent )
+{
+    return true;
+}
+
+void MagicCircle::ccTouchEnded( CCTouch* /*pTouche*/, CCEvent* /*pEvent*/ )
 {
     if (GetFsm().IsCurrentState(STATE(Operating)) && m_elapsedTime <= 2.0f && getChildrenCount() > 0)
     {
         GetFsm().SwitchState(STATE(Failed));
     }
+}
+
+bool MagicCircle::IsSucceed()
+{
+    return GetFsm().IsCurrentState(STATE(Succeed));
+}
+
+bool MagicCircle::IsFailed()
+{
+    return GetFsm().IsCurrentState(STATE(Failed));
 }
 
 IMPLEMENT_STATE_BEGIN(MagicCircle, Idle)
