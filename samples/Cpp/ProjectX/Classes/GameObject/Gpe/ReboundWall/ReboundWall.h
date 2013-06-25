@@ -3,6 +3,8 @@
 
 #include "GameObject/Gpe/Gpe.h"
 
+class FireBall;
+
 USING_NS_CC;
 
 class ReboundWall : public Gpe 
@@ -25,10 +27,14 @@ public:
     virtual void draw();
 
 private:
+    void CheckRedboud();
+    void ReboundFireBall( FireBall* fireBall );
+
     DECLARE_FSM(ReboundWall);
     DECLARE_VIRTUAL_STATE(Idle);
     DECLARE_VIRTUAL_STATE(Move);
 
+private:
     CCSprite* m_pMainSprite;
     float m_deltaTime;
 

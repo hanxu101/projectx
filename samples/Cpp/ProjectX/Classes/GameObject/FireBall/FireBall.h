@@ -21,6 +21,8 @@ public:
     void SetForce(CCPoint force);
     const CCPoint& GetDirection() const;
     const CCPoint& GetForce() const;
+    bool CanRebound() const;
+    void SetCanRebound(bool canRebound);
 
     // State
     void SetAbort();
@@ -51,6 +53,7 @@ protected:
     float m_maxSpeed;
     float m_forceFactor;
     float m_attackPoint;
+    bool m_canRebound;
 };
 
 #endif // _APP_FireBall_H_

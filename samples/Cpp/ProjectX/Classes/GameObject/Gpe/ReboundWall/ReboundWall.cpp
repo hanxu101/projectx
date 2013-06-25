@@ -1,6 +1,8 @@
 #include "CommonHeaders.h"
 
 #include "GameObject/Gpe/ReboundWall/ReboundWall.h"
+#include "GameObject/GameObjectManager/GameObjectManager.h"
+#include "GameObject/FireBall/FireBall.h"
 
 ReboundWall::ReboundWall()
     : m_pMainSprite(NULL)
@@ -37,6 +39,8 @@ void ReboundWall::StateUpdate(float deltaTime)
 {
     m_deltaTime = deltaTime;
     GetFsm().Update();
+
+    CheckRedboud();
 }
 
 void ReboundWall::SetSize(float right, float left, float bottom, float top, CCPoint center)
@@ -84,6 +88,60 @@ void ReboundWall::draw()
     ccDrawLine( bottomRight, bottomLeft);
     ccDrawLine( bottomLeft, topLeft);
 #endif
+}
+
+void ReboundWall::CheckRedboud()
+{
+    TGameObjectList objectList;
+    if (GameObjectManager::IsSingletonCreated())
+        GameObjectManager::Singleton().GetGameObjectList(eGOT_FireBall, objectList);
+
+    for (TGameObjectList::iterator iter = objectList.begin(); iter != objectList.end(); ++iter)
+    {
+        float nearestDistance = FLT_MAX;
+
+        CCPoint topLeft(ccpAdd( getPosition(), ccpAdd(m_center, ccp(-m_left, m_top))));
+        CCPoint topRight(ccpAdd( getPosition(), ccpAdd(m_center, ccp(m_right, m_top))));
+        CCPoint bottomRight(ccpAdd( getPosition(), ccpAdd(m_center, ccp(m_right, -m_bottom))));
+        CCPoint bottomLeft(ccpAdd( getPosition(), ccpAdd(m_center, ccp(-m_left, -m_bottom))));
+
+        float distanceSQ = ccpDistanceSQ(topLeft, (*iter)->getPosition());
+        if (distanceSQ < nearestDistance)
+        {
+            nearestDistance = distanceSQ;
+        }
+        distanceSQ = ccpDistanceSQ(topRight, (*iter)->getPosition());
+        if (distanceSQ < nearestDistance)
+        {
+            nearestDistance = distanceSQ;
+        }
+        distanceSQ = ccpDistanceSQ(bottomRight, (*iter)->getPosition());
+        if (distanceSQ < nearestDistance)
+        {
+            nearestDistance = distanceSQ;
+        }
+        distanceSQ = ccpDistanceSQ(bottomLeft, (*iter)->getPosition());
+        if (distanceSQ < nearestDistance)
+        {
+            nearestDistance = distanceSQ;
+        }
+
+        if (nearestDistance < (*iter)->GetCollisionRadius() * (*iter)->GetCollisionRadius())
+        {
+            ReboundFireBall(static_cast<FireBall*>(*iter));
+        }
+    }
+}
+
+void ReboundWall::ReboundFireBall( FireBall* fireBall )
+{
+    if (fireBall->CanRebound())
+    {
+        CCPoint direction = fireBall->GetDirection();
+        direction.x = direction.x * -1.0f;
+        fireBall->SetDirection(direction);
+        fireBall->SetCanRebound(false);
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////

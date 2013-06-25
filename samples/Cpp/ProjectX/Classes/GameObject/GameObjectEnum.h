@@ -4,7 +4,7 @@
 enum EGameObjectType
 {
     eGOT_Monster,
-    eGOT_Bullet,
+    eGOT_FireBall,
     eGOT_Item,
     eGOT_General,
     eGOT_MagicMatrix,

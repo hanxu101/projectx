@@ -5,7 +5,7 @@
 #include "GameObject/GameObject.h"
 
 FireBall::FireBall()
-    : GameObject(0.0f, eGOT_Bullet,10.0f)
+    : GameObject(0.0f, eGOT_FireBall,10.0f)
     , m_pMainSprite(NULL)
     , m_targetPos(CCPoint(0.0f, 0.0f))
     , m_direction(CCPoint(0.0f, 0.0f))
@@ -17,6 +17,7 @@ FireBall::FireBall()
     , m_maxSpeed(400.0f)
     , m_forceFactor(1.0f)
     , m_attackPoint(10.0f)
+    , m_canRebound(true)
 {
 }
 
@@ -87,6 +88,16 @@ void FireBall::Attack()
             (*iter)->ReduceHp(m_attackPoint);
         }
     }
+}
+
+bool FireBall::CanRebound() const
+{
+    return m_canRebound;
+}
+
+void FireBall::SetCanRebound(bool canRebound)
+{
+    m_canRebound = canRebound;
 }
 
 //////////////////////////////////////////////////////////////////////////

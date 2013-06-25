@@ -7,6 +7,7 @@
 Boomerang::Boomerang()
     : m_acceleration(-400.0f)
 {
+    m_canRebound = false;
 }
 
 Boomerang::~Boomerang()
