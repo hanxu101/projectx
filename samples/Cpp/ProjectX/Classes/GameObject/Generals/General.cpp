@@ -62,7 +62,7 @@ IMPLEMENT_STATE_END
     {
         m_magicCircle = new MagicCircle(m_magicPointVec, 2.0f);
         m_magicCircle->setPosition(VisibleRect::center());
-        addChild(m_magicCircle);
+        getParent()->addChild(m_magicCircle);
     }
     STATE_CONSTRUCTOR_END
 

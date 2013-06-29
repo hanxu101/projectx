@@ -32,10 +32,17 @@ protected:
 
     virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
     virtual void ccTouchEnded(CCTouch *pTouche, CCEvent *pEvent);
+    virtual void ccTouchMoved(CCTouch *pTouche, CCEvent *pEvent);
+
+    void AddGraphics();
+    void DelGraphics();
 
     TPointVector m_magicPointVector;
     float m_elapsedTime;
     float m_durationTime;
+
+    CCSprite* m_pMainSprite;
+    CCMotionStreak* m_pStreak;
 };
 
 #endif // _APP_MagicCircle_H_

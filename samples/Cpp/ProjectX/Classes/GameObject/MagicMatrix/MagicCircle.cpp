@@ -6,6 +6,8 @@
 MagicCircle::MagicCircle()
     : m_elapsedTime(0.0f)
     , m_durationTime(0.0f)
+    , m_pMainSprite(NULL)
+    , m_pStreak(NULL)
 {
 }
 
@@ -13,6 +15,8 @@ MagicCircle::MagicCircle( const TPointVector& magicPointVector, float durationTi
     : m_magicPointVector(magicPointVector)
     , m_elapsedTime(0.0f)
     , m_durationTime(durationTime)
+    , m_pMainSprite(NULL)
+    , m_pStreak(NULL)
 {
 }
 
@@ -26,11 +30,15 @@ void MagicCircle::onEnter()
     GameObject::onEnter();
     CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 1, true);
 
+    AddGraphics();
+
     INIT_FSM(Idle);
 }
 
 void MagicCircle::onExit()
 {
+    DelGraphics();
+
     CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
     GameObject::onExit();
 }
@@ -43,7 +51,18 @@ void MagicCircle::StateUpdate( float deltaTime )
 
 bool MagicCircle::ccTouchBegan( CCTouch *pTouch, CCEvent *pEvent )
 {
+    if (m_pStreak)
+        m_pStreak->removeFromParentAndCleanup(true);
+
+    m_pStreak = CCMotionStreak::create(1.0f, 3.0f, 10.0f, ccWHITE, "streak.png");
+    getParent()->addChild(m_pStreak);
+
     return true;
+}
+
+void MagicCircle::ccTouchMoved( CCTouch *pTouche, CCEvent *pEvent )
+{
+    m_pStreak->setPosition(pTouche->getLocation());
 }
 
 void MagicCircle::ccTouchEnded( CCTouch* /*pTouche*/, CCEvent* /*pEvent*/ )
@@ -62,6 +81,19 @@ bool MagicCircle::IsSucceed()
 bool MagicCircle::IsFailed()
 {
     return GetFsm().IsCurrentState(STATE(Failed));
+}
+
+void MagicCircle::AddGraphics()
+{
+    m_pMainSprite = CCSprite::create("baGua.png");
+    m_pMainSprite->setScale(2.0f);
+    addChild(m_pMainSprite);
+}
+
+void MagicCircle::DelGraphics()
+{
+    if (m_pStreak)
+        m_pStreak->removeFromParentAndCleanup(true);
 }
 
 IMPLEMENT_STATE_BEGIN(MagicCircle, Idle)
@@ -106,7 +138,7 @@ IMPLEMENT_STATE_END
         {
             SWITCH_TO_STATE(Failed);
         }
-        else if (getChildrenCount() == 0)
+        else if (getChildrenCount() == 1) // Hack: sprite left.
         {
             SWITCH_TO_STATE(Succeed);
         }
