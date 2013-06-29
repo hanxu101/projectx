@@ -47,8 +47,6 @@ protected:
     CCPoint m_forceDirection;
     float m_forceDirectionSpeed;
 
-    CCPoint m_moveForce;
-
     // configurable variables
     float m_maxSpeed;
     float m_forceFactor;

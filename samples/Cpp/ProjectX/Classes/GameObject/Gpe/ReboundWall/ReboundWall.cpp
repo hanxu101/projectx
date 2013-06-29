@@ -141,8 +141,17 @@ void ReboundWall::ReboundFireBall( FireBall* fireBall )
     if (fireBall->CanRebound())
     {
         CCPoint direction = fireBall->GetDirection();
+        CCPoint force = fireBall->GetForce();
+        float forceLength = ccpLength(force);
+        float angle = ccpAngle(direction, force);
+        
         direction.x = direction.x * -1.0f;
         fireBall->SetDirection(direction);
+
+        force = ccpRotateByAngle(direction, CCPoint(0.0f, 0.0f), angle);
+        force = ccpMult(ccpNormalize(force), forceLength);
+        fireBall->SetForce(force);
+
         fireBall->SetCanRebound(false);
     }
 }

@@ -51,6 +51,7 @@ void FireBall::StateUpdate(float deltaTime)
 void FireBall::SetDirection(CCPoint direction)
 {
     m_direction = direction;
+    m_forceDirectionSpeed = 0.0f;
 }
 
 const CCPoint& FireBall::GetDirection() const
@@ -136,8 +137,6 @@ IMPLEMENT_STATE_END
 {
     STATE_CONSTRUCTOR_BEGIN
     {
-        m_moveForce = ccpNormalize(m_force);
-
         m_direction = ccpNormalize(m_direction);
         m_forceLength = ccpLength(m_force);
         m_forceDirection = ccpNormalize(m_force);
@@ -148,7 +147,7 @@ IMPLEMENT_STATE_END
         STATE_UPDATE_BEGIN
     {
         m_forceDirectionSpeed += m_forceLength*m_forceFactor;
-        CCPoint offset(ccpAdd(ccpMult(m_direction, m_speed), ccpMult(m_moveForce, m_forceDirectionSpeed)));
+        CCPoint offset(ccpAdd(ccpMult(m_direction, m_speed), ccpMult(ccpNormalize(m_force), m_forceDirectionSpeed)));
         offset = ccpMult(ccpNormalize(offset), m_speed * m_deltaTime); // make speed constant
 
         CCPoint newPos = ccpAdd(getPosition(), offset);
