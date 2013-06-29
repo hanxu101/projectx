@@ -98,37 +98,40 @@ void ReboundWall::CheckRedboud()
 
     for (TGameObjectList::iterator iter = objectList.begin(); iter != objectList.end(); ++iter)
     {
-        float nearestDistance = FLT_MAX;
+        CCPoint circlePos = (*iter)->getPosition();
 
-        CCPoint topLeft(ccpAdd( getPosition(), ccpAdd(m_center, ccp(-m_left, m_top))));
-        CCPoint topRight(ccpAdd( getPosition(), ccpAdd(m_center, ccp(m_right, m_top))));
-        CCPoint bottomRight(ccpAdd( getPosition(), ccpAdd(m_center, ccp(m_right, -m_bottom))));
-        CCPoint bottomLeft(ccpAdd( getPosition(), ccpAdd(m_center, ccp(-m_left, -m_bottom))));
-
-        float distanceSQ = ccpDistanceSQ(topLeft, (*iter)->getPosition());
-        if (distanceSQ < nearestDistance)
-        {
-            nearestDistance = distanceSQ;
-        }
-        distanceSQ = ccpDistanceSQ(topRight, (*iter)->getPosition());
-        if (distanceSQ < nearestDistance)
-        {
-            nearestDistance = distanceSQ;
-        }
-        distanceSQ = ccpDistanceSQ(bottomRight, (*iter)->getPosition());
-        if (distanceSQ < nearestDistance)
-        {
-            nearestDistance = distanceSQ;
-        }
-        distanceSQ = ccpDistanceSQ(bottomLeft, (*iter)->getPosition());
-        if (distanceSQ < nearestDistance)
-        {
-            nearestDistance = distanceSQ;
-        }
-
-        if (nearestDistance < (*iter)->GetCollisionRadius() * (*iter)->GetCollisionRadius())
+        // If center of circle is inside the rectangle, it's intersected.
+        if ( circlePos.x > getPosition().x+m_center.x-m_left && circlePos.x < getPosition().x+m_center.x+m_right
+            && circlePos.y > getPosition().y+m_center.y-m_bottom && circlePos.y < getPosition().y+m_center.y+m_top)
         {
             ReboundFireBall(static_cast<FireBall*>(*iter));
+        }
+        else
+        {
+            // Find the nearest point on rectangle from circle center to rectangle
+            CCPoint nearestPoint = circlePos;
+            if (circlePos.x < getPosition().x+m_center.x-m_left)
+            {
+                nearestPoint.x = getPosition().x+m_center.x-m_left;
+            }
+            else if(circlePos.x > getPosition().x+m_center.x+m_right)
+            {
+                nearestPoint.x = getPosition().x+m_center.x+m_right;
+            }
+            if (circlePos.y < getPosition().y+m_center.y-m_bottom)
+            {
+                nearestPoint.y = getPosition().y+m_center.y-m_bottom;
+            }
+            else if(circlePos.y > getPosition().y+m_center.y+m_top)
+            {
+                nearestPoint.y = getPosition().y+m_center.y+m_top;
+            }
+
+            // if the distance from circle center to nearestRectagle point is lessthan R, it's intersected.
+            if (ccpDistanceSQ(nearestPoint, circlePos) < (*iter)->GetCollisionRadius() * (*iter)->GetCollisionRadius())
+            {
+                ReboundFireBall(static_cast<FireBall*>(*iter));
+            }
         }
     }
 }
