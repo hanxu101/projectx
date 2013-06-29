@@ -143,7 +143,7 @@ void ReboundWall::ReboundFireBall( FireBall* fireBall )
         CCPoint direction = fireBall->GetDirection();
         CCPoint force = fireBall->GetForce();
         float forceLength = ccpLength(force);
-        float angle = ccpAngle(direction, force);
+        float angle = ccpAngleSigned(direction, force);
         
         direction.x = direction.x * -1.0f;
         fireBall->SetDirection(direction);
@@ -202,6 +202,8 @@ IMPLEMENT_STATE_BEGIN(ReboundWall, Move)
         }
         
         newPos = ccpAdd(getPosition(), CCPoint(0.0f, m_speed * m_deltaTime));
+        newPos.y = clampf(newPos.y, m_downRange, m_upRange);
+
         setPosition(newPos);
     }
     STATE_UPDATE_END

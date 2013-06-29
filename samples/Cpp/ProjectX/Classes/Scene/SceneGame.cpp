@@ -30,16 +30,12 @@ const int g_monsterZOder = 1;
 const int g_backGroundZOrder = -1;
 
 GameLayer::GameLayer(void)
-    : m_isTouching(false)
-    , m_touchFrameCount(0)
-    , m_pMonsterGroupLogic(NULL)
+    : m_pMonsterGroupLogic(NULL)
     , m_pGeneralGroupLogic(NULL)
     , m_pGpeLogic(NULL)
-    , m_touchTimer(0.0f)
     , m_fireBall(NULL)
     , m_pGameUI(NULL)
 {
-    m_previousTouchPosVec.resize(PREVIOUS_TOUCHPOSITION_CACHE_NUM);
 }
 
 GameLayer::~GameLayer(void)
@@ -88,6 +84,7 @@ void GameLayer::onEnter()
     CCNode* pUiNode = CCNode::create();
     addChild(pUiNode, g_uiZOrder);
 
+#ifndef DEBUG_NO_UI
     // Init UI.
     COCOUISYSTEM->resetSystem(pUiNode);
     m_pGameUI = cs::CocoPanel::create();
@@ -95,9 +92,13 @@ void GameLayer::onEnter()
 
     cs::CocoWidget* pWidget = COCOUISYSTEM->createWidgetFromFile_json("UIGame.json");
     m_pGameUI->addChild(pWidget);
+#endif
 
     // Init player logic.
-    cs::CocoLoadingBar* pHpBar = dynamic_cast<cs::CocoLoadingBar*>(pWidget->getChildByName("HpBar"));
+    cs::CocoLoadingBar* pHpBar = NULL;
+#ifndef DEBUG_NO_UI
+    pHpBar = dynamic_cast<cs::CocoLoadingBar*>(pWidget->getChildByName("HpBar"));
+#endif
     MainPlayerLogic::CreateSingleton();
     MainPlayerLogic::Singleton().Init(pHpBar);
 
@@ -108,6 +109,7 @@ void GameLayer::onEnter()
     addChild(m_pMonsterGroupLogic, g_monsterZOder);
 #endif
 
+#ifndef DEBUG_NO_GENERAL
     // Init general logic.
     std::vector< EGeneralType > generalVec;
     generalVec.push_back(eGT_DiaoChan);
@@ -115,11 +117,14 @@ void GameLayer::onEnter()
     m_pGeneralGroupLogic = new GeneralGroupLogic(generalVec, m_pGameUI);
     m_pGeneralGroupLogic->autorelease();
     addChild(m_pGeneralGroupLogic, g_generalZOrder);
+#endif
 
+#ifndef DEBUG_NO_GPE
     // Init Gpe logic.
     m_pGpeLogic = new GpeLogic();
     m_pGpeLogic->autorelease();
     addChild(m_pGpeLogic);
+#endif
 
     //setTouchEnabled(true);
 
@@ -156,14 +161,17 @@ void GameLayer::Update(float dt)
 
 void GameLayer::UpdateTouchInfo(float dt)
 {
-    for (UINT8 i = 1; i < PREVIOUS_TOUCHPOSITION_CACHE_NUM; ++i)
+    for (UINT8 index = 0; index < m_previousTouchPosVec.size(); ++index)
     {
-        m_previousTouchPosVec[i-1] = m_previousTouchPosVec[i];
-    }
+        for (UINT8 i = 1; i < PREVIOUS_TOUCHPOSITION_CACHE_NUM; ++i)
+        {
+            m_previousTouchPosVec[index][i-1] = m_previousTouchPosVec[index][i];
+        }
 
-    m_previousTouchPosVec[PREVIOUS_TOUCHPOSITION_CACHE_NUM-1] = m_isTouching ? m_currentTouchLocation : INVALID_TOUCHPOSITION;
-    m_touchFrameCount = m_isTouching ? ++m_touchFrameCount : 0;
-    m_touchTimer = m_isTouching ? (m_touchFrameCount + dt) : 0.0f;
+        m_previousTouchPosVec[index][PREVIOUS_TOUCHPOSITION_CACHE_NUM-1] = m_isTouching[index] ? m_currentTouchPointMap[index] : INVALID_TOUCHPOSITION;
+        m_touchFrameCount[index] = m_isTouching[index] ? ++m_touchFrameCount[index] : 0;
+        m_touchTimer[index] = m_isTouching[index] ? (m_touchFrameCount[index] + dt) : 0.0f;
+    }
 }
 
 UINT GameLayer::GetPreviousTouchPosIndex( UINT rollbackFrameNum, UINT maxCacheNumber )
@@ -175,24 +183,28 @@ UINT GameLayer::GetPreviousTouchPosIndex( UINT rollbackFrameNum, UINT maxCacheNu
 
 void GameLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
 {
-    m_isTouching = true;
-
     CCSetIterator iter = pTouches->begin();
     for (; iter != pTouches->end(); iter++)
     {
         CCTouch* pTouch = (CCTouch*)(*iter);
-        m_currentTouchLocation = pTouch->getLocation();
+        CCPoint touchPos = pTouch->getLocation();
+        
+        if (m_currentTouchPointMap.find(pTouch->getID()) == m_currentTouchPointMap.end())
+            m_previousTouchPosVec[pTouch->getID()].resize(PREVIOUS_TOUCHPOSITION_CACHE_NUM);
+        
+        m_currentTouchPointMap[pTouch->getID()] = touchPos;
+        m_isTouching[pTouch->getID()] = true;
 
-        if (m_currentTouchLocation.y > VisibleRect::top().y / 2)
+        if ( touchPos.y > VisibleRect::top().y / 2)
         {
             Monster* pMonster = new Monster();
-            pMonster->setPosition(m_currentTouchLocation.x, VisibleRect::top().y);
+            pMonster->setPosition( touchPos.x, VisibleRect::top().y);
             addChild(pMonster);
         }
         else
         {
             m_fireBall = new FireBall();
-            m_fireBall->setPosition(m_currentTouchLocation);
+            m_fireBall->setPosition(touchPos);
             addChild(m_fireBall);
 
             m_pStreak = CCMotionStreak::create(1.0f, 3.0f, 10.0f, ccWHITE, "streak.png");
@@ -209,26 +221,29 @@ void GameLayer::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
         for (; iter != pTouches->end(); iter++)
         {
             CCTouch* pTouch = (CCTouch*)(*iter);
-            m_currentTouchLocation = pTouch->getLocation();
-            m_previousTouchPosVec[PREVIOUS_TOUCHPOSITION_CACHE_NUM-1] = m_currentTouchLocation;
+            CCPoint touchPos = pTouch->getLocation();
+            m_currentTouchPointMap[pTouch->getID()] = touchPos;
 
-            m_fireBall->setPosition(m_currentTouchLocation);
-            m_pStreak->setPosition(m_currentTouchLocation);
+            m_previousTouchPosVec[pTouch->getID()][PREVIOUS_TOUCHPOSITION_CACHE_NUM-1] = touchPos;
+
+            m_fireBall->setPosition(touchPos);
+            m_pStreak->setPosition(touchPos);
         }
     }
 }
 
 void GameLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
 {
-    m_isTouching = false;
     if (m_fireBall)
     {
         CCSetIterator iter = pTouches->begin();
         for (; iter != pTouches->end(); iter++)
         {
             CCTouch* pTouch = (CCTouch*)(*iter);
-            m_currentTouchLocation = pTouch->getLocation();
-            m_previousTouchPosVec[PREVIOUS_TOUCHPOSITION_CACHE_NUM-1] = m_currentTouchLocation;
+            CCPoint touchPoint = pTouch->getLocation();
+            m_currentTouchPointMap[pTouch->getID()]  = touchPoint;
+            m_previousTouchPosVec[pTouch->getID()][PREVIOUS_TOUCHPOSITION_CACHE_NUM-1] = touchPoint;
+            m_isTouching[pTouch->getID()] = false;
 
 #ifdef DEBUG_FAKE_FIREBALL_INPUT
             //Debug code
@@ -237,17 +252,17 @@ void GameLayer::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent)
 
             bool canFire = false;
 
-            if (m_touchFrameCount >= PREVIOUS_TOUCHPOSITION_CACHE_NUM)
+            if (m_touchFrameCount[pTouch->getID()] >= PREVIOUS_TOUCHPOSITION_CACHE_NUM)
             {
-                CCPoint previousTouchPoint = m_previousTouchPosVec[GetPreviousTouchPosIndex(m_touchFrameCount, PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
-                float offset = ccpDistance(m_currentTouchLocation, previousTouchPoint);
-                if (offset > FIRE_SLIDE_DISTANCE_MIN && m_touchTimer > FIRE_TOUCH_TIME_THRESHOLD)
+                CCPoint previousTouchPoint = m_previousTouchPosVec[pTouch->getID()][GetPreviousTouchPosIndex(m_touchFrameCount[pTouch->getID()], PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
+                float offset = ccpDistance(m_currentTouchPointMap[pTouch->getID()], previousTouchPoint);
+                if (offset > FIRE_SLIDE_DISTANCE_MIN && m_touchTimer[pTouch->getID()] > FIRE_TOUCH_TIME_THRESHOLD)
                 {
                     canFire = true;
 
-                    m_fireBall->SetDirection(CalculateDirection());
+                    m_fireBall->SetDirection(CalculateDirection(pTouch->getID()));
                     m_fireBall->SetSpeedFactor(CalculateSlideSpeedFactor(offset));
-                    m_fireBall->SetForce(CalculateSpinForce());
+                    m_fireBall->SetForce(CalculateSpinForce(pTouch->getID()));
                     m_fireBall->SetMove();
 
                     PrintMoveInfo();
@@ -270,19 +285,19 @@ void GameLayer::ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent)
     ccTouchesEnded(pTouches, pEvent);
 }
 
-CCPoint GameLayer::CalculateDirection()
+CCPoint GameLayer::CalculateDirection(int touchId)
 {
-    UINT index = GetPreviousTouchPosIndex(m_touchFrameCount, PREVIOUS_TOUCHPOSITION_CACHE_NUM);
-    CCPoint previousTouchPoint1 = m_previousTouchPosVec[index];
-    CCPoint previousTouchPoint2 = m_previousTouchPosVec[index+PREVIOUS_TOUCHPOSITION_CACHE_NUM/2];
+    UINT index = GetPreviousTouchPosIndex(m_touchFrameCount[touchId], PREVIOUS_TOUCHPOSITION_CACHE_NUM);
+    CCPoint previousTouchPoint1 = m_previousTouchPosVec[touchId][index];
+    CCPoint previousTouchPoint2 = m_previousTouchPosVec[touchId][index+PREVIOUS_TOUCHPOSITION_CACHE_NUM/2];
     //return ccpNormalize(ccpSub(previousTouchPoint2, previousTouchPoint1));
     return ccpSub(previousTouchPoint2, previousTouchPoint1);
 }
 
-CCPoint GameLayer::CalculateSpinForce()
+CCPoint GameLayer::CalculateSpinForce(int touchId)
 {
-    CCPoint previousTouchPoint1 = m_previousTouchPosVec[GetPreviousTouchPosIndex(0, PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
-    CCPoint previousTouchPoint2 = m_previousTouchPosVec[GetPreviousTouchPosIndex(PREVIOUS_TOUCHPOSITION_CACHE_NUM/2, PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
+    CCPoint previousTouchPoint1 = m_previousTouchPosVec[touchId][GetPreviousTouchPosIndex(0, PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
+    CCPoint previousTouchPoint2 = m_previousTouchPosVec[touchId][GetPreviousTouchPosIndex(PREVIOUS_TOUCHPOSITION_CACHE_NUM/2, PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
     return ccpSub(previousTouchPoint1, previousTouchPoint2);
 }
 
@@ -301,16 +316,16 @@ void GameLayer::PrintMoveInfo()
         CCLOG("DIRECTION :  (%.2f, %.2f)", m_fireBall->GetDirection().x, m_fireBall->GetDirection().y);
         CCLOG("FORCE :      (%.2f, %.2f)", m_fireBall->GetForce().x, m_fireBall->GetForce().y);
 
-        CCPoint previousTouchPoint1 = m_previousTouchPosVec[GetPreviousTouchPosIndex(0, PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
-        CCPoint previousTouchPoint2 = m_previousTouchPosVec[GetPreviousTouchPosIndex(PREVIOUS_TOUCHPOSITION_CACHE_NUM/2, PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
+        CCPoint previousTouchPoint1 = m_previousTouchPosVec[0][GetPreviousTouchPosIndex(0, PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
+        CCPoint previousTouchPoint2 = m_previousTouchPosVec[0][GetPreviousTouchPosIndex(PREVIOUS_TOUCHPOSITION_CACHE_NUM/2, PREVIOUS_TOUCHPOSITION_CACHE_NUM)];
         CCLOG("Force Points: (%.2f, %.2f), (%.2f, %.2f)", previousTouchPoint1.x, previousTouchPoint1.y, previousTouchPoint2.x, previousTouchPoint2.y);
     }
 
-    CCLOG("TouchFrameCount : %d)", m_touchFrameCount);
+    CCLOG("TouchFrameCount : %d)", m_touchFrameCount[0]);
 
     for (UINT8 i = 0; i < PREVIOUS_TOUCHPOSITION_CACHE_NUM; ++i)
     {
-        CCLOG("TouchPoint%d :(%.2f, %.2f)", i, m_previousTouchPosVec[i].x, m_previousTouchPosVec[i].y);
+        CCLOG("TouchPoint%d :(%.2f, %.2f)", i, m_previousTouchPosVec[0][i].x, m_previousTouchPosVec[0][i].y);
     }
 
     // for Excel format
@@ -318,8 +333,8 @@ void GameLayer::PrintMoveInfo()
     string strForX, strForY;
     for (UINT8 i = 0; i < PREVIOUS_TOUCHPOSITION_CACHE_NUM; ++i)
     {
-        strForX += CCString::createWithFormat("%.2f\t", m_previousTouchPosVec[i].x)->m_sString;
-        strForY += CCString::createWithFormat("%.2f\t", m_previousTouchPosVec[i].y)->m_sString;
+        strForX += CCString::createWithFormat("%.2f\t", m_previousTouchPosVec[0][i].x)->m_sString;
+        strForY += CCString::createWithFormat("%.2f\t", m_previousTouchPosVec[0][i].y)->m_sString;
     }
     CCLOG((strForX + "\n" + strForY).c_str());
 }
@@ -327,25 +342,25 @@ void GameLayer::PrintMoveInfo()
 void GameLayer::FakeInput()
 {
     // A spin curve to top right
-    /*m_previousTouchPosVec[0] = CCPoint(139.87f, 39.49f);
-    m_previousTouchPosVec[1] = CCPoint(148.2f, 71.73f);
-    m_previousTouchPosVec[2] = CCPoint(161.2f, 89.93f);
-    m_previousTouchPosVec[3] = CCPoint(195.0f, 112.81f);
-    m_previousTouchPosVec[4] = CCPoint(222.04f, 115.41f);
-    */
+    m_previousTouchPosVec[0][0] = CCPoint(139.87f, 39.49f);
+    m_previousTouchPosVec[0][1] = CCPoint(148.2f, 71.73f);
+    m_previousTouchPosVec[0][2] = CCPoint(161.2f, 89.93f);
+    m_previousTouchPosVec[0][3] = CCPoint(195.0f, 112.81f);
+    m_previousTouchPosVec[0][4] = CCPoint(222.04f, 115.41f);
+    
     // Move forward
-    /*m_previousTouchPosVec[0] = CCPoint(0.0f, 0.0f);
-    m_previousTouchPosVec[1] = CCPoint(0.0f, 71.73f);
-    m_previousTouchPosVec[2] = CCPoint(0.0f, 89.93f);
-    m_previousTouchPosVec[3] = CCPoint(0.0f, 112.81f);
-    m_previousTouchPosVec[4] = CCPoint(0.0f, 115.41f);
+    /*m_previousTouchPosVec[0][0] = CCPoint(0.0f, 0.0f);
+    m_previousTouchPosVec[0][1] = CCPoint(0.0f, 71.73f);
+    m_previousTouchPosVec[0][2] = CCPoint(0.0f, 89.93f);
+    m_previousTouchPosVec[0][3] = CCPoint(0.0f, 112.81f);
+    m_previousTouchPosVec[0][4] = CCPoint(0.0f, 115.41f);
     */
     // Boomerang
-    m_previousTouchPosVec[0] = CCPoint(0.0f, 0.0f);
-    m_previousTouchPosVec[1] = CCPoint(0.0f, 10.73f);
-    m_previousTouchPosVec[2] = CCPoint(0.0f, 20.93f);
-    m_previousTouchPosVec[3] = CCPoint(0.0f, 9.73f);
-    m_previousTouchPosVec[4] = CCPoint(0.0f, 0.0f);
+    /*m_previousTouchPosVec[0][0] = CCPoint(0.0f, 0.0f);
+    m_previousTouchPosVec[0][1] = CCPoint(0.0f, 10.73f);
+    m_previousTouchPosVec[0][2] = CCPoint(0.0f, 20.93f);
+    m_previousTouchPosVec[0][3] = CCPoint(0.0f, 9.73f);
+    m_previousTouchPosVec[0][4] = CCPoint(0.0f, 0.0f);*/
 };
 
 //------------------------------------------------------------------

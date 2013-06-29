@@ -15,7 +15,7 @@ FireBall::FireBall()
     , m_forceLength(0.0f)
     , m_forceDirection(CCPoint(0.0f, 0.0f))
     , m_maxSpeed(400.0f)
-    , m_forceFactor(1.0f)
+    , m_forceFactor(10.0f)
     , m_attackPoint(10.0f)
     , m_canRebound(true)
 {

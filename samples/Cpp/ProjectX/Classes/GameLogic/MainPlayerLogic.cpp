@@ -19,8 +19,6 @@ MainPlayerLogic::~MainPlayerLogic()
 
 void MainPlayerLogic::Init( cs::CocoLoadingBar* pHpBar )
 {
-    CCAssert(pHpBar, "Cannot find hp bar resource");
-
     m_pHpBar = pHpBar;
     m_originalHp = g_mainPlayerTotalHp;
     m_currentHp = g_mainPlayerTotalHp;

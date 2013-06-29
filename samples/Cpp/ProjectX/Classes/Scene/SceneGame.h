@@ -32,8 +32,8 @@ public:
 
 private:
     void Update(float dt);  
-    CCPoint CalculateDirection();
-    CCPoint CalculateSpinForce();
+    CCPoint CalculateDirection(int touchId);
+    CCPoint CalculateSpinForce(int touchId);
     float CalculateSlideSpeedFactor(float slideDistance); 
     void UpdateTouchInfo(float dt);
     UINT GetPreviousTouchPosIndex( UINT rollbackFrameNum, UINT maxCacheNumber );
@@ -42,21 +42,31 @@ private:
     void FakeInput();       // Debug
 
 private:
-    CCPoint m_currentTouchLocation;
-    bool m_isTouching;
-    UINT m_touchFrameCount;
+    typedef std::map< int, CCPoint> TTouchPointMap;
+    TTouchPointMap m_currentTouchPointMap;
 
     MonsterGroupLogic* m_pMonsterGroupLogic;
     GeneralGroupLogic* m_pGeneralGroupLogic;
     GpeLogic*          m_pGpeLogic;
 
-    std::vector<CCPoint> m_previousTouchPosVec;
+    typedef std::map< int, std::vector<CCPoint> > TPreviousTouchPosVecMap;
+    TPreviousTouchPosVecMap m_previousTouchPosVec;
     const static UINT8 PREVIOUS_TOUCHPOSITION_CACHE_NUM = 5;
     const static CCPoint INVALID_TOUCHPOSITION;
     const static float FIRE_SLIDE_DISTANCE_MAX;
     const static float FIRE_SLIDE_DISTANCE_MIN;
     const static float FIRE_TOUCH_TIME_THRESHOLD;
-    float m_touchTimer;
+    const static UINT8 MULTI_TOUCH_SUPPORT_NUMBER = 3;
+
+    typedef std::map< int, BOOL> TTouchIsTouchFlagMap;
+    TTouchIsTouchFlagMap m_isTouching;
+
+    typedef std::map< int, UINT> TTouchFrameCountMap;
+    TTouchFrameCountMap m_touchFrameCount;
+    
+    typedef std::map< int, float > TTouchTimerMap;
+    TTouchTimerMap m_touchTimer;
+    
     FireBall* m_fireBall;
     CCMotionStreak* m_pStreak;
 

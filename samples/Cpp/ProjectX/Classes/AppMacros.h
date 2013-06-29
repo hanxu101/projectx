@@ -56,9 +56,12 @@ static cocos2d::CCSize designResolutionSize = cocos2d::CCSizeMake(2048, 1536);
 //#define DEBUG_SKIP_MAIN_MENU
 //#define DEBUG_HIDE_TEXT
 //#define DEBUG_NO_MONSTER
+//#define DEBUG_NO_GENERAL
+//#define DEBUG_NO_GPE
 //#define DEBUG_NO_TITLE
 //#define DEBUG_NO_BACK_TO_MAIN_MENU
 //#define DEBUG_FAKE_FIREBALL_INPUT
-#define DEBUG_DRAW_DEBUG_SHAPE
+//#define DEBUG_DRAW_DEBUG_SHAPE
+//#define DEBUG_NO_UI
 
 #endif /* __APPMACROS_H__ */
