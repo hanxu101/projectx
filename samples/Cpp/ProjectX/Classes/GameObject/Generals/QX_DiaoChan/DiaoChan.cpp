@@ -16,13 +16,15 @@ DiaoChan::~DiaoChan()
 void DiaoChan::onEnter()
 {
     General::onEnter();
+    
+    m_type = eGT_DiaoChan;
 
     m_pMainSprite = CCSprite::create("Hero01_0.png");
     m_pMainSprite->setVisible(false);
     addChild(m_pMainSprite);
 
     m_pProfileImage = cs::CocoImageView::create();
-    m_pProfileImage->setTexture("DiaoChanEye.png");
+    m_pProfileImage->setTexture("Eye_DiaoChan.png");
     m_pProfileImage->setVisible(false);
 
     const CCPoint& centerPoint = VisibleRect::center();

@@ -7,9 +7,11 @@
 
 General::General()
     : GameObject(10.0f, eGOT_General,10.0f)
+    , m_type(eGT_Invalid)
     , m_pMainSprite(NULL)
     , m_pProfileImage(NULL)
     , m_elapasedTime(0.0f)
+    , m_deltaTime(0.0f)
     , m_magicCircle(NULL)
 {
 }
@@ -32,6 +34,7 @@ void General::onExit()
 
 void General::StateUpdate( float deltaTime )
 {
+    m_deltaTime = deltaTime;
     m_elapasedTime += deltaTime;
     GetFsm().Update();
 }
@@ -60,7 +63,7 @@ IMPLEMENT_STATE_END
 {
     STATE_CONSTRUCTOR_BEGIN
     {
-        m_magicCircle = new MagicCircle(m_magicPointVec, 2.0f);
+        m_magicCircle = new MagicCircle(m_magicPointVec, 2.0f, m_type);
         m_magicCircle->setPosition(VisibleRect::center());
         getParent()->addChild(m_magicCircle);
     }

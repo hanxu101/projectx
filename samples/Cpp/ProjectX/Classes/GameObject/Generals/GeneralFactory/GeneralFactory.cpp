@@ -2,6 +2,7 @@
 
 #include "GameObject/Generals/GeneralFactory/GeneralFactory.h"
 #include "GameObject/Generals/QX_DiaoChan/DiaoChan.h"
+#include "GameObject/Generals/S_MaChao/MaChao.h"
 
 GeneralFactory::GeneralFactory()
 {
@@ -22,6 +23,13 @@ void GeneralFactory::CreateGeneral( CCNode* parent, EGeneralType type, const CCP
             DiaoChan* pDiaoChan = new DiaoChan();
             pDiaoChan->setPosition(position);
             parent->addChild(pDiaoChan);
+        }
+        break;
+    case eGT_MaChao:
+        {
+            MaChao* pMaChao = new MaChao();
+            pMaChao->setPosition(position);
+            parent->addChild(pMaChao);
         }
         break;
     default:

@@ -40,6 +40,7 @@ enum EMonsterType
 enum EGeneralType
 {
     eGT_DiaoChan,
+    eGT_MaChao,
 
     eGT_Count,
     eGT_Invalid

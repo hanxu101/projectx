@@ -3,16 +3,24 @@
 #include "GameObject/MagicMatrix/MagicCircle.h"
 #include "GameObject/MagicMatrix/MagicPoint.h"
 
+static const char* MagicCircleRes[] =
+{
+    "baGua.png",
+    "baGua2.png"
+};
+
 MagicCircle::MagicCircle()
-    : m_elapsedTime(0.0f)
+    : m_associateGType(eGT_Invalid)
+    , m_elapsedTime(0.0f)
     , m_durationTime(0.0f)
     , m_pMainSprite(NULL)
     , m_pStreak(NULL)
 {
 }
 
-MagicCircle::MagicCircle( const TPointVector& magicPointVector, float durationTime )
-    : m_magicPointVector(magicPointVector)
+MagicCircle::MagicCircle( const TPointVector& magicPointVector, float durationTime, EGeneralType type )
+    : m_associateGType(type)
+    , m_magicPointVector(magicPointVector)
     , m_elapsedTime(0.0f)
     , m_durationTime(durationTime)
     , m_pMainSprite(NULL)
@@ -85,7 +93,7 @@ bool MagicCircle::IsFailed()
 
 void MagicCircle::AddGraphics()
 {
-    m_pMainSprite = CCSprite::create("baGua.png");
+    m_pMainSprite = CCSprite::create(MagicCircleRes[m_associateGType]);
     m_pMainSprite->setScale(2.0f);
     addChild(m_pMainSprite);
 }

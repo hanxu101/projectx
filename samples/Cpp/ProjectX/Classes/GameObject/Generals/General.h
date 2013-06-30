@@ -29,10 +29,13 @@ protected:
     DECLARE_VIRTUAL_STATE(CastSkill);
     DECLARE_VIRTUAL_STATE(Dead);
 
+    EGeneralType m_type;
+
     CCSprite* m_pMainSprite;
     cs::CocoImageView* m_pProfileImage;
 
     float m_elapasedTime;
+    float m_deltaTime;
 
     MagicCircle* m_magicCircle;
     TPointVector m_magicPointVec;

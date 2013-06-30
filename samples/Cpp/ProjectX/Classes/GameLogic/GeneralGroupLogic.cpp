@@ -9,12 +9,14 @@
 
 const char* NormalPng[] =
 {
-    "DiaoChan.png"
+    "G_DiaoChan.png",
+    "G_MaChao.png"
 };
 
 const char* SelectedPng[] =
 {
-    "DiaoChanSelect.png"
+    "G_DiaoChanSelect.png",
+    "G_MachaoSelect.png"
 };
 
 GeneralGroupLogic::GeneralGroupLogic()

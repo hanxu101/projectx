@@ -99,14 +99,17 @@
     <Filter Include="Classes\GameObject\Generals">
       <UniqueIdentifier>{784b1342-6fbd-4cfe-bc8d-6cb9ad079491}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\GameObject\Generals\QX_DiaoChan">
-      <UniqueIdentifier>{b277ef27-f4b0-47fd-a529-d6591b062120}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\GameObject\Generals\GeneralFactory">
       <UniqueIdentifier>{365c4f8a-c7db-4cd6-bdcc-09d17b2ba1b9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes\GameObject\MagicMatrix">
       <UniqueIdentifier>{6a8b6090-c600-4c52-8a9b-d3aa836249d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject\Generals\QX_DiaoChan">
+      <UniqueIdentifier>{b277ef27-f4b0-47fd-a529-d6591b062120}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject\Generals\S_MaChao">
+      <UniqueIdentifier>{5a5169d3-7326-4139-afb5-4bf87e1727f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -337,6 +340,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameObject\MagicMatrix\MagicPoint.cpp">
       <Filter>Classes\GameObject\MagicMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Generals\S_MaChao\MaChao.cpp">
+      <Filter>Classes\GameObject\Generals\S_MaChao</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -630,6 +636,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameObject\MagicMatrix\MagicPoint.h">
       <Filter>Classes\GameObject\MagicMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Generals\S_MaChao\MaChao.h">
+      <Filter>Classes\GameObject\Generals\S_MaChao</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

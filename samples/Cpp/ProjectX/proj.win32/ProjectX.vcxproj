@@ -178,6 +178,7 @@
     <ClCompile Include="..\Classes\GameObject\Generals\General.cpp" />
     <ClCompile Include="..\Classes\GameObject\Generals\GeneralFactory\GeneralFactory.cpp" />
     <ClCompile Include="..\Classes\GameObject\Generals\QX_DiaoChan\DiaoChan.cpp" />
+    <ClCompile Include="..\Classes\GameObject\Generals\S_MaChao\MaChao.cpp" />
     <ClCompile Include="..\Classes\GameObject\Gpe\Gpe.cpp" />
     <ClCompile Include="..\Classes\GameObject\Gpe\ReboundWall\ReboundWall.cpp" />
     <ClCompile Include="..\Classes\GameObject\Items\BuffItem\TimeFreezeItem.cpp" />
@@ -267,6 +268,7 @@
     <ClInclude Include="..\Classes\GameObject\Generals\General.h" />
     <ClInclude Include="..\Classes\GameObject\Generals\GeneralFactory\GeneralFactory.h" />
     <ClInclude Include="..\Classes\GameObject\Generals\QX_DiaoChan\DiaoChan.h" />
+    <ClInclude Include="..\Classes\GameObject\Generals\S_MaChao\MaChao.h" />
     <ClInclude Include="..\Classes\GameObject\Gpe\Gpe.h" />
     <ClInclude Include="..\Classes\GameObject\Gpe\ReboundWall\ReboundWall.h" />
     <ClInclude Include="..\Classes\GameObject\Items\BuffItem\TimeFreezeItem.h" />

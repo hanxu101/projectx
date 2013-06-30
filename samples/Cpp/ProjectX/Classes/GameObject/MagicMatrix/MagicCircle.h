@@ -11,7 +11,7 @@ class MagicCircle : public GameObject, public CCTargetedTouchDelegate
 
 public:
     MagicCircle();
-    MagicCircle(const TPointVector& magicPointVector, float durationTime);
+    MagicCircle(const TPointVector& magicPointVector, float durationTime, EGeneralType type);
     virtual ~MagicCircle();
 
     virtual void onEnter();
@@ -36,6 +36,8 @@ protected:
 
     void AddGraphics();
     void DelGraphics();
+
+    EGeneralType m_associateGType;
 
     TPointVector m_magicPointVector;
     float m_elapsedTime;

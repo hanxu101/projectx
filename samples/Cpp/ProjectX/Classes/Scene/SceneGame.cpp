@@ -113,7 +113,7 @@ void GameLayer::onEnter()
     // Init general logic.
     std::vector< EGeneralType > generalVec;
     generalVec.push_back(eGT_DiaoChan);
-    generalVec.push_back(eGT_DiaoChan);
+    generalVec.push_back(eGT_MaChao);
     m_pGeneralGroupLogic = new GeneralGroupLogic(generalVec, m_pGameUI);
     m_pGeneralGroupLogic->autorelease();
     addChild(m_pGeneralGroupLogic, g_generalZOrder);
