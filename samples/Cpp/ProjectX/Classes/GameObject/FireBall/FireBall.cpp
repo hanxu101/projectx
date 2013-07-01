@@ -3,6 +3,7 @@
 #include "GameObject/FireBall/FireBall.h"
 #include "GameObject/GameObjectManager/GameObjectManager.h"
 #include "GameObject/GameObject.h"
+#include "Gamelogic/MainPlayerLogic.h"
 
 FireBall::FireBall()
     : GameObject(0.0f, eGOT_FireBall,10.0f)
@@ -14,6 +15,7 @@ FireBall::FireBall()
     , m_force(CCPoint(0.0f, 0.0f))
     , m_forceLength(0.0f)
     , m_forceDirection(CCPoint(0.0f, 0.0f))
+    , m_comboAttackCount(0)
     , m_maxSpeed(400.0f)
     , m_forceFactor(10.0f)
     , m_attackPoint(10.0f)
@@ -87,8 +89,20 @@ void FireBall::Attack()
         if (distanceSQ < maxCollisionDis * maxCollisionDis)
         {
             (*iter)->ReduceHp(m_attackPoint);
+            ++m_comboAttackCount;
+            AddBonus();
         }
     }
+}
+
+void FireBall::AddBonus()
+{
+    // if the attacked 1-5, the bonus * 1
+    // if the attacked > 5, the bouns * n
+    if ( m_comboAttackCount < 5 )
+        MainPlayerLogic::Singleton().IncreaseCoin(1);
+    else
+        MainPlayerLogic::Singleton().IncreaseCoin(m_comboAttackCount);
 }
 
 bool FireBall::CanRebound() const
@@ -141,6 +155,8 @@ IMPLEMENT_STATE_END
         m_forceLength = ccpLength(m_force);
         m_forceDirection = ccpNormalize(m_force);
         m_forceDirectionSpeed = 0.0f;
+
+		m_comboAttackCount = 0;
     }
     STATE_CONSTRUCTOR_END
 

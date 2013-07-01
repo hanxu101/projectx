@@ -30,6 +30,7 @@ public:
 
 protected:
     void Attack();
+    void AddBonus();
 
     DECLARE_FSM(FireBall);
     DECLARE_VIRTUAL_STATE(Idle);
@@ -42,10 +43,11 @@ protected:
     CCPoint m_direction;
     float m_speed;
     float m_deltaTime;
-    CCPoint m_force;
+    CCPoint m_force;	
     float m_forceLength;
     CCPoint m_forceDirection;
     float m_forceDirectionSpeed;
+    UINT8 m_comboAttackCount;
 
     // configurable variables
     float m_maxSpeed;
