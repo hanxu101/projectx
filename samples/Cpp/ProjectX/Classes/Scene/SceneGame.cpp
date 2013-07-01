@@ -81,11 +81,11 @@ void GameLayer::onEnter()
     addChild(pBackGround, g_backGroundZOrder);
 #endif
 
+#ifndef DEBUG_NO_UI
+    // Init UI.
     CCNode* pUiNode = CCNode::create();
     addChild(pUiNode, g_uiZOrder);
 
-#ifndef DEBUG_NO_UI
-    // Init UI.
     COCOUISYSTEM->resetSystem(pUiNode);
     m_pGameUI = cs::CocoPanel::create();
     COCOUISYSTEM->getCurScene()->addWidget(m_pGameUI);
@@ -188,10 +188,10 @@ void GameLayer::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
     {
         CCTouch* pTouch = (CCTouch*)(*iter);
         CCPoint touchPos = pTouch->getLocation();
-        
+
         if (m_currentTouchPointMap.find(pTouch->getID()) == m_currentTouchPointMap.end())
             m_previousTouchPosVec[pTouch->getID()].resize(PREVIOUS_TOUCHPOSITION_CACHE_NUM);
-        
+
         m_currentTouchPointMap[pTouch->getID()] = touchPos;
         m_isTouching[pTouch->getID()] = true;
 
@@ -347,7 +347,7 @@ void GameLayer::FakeInput()
     m_previousTouchPosVec[0][2] = CCPoint(161.2f, 89.93f);
     m_previousTouchPosVec[0][3] = CCPoint(195.0f, 112.81f);
     m_previousTouchPosVec[0][4] = CCPoint(222.04f, 115.41f);
-    
+
     // Move forward
     /*m_previousTouchPosVec[0][0] = CCPoint(0.0f, 0.0f);
     m_previousTouchPosVec[0][1] = CCPoint(0.0f, 71.73f);

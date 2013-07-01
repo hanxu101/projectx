@@ -81,6 +81,7 @@ IMPLEMENT_STATE_END
     STATE_CONSTRUCTOR_BEGIN
     {
         MainPlayerLogic::Singleton().ReduceHp(1);
+        MainPlayerLogic::Singleton().IncreaseCoin(1);
         Unspawn();
     }
     STATE_CONSTRUCTOR_END

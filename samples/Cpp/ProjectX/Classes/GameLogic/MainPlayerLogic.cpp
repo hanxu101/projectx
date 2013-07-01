@@ -1,15 +1,22 @@
 #include "CommonHeaders.h"
 
 #include "Gamelogic/MainPlayerLogic.h"
+#include "UISystem.h"
+#include "CocoLabelAtlas.h"
+#include "CocoLoadingBar.h"
 
-const int g_mainPlayerTotalHp = 10;
+static const int g_mainPlayerTotalHp = 10;
+static const int g_originalCoinNum = 0;
 
 IMPLEMENT_SINGLETON(MainPlayerLogic);
 
 MainPlayerLogic::MainPlayerLogic()
     : m_pHpBar(NULL)
+    , m_pCoinNumLableAtlas(NULL)
     , m_originalHp(0)
     , m_currentHp(0)
+    , m_originalCoin(0)
+    , m_currentCoin(0)
 {
 }
 
@@ -22,6 +29,16 @@ void MainPlayerLogic::Init( cs::CocoLoadingBar* pHpBar )
     m_pHpBar = pHpBar;
     m_originalHp = g_mainPlayerTotalHp;
     m_currentHp = g_mainPlayerTotalHp;
+    m_originalCoin = g_originalCoinNum;
+    m_currentCoin = g_originalCoinNum;
+
+    // Add player coin UI. TODO: Draw the UI management.
+    m_pCoinNumLableAtlas = cs::CocoLabelAtlas::create();
+    m_pCoinNumLableAtlas->setPosition(ccp(VisibleRect::bottom().x, VisibleRect::bottom().y + 10.0f));
+    float scaleFactor = CCDirector::sharedDirector()->getContentScaleFactor();
+    m_pCoinNumLableAtlas->setProperty("0", "CoinNumber.png", 50.0f / scaleFactor, 50.0f / scaleFactor, "0");
+
+    COCOUISYSTEM->getCurScene()->addWidget(m_pCoinNumLableAtlas);
 }
 
 void MainPlayerLogic::Uninit()
@@ -37,7 +54,8 @@ void MainPlayerLogic::Reset()
 
 void MainPlayerLogic::ReduceHp( int reduceHp )
 {
-    m_currentHp -= reduceHp;
+    if (m_currentHp > 0)
+        m_currentHp -= reduceHp;
 
     AdjustHpBar();
 }
@@ -49,8 +67,33 @@ void MainPlayerLogic::IncreaseHp( int increaseHp )
     AdjustHpBar();
 }
 
+void MainPlayerLogic::ReduceCoin( int reduceCoin )
+{
+    if (m_currentCoin > 0)
+    {
+        m_currentCoin -= reduceCoin;
+
+        DrawCoinValue();
+    }
+}
+
+void MainPlayerLogic::IncreaseCoin( int increaseCoin )
+{
+    m_currentCoin += increaseCoin;
+
+    DrawCoinValue();
+}
+
 void MainPlayerLogic::AdjustHpBar()
 {
     if (m_pHpBar && m_originalHp != 0)
         m_pHpBar->setPercent(static_cast<float>(m_currentHp) / static_cast<float>(m_originalHp) * 100);
+}
+
+void MainPlayerLogic::DrawCoinValue()
+{
+    char stringValue[20];
+    _itoa(m_currentCoin, stringValue, 10);
+
+    m_pCoinNumLableAtlas->setStringValue(stringValue);
 }
