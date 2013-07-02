@@ -16,10 +16,14 @@ FireBall::FireBall()
     , m_forceLength(0.0f)
     , m_forceDirection(CCPoint(0.0f, 0.0f))
     , m_comboAttackCount(0)
+    , m_energyChargeTime(0.0f)
+    , m_isEnergyChanged(false)
     , m_maxSpeed(400.0f)
     , m_forceFactor(10.0f)
     , m_attackPoint(10.0f)
     , m_canRebound(true)
+    , m_energyChargeTimeThreshold(1.0f)
+    , m_energyChargedCollisionRadius(20.0f)
 {
 }
 
@@ -31,8 +35,8 @@ void FireBall::onEnter()
 {
     GameObject::onEnter();
 
-    m_pMainSprite = CCSprite::create("ball.png");
-    m_pMainSprite->setScale(4.0f);
+    m_pMainSprite = CCSprite::create("ball_EnergyCharged.png");
+    m_pMainSprite->setScale(1.5f);
 
     addChild(m_pMainSprite);
 
@@ -42,6 +46,14 @@ void FireBall::onEnter()
 void FireBall::onExit()
 {
     GameObject::onExit();
+}
+
+void FireBall::draw()
+{
+#ifdef DEBUG_DRAW_DEBUG_SHAPE
+    glLineWidth( 2.0f );
+    ccDrawCircle(CCPoint(0.0f, 0.0f), m_collisionRadius, (float)M_PI*2.0f, 50, false);
+#endif
 }
 
 void FireBall::StateUpdate(float deltaTime)
@@ -138,6 +150,14 @@ IMPLEMENT_STATE_BEGIN(FireBall, Idle)
 
         STATE_UPDATE_BEGIN
     {
+        if (!m_isEnergyChanged && m_energyChargeTime > m_energyChargeTimeThreshold)
+        {
+            m_isEnergyChanged = true;
+            m_collisionRadius = m_energyChargedCollisionRadius;
+            m_pMainSprite->setScale(3.0f);
+        }
+        else
+            m_energyChargeTime += m_deltaTime;
     }
     STATE_UPDATE_END
         STATE_DESTRUCTOR_BEGIN

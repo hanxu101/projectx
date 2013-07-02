@@ -28,6 +28,9 @@ public:
     void SetAbort();
     void SetMove();
 
+private:
+    void draw();
+
 protected:
     void Attack();
     void AddBonus();
@@ -48,12 +51,16 @@ protected:
     CCPoint m_forceDirection;
     float m_forceDirectionSpeed;
     UINT8 m_comboAttackCount;
+    float m_energyChargeTime;
+    bool m_isEnergyChanged;
 
     // configurable variables
     float m_maxSpeed;
     float m_forceFactor;
     float m_attackPoint;
     bool m_canRebound;
+    float m_energyChargeTimeThreshold;
+    float m_energyChargedCollisionRadius;
 };
 
 #endif // _APP_FireBall_H_
