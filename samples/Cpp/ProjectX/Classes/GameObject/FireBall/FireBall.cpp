@@ -17,14 +17,19 @@ FireBall::FireBall()
     , m_forceDirection(CCPoint(0.0f, 0.0f))
     , m_comboAttackCount(0)
     , m_energyChargeTime(0.0f)
-    , m_isEnergyChanged(false)
     , m_maxSpeed(400.0f)
     , m_forceFactor(10.0f)
     , m_attackPoint(10.0f)
     , m_canRebound(true)
-    , m_energyChargeTimeThreshold(1.0f)
-    , m_energyChargedCollisionRadius(20.0f)
+    , m_energyChargeLevel(0)
 {
+    m_energyChargeTimeThreshold[0] = 1.0f;
+    m_energyChargeTimeThreshold[1] = 1.5f;
+    m_energyChargeTimeThreshold[2] = 3.0f;
+
+    m_energyChargedCollisionRadiusScaleValue[0] = 1.2f;
+    m_energyChargedCollisionRadiusScaleValue[1] = 1.5f;
+    m_energyChargedCollisionRadiusScaleValue[2] = 2.0f;
 }
 
 FireBall::~FireBall()
@@ -127,6 +132,19 @@ void FireBall::SetCanRebound(bool canRebound)
     m_canRebound = canRebound;
 }
 
+void FireBall::AddEnergyChargeLevel()
+{
+    if (m_energyChargeLevel < MAX_ENERGY_CHARGE_LEVEL)
+        ++m_energyChargeLevel;
+}
+
+bool FireBall::IsReachMaxEnergyChargeLevel()
+{
+    CCAssert(m_energyChargeLevel <= MAX_ENERGY_CHARGE_LEVEL, "The energyChargeLevel must be less than Max energy charge level.");
+    
+    return m_energyChargeLevel == MAX_ENERGY_CHARGE_LEVEL;
+}
+
 //////////////////////////////////////////////////////////////////////////
 // Switch State
 void FireBall::SetAbort()
@@ -150,14 +168,18 @@ IMPLEMENT_STATE_BEGIN(FireBall, Idle)
 
         STATE_UPDATE_BEGIN
     {
-        if (!m_isEnergyChanged && m_energyChargeTime > m_energyChargeTimeThreshold)
+        if (!IsReachMaxEnergyChargeLevel())
         {
-            m_isEnergyChanged = true;
-            m_collisionRadius = m_energyChargedCollisionRadius;
-            m_pMainSprite->setScale(3.0f);
+            if (m_energyChargeTime > m_energyChargeTimeThreshold[m_energyChargeLevel])
+            {
+                m_collisionRadius = m_collisionRadius * m_energyChargedCollisionRadiusScaleValue[m_energyChargeLevel];
+                m_pMainSprite->setScale(m_pMainSprite->getScale() * m_energyChargedCollisionRadiusScaleValue[m_energyChargeLevel]);
+
+                AddEnergyChargeLevel();
+            }
+            else
+                m_energyChargeTime += m_deltaTime;
         }
-        else
-            m_energyChargeTime += m_deltaTime;
     }
     STATE_UPDATE_END
         STATE_DESTRUCTOR_BEGIN
@@ -176,7 +198,7 @@ IMPLEMENT_STATE_END
         m_forceDirection = ccpNormalize(m_force);
         m_forceDirectionSpeed = 0.0f;
 
-		m_comboAttackCount = 0;
+        m_comboAttackCount = 0;
     }
     STATE_CONSTRUCTOR_END
 

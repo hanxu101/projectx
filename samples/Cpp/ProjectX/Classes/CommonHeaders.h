@@ -8,5 +8,6 @@
 #include "ResourceDefines.h"
 #include "utilities/Utilities.h"
 #include "utilities/Singleton.h"
+#include "utilities/TypeDefines.h"
 
 #endif  //COMMON_HEADERS_H

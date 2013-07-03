@@ -293,6 +293,7 @@
     <ClInclude Include="..\Classes\utilities\FSM\TransitionClusterMacros.h" />
     <ClInclude Include="..\Classes\utilities\FSM\TransitionMacros.h" />
     <ClInclude Include="..\Classes\utilities\Singleton.h" />
+    <ClInclude Include="..\Classes\utilities\TypeDefines.h" />
     <ClInclude Include="..\Classes\utilities\Utilities.h" />
     <ClInclude Include="..\Classes\VisibleRect.h" />
     <ClInclude Include="main.h" />
