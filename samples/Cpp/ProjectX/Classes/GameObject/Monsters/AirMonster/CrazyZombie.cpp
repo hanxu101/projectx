@@ -2,6 +2,7 @@
 
 #include "GameObject/Monsters/AirMonster/CrazyZombie.h"
 #include "GameObject/Items/BuffItem/TimeFreezeItem.h"
+#include "GameObject/Items/Gold/Gold.h"
 
 CrazyZombie::CrazyZombie()
     : m_timeElapsed(0.0f)
@@ -31,11 +32,17 @@ void CrazyZombie::onExit()
 
 void CrazyZombie::Killed()
 {
-    const float dropRate = 0.05f;
+    const float dropRate = 0.03f;
 
     if (RandomFloat(0.0f, 1.0f) < dropRate)
     {
         TimeFreezeItem* pItem = new TimeFreezeItem();
+        pItem->setPosition(getPosition());
+        getParent()->addChild(pItem);
+    }
+    else if (RandomFloat(0.0f, 1.0f) < dropRate)
+    {
+        Gold* pItem = new Gold();
         pItem->setPosition(getPosition());
         getParent()->addChild(pItem);
     }

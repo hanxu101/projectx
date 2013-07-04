@@ -111,6 +111,9 @@
     <Filter Include="Classes\GameObject\Generals\S_MaChao">
       <UniqueIdentifier>{5a5169d3-7326-4139-afb5-4bf87e1727f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\GameObject\Items\Gold">
+      <UniqueIdentifier>{15afbd2d-d058-49bc-b337-1cfff168213e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -343,6 +346,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameObject\Generals\S_MaChao\MaChao.cpp">
       <Filter>Classes\GameObject\Generals\S_MaChao</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Items\Gold\Gold.cpp">
+      <Filter>Classes\GameObject\Items\Gold</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -642,6 +648,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\utilities\TypeDefines.h">
       <Filter>Classes\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Items\Gold\Gold.h">
+      <Filter>Classes\GameObject\Items\Gold</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

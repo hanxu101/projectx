@@ -182,6 +182,7 @@
     <ClCompile Include="..\Classes\GameObject\Gpe\Gpe.cpp" />
     <ClCompile Include="..\Classes\GameObject\Gpe\ReboundWall\ReboundWall.cpp" />
     <ClCompile Include="..\Classes\GameObject\Items\BuffItem\TimeFreezeItem.cpp" />
+    <ClCompile Include="..\Classes\GameObject\Items\Gold\Gold.cpp" />
     <ClCompile Include="..\Classes\GameObject\Items\Item.cpp" />
     <ClCompile Include="..\Classes\GameObject\MagicMatrix\MagicCircle.cpp" />
     <ClCompile Include="..\Classes\GameObject\MagicMatrix\MagicPoint.cpp" />
@@ -272,6 +273,7 @@
     <ClInclude Include="..\Classes\GameObject\Gpe\Gpe.h" />
     <ClInclude Include="..\Classes\GameObject\Gpe\ReboundWall\ReboundWall.h" />
     <ClInclude Include="..\Classes\GameObject\Items\BuffItem\TimeFreezeItem.h" />
+    <ClInclude Include="..\Classes\GameObject\Items\Gold\Gold.h" />
     <ClInclude Include="..\Classes\GameObject\Items\Item.h" />
     <ClInclude Include="..\Classes\GameObject\MagicMatrix\MagicCircle.h" />
     <ClInclude Include="..\Classes\GameObject\MagicMatrix\MagicPoint.h" />
