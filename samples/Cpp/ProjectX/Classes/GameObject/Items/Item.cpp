@@ -4,6 +4,11 @@
 
 Item::Item()
     : GameObject(10.0f, eGOT_Item,10.0f)
+    , m_pMainSprite(NULL)
+    , m_targetPos(CCPointZero)
+    , m_direction(CCPointZero)
+    , m_speed(20.0f)
+    , m_deltaTime(0.0f)
 {
 }
 
@@ -51,3 +56,70 @@ void Item::ccTouchesEnded( cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent )
         }
     }
 }
+
+
+IMPLEMENT_STATE_BEGIN(Item, Idle)
+{
+    STATE_CONSTRUCTOR_BEGIN
+    {
+    }
+    STATE_CONSTRUCTOR_END
+
+        STATE_UPDATE_BEGIN
+    {      
+        SWITCH_TO_STATE(Move);
+    }
+    STATE_UPDATE_END
+
+        STATE_DESTRUCTOR_BEGIN
+    {
+    }
+    STATE_DESTRUCTOR_END
+}
+IMPLEMENT_STATE_END
+
+    IMPLEMENT_STATE_BEGIN(Item, Move)
+{
+    STATE_CONSTRUCTOR_BEGIN
+    {
+        m_targetPos = CCPoint(getPosition().x, VisibleRect::bottom().y);
+        m_direction = ccpSub(m_targetPos, getPosition());
+        m_direction = ccpNormalize(m_direction);
+    }
+    STATE_CONSTRUCTOR_END
+
+        STATE_UPDATE_BEGIN
+    {      
+        CCPoint newPos =  ccpAdd( getPosition(), ccpMult(ccpMult(m_direction, m_speed), m_deltaTime) );
+        setPosition(newPos);
+
+        TRANSIT_TO_STATE( !VisibleRect::getVisibleRect().containsPoint(newPos), NoTransitionAction, ArrivedBottomSafe );
+    }
+    STATE_UPDATE_END
+
+        STATE_DESTRUCTOR_BEGIN
+    {
+    }
+    STATE_DESTRUCTOR_END
+}
+IMPLEMENT_STATE_END
+
+    IMPLEMENT_STATE_BEGIN(Item, ArrivedBottomSafe)
+{
+    STATE_CONSTRUCTOR_BEGIN
+    {
+        Unspawn();
+    }
+    STATE_CONSTRUCTOR_END
+
+        STATE_UPDATE_BEGIN
+    {      
+    }
+    STATE_UPDATE_END
+
+        STATE_DESTRUCTOR_BEGIN
+    {
+    }
+    STATE_DESTRUCTOR_END
+}
+IMPLEMENT_STATE_END

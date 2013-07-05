@@ -21,19 +21,7 @@ public:
     virtual void ItemTouchesEnded();
 
 private:
-    void PlayMonsterWalkAnimation();
-
-    DECLARE_FSM(TimeFreezeItem);
-    DECLARE_STATE(Idle);
-    DECLARE_STATE(Move);
-    DECLARE_STATE(ArrivedBottomSafe);
-
-    CCSprite* m_pMainSprite;
-
-    CCPoint m_targetPos;
-    CCPoint m_direction;
-    float m_speed;
-    float m_deltaTime;
+    OVERLOAD_FSM(TimeFreezeItem);
 };
 
 #endif // _APP_TimeFreezeItem_H_

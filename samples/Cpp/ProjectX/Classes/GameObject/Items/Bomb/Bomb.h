@@ -1,15 +1,15 @@
-#ifndef  _APP_Gold_H_
-#define  _APP_Gold_H_
+#ifndef  _APP_Bomb_H_
+#define  _APP_Bomb_H_
 
 #include "GameObject/Items/Item.h"
 
 USING_NS_CC;
 
-class Gold : public Item
+class Bomb : public Item
 {
 public:
-    Gold();
-    virtual ~Gold();
+    Bomb();
+    virtual ~Bomb();
 
     virtual void onEnter();
     virtual void onExit();
@@ -21,7 +21,9 @@ public:
     virtual void ItemTouchesEnded();
 
 private:
-    OVERLOAD_FSM(Gold);
+    OVERLOAD_FSM(Bomb);
+
+    void Attack();
 };
 
-#endif // _APP_Gold_H_
+#endif // _APP_Bomb_H_

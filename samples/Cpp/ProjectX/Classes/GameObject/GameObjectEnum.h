@@ -49,6 +49,8 @@ enum EGeneralType
 enum EItemType
 {
     eIT_TimeFreezeItem,
+    eIT_Gold,
+    eIT_Bomb,
 
     eIT_Count,
     eIT_Invalid
