@@ -1,14 +1,14 @@
 #ifndef  _APP_MAINPLAYERLOGIC_H_
 #define  _APP_MAINPLAYERLOGIC_H_
 
-namespace cs{class CocoLoadingBar; class CocoLabelAtlas;}
+namespace cs{class CocoWidget; class CocoLoadingBar; class CocoLabelAtlas;}
 
 class MainPlayerLogic
 {
     DECLARE_SINGLETON(MainPlayerLogic);
 
 public:
-    void Init(cs::CocoLoadingBar* pHpBar);
+    void Init(cs::CocoWidget* pCocoWidget);
     void Uninit();
 
     void Reset();

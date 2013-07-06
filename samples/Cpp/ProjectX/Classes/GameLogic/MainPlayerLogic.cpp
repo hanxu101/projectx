@@ -24,21 +24,18 @@ MainPlayerLogic::~MainPlayerLogic()
 {
 }
 
-void MainPlayerLogic::Init( cs::CocoLoadingBar* pHpBar )
+void MainPlayerLogic::Init( cs::CocoWidget* pCocoWidget)
 {
-    m_pHpBar = pHpBar;
     m_originalHp = g_mainPlayerTotalHp;
     m_currentHp = g_mainPlayerTotalHp;
     m_originalCoin = g_originalCoinNum;
     m_currentCoin = g_originalCoinNum;
 
-    // Add player coin UI. TODO: Draw the UI management.
-    m_pCoinNumLableAtlas = cs::CocoLabelAtlas::create();
-    m_pCoinNumLableAtlas->setPosition(ccp(VisibleRect::bottom().x, VisibleRect::bottom().y + 10.0f));
-    float scaleFactor = CCDirector::sharedDirector()->getContentScaleFactor();
-    m_pCoinNumLableAtlas->setProperty("0", "CoinNumber.png", 50.0f / scaleFactor, 50.0f / scaleFactor, "0");
-
-    COCOUISYSTEM->getCurScene()->addWidget(m_pCoinNumLableAtlas);
+    if (pCocoWidget)
+    {
+        m_pHpBar = dynamic_cast<cs::CocoLoadingBar*>(pCocoWidget->getChildByName("HpBar"));
+        m_pCoinNumLableAtlas = dynamic_cast<cs::CocoLabelAtlas*>(pCocoWidget->getChildByName("Gold"));
+    }
 }
 
 void MainPlayerLogic::Uninit()
@@ -95,5 +92,6 @@ void MainPlayerLogic::DrawCoinValue()
     char stringValue[20];
     _itoa(m_currentCoin, stringValue, 10);
 
-    m_pCoinNumLableAtlas->setStringValue(stringValue);
+    if (m_pCoinNumLableAtlas)
+        m_pCoinNumLableAtlas->setStringValue(stringValue);
 }

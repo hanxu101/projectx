@@ -8,7 +8,6 @@
 #include "GameLogic/MonsterGroupLogic.h"
 #include "Buff/BuffManager/BuffManager.h"
 #include "UISystem.h"
-#include "CocoLoadingBar.h"
 #include "CocoPanel.h"
 #include "Gamelogic/MainPlayerLogic.h"
 #include "GameLogic/GeneralGroupLogic.h"
@@ -81,6 +80,8 @@ void GameLayer::onEnter()
     addChild(pBackGround, g_backGroundZOrder);
 #endif
 
+    cs::CocoWidget* pWidget = NULL;
+
 #ifndef DEBUG_NO_UI
     // Init UI.
     CCNode* pUiNode = CCNode::create();
@@ -90,17 +91,12 @@ void GameLayer::onEnter()
     m_pGameUI = cs::CocoPanel::create();
     COCOUISYSTEM->getCurScene()->addWidget(m_pGameUI);
 
-    cs::CocoWidget* pWidget = COCOUISYSTEM->createWidgetFromFile_json("UIGame.json");
+    pWidget = COCOUISYSTEM->createWidgetFromFile_json("UIGame.json");
     m_pGameUI->addChild(pWidget);
 #endif
 
-    // Init player logic.
-    cs::CocoLoadingBar* pHpBar = NULL;
-#ifndef DEBUG_NO_UI
-    pHpBar = dynamic_cast<cs::CocoLoadingBar*>(pWidget->getChildByName("HpBar"));
-#endif
     MainPlayerLogic::CreateSingleton();
-    MainPlayerLogic::Singleton().Init(pHpBar);
+    MainPlayerLogic::Singleton().Init(pWidget);
 
 #ifndef DEBUG_NO_MONSTER
     // Init monster logic.
