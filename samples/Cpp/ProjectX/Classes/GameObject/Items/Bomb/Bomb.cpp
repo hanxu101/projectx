@@ -3,6 +3,9 @@
 #include "GameObject/Items/Bomb/Bomb.h"
 #include "GameObject/GameObjectManager/GameObjectManager.h"
 
+static const float g_bombExplosionRange = 30.0f;
+static const float g_bombAttackDamage = 10.0f;
+
 Bomb::Bomb()
 {
 
@@ -54,9 +57,9 @@ void Bomb::Attack()
 
     for (TGameObjectList::iterator iter = objectList.begin(); iter != objectList.end(); ++iter)
     {
-        if ((*iter)->getPositionY() - getPositionY() < 6.0f)
+        if (abs((*iter)->getPositionY() - getPositionY()) < g_bombExplosionRange)
         {
-            (*iter)->ReduceHp(10.0f);
+            (*iter)->ReduceHp(g_bombAttackDamage);
         }
     }
 }
