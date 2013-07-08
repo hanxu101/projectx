@@ -29,6 +29,7 @@ enum EMonsterType
     eMT_StoneMan,
     eMT_Titan,
     eMT_CrazyZombie,
+    eMT_CrazyZombieBomber,
     eMT_WaterElement,
     eMT_Fisherman,
     eMT_Naga,

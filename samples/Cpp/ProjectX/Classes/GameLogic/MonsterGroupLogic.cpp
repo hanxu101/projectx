@@ -30,13 +30,13 @@ void MonsterGroupLogic::InitMonsterData()
 {
     for (UINT i = 0; i < 15; ++i)
     {
-        AddOneLine(eMT_CrazyZombie,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_CrazyZombie,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid);
-        AddOneLine(eMT_Invalid,eMT_CrazyZombie,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_CrazyZombie,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid);
-        AddOneLine(eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_CrazyZombie,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid);
-        AddOneLine(eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_CrazyZombie,eMT_Invalid,eMT_CrazyZombie,eMT_StoneMan,eMT_StoneMan,eMT_StoneMan,eMT_Invalid);
-        AddOneLine(eMT_CrazyZombie,eMT_StoneMan,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_CrazyZombie,eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid);
-        AddOneLine(eMT_Invalid,eMT_StoneMan,eMT_StoneMan,eMT_Invalid,eMT_StoneMan,eMT_CrazyZombie,eMT_StoneMan,eMT_StoneMan,eMT_StoneMan,eMT_Invalid);
-        AddOneLine(eMT_Invalid,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_Invalid);
+        AddOneLine(eMT_Invalid,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombieBomber,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_Invalid);
+        AddOneLine(eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_CrazyZombie,eMT_CrazyZombie,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid);
+        AddOneLine(eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid);
+        AddOneLine(eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid);
+        AddOneLine(eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid);
+        AddOneLine(eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_Invalid);
+        AddOneLine(eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan);
     }
 
     m_monsterLineWaveCount = m_monsterData.size();
