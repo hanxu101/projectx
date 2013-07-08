@@ -149,6 +149,8 @@ void GameLayer::Update(float dt)
     m_pMonsterGroupLogic->StateUpdate(dt);
 #endif
 
+    m_pGeneralGroupLogic->Update(dt);
+
     UpdateTouchInfo(dt);
 
     GameObjectManager::Singleton().Update(dt);

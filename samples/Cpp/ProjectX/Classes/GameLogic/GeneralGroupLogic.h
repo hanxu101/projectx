@@ -5,9 +5,10 @@
 
 USING_NS_CC;
 
-namespace cs{class CocoPanel;}
+namespace cs{class CocoPanel; class CocoButton;}
 
 typedef std::vector< EGeneralType > TGeneralDataVec;
+typedef std::map< cs::CocoButton*, float > TButtonCdMap;
 
 class GeneralGroupLogic : public CCNode
 {
@@ -19,12 +20,16 @@ public:
     virtual void onEnter();
     virtual void onExit();
 
+    void Update(float dt);
+
 private:
     void GeneralBottonClicked(CCObject* pSender);
 
     TGeneralDataVec m_generalData;
 
     cs::CocoPanel* m_pGameUI;
+
+    TButtonCdMap m_buttonCdMap;
 };
 
 #endif //_APP_GeneralGroupLogic_H_

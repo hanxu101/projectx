@@ -28,9 +28,9 @@ void DiaoChan::onEnter()
     m_pProfileImage->setVisible(false);
 
     const CCPoint& centerPoint = VisibleRect::center();
-    m_magicPointVec.push_back(ccp(centerPoint.x + 50, centerPoint.y));
-    m_magicPointVec.push_back(centerPoint);
     m_magicPointVec.push_back(ccp(centerPoint.x - 50, centerPoint.y));
+    m_magicPointVec.push_back(centerPoint);
+    m_magicPointVec.push_back(ccp(centerPoint.x + 50, centerPoint.y));
 
     COCOUISYSTEM->getCurScene()->addWidget(m_pProfileImage);
 }

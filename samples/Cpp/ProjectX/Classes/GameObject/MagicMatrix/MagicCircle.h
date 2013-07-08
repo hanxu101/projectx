@@ -37,14 +37,20 @@ protected:
     void AddGraphics();
     void DelGraphics();
 
+    void MoveParticle();
+
     EGeneralType m_associateGType;
 
     TPointVector m_magicPointVector;
+    float m_deltaTime;
     float m_elapsedTime;
     float m_durationTime;
 
     CCSprite* m_pMainSprite;
     CCMotionStreak* m_pStreak;
+    CCParticleGalaxy* m_pParticle;
+
+    unsigned int m_particlePointNum;
 };
 
 #endif // _APP_MagicCircle_H_

@@ -7,6 +7,8 @@
 
 #include "UISystem.h"
 
+static const float g_generalCdTime = 5.0f;
+
 const char* NormalPng[] =
 {
     "G_DiaoChan.png",
@@ -17,6 +19,12 @@ const char* SelectedPng[] =
 {
     "G_DiaoChanSelect.png",
     "G_MachaoSelect.png"
+};
+
+const char* DisablePng[] =
+{
+    "G_DiaoChanDisable.png",
+    "G_MachaoDisable.png"
 };
 
 GeneralGroupLogic::GeneralGroupLogic()
@@ -33,6 +41,7 @@ GeneralGroupLogic::GeneralGroupLogic( const TGeneralDataVec& generalData, cs::Co
 GeneralGroupLogic::~GeneralGroupLogic()
 {
     m_generalData.clear();
+    m_buttonCdMap.clear();
 }
 
 void GeneralGroupLogic::onEnter()
@@ -50,7 +59,7 @@ void GeneralGroupLogic::onEnter()
             pButton->setBeTouchAble(true);
             // Set relationship between these picture with generalType.
             EGeneralType type = m_generalData[i];
-            pButton->setTextures(NormalPng[type], SelectedPng[type], "");
+            pButton->setTextures(NormalPng[type], SelectedPng[type], DisablePng[type]);
 
             pButton->addReleaseEvent(this, coco_releaseselector(GeneralGroupLogic::GeneralBottonClicked));
             pButton->setScale(0.5f);
@@ -72,4 +81,27 @@ void GeneralGroupLogic::GeneralBottonClicked( CCObject* pSender )
     EGeneralType type = m_generalData[widgetTag];
 
     GeneralFactory::Get().CreateGeneral(this, type, ccp(240,200));
+
+    pButton->setBeTouchAble(false);
+    pButton->setPressState(2);
+
+    if (m_buttonCdMap.find(pButton) == m_buttonCdMap.end())
+        m_buttonCdMap.insert(std::pair<cs::CocoButton*, float>(pButton, 0.0f));
+}
+
+void GeneralGroupLogic::Update( float dt )
+{
+    for (TButtonCdMap::iterator iter = m_buttonCdMap.begin(); iter != m_buttonCdMap.end(); ++iter)
+    {
+        iter->second += dt;
+
+        if (iter->second > g_generalCdTime && iter->first)
+        {
+            iter->first->setBeTouchAble(true);
+            iter->first->setPressState(0);
+
+            m_buttonCdMap.erase(iter);
+            break;
+        }
+    }
 }

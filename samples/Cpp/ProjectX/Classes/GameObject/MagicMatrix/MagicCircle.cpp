@@ -11,20 +11,25 @@ static const char* MagicCircleRes[] =
 
 MagicCircle::MagicCircle()
     : m_associateGType(eGT_Invalid)
+    , m_deltaTime(0.0f)
     , m_elapsedTime(0.0f)
     , m_durationTime(0.0f)
     , m_pMainSprite(NULL)
     , m_pStreak(NULL)
+    , m_pParticle(NULL)
+    , m_particlePointNum(0)
 {
 }
 
 MagicCircle::MagicCircle( const TPointVector& magicPointVector, float durationTime, EGeneralType type )
     : m_associateGType(type)
     , m_magicPointVector(magicPointVector)
+    , m_deltaTime(0.0f)
     , m_elapsedTime(0.0f)
     , m_durationTime(durationTime)
     , m_pMainSprite(NULL)
     , m_pStreak(NULL)
+    , m_particlePointNum(0)
 {
 }
 
@@ -36,6 +41,19 @@ MagicCircle::~MagicCircle()
 void MagicCircle::onEnter()
 {
     GameObject::onEnter();
+
+    //////////////////////////////////////////////////////////////////////////
+    //Test particle
+    m_pParticle = CCParticleGalaxy::create();
+    CCTexture2D *pTexture = CCTextureCache::sharedTextureCache()->addImage("stars.png");
+    m_pParticle->setTexture(pTexture);
+    m_pParticle->setLife(0.5f);
+    m_pParticle->setScale(0.3f);
+    //m_pParticle->setPosition(VisibleRect::center());
+
+    getParent()->addChild(m_pParticle, 10);
+    //////////////////////////////////////////////////////////////////////////
+
     CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 1, true);
 
     AddGraphics();
@@ -53,6 +71,7 @@ void MagicCircle::onExit()
 
 void MagicCircle::StateUpdate( float deltaTime )
 {
+    m_deltaTime = deltaTime;
     m_elapsedTime += deltaTime;
     GetFsm().Update();
 }
@@ -102,6 +121,32 @@ void MagicCircle::DelGraphics()
 {
     if (m_pStreak)
         m_pStreak->removeFromParentAndCleanup(true);
+
+    if (m_pParticle)
+        m_pParticle->removeFromParentAndCleanup(true);
+}
+
+void MagicCircle::MoveParticle()
+{
+    if (m_pParticle)
+    {
+        CCPoint direction = ccpNormalize(ccpSub(m_magicPointVector[m_particlePointNum],  m_pParticle->getPosition()));
+        CCPoint newPos =  ccpAdd( m_pParticle->getPosition(), ccpMult(ccpMult(direction, 200.0f), m_deltaTime) );
+        m_pParticle->setPosition(newPos);
+
+        if (ccpDistanceSQ(newPos, m_magicPointVector[m_particlePointNum]) < 4.0f)
+        {
+            if (m_particlePointNum < m_magicPointVector.size() - 1)
+            {
+                ++m_particlePointNum;
+            }
+            else
+            {
+                m_pParticle->removeFromParentAndCleanup(true);
+                m_pParticle = NULL;
+            }
+        }
+    }
 }
 
 IMPLEMENT_STATE_BEGIN(MagicCircle, Idle)
@@ -137,11 +182,16 @@ IMPLEMENT_STATE_END
         }
 
         m_elapsedTime = 0.0f;
+
+        m_pParticle->setPosition(m_magicPointVector[m_particlePointNum]);
+        ++m_particlePointNum;
     }
     STATE_CONSTRUCTOR_END
 
         STATE_UPDATE_BEGIN
-    {      
+    {
+        MoveParticle();
+
         if (m_elapsedTime > 2.0f)
         {
             SWITCH_TO_STATE(Failed);
@@ -206,6 +256,12 @@ IMPLEMENT_STATE_END
 {
     STATE_CONSTRUCTOR_BEGIN
     {
+        if (m_pParticle)
+        {
+            m_pParticle->removeFromParentAndCleanup(true);
+            m_pParticle = NULL;
+        }
+
         Unspawn();
     }
     STATE_CONSTRUCTOR_END
