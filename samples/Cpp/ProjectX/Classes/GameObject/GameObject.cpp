@@ -65,7 +65,7 @@ void GameObject::ReduceHp( float hp )
 {
     m_hp -= hp;
 
-    if (m_hp <= 0)
+    if (m_hp <= 0 && m_hp + hp > 0)
         Killed();
 }
 
