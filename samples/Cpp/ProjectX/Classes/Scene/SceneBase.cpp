@@ -27,12 +27,16 @@ void SceneBase::onEnter()
 #endif
 }
 
+#include "Skill/SkillManager.h"
+
 void SceneBase::MainMenuCallback(CCObject* pSender)
 {
-    CCScene* pScene = CCScene::create();
+    /*CCScene* pScene = CCScene::create();
     CCLayer* pLayer = new SceneManager();
     pLayer->autorelease();
 
     pScene->addChild(pLayer);
     CCDirector::sharedDirector()->replaceScene(pScene);
+    */
+    SkillManager::Singleton().Execute(eST_DirectBurn, 5.0f);
 }

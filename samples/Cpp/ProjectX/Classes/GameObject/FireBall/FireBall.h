@@ -23,6 +23,8 @@ public:
     const CCPoint& GetForce() const;
     bool CanRebound() const;
     void SetCanRebound(bool canRebound);
+    bool CanDirectBurn() const;
+    void SetCanDirectBurn(bool canDirectBurn);
 
     // State
     void SetAbort();
@@ -59,6 +61,7 @@ protected:
     float m_forceFactor;
     float m_attackPoint;
     bool m_canRebound;
+    bool m_canDirectBurn;
 
     static const int MAX_ENERGY_CHARGE_LEVEL = 3;
     float m_energyChargeTimeThreshold[MAX_ENERGY_CHARGE_LEVEL];

@@ -31,9 +31,9 @@ static SceneBase* CreateScene(int nIdx)
 SceneManager::SceneManager()
 {
     // UI Init
-	COCOUISYSTEM->init();
+    COCOUISYSTEM->init();
 
-	 // add close menu
+     // add close menu
     CCMenuItemImage *pCloseItem = CCMenuItemImage::create(s_pPathClose, s_pPathCloseSelected, this, menu_selector(SceneManager::closeCallback) );
     CCMenu* pMenu =CCMenu::create(pCloseItem, NULL);
 
@@ -45,7 +45,7 @@ SceneManager::SceneManager()
     for (int i = 0; i < MainMenu_Count; ++i)
     {
         CCLabelTTF* label = CCLabelTTF::create(g_MainMenuNames[i].c_str(), "Arial", 20);
-		label->setColor(ccMAGENTA);
+        label->setColor(ccMAGENTA);
         CCMenuItemLabel* pMenuItem = CCMenuItemLabel::create(label, this, menu_selector(SceneManager::menuCallback));
 
         m_pItemMenu->addChild(pMenuItem, i + 10000);
@@ -60,8 +60,8 @@ SceneManager::SceneManager()
 
     addChild(pMenu, 1);
 
-	CCLabelTTF* pLabel = CCLabelTTF::create("Project", "Arial", TITLE_FONT_SIZE);
-	pLabel->setColor(ccGRAY);
+    CCLabelTTF* pLabel = CCLabelTTF::create("Project", "Arial", TITLE_FONT_SIZE);
+    pLabel->setColor(ccGRAY);
 
     // position the label on the center of the screen
     pLabel->setPosition(ccp(VisibleRect::center().x - 10,
@@ -70,7 +70,7 @@ SceneManager::SceneManager()
     // add the label as a child to this layer
     addChild(pLabel, 1);
 
-	// add splash screen"
+    // add splash screen"
     CCSprite* pSprite = CCSprite::create("projectx.png");
 
     // position the sprite on the center of the screen
@@ -87,7 +87,7 @@ void SceneManager::menuCallback(CCObject * pSender)
     int nIdx = pMenuItem->getZOrder() - 10000;
 
     // create the test scene and run it
-	SceneBase* pScene = CreateScene(nIdx);
+    SceneBase* pScene = CreateScene(nIdx);
     if (pScene)
     {
         pScene->runThisTest();

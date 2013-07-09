@@ -117,6 +117,9 @@
     <Filter Include="Classes\GameObject\Items\Bomb">
       <UniqueIdentifier>{0d48a45c-bdef-4c75-b51c-ed51b4a460f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Skill">
+      <UniqueIdentifier>{d7f9f6eb-eb69-45ef-8578-8cbf04f2e51b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -358,6 +361,18 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameObject\Monsters\AirMonster\CrazyZombieBomber.cpp">
       <Filter>Classes\GameObject\Monsters\AirMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Skill\FireWall.cpp">
+      <Filter>Classes\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Skill\SkillManager.cpp">
+      <Filter>Classes\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Skill\SkillBase.cpp">
+      <Filter>Classes\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Skill\DirectBurn.cpp">
+      <Filter>Classes\Skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -666,6 +681,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameObject\Monsters\AirMonster\CrazyZombieBomber.h">
       <Filter>Classes\GameObject\Monsters\AirMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Skill\FireWall.h">
+      <Filter>Classes\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Skill\SkillManager.h">
+      <Filter>Classes\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Skill\SkillBase.h">
+      <Filter>Classes\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Skill\DirectBurn.h">
+      <Filter>Classes\Skill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

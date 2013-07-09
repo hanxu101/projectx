@@ -12,6 +12,7 @@
 #include "Gamelogic/MainPlayerLogic.h"
 #include "GameLogic/GeneralGroupLogic.h"
 #include "GameLogic/GpeLogic.h"
+#include "Skill/SkillManager.h"
 
 //------------------------------------------------------------------
 //
@@ -65,6 +66,8 @@ void GameLayer::onEnter()
 
     GameObjectManager::CreateSingleton();
     BuffManager::CreateSingleton();
+    SkillManager::CreateSingleton();
+    SkillManager::Singleton().Init();
 
 #ifndef DEBUG_HIDE_TEXT
     // Back ground.
@@ -135,10 +138,11 @@ void GameLayer::onExit()
 
     CCLayer::onExit();
 
-    // Destory singletons after base layer exit. (After all children exit)
+    // Destroy singletons after base layer exit. (After all children exit)
     GameObjectManager::DestroySingleton();
     BuffManager::DestroySingleton();
-
+    SkillManager::Singleton().Uninit();
+    SkillManager::DestroySingleton();
     MainPlayerLogic::Singleton().Uninit();
     MainPlayerLogic::DestroySingleton();
 }
@@ -155,6 +159,7 @@ void GameLayer::Update(float dt)
 
     GameObjectManager::Singleton().Update(dt);
     BuffManager::Singleton().Update(dt);
+    SkillManager::Singleton().Update(dt);
 }
 
 void GameLayer::UpdateTouchInfo(float dt)

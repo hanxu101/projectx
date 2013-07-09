@@ -21,6 +21,7 @@ FireBall::FireBall()
     , m_forceFactor(10.0f)
     , m_attackPoint(10.0f)
     , m_canRebound(true)
+    , m_canDirectBurn(false)
     , m_energyChargeLevel(0)
 {
     m_energyChargeTimeThreshold[0] = 1.0f;
@@ -132,6 +133,16 @@ void FireBall::SetCanRebound(bool canRebound)
     m_canRebound = canRebound;
 }
 
+bool FireBall::CanDirectBurn() const
+{
+    return m_canDirectBurn;
+}
+
+void FireBall::SetCanDirectBurn(bool canDirectBurn)
+{
+    m_canDirectBurn = canDirectBurn;
+}
+
 void FireBall::AddEnergyChargeLevel()
 {
     if (m_energyChargeLevel < MAX_ENERGY_CHARGE_LEVEL)
@@ -180,6 +191,9 @@ IMPLEMENT_STATE_BEGIN(FireBall, Idle)
             else
                 m_energyChargeTime += m_deltaTime;
         }
+
+        if (m_canDirectBurn)
+            Attack();
     }
     STATE_UPDATE_END
         STATE_DESTRUCTOR_BEGIN
