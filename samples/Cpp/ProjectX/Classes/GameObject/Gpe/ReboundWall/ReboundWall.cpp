@@ -127,10 +127,14 @@ void ReboundWall::CheckRedboud()
                 nearestPoint.y = getPosition().y+m_center.y+m_top;
             }
 
-            // if the distance from circle center to nearestRectagle point is lessthan R, it's intersected.
+            // if the distance from circle center to nearestRectagle point is less than R, it's intersected.
             if (ccpDistanceSQ(nearestPoint, circlePos) < (*iter)->GetCollisionRadius() * (*iter)->GetCollisionRadius())
             {
                 ReboundFireBall(static_cast<FireBall*>(*iter));
+            }
+            else
+            {
+                m_collidedGameObjectSet.erase(*iter);
             }
         }
     }
@@ -138,8 +142,10 @@ void ReboundWall::CheckRedboud()
 
 void ReboundWall::ReboundFireBall( FireBall* fireBall )
 {
-    if (fireBall->CanRebound())
+    if (fireBall->CanRebound() && m_collidedGameObjectSet.find(fireBall) == m_collidedGameObjectSet.end())
     {
+        m_collidedGameObjectSet.insert(fireBall);
+
         CCPoint direction = fireBall->GetDirection();
         CCPoint force = fireBall->GetForce();
         float forceLength = ccpLength(force);
@@ -151,8 +157,6 @@ void ReboundWall::ReboundFireBall( FireBall* fireBall )
         force = ccpRotateByAngle(direction, CCPoint(0.0f, 0.0f), angle);
         force = ccpMult(ccpNormalize(force), forceLength);
         fireBall->SetForce(force);
-
-        fireBall->SetCanRebound(false);
     }
 }
 

@@ -48,6 +48,7 @@ private:
     float m_downRange;
 
     float m_speed;
+    std::set<GameObject*> m_collidedGameObjectSet;
 };
 
 #endif // _APP_ReboundWall_H_
