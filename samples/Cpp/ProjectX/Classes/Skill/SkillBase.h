@@ -19,11 +19,12 @@ public:
     void SetTime(float time);
 
 protected:
-    virtual void OnUpdate();
+    virtual void OnUpdate(float deltaTime);
 
 protected:
     ESkillType m_type;
     float m_lastTime;
+    bool m_hasTimeLimit;
 };
 
 #endif // _APP_SkillBase_H_

@@ -2,6 +2,7 @@
 
 #include "Skill/SkillManager.h"
 #include "Skill/SkillBase.h"
+#include "Skill/CommonSkill.h"
 #include "Skill/DirectBurn.h"
 #include "Skill/FireWall.h"
 
@@ -19,7 +20,11 @@ SkillManager::~SkillManager()
 void SkillManager::Init()
 {
     for (int i = 0; i < eST_Count; ++i)
+    {
         m_skillNum[i] = 3;
+    }
+
+    Execute(eST_Common, 0.0f);
 }
 
 void SkillManager::Update(float deltaTime)
@@ -54,6 +59,9 @@ bool SkillManager::Execute( ESkillType type, float time )
         SkillBase* pSkill = NULL;
         switch(type)
         {
+        case eST_Common:
+            pSkill = new CommonSkill();
+            break;
         case eST_FireWall:
             pSkill = new FireWall();
             break;
@@ -69,7 +77,9 @@ bool SkillManager::Execute( ESkillType type, float time )
         pSkill->SetTime(time);
         m_skillVec.push_back(pSkill);
 
-        --m_skillNum[type];
+        if (type != eST_Common)
+            --m_skillNum[type];
+
         result = true;
     }
 

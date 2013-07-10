@@ -5,6 +5,7 @@ class SkillBase;
 
 enum ESkillType
 {
+    eST_Common,
     eST_FireWall,
     eST_DirectBurn,
 

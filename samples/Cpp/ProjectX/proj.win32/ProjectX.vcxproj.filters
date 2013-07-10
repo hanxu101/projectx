@@ -374,6 +374,9 @@
     <ClCompile Include="..\Classes\Skill\DirectBurn.cpp">
       <Filter>Classes\Skill</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Skill\CommonSkill.cpp">
+      <Filter>Classes\Skill</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -692,6 +695,9 @@
       <Filter>Classes\Skill</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Skill\DirectBurn.h">
+      <Filter>Classes\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Skill\CommonSkill.h">
       <Filter>Classes\Skill</Filter>
     </ClInclude>
   </ItemGroup>

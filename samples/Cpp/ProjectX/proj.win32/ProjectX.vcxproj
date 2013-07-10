@@ -197,6 +197,7 @@
     <ClCompile Include="..\Classes\Scene\SceneCredits.cpp" />
     <ClCompile Include="..\Classes\Scene\SceneGame.cpp" />
     <ClCompile Include="..\Classes\Scene\SceneManager.cpp" />
+    <ClCompile Include="..\Classes\Skill\CommonSkill.cpp" />
     <ClCompile Include="..\Classes\Skill\DirectBurn.cpp" />
     <ClCompile Include="..\Classes\Skill\FireWall.cpp" />
     <ClCompile Include="..\Classes\Skill\SkillBase.cpp" />
@@ -295,6 +296,7 @@
     <ClInclude Include="..\Classes\Scene\SceneCredits.h" />
     <ClInclude Include="..\Classes\Scene\SceneGame.h" />
     <ClInclude Include="..\Classes\Scene\SceneManager.h" />
+    <ClInclude Include="..\Classes\Skill\CommonSkill.h" />
     <ClInclude Include="..\Classes\Skill\DirectBurn.h" />
     <ClInclude Include="..\Classes\Skill\FireWall.h" />
     <ClInclude Include="..\Classes\Skill\SkillBase.h" />
