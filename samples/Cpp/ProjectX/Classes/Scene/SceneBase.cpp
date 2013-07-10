@@ -38,5 +38,5 @@ void SceneBase::MainMenuCallback(CCObject* pSender)
     pScene->addChild(pLayer);
     CCDirector::sharedDirector()->replaceScene(pScene);
     */
-    SkillManager::Singleton().Execute(eST_DirectBurn, 5.0f);
+    SkillManager::Singleton().Execute(eST_FireWall, 5.0f);
 }

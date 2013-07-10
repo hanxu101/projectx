@@ -14,7 +14,7 @@ DirectBurn::~DirectBurn()
 
 }
 
-void DirectBurn::OnUpdate()
+void DirectBurn::OnUpdate(float deltaTime)
 {
     TGameObjectList fireballList;
     GameObjectManager::Singleton().GetGameObjectList(eGOT_FireBall, fireballList);

@@ -91,3 +91,14 @@ void SkillManager::AddSkillNum( ESkillType type, int num )
 {
     m_skillNum[type] += num;
 }
+
+void SkillManager::GetSkill( ESkillType type, SkillManager::TSkillVector& skillVec)
+{
+    skillVec.clear();
+
+    for (TSkillVector::iterator iter = m_skillVec.begin(); iter != m_skillVec.end(); ++iter)
+    {
+        if ((*iter)->GetType() == type)
+            skillVec.push_back(*iter);
+    }
+}

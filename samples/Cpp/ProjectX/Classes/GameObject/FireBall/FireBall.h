@@ -35,7 +35,6 @@ private:
 
 protected:
     void Attack();
-    void AddBonus();
     void AddEnergyChargeLevel();
     bool IsReachMaxEnergyChargeLevel();
 

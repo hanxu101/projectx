@@ -108,19 +108,9 @@ void FireBall::Attack()
         {
             (*iter)->ReduceHp(m_attackPoint);
             ++m_comboAttackCount;
-            AddBonus();
+            MainPlayerLogic::Singleton().ComboIncreaseCoin(m_comboAttackCount);
         }
     }
-}
-
-void FireBall::AddBonus()
-{
-    // if the attacked 1-5, the bonus * 1
-    // if the attacked > 5, the bouns * n
-    if ( m_comboAttackCount < 5 )
-        MainPlayerLogic::Singleton().IncreaseCoin(1);
-    else
-        MainPlayerLogic::Singleton().IncreaseCoin(m_comboAttackCount);
 }
 
 bool FireBall::CanRebound() const

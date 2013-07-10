@@ -9,8 +9,9 @@ public:
     DirectBurn();
     virtual ~DirectBurn();
 
-    virtual void OnUpdate();
+    virtual void OnUpdate(float deltaTime);
     virtual void Uninit();
+
 };
 
 #endif // _APP_DirectBurn_H_

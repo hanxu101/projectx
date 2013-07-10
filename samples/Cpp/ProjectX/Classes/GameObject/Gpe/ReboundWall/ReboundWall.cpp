@@ -76,8 +76,8 @@ void ReboundWall::SetSpeed(float speed)
 void ReboundWall::draw()
 {
 #ifdef DEBUG_DRAW_DEBUG_SHAPE
-	glLineWidth( 5.0f );
-	ccDrawColor4B(ccRED.r, ccRED.g, ccRED.b, 255);
+    glLineWidth( 5.0f );
+    ccDrawColor4B(ccRED.r, ccRED.g, ccRED.b, 255);
     CCPoint topLeft(ccpAdd(m_center, ccp(-m_left, m_top)));
     CCPoint topRight(ccpAdd(m_center, ccp(m_right, m_top)));
     CCPoint bottomRight(ccpAdd(m_center, ccp(m_right, -m_bottom)));

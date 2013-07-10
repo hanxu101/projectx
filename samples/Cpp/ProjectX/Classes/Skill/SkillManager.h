@@ -13,6 +13,7 @@ enum ESkillType
     eST_Invalid
 };
 
+
 class SkillManager
 {
     DECLARE_SINGLETON(SkillManager);
@@ -26,9 +27,10 @@ public:
 
     void AddSkillNum(ESkillType type, int num);
 
-private:
-
     typedef std::vector<SkillBase*> TSkillVector;
+    void GetSkill(ESkillType type, SkillManager::TSkillVector& skillVec);
+
+private:
     TSkillVector m_skillVec;
 
     int m_skillNum[eST_Count];

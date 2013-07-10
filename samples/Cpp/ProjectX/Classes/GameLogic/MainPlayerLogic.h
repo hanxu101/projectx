@@ -18,6 +18,7 @@ public:
 
     void ReduceCoin(int reduceCoin);
     void IncreaseCoin(int increaseCoin);
+    void ComboIncreaseCoin(int comboNum);
 
 private:
     void AdjustHpBar();

@@ -19,9 +19,9 @@ CommonSkill::~CommonSkill()
 
 }
 
-void CommonSkill::OnUpdate(float deltaTime)
+void CommonSkill::Init()
 {
-    UpdateTouchInfo(deltaTime);
+    CCDirector::sharedDirector()->getTouchDispatcher()->addStandardDelegate(this, 2);
 }
 
 void CommonSkill::Uninit()
@@ -29,10 +29,9 @@ void CommonSkill::Uninit()
     CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 }
 
-void CommonSkill::Init()
+void CommonSkill::OnUpdate(float deltaTime)
 {
-    CCDirector::sharedDirector()->getTouchDispatcher()->addStandardDelegate(this, 2);
-
+    UpdateTouchInfo(deltaTime);
 }
 
 void CommonSkill::UpdateTouchInfo(float dt)
@@ -78,7 +77,7 @@ void CommonSkill::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
         pScene->addChild(m_fireBall);
 
         m_pStreak = CCMotionStreak::create(1.0f, 3.0f, 10.0f, ccWHITE, "streak.png");
-        pScene->addChild(m_pStreak);        
+        pScene->addChild(m_pStreak);
     }
 }
 

@@ -81,6 +81,16 @@ void MainPlayerLogic::IncreaseCoin( int increaseCoin )
     DrawCoinValue();
 }
 
+void MainPlayerLogic::ComboIncreaseCoin( int comboNum )
+{
+    // if the attacked 1-5, the bonus * 1
+    // if the attacked > 5, the bouns * n
+    if ( comboNum < 5 )
+        IncreaseCoin(1);
+    else
+        IncreaseCoin(comboNum);
+}
+
 void MainPlayerLogic::AdjustHpBar()
 {
     if (m_pHpBar && m_originalHp != 0)
