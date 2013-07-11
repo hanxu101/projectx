@@ -5,6 +5,8 @@
 
 class DirectBurn : public SkillBase
 {
+    typedef SkillBase super;
+
 public:
     DirectBurn();
     virtual ~DirectBurn();

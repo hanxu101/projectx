@@ -11,7 +11,7 @@ const float CommonSkill::FIRE_TOUCH_TIME_THRESHOLD = 0.0167f * 5.0f;
 
 CommonSkill::CommonSkill()
 {
-    m_hasTimeLimit = false;
+
 }
 
 CommonSkill::~CommonSkill()
@@ -21,6 +21,8 @@ CommonSkill::~CommonSkill()
 
 void CommonSkill::Init()
 {
+    super::Init();
+
     CCDirector::sharedDirector()->getTouchDispatcher()->addStandardDelegate(this, 2);
 }
 

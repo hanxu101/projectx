@@ -9,6 +9,7 @@
 IMPLEMENT_SINGLETON(SkillManager);
 
 SkillManager::SkillManager()
+    : m_layer(NULL)
 {
 }
 
@@ -17,14 +18,16 @@ SkillManager::~SkillManager()
 
 }
 
-void SkillManager::Init()
+void SkillManager::Init(CCLayer* layer)
 {
+    m_layer = layer;
+
     for (int i = 0; i < eST_Count; ++i)
     {
         m_skillNum[i] = 3;
     }
 
-    Execute(eST_Common, 0.0f);
+    Execute(eST_Common, false, 0.0f);
 }
 
 void SkillManager::Update(float deltaTime)
@@ -39,6 +42,7 @@ void SkillManager::Update(float deltaTime)
         else
         {
             (*iter)->Uninit();
+            m_layer->removeChild(*iter);
             CC_SAFE_DELETE(*iter);
             iter = m_skillVec.erase(iter);
         }
@@ -50,7 +54,7 @@ void SkillManager::Uninit()
 
 }
 
-bool SkillManager::Execute( ESkillType type, float time )
+bool SkillManager::Execute( ESkillType type, bool hasTimeLimit, float time )
 {
     bool result = false;
 
@@ -74,7 +78,10 @@ bool SkillManager::Execute( ESkillType type, float time )
         }
 
         pSkill->Init();
+        pSkill->SetHasTimeLimit(hasTimeLimit);
         pSkill->SetTime(time);
+        m_layer->addChild(pSkill);
+
         m_skillVec.push_back(pSkill);
 
         if (type != eST_Common)

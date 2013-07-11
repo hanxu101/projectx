@@ -47,7 +47,7 @@ void GameLayer::onEnter()
     GameObjectManager::CreateSingleton();
     BuffManager::CreateSingleton();
     SkillManager::CreateSingleton();
-    SkillManager::Singleton().Init();
+    SkillManager::Singleton().Init(this);
 
 #ifndef DEBUG_HIDE_TEXT
     // Back ground.

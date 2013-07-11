@@ -3,7 +3,7 @@
 
 #include "Skill/SkillManager.h"
 
-class SkillBase
+class SkillBase : public CCNode
 {
 public:
     SkillBase();
@@ -17,6 +17,7 @@ public:
     ESkillType GetType();
 
     void SetTime(float time);
+    void SetHasTimeLimit(bool flag);
 
 protected:
     virtual void OnUpdate(float deltaTime);

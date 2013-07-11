@@ -7,7 +7,7 @@
 
 FireWall::FireWall()
     : m_collisionUnitRadius(5.0f)
-    , m_unitDistance(5.0f)
+    , m_unitDistance(10.0f)
     , m_comboAttackCount(0)
 {
 }
@@ -19,6 +19,8 @@ FireWall::~FireWall()
 
 void FireWall::Init()
 {
+    super::Init();
+
     CCDirector::sharedDirector()->getTouchDispatcher()->addStandardDelegate(this, 2);
     m_collisionUnits.clear();
 }
@@ -30,14 +32,6 @@ void FireWall::Uninit()
 
 void FireWall::OnUpdate( float deltaTime )
 {
-#ifdef DEBUG_DRAW_DEBUG_SHAPE
-    glLineWidth( 2.0f );
-    for (std::vector<CCPoint>::iterator unitIter = m_collisionUnits.begin(); unitIter != m_collisionUnits.end(); ++unitIter)
-    {
-        ccDrawCircle(*unitIter, m_collisionUnitRadius, (float)M_PI*2.0f, 50, false);
-    }
-#endif
-
     TGameObjectList objectList;
     if (GameObjectManager::IsSingletonCreated())
         GameObjectManager::Singleton().GetGameObjectList(eGOT_Monster, objectList);
@@ -73,12 +67,11 @@ void FireWall::ccTouchesMoved( cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEven
         CCPoint touchPos = pTouch->getLocation();
         if (m_collisionUnits.size() == 0)
         {
-             m_collisionUnits.push_back(touchPos);
+            m_collisionUnits.push_back(touchPos);
  
-            Unit* pUnit = Unit::create("ball_EnergyCharged.png");
-            pUnit->setPosition(touchPos);
-            CCScene* pScene = CCDirector::sharedDirector()->getRunningScene();
-            pScene->addChild(pUnit);
+            CCSprite* pSprite = CCSprite::create("ball_EnergyCharged.png");
+            pSprite->setPosition(touchPos);
+            addChild(pSprite);
         }
         else
         {
@@ -94,10 +87,10 @@ void FireWall::ccTouchesMoved( cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEven
             if (!collided)
             {
                 m_collisionUnits.push_back(touchPos);
-                Unit* pUnit = Unit::create("ball_EnergyCharged.png");
-                pUnit->setPosition(touchPos);
-                CCScene* pScene = CCDirector::sharedDirector()->getRunningScene();
-                pScene->addChild(pUnit);
+
+                CCSprite* pSprite = CCSprite::create("ball_EnergyCharged.png");
+                pSprite->setPosition(touchPos);
+                addChild(pSprite);
             }
         }
     }
@@ -113,27 +106,12 @@ void FireWall::ccTouchesCancelled( cocos2d::CCSet *pTouches, cocos2d::CCEvent *p
 
 }
 
-void FireWall::Unit::draw()
+void FireWall::draw()
 {
-    CCSprite::draw();
 #ifdef DEBUG_DRAW_DEBUG_SHAPE
-    ccDrawCircle(CCPoint(0.0f, 0.0f), 5.0f, (float)M_PI*2.0f, 50, false);
-#endif
-}
-
-FireWall::Unit::Unit()
-{
-
-}
-
-FireWall::Unit* FireWall::Unit::create( const char *pszFileName )
-{
-    Unit *pobSprite = new Unit();
-    if (pobSprite && pobSprite->initWithFile(pszFileName))
+    for (std::vector<CCPoint>::iterator unitIter = m_collisionUnits.begin(); unitIter != m_collisionUnits.end(); ++unitIter)
     {
-        pobSprite->autorelease();
-        return pobSprite;
+        ccDrawCircle(*unitIter, m_collisionUnitRadius, (float)M_PI*2.0f, 50, false);
     }
-    CC_SAFE_DELETE(pobSprite);
-    return NULL;
+#endif
 }

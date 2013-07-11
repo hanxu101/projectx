@@ -17,7 +17,6 @@ SkillBase::~SkillBase()
 
 void SkillBase::Init()
 {
-
 }
 
 bool SkillBase::Update( float deltaTime )
@@ -52,4 +51,9 @@ ESkillType SkillBase::GetType()
 void SkillBase::SetTime( float time )
 {
     m_lastTime = time;
+}
+
+void SkillBase::SetHasTimeLimit( bool flag )
+{
+    m_hasTimeLimit = flag;
 }

@@ -5,8 +5,10 @@ class FireBall;
 
 #include "Skill/SkillBase.h"
 
-class CommonSkill : public SkillBase, public CCNode, public CCTargetedTouchDelegate
+class CommonSkill : public SkillBase, public CCTargetedTouchDelegate
 {
+    typedef SkillBase super;
+
 public:
     CommonSkill();
     virtual ~CommonSkill();

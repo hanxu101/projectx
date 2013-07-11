@@ -4,24 +4,18 @@
 #include "Skill/SkillBase.h"
 
 
-class FireWall : public SkillBase, public CCNode, public CCTargetedTouchDelegate
+class FireWall : public SkillBase, public CCTargetedTouchDelegate
 {
-    class Unit : public CCSprite
-    {
-    public:
-        Unit();
-
-        static Unit* create(const char *pszFileName);
-        virtual void draw(void);
-        
-    };
 public:
+    typedef SkillBase super;
+
     FireWall();
     virtual ~FireWall();
 
     virtual void Init();
     virtual void OnUpdate(float deltaTime);
     virtual void Uninit();
+    virtual void draw();
 
     virtual void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
     virtual void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);

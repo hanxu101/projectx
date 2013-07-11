@@ -19,11 +19,11 @@ class SkillManager
     DECLARE_SINGLETON(SkillManager);
 
 public:
-    void Init();
+    void Init(CCLayer* layer);
     void Update(float deltaTime);
     void Uninit();
 
-    bool Execute(ESkillType type, float time);
+    bool Execute(ESkillType type, bool hasTimeLimit, float time);
 
     void AddSkillNum(ESkillType type, int num);
 
@@ -31,6 +31,7 @@ public:
     void GetSkill(ESkillType type, SkillManager::TSkillVector& skillVec);
 
 private:
+    CCLayer* m_layer;
     TSkillVector m_skillVec;
 
     int m_skillNum[eST_Count];
