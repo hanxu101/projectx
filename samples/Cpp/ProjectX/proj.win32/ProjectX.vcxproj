@@ -202,6 +202,7 @@
     <ClCompile Include="..\Classes\Skill\FireWall.cpp" />
     <ClCompile Include="..\Classes\Skill\SkillBase.cpp" />
     <ClCompile Include="..\Classes\Skill\SkillManager.cpp" />
+    <ClCompile Include="..\Classes\Ui\UiManager.cpp" />
     <ClCompile Include="..\Classes\VisibleRect.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -301,6 +302,7 @@
     <ClInclude Include="..\Classes\Skill\FireWall.h" />
     <ClInclude Include="..\Classes\Skill\SkillBase.h" />
     <ClInclude Include="..\Classes\Skill\SkillManager.h" />
+    <ClInclude Include="..\Classes\Ui\UiManager.h" />
     <ClInclude Include="..\Classes\utilities\FSM\Fsm.h" />
     <ClInclude Include="..\Classes\utilities\FSM\Fsm.hpp" />
     <ClInclude Include="..\Classes\utilities\FSM\FsmInclude.h" />

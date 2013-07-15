@@ -1,7 +1,13 @@
 #ifndef Utilities_H
 #define Utilities_H
 
-#define MAX_LEN         (cocos2d::kMaxLogLen + 1)
+#if COCOS2D_DEBUG
+    #define DynamicCast dynamic_cast
+#else
+    #define DynamicCast static_cast
+#endif
+
+#define MAX_LEN     (cocos2d::kMaxLogLen + 1)
 
 #define XAssert(cond, format, ...)      \
     if(!cond)                           \

@@ -30,8 +30,6 @@ private:
     MonsterGroupLogic*  m_pMonsterGroupLogic;
     GeneralGroupLogic*  m_pGeneralGroupLogic;
     GpeLogic*           m_pGpeLogic;
-
-    cs::CocoPanel*      m_pGameUI;
 };
 
 class SceneGame : public SceneBase

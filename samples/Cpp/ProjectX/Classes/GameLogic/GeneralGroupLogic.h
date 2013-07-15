@@ -14,7 +14,7 @@ class GeneralGroupLogic : public CCNode
 {
 public:
     GeneralGroupLogic();
-    GeneralGroupLogic(const TGeneralDataVec& generalData, cs::CocoPanel* pGameUI);
+    GeneralGroupLogic(const TGeneralDataVec& generalData);
     virtual ~GeneralGroupLogic();
 
     virtual void onEnter();
@@ -26,8 +26,6 @@ private:
     void GeneralBottonClicked(CCObject* pSender);
 
     TGeneralDataVec m_generalData;
-
-    cs::CocoPanel* m_pGameUI;
 
     TButtonCdMap m_buttonCdMap;
 };

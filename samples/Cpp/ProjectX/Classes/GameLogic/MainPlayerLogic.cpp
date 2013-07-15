@@ -1,9 +1,7 @@
 #include "CommonHeaders.h"
 
 #include "Gamelogic/MainPlayerLogic.h"
-#include "UISystem.h"
-#include "CocoLabelAtlas.h"
-#include "CocoLoadingBar.h"
+#include "Ui/UiManager.h"
 
 static const int g_mainPlayerTotalHp = 10;
 static const int g_originalCoinNum = 0;
@@ -24,18 +22,14 @@ MainPlayerLogic::~MainPlayerLogic()
 {
 }
 
-void MainPlayerLogic::Init( cs::CocoWidget* pCocoWidget)
+void MainPlayerLogic::Init()
 {
-    m_originalHp = g_mainPlayerTotalHp;
     m_currentHp = g_mainPlayerTotalHp;
     m_originalCoin = g_originalCoinNum;
     m_currentCoin = g_originalCoinNum;
 
-    if (pCocoWidget)
-    {
-        m_pHpBar = dynamic_cast<cs::CocoLoadingBar*>(pCocoWidget->getChildByName("HpBar"));
-        m_pCoinNumLableAtlas = dynamic_cast<cs::CocoLabelAtlas*>(pCocoWidget->getChildByName("Gold"));
-    }
+    m_pHpBar = DynamicCast<cs::CocoLoadingBar*>(UiManager::Singleton().GetChildByName("HpBar"));
+    m_pCoinNumLableAtlas = DynamicCast<cs::CocoLabelAtlas*>(UiManager::Singleton().GetChildByName("Gold"));
 }
 
 void MainPlayerLogic::Uninit()

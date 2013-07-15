@@ -8,7 +8,7 @@ class MainPlayerLogic
     DECLARE_SINGLETON(MainPlayerLogic);
 
 public:
-    void Init(cs::CocoWidget* pCocoWidget);
+    void Init();
     void Uninit();
 
     void Reset();

@@ -120,6 +120,9 @@
     <Filter Include="Classes\Skill">
       <UniqueIdentifier>{d7f9f6eb-eb69-45ef-8578-8cbf04f2e51b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\UI">
+      <UniqueIdentifier>{1f5c6213-b0de-4e3b-906f-8a4f0559ccfa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -376,6 +379,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Skill\CommonSkill.cpp">
       <Filter>Classes\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Ui\UiManager.cpp">
+      <Filter>Classes\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -699,6 +705,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Skill\CommonSkill.h">
       <Filter>Classes\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Ui\UiManager.h">
+      <Filter>Classes\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

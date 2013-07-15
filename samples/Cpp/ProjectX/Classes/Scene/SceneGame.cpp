@@ -8,8 +8,7 @@
 #include "GameLogic/GeneralGroupLogic.h"
 #include "Gamelogic/MainPlayerLogic.h"
 #include "GameLogic/GpeLogic.h"
-#include "UISystem.h"
-#include "CocoPanel.h"
+#include "Ui/UiManager.h"
 
 //------------------------------------------------------------------
 //
@@ -25,7 +24,6 @@ GameLayer::GameLayer(void)
     : m_pMonsterGroupLogic(NULL)
     , m_pGeneralGroupLogic(NULL)
     , m_pGpeLogic(NULL)
-    , m_pGameUI(NULL)
 {
 }
 
@@ -70,16 +68,12 @@ void GameLayer::onEnter()
     CCNode* pUiNode = CCNode::create();
     addChild(pUiNode, g_uiZOrder);
 
-    COCOUISYSTEM->resetSystem(pUiNode);
-    m_pGameUI = cs::CocoPanel::create();    
-    COCOUISYSTEM->getCurScene()->addWidget(m_pGameUI);
-
-    pWidget = COCOUISYSTEM->createWidgetFromFile_json("../UI/Json/UIGame.json");
-    m_pGameUI->addChild(pWidget);
+    UiManager::CreateSingleton();
+    UiManager::Singleton().Init(pUiNode);
 #endif
 
     MainPlayerLogic::CreateSingleton();
-    MainPlayerLogic::Singleton().Init(pWidget);
+    MainPlayerLogic::Singleton().Init();
 
 #ifndef DEBUG_NO_MONSTER
     // Init monster logic.
@@ -93,7 +87,7 @@ void GameLayer::onEnter()
     std::vector< EGeneralType > generalVec;
     generalVec.push_back(eGT_DiaoChan);
     generalVec.push_back(eGT_MaChao);
-    m_pGeneralGroupLogic = new GeneralGroupLogic(generalVec, m_pGameUI);
+    m_pGeneralGroupLogic = new GeneralGroupLogic(generalVec);
     m_pGeneralGroupLogic->autorelease();
     addChild(m_pGeneralGroupLogic, g_generalZOrder);
 #endif
