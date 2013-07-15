@@ -9,9 +9,7 @@
   <JsonList>
     <string>UIGame.json</string>
   </JsonList>
-  <imageFileList>
-    <string>UIGame0.plist</string>
-  </imageFileList>
+  <imageFileList />
   <bBatchImage>false</bBatchImage>
   <JsonSuffix>.json</JsonSuffix>
   <CanvasSize>
