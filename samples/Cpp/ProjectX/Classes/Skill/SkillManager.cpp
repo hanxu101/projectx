@@ -10,6 +10,8 @@ IMPLEMENT_SINGLETON(SkillManager);
 
 SkillManager::SkillManager()
     : m_layer(NULL)
+    , m_commonSkill(NULL)
+    , m_secondarySkill(NULL)
 {
 }
 
@@ -27,37 +29,46 @@ void SkillManager::Init(CCLayer* layer)
         m_skillNum[i] = 3;
     }
 
-    Execute(eST_Common, false, 0.0f);
+    m_commonSkill = SetupSkill(eST_Common, false, 0.0f);
 }
 
 void SkillManager::Update(float deltaTime)
 {
-    TSkillVector::iterator iter = m_skillVec.begin();
-    for (; iter != m_skillVec.end();)
+    // Update Secondary Skill.
+    if (m_secondarySkill && !m_secondarySkill->Update(deltaTime))
     {
-        if ((*iter)->Update(deltaTime))
-        {
-            ++iter;
-        }
-        else
-        {
-            (*iter)->Uninit();
-            m_layer->removeChild(*iter);
-            CC_SAFE_DELETE(*iter);
-            iter = m_skillVec.erase(iter);
-        }
+        m_secondarySkill->Uninit();
+        m_layer->removeChild(m_secondarySkill);
+        CC_SAFE_DELETE(m_secondarySkill);
+        
+        m_commonSkill->Reset();
     }
+
+    // If there is no Secondary skill, update common skill.
+    if (!m_secondarySkill)
+        m_commonSkill->Update(deltaTime);
+    
 }
 
 void SkillManager::Uninit()
 {
+    if (m_commonSkill)
+    {
+        m_commonSkill->Uninit();
+        m_layer->removeChild(m_commonSkill);
+        CC_SAFE_DELETE(m_commonSkill);
+    }
 
+    if (m_secondarySkill)
+    {
+        m_secondarySkill->Uninit();
+        m_layer->removeChild(m_secondarySkill);
+        CC_SAFE_DELETE(m_secondarySkill);
+    }
 }
 
-bool SkillManager::Execute( ESkillType type, bool hasTimeLimit, float time )
+SkillBase* SkillManager::SetupSkill( ESkillType type, bool hasTimeLimit, float time )
 {
-    bool result = false;
-
     if (m_skillNum[type] > 0)
     {
         SkillBase* pSkill = NULL;
@@ -82,15 +93,13 @@ bool SkillManager::Execute( ESkillType type, bool hasTimeLimit, float time )
         pSkill->SetTime(time);
         m_layer->addChild(pSkill);
 
-        m_skillVec.push_back(pSkill);
-
         if (type != eST_Common)
             --m_skillNum[type];
 
-        result = true;
+        return pSkill;
     }
 
-    return result;
+    return NULL;
 
 }
 
@@ -99,13 +108,16 @@ void SkillManager::AddSkillNum( ESkillType type, int num )
     m_skillNum[type] += num;
 }
 
-void SkillManager::GetSkill( ESkillType type, SkillManager::TSkillVector& skillVec)
+bool SkillManager::LaunchSecondarySkill( ESkillType type, bool hasTimeLimit, float time )
 {
-    skillVec.clear();
-
-    for (TSkillVector::iterator iter = m_skillVec.begin(); iter != m_skillVec.end(); ++iter)
+    if (m_secondarySkill)
     {
-        if ((*iter)->GetType() == type)
-            skillVec.push_back(*iter);
+        m_secondarySkill->Uninit();
+        m_layer->removeChild(m_secondarySkill);
+        CC_SAFE_DELETE(m_secondarySkill);
     }
+
+    m_secondarySkill = SetupSkill(type, hasTimeLimit, time);
+
+    return m_secondarySkill != NULL;
 }

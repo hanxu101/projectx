@@ -71,10 +71,10 @@ void GameLayer::onEnter()
     addChild(pUiNode, g_uiZOrder);
 
     COCOUISYSTEM->resetSystem(pUiNode);
-    m_pGameUI = cs::CocoPanel::create();
+    m_pGameUI = cs::CocoPanel::create();    
     COCOUISYSTEM->getCurScene()->addWidget(m_pGameUI);
 
-    pWidget = COCOUISYSTEM->createWidgetFromFile_json("UIGame.json");
+    pWidget = COCOUISYSTEM->createWidgetFromFile_json("../UI/Json/UIGame.json");
     m_pGameUI->addChild(pWidget);
 #endif
 

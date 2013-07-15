@@ -43,6 +43,11 @@ void SkillBase::Uninit()
 
 }
 
+void SkillBase::Reset()
+{
+
+}
+
 ESkillType SkillBase::GetType()
 {
     return m_type;

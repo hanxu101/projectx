@@ -16,6 +16,7 @@ public:
     virtual void Init();
     virtual void OnUpdate(float deltaTime);
     virtual void Uninit();
+    virtual void Reset();
 
     virtual void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
     virtual void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);

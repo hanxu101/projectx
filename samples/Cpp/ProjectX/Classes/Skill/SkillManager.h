@@ -23,17 +23,16 @@ public:
     void Update(float deltaTime);
     void Uninit();
 
-    bool Execute(ESkillType type, bool hasTimeLimit, float time);
-
+    bool LaunchSecondarySkill(ESkillType type, bool hasTimeLimit, float time);
     void AddSkillNum(ESkillType type, int num);
 
-    typedef std::vector<SkillBase*> TSkillVector;
-    void GetSkill(ESkillType type, SkillManager::TSkillVector& skillVec);
+private:
+    SkillBase* SetupSkill(ESkillType type, bool hasTimeLimit, float time);
 
 private:
     CCLayer* m_layer;
-    TSkillVector m_skillVec;
-
+    SkillBase* m_commonSkill;
+    SkillBase* m_secondarySkill;
     int m_skillNum[eST_Count];
 };
 

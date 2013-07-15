@@ -31,6 +31,18 @@ void CommonSkill::Uninit()
     CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 }
 
+void CommonSkill::Reset()
+{
+    m_currentTouchPointMap.clear();
+    m_previousTouchPosVec.clear();
+    m_isTouching.clear();
+    m_touchFrameCount.clear();
+    m_touchTimer.clear();
+    m_fireBall = NULL;
+    m_pStreak = NULL;
+}
+
+
 void CommonSkill::OnUpdate(float deltaTime)
 {
     UpdateTouchInfo(deltaTime);

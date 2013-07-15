@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Version>0.0.2.1</Version>
+  <Name>UIGame</Name>
+  <ProjectDir>D:\Project\ProjectX\trunk\samples\Cpp\ProjectX\UI</ProjectDir>
+  <SceneJson>UIGame.json</SceneJson>
+  <Resources>D:\Project\ProjectX\trunk\samples\Cpp\ProjectX\UI\Resources</Resources>
+  <JsonFolder>D:\Project\ProjectX\trunk\samples\Cpp\ProjectX\UI\Json</JsonFolder>
+  <JsonList>
+    <string>UIGame.json</string>
+  </JsonList>
+  <imageFileList>
+    <string>UIGame0.plist</string>
+  </imageFileList>
+  <bBatchImage>false</bBatchImage>
+  <JsonSuffix>.json</JsonSuffix>
+  <CanvasSize>
+    <Width>480</Width>
+    <Height>320</Height>
+  </CanvasSize>
+  <CurrentUIJson>UIGame.json</CurrentUIJson>
+</UIProject>

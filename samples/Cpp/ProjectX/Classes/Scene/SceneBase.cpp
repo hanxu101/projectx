@@ -38,5 +38,5 @@ void SceneBase::MainMenuCallback(CCObject* pSender)
     pScene->addChild(pLayer);
     CCDirector::sharedDirector()->replaceScene(pScene);
     */
-    SkillManager::Singleton().Execute(eST_FireWall, true, 5.0f);
+    SkillManager::Singleton().LaunchSecondarySkill(eST_FireWall, true, 5.0f);
 }

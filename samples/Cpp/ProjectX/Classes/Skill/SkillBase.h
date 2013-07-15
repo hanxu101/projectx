@@ -11,8 +11,8 @@ public:
     
     virtual void Init();
     bool Update(float deltaTime);
-
     virtual void Uninit();
+    virtual void Reset();
 
     ESkillType GetType();
 
