@@ -23,16 +23,6 @@ void CommonSkill::Init()
 {
     super::Init();
 
-    CCDirector::sharedDirector()->getTouchDispatcher()->addStandardDelegate(this, 2);
-}
-
-void CommonSkill::Uninit()
-{
-    CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
-}
-
-void CommonSkill::Reset()
-{
     m_currentTouchPointMap.clear();
     m_previousTouchPosVec.clear();
     m_isTouching.clear();
@@ -40,8 +30,16 @@ void CommonSkill::Reset()
     m_touchTimer.clear();
     m_fireBall = NULL;
     m_pStreak = NULL;
+
+    CCDirector::sharedDirector()->getTouchDispatcher()->addStandardDelegate(this, 2);
 }
 
+void CommonSkill::Uninit()
+{
+    CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
+
+    super::Uninit();
+}
 
 void CommonSkill::OnUpdate(float deltaTime)
 {

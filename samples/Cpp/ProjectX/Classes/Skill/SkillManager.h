@@ -14,7 +14,7 @@ enum ESkillType
 };
 
 
-class SkillManager
+class SkillManager : public CCNode
 {
     DECLARE_SINGLETON(SkillManager);
 
@@ -28,6 +28,8 @@ public:
 
 private:
     SkillBase* SetupSkill(ESkillType type, bool hasTimeLimit, float time);
+    void Skill1BottonClicked( CCObject* pSender );
+    void Skill2BottonClicked( CCObject* pSender );
 
 private:
     CCLayer* m_layer;

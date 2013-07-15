@@ -5,6 +5,7 @@
 #include "Skill/CommonSkill.h"
 #include "Skill/DirectBurn.h"
 #include "Skill/FireWall.h"
+#include "Ui/UiManager.h"
 
 IMPLEMENT_SINGLETON(SkillManager);
 
@@ -30,6 +31,12 @@ void SkillManager::Init(CCLayer* layer)
     }
 
     m_commonSkill = SetupSkill(eST_Common, false, 0.0f);
+
+    cs::CocoButton* buttonSkill1 = DynamicCast<cs::CocoButton*>(UiManager::Singleton().GetChildByName("ButtonSkill1"));
+    cs::CocoButton* buttonSkill2 = DynamicCast<cs::CocoButton*>(UiManager::Singleton().GetChildByName("ButtonSkill2"));
+
+    buttonSkill1->addReleaseEvent(this, coco_releaseselector(SkillManager::Skill1BottonClicked));
+    buttonSkill2->addReleaseEvent(this, coco_releaseselector(SkillManager::Skill2BottonClicked));
 }
 
 void SkillManager::Update(float deltaTime)
@@ -41,7 +48,7 @@ void SkillManager::Update(float deltaTime)
         m_layer->removeChild(m_secondarySkill);
         CC_SAFE_DELETE(m_secondarySkill);
         
-        m_commonSkill->Reset();
+        m_commonSkill->Init();
     }
 
     // If there is no Secondary skill, update common skill.
@@ -110,6 +117,8 @@ void SkillManager::AddSkillNum( ESkillType type, int num )
 
 bool SkillManager::LaunchSecondarySkill( ESkillType type, bool hasTimeLimit, float time )
 {
+    m_commonSkill->Uninit();
+
     if (m_secondarySkill)
     {
         m_secondarySkill->Uninit();
@@ -120,4 +129,14 @@ bool SkillManager::LaunchSecondarySkill( ESkillType type, bool hasTimeLimit, flo
     m_secondarySkill = SetupSkill(type, hasTimeLimit, time);
 
     return m_secondarySkill != NULL;
+}
+
+void SkillManager::Skill1BottonClicked( CCObject* pSender )
+{
+    LaunchSecondarySkill(eST_DirectBurn, true, 10.0f);
+}
+
+void SkillManager::Skill2BottonClicked( CCObject* pSender )
+{
+    LaunchSecondarySkill(eST_FireWall, true, 10.0f);
 }

@@ -42,6 +42,15 @@ void GameLayer::onEnter()
 
     CCDirector::sharedDirector()->getScheduler()->scheduleSelector(schedule_selector(GameLayer::Update), this, 0, false);
 
+#ifndef DEBUG_NO_UI
+    // Init UI.
+    CCNode* pUiNode = CCNode::create();
+    addChild(pUiNode, g_uiZOrder);
+
+    UiManager::CreateSingleton();
+    UiManager::Singleton().Init(pUiNode);
+#endif
+
     GameObjectManager::CreateSingleton();
     BuffManager::CreateSingleton();
     SkillManager::CreateSingleton();
@@ -59,17 +68,6 @@ void GameLayer::onEnter()
 
     pBackGround->setPosition(VisibleRect::center());
     addChild(pBackGround, g_backGroundZOrder);
-#endif
-
-    cs::CocoWidget* pWidget = NULL;
-
-#ifndef DEBUG_NO_UI
-    // Init UI.
-    CCNode* pUiNode = CCNode::create();
-    addChild(pUiNode, g_uiZOrder);
-
-    UiManager::CreateSingleton();
-    UiManager::Singleton().Init(pUiNode);
 #endif
 
     MainPlayerLogic::CreateSingleton();
@@ -113,12 +111,12 @@ void GameLayer::onExit()
     CCLayer::onExit();
 
     // Destroy singletons after base layer exit. (After all children exit)
-    GameObjectManager::DestroySingleton();
     BuffManager::DestroySingleton();
     SkillManager::Singleton().Uninit();
     SkillManager::DestroySingleton();
     MainPlayerLogic::Singleton().Uninit();
     MainPlayerLogic::DestroySingleton();
+    GameObjectManager::DestroySingleton();
 }
 
 void GameLayer::Update(float dt)
