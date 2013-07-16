@@ -29,16 +29,7 @@ void CommonSkill::Init()
     m_touchFrameCount.clear();
     m_touchTimer.clear();
     m_fireBall = NULL;
-    m_pStreak = NULL;
-
-    CCDirector::sharedDirector()->getTouchDispatcher()->addStandardDelegate(this, 2);
-}
-
-void CommonSkill::Uninit()
-{
-    CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
-
-    super::Uninit();
+    m_pStreak = NULL;    
 }
 
 void CommonSkill::OnUpdate(float deltaTime)

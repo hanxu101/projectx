@@ -3,7 +3,7 @@
 
 #include "Skill/SkillManager.h"
 
-class SkillBase : public CCNode
+class SkillBase : public CCNode, public CCTargetedTouchDelegate
 {
 public:
     SkillBase();

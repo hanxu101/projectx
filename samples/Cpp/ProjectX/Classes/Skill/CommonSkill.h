@@ -5,7 +5,7 @@ class FireBall;
 
 #include "Skill/SkillBase.h"
 
-class CommonSkill : public SkillBase, public CCTargetedTouchDelegate
+class CommonSkill : public SkillBase
 {
     typedef SkillBase super;
 
@@ -15,7 +15,6 @@ public:
 
     virtual void Init();
     virtual void OnUpdate(float deltaTime);
-    virtual void Uninit();
 
     virtual void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);
     virtual void ccTouchesMoved(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);

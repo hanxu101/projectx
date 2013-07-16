@@ -21,13 +21,7 @@ void FireWall::Init()
 {
     super::Init();
 
-    CCDirector::sharedDirector()->getTouchDispatcher()->addStandardDelegate(this, 2);
     m_collisionUnits.clear();
-}
-
-void FireWall::Uninit()
-{
-    CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 }
 
 void FireWall::OnUpdate( float deltaTime )

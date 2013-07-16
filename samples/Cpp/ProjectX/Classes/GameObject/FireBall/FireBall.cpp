@@ -169,7 +169,11 @@ IMPLEMENT_STATE_BEGIN(FireBall, Idle)
 
         STATE_UPDATE_BEGIN
     {
-        if (!IsReachMaxEnergyChargeLevel())
+        if (m_canDirectBurn)
+        {
+            Attack();
+        }
+        else if (!IsReachMaxEnergyChargeLevel())
         {
             if (m_energyChargeTime > m_energyChargeTimeThreshold[m_energyChargeLevel])
             {
@@ -181,9 +185,6 @@ IMPLEMENT_STATE_BEGIN(FireBall, Idle)
             else
                 m_energyChargeTime += m_deltaTime;
         }
-
-        if (m_canDirectBurn)
-            Attack();
     }
     STATE_UPDATE_END
         STATE_DESTRUCTOR_BEGIN

@@ -4,7 +4,7 @@
 #include "Skill/SkillBase.h"
 
 
-class FireWall : public SkillBase, public CCTargetedTouchDelegate
+class FireWall : public SkillBase
 {
 public:
     typedef SkillBase super;
@@ -14,7 +14,6 @@ public:
 
     virtual void Init();
     virtual void OnUpdate(float deltaTime);
-    virtual void Uninit();
     virtual void draw();
 
     virtual void ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent);

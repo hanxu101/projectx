@@ -17,6 +17,7 @@ SkillBase::~SkillBase()
 
 void SkillBase::Init()
 {
+    CCDirector::sharedDirector()->getTouchDispatcher()->addStandardDelegate(this, 2);
 }
 
 bool SkillBase::Update( float deltaTime )
@@ -40,7 +41,7 @@ void SkillBase::OnUpdate(float deltaTime)
 
 void SkillBase::Uninit()
 {
-
+    CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 }
 
 void SkillBase::Reset()
