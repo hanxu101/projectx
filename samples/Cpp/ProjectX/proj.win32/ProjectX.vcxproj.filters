@@ -120,6 +120,9 @@
     <Filter Include="Classes\Skill">
       <UniqueIdentifier>{d7f9f6eb-eb69-45ef-8578-8cbf04f2e51b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\GameObject\Items\GoldPlate">
+      <UniqueIdentifier>{d0ef3945-569b-4db4-9064-b40832fcce58}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Classes\UI">
       <UniqueIdentifier>{1f5c6213-b0de-4e3b-906f-8a4f0559ccfa}</UniqueIdentifier>
     </Filter>
@@ -379,6 +382,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Skill\CommonSkill.cpp">
       <Filter>Classes\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Items\GoldPlate\GoldPlate.cpp">
+      <Filter>Classes\GameObject\Items\GoldPlate</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Ui\UiManager.cpp">
       <Filter>Classes\UI</Filter>
@@ -705,6 +711,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Skill\CommonSkill.h">
       <Filter>Classes\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Items\GoldPlate\GoldPlate.h">
+      <Filter>Classes\GameObject\Items\GoldPlate</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Ui\UiManager.h">
       <Filter>Classes\UI</Filter>

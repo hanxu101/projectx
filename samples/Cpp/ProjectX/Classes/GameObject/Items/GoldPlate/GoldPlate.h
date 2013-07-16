@@ -1,15 +1,15 @@
-#ifndef  _APP_Bomb_H_
-#define  _APP_Bomb_H_
+#ifndef  _APP_GoldPlate_H_
+#define  _APP_GoldPlate_H_
 
 #include "GameObject/Items/Item.h"
 
 USING_NS_CC;
 
-class Bomb : public Item
+class GoldPlate : public Item
 {
 public:
-    Bomb();
-    virtual ~Bomb();
+    GoldPlate();
+    virtual ~GoldPlate();
 
     virtual void onEnter();
     virtual void onExit();
@@ -21,12 +21,9 @@ public:
     virtual void ItemTouchesEnded();
 
 private:
-    OVERLOAD_FSM(Bomb);
-    DECLARE_VIRTUAL_STATE(Move);
+    OVERLOAD_FSM(GoldPlate);
 
-    void Attack();
-
-    float m_lifeTime;
+    unsigned int m_clickedTime;
 };
 
-#endif // _APP_Bomb_H_
+#endif // _APP_GoldPlate_H_

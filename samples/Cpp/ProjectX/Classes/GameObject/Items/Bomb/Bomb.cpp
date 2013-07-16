@@ -7,6 +7,7 @@ static const float g_bombExplosionRange = 30.0f;
 static const float g_bombAttackDamage = 10.0f;
 
 Bomb::Bomb()
+    : m_lifeTime(2.0f)
 {
 
 }
@@ -63,3 +64,24 @@ void Bomb::Attack()
         }
     }
 }
+
+IMPLEMENT_STATE_BEGIN(Bomb, Move)
+{
+    STATE_CONSTRUCTOR_BEGIN
+    {
+    }
+    STATE_CONSTRUCTOR_END
+
+        STATE_UPDATE_BEGIN
+    {      
+        m_lifeTime -= m_deltaTime;
+        TRANSIT_TO_STATE( m_lifeTime < 0.0f, NoTransitionAction, ArrivedBottomSafe );
+    }
+    STATE_UPDATE_END
+
+        STATE_DESTRUCTOR_BEGIN
+    {
+    }
+    STATE_DESTRUCTOR_END
+}
+IMPLEMENT_STATE_END
