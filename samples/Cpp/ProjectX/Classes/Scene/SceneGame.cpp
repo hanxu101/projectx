@@ -71,8 +71,8 @@ void GameLayer::onEnter()
 #endif
 
     MainPlayerLogic::CreateSingleton();
-    MainPlayerLogic::Singleton().Init();
-
+    MainPlayerLogic::Singleton().Init(this);
+    
 #ifndef DEBUG_NO_MONSTER
     // Init monster logic.
     m_pMonsterGroupLogic = new MonsterGroupLogic();
@@ -108,8 +108,6 @@ void GameLayer::onExit()
     COCOUISYSTEM->cleanUIScene();
     CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 
-    CCLayer::onExit();
-
     // Destroy singletons after base layer exit. (After all children exit)
     BuffManager::DestroySingleton();
     SkillManager::Singleton().Uninit();
@@ -117,6 +115,11 @@ void GameLayer::onExit()
     MainPlayerLogic::Singleton().Uninit();
     MainPlayerLogic::DestroySingleton();
     GameObjectManager::DestroySingleton();
+#ifndef DEBUG_NO_UI
+    UiManager::DestroySingleton();
+#endif
+
+    CCLayer::onExit();
 }
 
 void GameLayer::Update(float dt)

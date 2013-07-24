@@ -2,6 +2,7 @@
 
 #include "Gamelogic/MainPlayerLogic.h"
 #include "Ui/UiManager.h"
+#include "GameObject/MainCharacter.h"
 
 static const int g_mainPlayerTotalHp = 10;
 static const int g_originalCoinNum = 0;
@@ -15,6 +16,7 @@ MainPlayerLogic::MainPlayerLogic()
     , m_currentHp(0)
     , m_originalCoin(0)
     , m_currentCoin(0)
+    , m_parent(NULL)
 {
 }
 
@@ -22,18 +24,28 @@ MainPlayerLogic::~MainPlayerLogic()
 {
 }
 
-void MainPlayerLogic::Init()
+void MainPlayerLogic::Init(CCLayer* layer)
 {
+    m_parent = layer;
+
     m_currentHp = g_mainPlayerTotalHp;
     m_originalCoin = g_originalCoinNum;
     m_currentCoin = g_originalCoinNum;
 
     m_pHpBar = DynamicCast<cs::CocoLoadingBar*>(UiManager::Singleton().GetChildByName("HpBar"));
     m_pCoinNumLableAtlas = DynamicCast<cs::CocoLabelAtlas*>(UiManager::Singleton().GetChildByName("Gold"));
+
+    // TODO. Temporary create it here.
+    m_pMC = new MainCharacter();
+    m_pMC->setPosition(VisibleRect().center().x, VisibleRect().bottom().y + 40.0f);
+    m_parent->addChild(m_pMC);
 }
 
 void MainPlayerLogic::Uninit()
 {
+    // TODO. Temporary delete it here.
+    m_parent->removeChild(m_pMC);
+
     Reset();
     m_pHpBar = NULL;
 }

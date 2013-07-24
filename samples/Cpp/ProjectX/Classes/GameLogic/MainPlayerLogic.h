@@ -2,15 +2,16 @@
 #define  _APP_MAINPLAYERLOGIC_H_
 
 namespace cs{class CocoWidget; class CocoLoadingBar; class CocoLabelAtlas;}
+class MainCharacter;
+class FireBall;
 
-class MainPlayerLogic
+class MainPlayerLogic : public CCNode
 {
     DECLARE_SINGLETON(MainPlayerLogic);
 
 public:
-    void Init();
+    void Init(CCLayer* layer);
     void Uninit();
-
     void Reset();
 
     void ReduceHp(int reduceHp);
@@ -32,6 +33,9 @@ private:
 
     int m_originalCoin;
     int m_currentCoin;
+
+    CCLayer* m_parent;
+    MainCharacter* m_pMC;
 };
 
 #endif //_APP_GAMEOBJECTMANAGER_H_

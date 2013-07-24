@@ -31,12 +31,10 @@ void SceneBase::onEnter()
 
 void SceneBase::MainMenuCallback(CCObject* pSender)
 {
-    /*CCScene* pScene = CCScene::create();
+    CCScene* pScene = CCScene::create();
     CCLayer* pLayer = new SceneManager();
     pLayer->autorelease();
 
     pScene->addChild(pLayer);
     CCDirector::sharedDirector()->replaceScene(pScene);
-    */
-    SkillManager::Singleton().LaunchSecondarySkill(eST_FireWall, true, 5.0f);
 }
