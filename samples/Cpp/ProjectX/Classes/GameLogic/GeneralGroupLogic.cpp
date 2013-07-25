@@ -49,7 +49,7 @@ void GeneralGroupLogic::onEnter()
     {
         CocoButton* pButton = CocoButton::create();
         pButton->setWidgetTag(static_cast<int>(i));
-        pButton->setPosition(ccp(VisibleRect::left().x + 10, 30 * (1 + i)));
+        pButton->setPosition(ccp(VisibleRect::right().x - 10, 30 * (1 + i) + 50));
         pButton->setBeTouchAble(true);
         // Set relationship between these picture with generalType.
         EGeneralType type = m_generalData[i];
