@@ -6,6 +6,9 @@
 MainCharacter::MainCharacter()
     : m_pMainSprite(NULL)
     , m_speed(0.0f)
+    , m_isLeftButtonPushedDown(false)
+    , m_isRightButtonPushedDown(false)
+    , m_pPushedButton(false)
 {
 }
 
@@ -16,6 +19,8 @@ MainCharacter::~MainCharacter()
 void MainCharacter::onEnter()
 {
     GameObject::onEnter();
+
+    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this,0,true); 
 
     m_pMainSprite = CCSprite::create("Hero01_0.png");
     m_pMainSprite->setScale(4.0f);
@@ -40,29 +45,36 @@ void MainCharacter::onEnter()
 void MainCharacter::onExit()
 {
     GameObject::onExit();
+
+    CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 }
 
 void MainCharacter::StateUpdate(float deltaTime)
 {
     GetFsm().Update();
-    m_speed = 0.0f;
 }
 
 void MainCharacter::BottonLeftPushDown( CCObject* pSender )
 {
     CCLOG("BottonLeftPushDown");
-
-    m_speed = -10.0f;
+    
+    m_isLeftButtonPushedDown = true;
+    m_isRightButtonPushedDown = false;
+    m_pPushedButton = DynamicCast<cs::CocoButton*>(UiManager::Singleton().GetChildByName("ButtonLeft"));
 }
 
 void MainCharacter::BottonLeftCacel( CCObject* pSender )
 {
     CCLOG("BottonLeftCacel");
+
+    m_isLeftButtonPushedDown = false;
 }
 
 void MainCharacter::BottonLeftRelease( CCObject* pSender )
 {
     CCLOG("BottonLeftRelease");
+
+    m_isLeftButtonPushedDown = false;
 }
 
 void MainCharacter::BottonLeftMove( CCObject* pSender )
@@ -74,22 +86,72 @@ void MainCharacter::BottonRightPushDown( CCObject* pSender )
 {
     CCLOG("BottonRightPushDown");
 
-    m_speed = 10.0f;
+    m_isLeftButtonPushedDown = false;
+    m_isRightButtonPushedDown = true;
+    m_pPushedButton = DynamicCast<cs::CocoButton*>(UiManager::Singleton().GetChildByName("ButtonRight"));
 }
 
 void MainCharacter::BottonRightCacel( CCObject* pSender )
 {
-    CCLOG("BottonRightCacel");
+    CCLOG("BottonRightCacel"); 
+
+    m_isRightButtonPushedDown = false;
 }
 
 void MainCharacter::BottonRightRelease( CCObject* pSender )
 {
     CCLOG("BottonRightRelease");
+
+    m_isRightButtonPushedDown = false;
 }
 
 void MainCharacter::BottonRightMove( CCObject* pSender )
 {
     CCLOG("BottonRightMovev");
+}
+
+bool MainCharacter::ccTouchBegan( CCTouch *pTouch, CCEvent *pEvent )
+{
+    if (!m_isLeftButtonPushedDown && !m_isRightButtonPushedDown)
+        return false;
+
+    CCPoint p = pTouch->getLocation();  
+    if (m_pPushedButton->getRect().containsPoint(p))
+    {
+        if (m_isLeftButtonPushedDown)
+            m_speed = -10.0f;
+        else
+            m_speed = 10.0f;
+    }
+
+    return true;
+}
+
+void MainCharacter::ccTouchMoved( CCTouch *pTouch, CCEvent *pEvent )
+{
+    if (!m_isLeftButtonPushedDown && !m_isRightButtonPushedDown)
+        return ;
+
+    CCPoint p = pTouch->getLocation();  
+    if (m_pPushedButton->getRect().containsPoint(p))
+    {
+        if (m_isLeftButtonPushedDown)
+            m_speed = -10.0f;
+        else
+            m_speed = 10.0f;
+    }
+    else
+        m_speed = 0.0f;
+}
+
+void MainCharacter::ccTouchEnded( CCTouch *pTouch, CCEvent *pEvent )
+{
+    m_speed = 0.0f;
+}
+
+void MainCharacter::ccTouchCancelled( CCTouch *pTouch, CCEvent *pEvent )
+{
+    m_speed = 0.0f;
 }
 
 void MainCharacter::PlayHeroTestAnimation()
@@ -151,7 +213,12 @@ IMPLEMENT_STATE_BEGIN(MainCharacter, Idle)
 
         STATE_UPDATE_BEGIN
     {      
-        setPositionX(getPositionX() + m_speed);
+        if (getPositionX() + m_speed > VisibleRect::right().x)
+            setPositionX(VisibleRect::right().x);
+        else if (getPositionX() + m_speed < VisibleRect::left().x)
+            setPositionX(VisibleRect::left().x);
+        else
+            setPositionX(getPositionX() + m_speed);
     }
     STATE_UPDATE_END
 

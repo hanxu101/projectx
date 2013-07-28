@@ -4,6 +4,7 @@
 #include "GameObject/GameObject.h"
 
 USING_NS_CC;
+namespace cs{ class CocoButton;};
 
 class MainCharacter : public GameObject, public CCTargetedTouchDelegate 
 {
@@ -15,6 +16,11 @@ public:
     virtual void onExit();
 
     void StateUpdate(float deltaTime);
+
+    virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
+    virtual void ccTouchMoved(CCTouch *pTouche, CCEvent *pEvent);
+    virtual void ccTouchEnded(CCTouch *pTouche, CCEvent *pEvent);
+    virtual void ccTouchCancelled(CCTouch *pTouche, CCEvent *pEvent);
 
 private:
     void BottonLeftPushDown( CCObject* pSender );
@@ -31,9 +37,13 @@ private:
 
     DECLARE_FSM(MainCharacter);
     DECLARE_STATE(Idle);
+
 private:
     CCSprite* m_pMainSprite;
     float m_speed;
+    bool m_isLeftButtonPushedDown;
+    bool m_isRightButtonPushedDown;
+    cs::CocoButton* m_pPushedButton;
 };
 
 #endif // _APP_MainCharacter_H_
