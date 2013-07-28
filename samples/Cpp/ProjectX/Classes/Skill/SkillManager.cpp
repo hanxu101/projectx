@@ -46,8 +46,7 @@ void SkillManager::Update(float deltaTime)
     {
         m_secondarySkill->Uninit();
         m_layer->removeChild(m_secondarySkill);
-        CC_SAFE_DELETE(m_secondarySkill);
-        
+        m_secondarySkill = NULL;
         m_commonSkill->Init();
     }
 
@@ -63,14 +62,14 @@ void SkillManager::Uninit()
     {
         m_commonSkill->Uninit();
         m_layer->removeChild(m_commonSkill);
-        CC_SAFE_DELETE(m_commonSkill);
+        m_commonSkill = NULL;
     }
 
     if (m_secondarySkill)
     {
         m_secondarySkill->Uninit();
         m_layer->removeChild(m_secondarySkill);
-        CC_SAFE_DELETE(m_secondarySkill);
+        m_secondarySkill = NULL;
     }
 }
 
@@ -98,6 +97,7 @@ SkillBase* SkillManager::SetupSkill( ESkillType type, bool hasTimeLimit, float t
         pSkill->Init();
         pSkill->SetHasTimeLimit(hasTimeLimit);
         pSkill->SetTime(time);
+        pSkill->autorelease();
         m_layer->addChild(pSkill);
 
         if (type != eST_Common)
@@ -123,7 +123,7 @@ bool SkillManager::LaunchSecondarySkill( ESkillType type, bool hasTimeLimit, flo
     {
         m_secondarySkill->Uninit();
         m_layer->removeChild(m_secondarySkill);
-        CC_SAFE_DELETE(m_secondarySkill);
+        m_secondarySkill = NULL;
     }
 
     m_secondarySkill = SetupSkill(type, hasTimeLimit, time);
