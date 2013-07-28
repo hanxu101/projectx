@@ -33,9 +33,20 @@ enum EMonsterType
     eMT_WaterElement,
     eMT_Fisherman,
     eMT_Naga,
+    
+    eMT_MaChao,
 
     eMT_Count,
     eMT_Invalid
+};
+
+enum EMonsterCategory
+{
+    eMC_Normal,
+    eMC_Boss,
+
+    eMC_Count,
+    eMC_Invalid
 };
 
 enum EGeneralType

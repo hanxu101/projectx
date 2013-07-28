@@ -4,6 +4,7 @@
 #include "GameObject/Monsters/EarthMonster/StoneMan.h"
 #include "GameObject/Monsters/AirMonster/CrazyZombie.h"
 #include "GameObject/Monsters/AirMonster/CrazyZombieBomber.h"
+#include "GameObject/Monsters/Boss/Shu/BossMaChao.h"
 
 MonsterFactory::MonsterFactory()
 {
@@ -37,6 +38,14 @@ void MonsterFactory::CreateMonster( CCNode* parent, EMonsterType type, const CCP
             pCrazyZombieBomber->setPosition(position);
             parent->addChild(pCrazyZombieBomber);
         }
+        break;
+    case eMT_MaChao:
+        {
+            BossMaChao* pMaChao = new BossMaChao();
+            pMaChao->setPosition(position);
+            parent->addChild(pMaChao);
+        }
+        break;
     default:
         break;
     }

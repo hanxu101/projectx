@@ -35,7 +35,6 @@ protected:
     virtual void ccTouchMoved(CCTouch *pTouche, CCEvent *pEvent);
 
     void AddGraphics();
-    void DelGraphics();
 
     void MoveParticle();
 

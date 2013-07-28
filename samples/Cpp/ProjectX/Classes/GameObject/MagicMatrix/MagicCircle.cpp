@@ -63,8 +63,6 @@ void MagicCircle::onEnter()
 
 void MagicCircle::onExit()
 {
-    DelGraphics();
-
     CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
     GameObject::onExit();
 }
@@ -115,15 +113,6 @@ void MagicCircle::AddGraphics()
     m_pMainSprite = CCSprite::create(MagicCircleRes[m_associateGType]);
     m_pMainSprite->setScale(2.0f);
     addChild(m_pMainSprite);
-}
-
-void MagicCircle::DelGraphics()
-{
-    if (m_pStreak)
-        m_pStreak->removeFromParentAndCleanup(true);
-
-    if (m_pParticle)
-        m_pParticle->removeFromParentAndCleanup(true);
 }
 
 void MagicCircle::MoveParticle()

@@ -126,6 +126,21 @@
     <Filter Include="Classes\UI">
       <UniqueIdentifier>{1f5c6213-b0de-4e3b-906f-8a4f0559ccfa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\GameObject\Monsters\Boss">
+      <UniqueIdentifier>{072b1691-7e7d-4cdd-94c6-c031a8103f42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject\Monsters\Boss\Wei">
+      <UniqueIdentifier>{bfc71f88-1185-4a31-ac88-2ff2fe9afd0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject\Monsters\Boss\Shu">
+      <UniqueIdentifier>{a51915a1-ea46-4f88-ab2b-d03382bbc761}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject\Monsters\Boss\Wu">
+      <UniqueIdentifier>{7c8142b5-b66e-4fbe-9c0c-9943355c42d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject\Monsters\Boss\QunXiong">
+      <UniqueIdentifier>{51518e58-255e-453c-8601-79d7f2afa67f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -388,6 +403,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Ui\UiManager.cpp">
       <Filter>Classes\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Monsters\Boss\Shu\BossMaChao.cpp">
+      <Filter>Classes\GameObject\Monsters\Boss\Shu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -717,6 +735,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Ui\UiManager.h">
       <Filter>Classes\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Monsters\Boss\Shu\BossMaChao.h">
+      <Filter>Classes\GameObject\Monsters\Boss\Shu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

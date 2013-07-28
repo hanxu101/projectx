@@ -191,6 +191,7 @@
     <ClCompile Include="..\Classes\GameObject\MainCharacter.cpp" />
     <ClCompile Include="..\Classes\GameObject\Monsters\AirMonster\CrazyZombie.cpp" />
     <ClCompile Include="..\Classes\GameObject\Monsters\AirMonster\CrazyZombieBomber.cpp" />
+    <ClCompile Include="..\Classes\GameObject\Monsters\Boss\Shu\BossMaChao.cpp" />
     <ClCompile Include="..\Classes\GameObject\Monsters\EarthMonster\StoneMan.cpp" />
     <ClCompile Include="..\Classes\GameObject\Monsters\Monster.cpp" />
     <ClCompile Include="..\Classes\GameObject\Monsters\MonsterFactory\MonsterFactory.cpp" />
@@ -291,6 +292,7 @@
     <ClInclude Include="..\Classes\GameObject\MainCharacter.h" />
     <ClInclude Include="..\Classes\GameObject\Monsters\AirMonster\CrazyZombie.h" />
     <ClInclude Include="..\Classes\GameObject\Monsters\AirMonster\CrazyZombieBomber.h" />
+    <ClInclude Include="..\Classes\GameObject\Monsters\Boss\Shu\BossMaChao.h" />
     <ClInclude Include="..\Classes\GameObject\Monsters\EarthMonster\StoneMan.h" />
     <ClInclude Include="..\Classes\GameObject\Monsters\Monster.h" />
     <ClInclude Include="..\Classes\GameObject\Monsters\MonsterFactory\MonsterFactory.h" />
