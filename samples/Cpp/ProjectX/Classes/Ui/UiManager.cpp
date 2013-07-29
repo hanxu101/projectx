@@ -7,6 +7,7 @@ IMPLEMENT_SINGLETON(UiManager);
 UiManager::UiManager()
     : m_pPanel(NULL)
     , m_pWidget(NULL)
+    , m_isInUi(false)
 {
 
 }
@@ -26,6 +27,11 @@ void UiManager::Init( CCNode* pNode )
     m_pPanel->addChild(m_pWidget);
 }
 
+void UiManager::Update( float dt )
+{
+    m_isInUi = false;
+}
+
 CocoWidget* UiManager::GetChildByName( const char* name )
 {
     XAssert(m_pWidget, "m_pWidget is invalid.");
@@ -36,4 +42,14 @@ CocoWidget* UiManager::GetChildByName( const char* name )
 void UiManager::AddChildWidget( CocoWidget* child )
 {
     m_pPanel->addChild(child);
+}
+
+bool UiManager::IsInUi() const
+{
+    return m_isInUi;
+}
+
+void UiManager::SetIsInUi( bool isInUi )
+{
+    m_isInUi = isInUi;
 }

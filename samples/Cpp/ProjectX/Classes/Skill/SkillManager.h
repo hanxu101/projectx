@@ -30,6 +30,7 @@ private:
     SkillBase* SetupSkill(ESkillType type, bool hasTimeLimit, float time);
     void Skill1BottonClicked( CCObject* pSender );
     void Skill2BottonClicked( CCObject* pSender );
+    void SkillBottonPushDown( CCObject* pSender );
 
 private:
     CCLayer* m_layer;

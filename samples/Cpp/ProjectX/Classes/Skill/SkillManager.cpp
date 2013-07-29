@@ -37,6 +37,8 @@ void SkillManager::Init(CCLayer* layer)
 
     buttonSkill1->addReleaseEvent(this, coco_releaseselector(SkillManager::Skill1BottonClicked));
     buttonSkill2->addReleaseEvent(this, coco_releaseselector(SkillManager::Skill2BottonClicked));
+    buttonSkill1->addPushDownEvent(this, coco_releaseselector(SkillManager::SkillBottonPushDown));
+    buttonSkill2->addPushDownEvent(this, coco_releaseselector(SkillManager::SkillBottonPushDown));
 }
 
 void SkillManager::Update(float deltaTime)
@@ -117,17 +119,24 @@ void SkillManager::AddSkillNum( ESkillType type, int num )
 
 bool SkillManager::LaunchSecondarySkill( ESkillType type, bool hasTimeLimit, float time )
 {
-    m_commonSkill->Uninit();
-
-    if (m_secondarySkill)
+    bool hadSecondarySkill = m_secondarySkill;
+    if (hadSecondarySkill)
     {
-        m_secondarySkill->Uninit();
-        m_layer->removeChild(m_secondarySkill);
-        m_secondarySkill = NULL;
+        if (m_skillNum[type] > 0) // switch to a new skill
+        {
+            m_secondarySkill->Uninit();
+            m_layer->removeChild(m_secondarySkill);
+            m_secondarySkill = NULL;
+        }
     }
 
-    m_secondarySkill = SetupSkill(type, hasTimeLimit, time);
-
+    if (m_skillNum[type] > 0) // setup new skill
+    {
+        m_secondarySkill = SetupSkill(type, hasTimeLimit, time);
+        if (!hadSecondarySkill && m_secondarySkill)
+            m_commonSkill->Uninit();
+    }
+    
     return m_secondarySkill != NULL;
 }
 
@@ -139,4 +148,9 @@ void SkillManager::Skill1BottonClicked( CCObject* pSender )
 void SkillManager::Skill2BottonClicked( CCObject* pSender )
 {
     LaunchSecondarySkill(eST_FireWall, true, 10.0f);
+}
+
+void SkillManager::SkillBottonPushDown( CCObject* pSender )
+{
+    UiManager::Singleton().SetIsInUi(true);
 }

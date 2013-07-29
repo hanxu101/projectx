@@ -3,6 +3,7 @@
 #include "Skill/CommonSkill.h"
 #include "GameObject/GameObjectManager/GameObjectManager.h"
 #include "GameObject/FireBall/FireBall.h"
+#include "Ui/UiManager.h"
 
 const CCPoint CommonSkill::INVALID_TOUCHPOSITION = CCPoint(-1.0f, -1.0f);
 const float CommonSkill::FIRE_SLIDE_DISTANCE_MAX = 20.0f;
@@ -61,6 +62,9 @@ UINT CommonSkill::GetPreviousTouchPosIndex( UINT rollbackFrameNum, UINT maxCache
 
 void CommonSkill::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
 {
+    if (UiManager::Singleton().IsInUi())
+        return;
+
     CCSetIterator iter = pTouches->begin();
     for (; iter != pTouches->end(); iter++)
     {

@@ -2,6 +2,7 @@
 
 #include "Skill/DirectBurn.h"
 #include "GameObject/FireBall/FireBall.h"
+#include "Ui/UiManager.h"
 
 DirectBurn::DirectBurn()
     : m_fireBall(NULL)
@@ -17,6 +18,9 @@ DirectBurn::~DirectBurn()
 
 void DirectBurn::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
 {
+    if (UiManager::Singleton().IsInUi())
+        return;
+
     CCSetIterator iter = pTouches->begin();
     for (; iter != pTouches->end(); iter++)
     {

@@ -56,6 +56,8 @@ void GeneralGroupLogic::onEnter()
         pButton->setTextures(NormalPng[type], SelectedPng[type], DisablePng[type]);
 
         pButton->addReleaseEvent(this, coco_releaseselector(GeneralGroupLogic::GeneralBottonClicked));
+        pButton->addPushDownEvent(this, coco_releaseselector(GeneralGroupLogic::GeneralBottonPushDown));
+
         pButton->setScale(0.5f);
 
         UiManager::Singleton().AddChildWidget(pButton);
@@ -80,6 +82,11 @@ void GeneralGroupLogic::GeneralBottonClicked( CCObject* pSender )
 
     if (m_buttonCdMap.find(pButton) == m_buttonCdMap.end())
         m_buttonCdMap.insert(std::pair<cs::CocoButton*, float>(pButton, 0.0f));
+}
+
+void GeneralGroupLogic::GeneralBottonPushDown( CCObject* pSender )
+{
+    UiManager::Singleton().SetIsInUi(true);
 }
 
 void GeneralGroupLogic::Update( float dt )

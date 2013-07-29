@@ -124,6 +124,7 @@ void GameLayer::onExit()
 
 void GameLayer::Update(float dt)
 {
+    UiManager::Singleton().Update(dt);
 #ifndef DEBUG_NO_MONSTER
     m_pMonsterGroupLogic->StateUpdate(dt);
 #endif
@@ -133,6 +134,7 @@ void GameLayer::Update(float dt)
     GameObjectManager::Singleton().Update(dt);
     BuffManager::Singleton().Update(dt);
     SkillManager::Singleton().Update(dt);
+
 }
 
 //------------------------------------------------------------------

@@ -24,7 +24,9 @@ public:
 
 private:
     void GeneralBottonClicked(CCObject* pSender);
+    void GeneralBottonPushDown( CCObject* pSender );
 
+private:
     TGeneralDataVec m_generalData;
 
     TButtonCdMap m_buttonCdMap;

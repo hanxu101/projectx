@@ -16,12 +16,17 @@ class UiManager
 
 public:
     void Init(CCNode* pNode);
+    void Update(float dt);
+
     CocoWidget* GetChildByName(const char *name);
     void AddChildWidget(CocoWidget* child);
+    bool IsInUi() const;
+    void SetIsInUi(bool isInUi);
 
 private:
     CocoPanel*  m_pPanel;
     CocoWidget* m_pWidget;
+    bool m_isInUi;
 
 };
 
