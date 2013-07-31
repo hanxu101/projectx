@@ -3,11 +3,13 @@
 
 enum EGameObjectType
 {
+    eGOT_MainCharacter,
     eGOT_Monster,
     eGOT_FireBall,
     eGOT_Item,
     eGOT_General,
     eGOT_MagicMatrix,
+    eGOT_Bullet,
 
     eGOT_Count,
     eGOT_Invalid

@@ -1,11 +1,14 @@
 #include "CommonHeaders.h"
 
 #include "GameObject/Monsters/Boss/Shu/BossMaChao.h"
+#include "GameObject/Bullet/Bullet.h"
+#include "GameObject/Monsters/Boss/Defines/BossDefines.h"
 
 BossMaChao::BossMaChao()
-    : m_pParticle(NULL)
-    , m_moveNode(0)
+    : m_moveNode(0)
+    , m_skillCastTimeElapsed(0.0f)
 {
+    m_speed = s_MaChao_MoveSpeed;
 }
 
 BossMaChao::~BossMaChao()
@@ -31,12 +34,6 @@ void BossMaChao::onExit()
 
 void BossMaChao::Killed()
 {
-    if (m_pParticle)
-    {
-        m_pParticle->removeFromParentAndCleanup(true);
-        m_pParticle = NULL;
-    }
-
     Unspawn();
 }
 
@@ -89,8 +86,6 @@ IMPLEMENT_STATE_BEGIN(BossMaChao, Move)
         m_targetPos = VisibleRect::center();
         m_direction = ccpSub(m_targetPos, getPosition());
         m_direction = ccpNormalize(m_direction);
-
-        m_speed = 28.0f;
     }
     STATE_CONSTRUCTOR_END
 
@@ -99,7 +94,7 @@ IMPLEMENT_STATE_BEGIN(BossMaChao, Move)
         CCPoint newPos =  ccpAdd( getPosition(), ccpMult(ccpMult(m_direction, m_speed), m_deltaTime) );
         setPosition(newPos);
 
-        TRANSIT_TO_STATE( ccpDistanceSQ(newPos, m_targetPos) < 5.0f, NoTransitionAction, CastSkill );
+        TRANSIT_TO_STATE( ccpDistanceSQ(newPos, m_targetPos) < s_Boss_TargetPos_Offset, NoTransitionAction, CastSkill );
     }
     STATE_UPDATE_END
 
@@ -117,38 +112,26 @@ IMPLEMENT_STATE_END
     {
         PlayMonsterWalkAnimation(ED_Down);
 
-        m_pParticle = CCParticleGalaxy::create();
-        CCTexture2D *pTexture = CCTextureCache::sharedTextureCache()->addImage("stars.png");
-        m_pParticle->setTexture(pTexture);
-        m_pParticle->setLife(0.5f);
-        m_pParticle->setScale(0.3f);
-        m_pParticle->setPosition(getPosition());
-        getParent()->addChild(m_pParticle, 10);
+        Bullet* pBullet = new Bullet();
+        pBullet->setPosition(getPosition());
+        getParent()->addChild(pBullet);
 
         m_targetPos = CCPoint(getPosition().x, VisibleRect::bottom().y);
         m_direction = ccpSub(m_targetPos, getPosition());
         m_direction = ccpNormalize(m_direction);
-
-        m_speed = 60.0f;
     }
     STATE_CONSTRUCTOR_END
 
         STATE_UPDATE_BEGIN
     {
-        CCPoint newPos = ccpAdd( m_pParticle->getPosition(), ccpMult(ccpMult(m_direction, m_speed), m_deltaTime) );
-        m_pParticle->setPosition(newPos);
-
-        TRANSIT_TO_STATE( ccpDistanceSQ(newPos, m_targetPos) < 5.0f, NoTransitionAction, MoveAround );
+        m_skillCastTimeElapsed += m_deltaTime;
+        TRANSIT_TO_STATE( m_skillCastTimeElapsed > s_MaChao_CastSkillTime, NoTransitionAction, MoveAround );
     }
     STATE_UPDATE_END
 
         STATE_DESTRUCTOR_BEGIN
     {
-        if (m_pParticle)
-        {
-            m_pParticle->removeFromParentAndCleanup(true);
-            m_pParticle = NULL;
-        }
+        m_skillCastTimeElapsed = 0.0f;
     }
     STATE_DESTRUCTOR_END
 }
@@ -169,8 +152,6 @@ IMPLEMENT_STATE_END
 
         EDirection direction = m_direction.x > 0 ? ED_Right : ED_Left;        
         PlayMonsterWalkAnimation(direction);
-
-        m_speed = 28.0f;
     }
     STATE_CONSTRUCTOR_END
 
@@ -179,7 +160,7 @@ IMPLEMENT_STATE_END
         CCPoint newPos =  ccpAdd( getPosition(), ccpMult(ccpMult(m_direction, m_speed), m_deltaTime) );
         setPosition(newPos);
 
-        TRANSIT_TO_STATE( ccpDistanceSQ(newPos, m_targetPos) < 5.0f, NoTransitionAction, CastSkill );
+        TRANSIT_TO_STATE( ccpDistanceSQ(newPos, m_targetPos) < s_Boss_TargetPos_Offset, NoTransitionAction, CastSkill );
     }
     STATE_UPDATE_END
 

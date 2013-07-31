@@ -37,10 +37,10 @@ private:
      DECLARE_STATE(CastSkill);
      DECLARE_STATE(MoveAround);
 
-     CCParticleGalaxy* m_pParticle;
-
      std::vector<CCPoint> m_moveAroundPos;
      unsigned int m_moveNode;
+
+     float m_skillCastTimeElapsed;
 };
 
 #endif // _APP_Monsters_Boss_Shu_MaChao_H_

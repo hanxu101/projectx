@@ -171,6 +171,7 @@
     <ClCompile Include="..\Classes\GameLogic\GpeLogic.cpp" />
     <ClCompile Include="..\Classes\GameLogic\MainPlayerLogic.cpp" />
     <ClCompile Include="..\Classes\GameLogic\MonsterGroupLogic.cpp" />
+    <ClCompile Include="..\Classes\GameObject\Bullet\Bullet.cpp" />
     <ClCompile Include="..\Classes\GameObject\FireBall\Boomerang.cpp" />
     <ClCompile Include="..\Classes\GameObject\FireBall\FireBall.cpp" />
     <ClCompile Include="..\Classes\GameObject\GameObject.cpp" />
@@ -271,6 +272,7 @@
     <ClInclude Include="..\Classes\GameLogic\GpeLogic.h" />
     <ClInclude Include="..\Classes\GameLogic\MainPlayerLogic.h" />
     <ClInclude Include="..\Classes\GameLogic\MonsterGroupLogic.h" />
+    <ClInclude Include="..\Classes\GameObject\Bullet\Bullet.h" />
     <ClInclude Include="..\Classes\GameObject\FireBall\Boomerang.h" />
     <ClInclude Include="..\Classes\GameObject\FireBall\FireBall.h" />
     <ClInclude Include="..\Classes\GameObject\GameObject.h" />
@@ -292,6 +294,7 @@
     <ClInclude Include="..\Classes\GameObject\MainCharacter.h" />
     <ClInclude Include="..\Classes\GameObject\Monsters\AirMonster\CrazyZombie.h" />
     <ClInclude Include="..\Classes\GameObject\Monsters\AirMonster\CrazyZombieBomber.h" />
+    <ClInclude Include="..\Classes\GameObject\Monsters\Boss\Defines\BossDefines.h" />
     <ClInclude Include="..\Classes\GameObject\Monsters\Boss\Shu\BossMaChao.h" />
     <ClInclude Include="..\Classes\GameObject\Monsters\EarthMonster\StoneMan.h" />
     <ClInclude Include="..\Classes\GameObject\Monsters\Monster.h" />

@@ -4,7 +4,8 @@
 #include "Ui/UiManager.h"
 
 MainCharacter::MainCharacter()
-    : m_pMainSprite(NULL)
+    : GameObject(10.0f, eGOT_MainCharacter,10.0f)
+    , m_pMainSprite(NULL)
     , m_speed(0.0f)
     , m_isLeftButtonPushedDown(false)
     , m_isRightButtonPushedDown(false)

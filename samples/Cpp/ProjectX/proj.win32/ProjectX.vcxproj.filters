@@ -141,6 +141,12 @@
     <Filter Include="Classes\GameObject\Monsters\Boss\QunXiong">
       <UniqueIdentifier>{51518e58-255e-453c-8601-79d7f2afa67f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\GameObject\Bullet">
+      <UniqueIdentifier>{9923bf69-bc84-4441-938a-f4deda2facd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameObject\Monsters\Boss\Defines">
+      <UniqueIdentifier>{3211e34e-9125-42c9-88c1-e265f555a47c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -406,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameObject\Monsters\Boss\Shu\BossMaChao.cpp">
       <Filter>Classes\GameObject\Monsters\Boss\Shu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject\Bullet\Bullet.cpp">
+      <Filter>Classes\GameObject\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -738,6 +747,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameObject\Monsters\Boss\Shu\BossMaChao.h">
       <Filter>Classes\GameObject\Monsters\Boss\Shu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Bullet\Bullet.h">
+      <Filter>Classes\GameObject\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject\Monsters\Boss\Defines\BossDefines.h">
+      <Filter>Classes\GameObject\Monsters\Boss\Defines</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

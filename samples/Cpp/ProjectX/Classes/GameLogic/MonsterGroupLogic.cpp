@@ -36,7 +36,7 @@ void MonsterGroupLogic::InitMonsterData()
         AddOneLine(eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid);
         AddOneLine(eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid);
         AddOneLine(eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_Invalid);
-        AddOneLine(eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan);
+        AddOneLine(eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_MaChao,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan);
     }
 
     m_monsterLineWaveCount = m_monsterData.size();
