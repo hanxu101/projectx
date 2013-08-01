@@ -7,18 +7,24 @@ USING_NS_CC;
 
 enum
 {
-    MainMenu_Game = 0,
+    MainMenu_Login =0 ,
     MainMenu_Credits,
-    MainMenu_Option,
+
+    MainMenu_Home,
+    MainMenu_Game,
+    MainMenu_Tartar,
+    MainMenu_Doctor,
+
 
     MainMenu_Count,
 };
 
 const std::string g_MainMenuNames[MainMenu_Count] = {
-"Game",
-"Credits",
-"Option"
+    "Enter",
+    "Credits"
 };
+
+class SceneBase;
 
 class SceneManager : public cocos2d::CCLayer
 {
@@ -26,10 +32,10 @@ class SceneManager : public cocos2d::CCLayer
 public:
     SceneManager();
     virtual void onEnter();
-
     void menuCallback(CCObject * pSender);
     void closeCallback(CCObject * pSender);
-
+    
+    static SceneBase* CreateScene(int nIdx);
 private:
     CCPoint m_tBeginPos;
     CCMenu* m_pItemMenu;

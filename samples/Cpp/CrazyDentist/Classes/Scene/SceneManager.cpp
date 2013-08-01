@@ -1,32 +1,17 @@
 #include "CommonHeaders.h"
 
 #include "SceneManager.h"
-#include "SceneGame.h"
+
+#include "SceneLogin.h"
 #include "SceneCredits.h"
+#include "SceneHome.h"
+#include "SceneGame.h"
+#include "SceneTartar.h"
+#include "SceneDoctor.h"
+
 #include "UISystem.h"
 
 USING_NS_CC;
-
-static SceneBase* CreateScene(int nIdx)
-{
-    CCDirector::sharedDirector()->purgeCachedData();
-
-    SceneBase* pScene = NULL;
-
-    switch (nIdx)
-    {
-    case MainMenu_Game:
-        pScene = new SceneGame(); break;
-    case MainMenu_Credits:
-        pScene = new SceneCredits(); break;
-     case MainMenu_Option:
-         pScene = new SceneGame(); break;
-    default:
-        break;
-    }
-
-    return pScene;
-}
 
 SceneManager::SceneManager()
 {
@@ -42,10 +27,10 @@ SceneManager::SceneManager()
 
     // add menu items for Main Menu
     m_pItemMenu = CCMenu::create();
-    for (int i = 0; i < MainMenu_Count; ++i)
+    for (int i = 0; i <= MainMenu_Credits; ++i)
     {
         CCLabelTTF* label = CCLabelTTF::create(g_MainMenuNames[i].c_str(), "Arial", 20);
-        label->setColor(ccMAGENTA);
+        label->setColor(ccBLACK);
         CCMenuItemLabel* pMenuItem = CCMenuItemLabel::create(label, this, menu_selector(SceneManager::menuCallback));
 
         m_pItemMenu->addChild(pMenuItem, i + 10000);
@@ -61,7 +46,7 @@ SceneManager::SceneManager()
     addChild(pMenu, 1);
 
     CCLabelTTF* pLabel = CCLabelTTF::create("CrazyDentist", "Arial", TITLE_FONT_SIZE);
-    pLabel->setColor(ccGRAY);
+    pLabel->setColor(ccBLACK);
 
     // position the label on the center of the screen
     pLabel->setPosition(ccp(VisibleRect::center().x - 10,
@@ -87,12 +72,7 @@ void SceneManager::menuCallback(CCObject * pSender)
     int nIdx = pMenuItem->getZOrder() - 10000;
 
     // create the test scene and run it
-    SceneBase* pScene = CreateScene(nIdx);
-    if (pScene)
-    {
-        pScene->runThisTest();
-        pScene->release();
-    }
+    CreateScene(nIdx);
 }
 
 void SceneManager::closeCallback(CCObject * pSender)
@@ -109,11 +89,40 @@ void SceneManager::onEnter()
 
 #ifdef DEBUG_HIDE_TEXT
     // directly goto Game Scene
-    SceneBase* pScene = CreateScene(0);
+    CreateScene(MainMenu_Login);
+
+#endif
+}
+
+SceneBase* SceneManager::CreateScene( int nIdx )
+{
+    CCDirector::sharedDirector()->purgeCachedData();
+
+    SceneBase* pScene = NULL;
+
+    switch (nIdx)
+    {
+    case MainMenu_Login:
+        pScene = new SceneLogin(); break;
+    case MainMenu_Credits:
+        pScene = new SceneCredits(); break;
+    case MainMenu_Home:
+        pScene = new SceneHome(); break;
+    case MainMenu_Game:
+        pScene = new SceneGame(); break;
+    case MainMenu_Tartar:
+        pScene = new SceneTartar(); break;
+    case MainMenu_Doctor:
+        pScene = new SceneDoctor(); break;
+    default:
+        break;
+    }
+
     if (pScene)
     {
         pScene->runThisTest();
         pScene->release();
     }
-#endif
+
+    return pScene;
 }
