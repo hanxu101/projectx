@@ -17,7 +17,7 @@ public:
     virtual void onEnter();
 
 private:
-    void menuCallback(CCObject * pSender);
+    void BottonOKClicked( CCObject* pSender );
 };
 
 class SceneLogin : public SceneBase

@@ -15,6 +15,9 @@ public:
 
     virtual std::string title();
     virtual void onEnter();
+
+private:
+    void menuCallback(CCObject * pSender);
 };
 
 class SceneHome : public SceneBase

@@ -33,12 +33,14 @@ void GameLayer::onEnter()
 
     CCDirector::sharedDirector()->getScheduler()->scheduleSelector(schedule_selector(GameLayer::Update), this, 0, false);
 
-    // Init UI.
-    CCNode* pUiNode = CCNode::create();
-    addChild(pUiNode, g_uiZOrder);
+    CCLabelTTF* label = CCLabelTTF::create(title().c_str(), "Arial", 32);
+    addChild(label, 1);
+    label->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y-50) );
 
-    UiManager::CreateSingleton();
-    UiManager::Singleton().Init(pUiNode);
+    std::string content = "GameLayer1.";
+    CCLabelTTF* labelContent = CCLabelTTF::create(content.c_str(), "Arial", 20);
+    addChild(labelContent, 1);
+    labelContent->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y-150) );
 
     // Back ground.
     CCSprite* pBackGround = CCSprite::create("splashscreen.png");
@@ -62,10 +64,6 @@ void GameLayer::onExit()
 {
     COCOUISYSTEM->cleanUIScene();
     CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
-
-#ifndef DEBUG_NO_UI
-    UiManager::DestroySingleton();
-#endif
 
     CCLayer::onExit();
 }

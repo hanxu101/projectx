@@ -9,7 +9,7 @@
 #include "SceneTartar.h"
 #include "SceneDoctor.h"
 
-#include "UISystem.h"
+#include "Ui/UiManager.h"
 
 USING_NS_CC;
 
@@ -17,6 +17,8 @@ SceneManager::SceneManager()
 {
     // UI Init
     COCOUISYSTEM->init();
+    if (!UiManager::IsSingletonCreated())
+        UiManager::CreateSingleton();
 
      // add close menu
     CCMenuItemImage *pCloseItem = CCMenuItemImage::create(s_pPathClose, s_pPathCloseSelected, this, menu_selector(SceneManager::closeCallback) );
@@ -63,6 +65,7 @@ SceneManager::SceneManager()
 
     // add the sprite as a child to this layer
     this->addChild(pSprite, 0);
+
 }
 
 void SceneManager::menuCallback(CCObject * pSender)
