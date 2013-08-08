@@ -28,6 +28,7 @@ void MainPlayerLogic::Init(CCLayer* layer)
 {
     m_parent = layer;
 
+    m_originalHp = g_mainPlayerTotalHp;
     m_currentHp = g_mainPlayerTotalHp;
     m_originalCoin = g_originalCoinNum;
     m_currentCoin = g_originalCoinNum;
