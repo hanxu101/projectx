@@ -106,7 +106,7 @@ void MainPlayerLogic::AdjustHpBar()
 void MainPlayerLogic::DrawCoinValue()
 {
     char stringValue[20];
-    _itoa(m_currentCoin, stringValue, 10);
+    sprintf(stringValue, "%d", m_currentCoin);
 
     if (m_pCoinNumLableAtlas)
         m_pCoinNumLableAtlas->setStringValue(stringValue);
