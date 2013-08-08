@@ -2,6 +2,7 @@
 
 #include "GameObject/Bullet/Bullet.h"
 #include "Gamelogic/MainPlayerLogic.h"
+#include "GameObject/GameObjectManager/GameObjectManager.h"
 
 Bullet::Bullet()
     : GameObject(10.0f, eGOT_Bullet,10.0f)
@@ -34,6 +35,24 @@ void Bullet::StateUpdate( float deltaTime )
 {
     m_deltaTime = deltaTime;
     GetFsm().Update();
+}
+
+void Bullet::Attack()
+{    
+    TGameObjectList objectList;
+    if (GameObjectManager::IsSingletonCreated())
+        GameObjectManager::Singleton().GetGameObjectList(eGOT_MainCharacter, objectList);
+    for (TGameObjectList::iterator iter = objectList.begin(); iter != objectList.end(); ++iter)
+    {
+        float maxCollisionDis = (*iter)->GetCollisionRadius() + GetCollisionRadius();
+        float distanceSQ = ccpDistanceSQ((*iter)->getPosition(), getPosition());
+
+        if (distanceSQ < maxCollisionDis * maxCollisionDis)
+        {
+            MainPlayerLogic::Singleton().ReduceHp(1);
+            GetFsm().SwitchState(STATE(ArrivedBottomSafe));
+        }
+    }
 }
 
 IMPLEMENT_STATE_BEGIN(Bullet, Idle)
@@ -80,6 +99,8 @@ IMPLEMENT_STATE_END
         setPosition(newPos);
         m_pParticle->setPosition(newPos);
 
+        Attack();
+
         TRANSIT_TO_STATE( !VisibleRect::getVisibleRect().containsPoint(newPos), NoTransitionAction, ArrivedBottomSafe );
     }
     STATE_UPDATE_END
@@ -95,7 +116,6 @@ IMPLEMENT_STATE_END
 {
     STATE_CONSTRUCTOR_BEGIN
     {
-        MainPlayerLogic::Singleton().ReduceHp(1);
         m_pParticle->removeFromParentAndCleanup(true);
         Unspawn();
     }

@@ -16,6 +16,8 @@ public:
 
     virtual void StateUpdate(float deltaTime);
 
+    void Attack();
+
 protected:
     DECLARE_FSM(Bullet);
     DECLARE_VIRTUAL_STATE(Idle);

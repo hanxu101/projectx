@@ -9,6 +9,7 @@ BossMaChao::BossMaChao()
     , m_skillCastTimeElapsed(0.0f)
 {
     m_speed = s_MaChao_MoveSpeed;
+    m_hp = 500.0f;
 }
 
 BossMaChao::~BossMaChao()

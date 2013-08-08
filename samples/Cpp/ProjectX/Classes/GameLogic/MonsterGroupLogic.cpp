@@ -28,7 +28,9 @@ void MonsterGroupLogic::onEnter()
 
 void MonsterGroupLogic::InitMonsterData()
 {
-    for (UINT i = 0; i < 15; ++i)
+    AddOneLine(eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_MaChao,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid);    
+
+    for (UINT i = 0; i < 5; ++i)
     {
         AddOneLine(eMT_Invalid,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombieBomber,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_CrazyZombie,eMT_Invalid);
         AddOneLine(eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_CrazyZombie,eMT_CrazyZombie,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid);
@@ -36,7 +38,7 @@ void MonsterGroupLogic::InitMonsterData()
         AddOneLine(eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid);
         AddOneLine(eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid);
         AddOneLine(eMT_Invalid,eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan,eMT_Invalid);
-        AddOneLine(eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_MaChao,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan);
+        AddOneLine(eMT_StoneMan,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_Invalid,eMT_StoneMan);
     }
 
     m_monsterLineWaveCount = m_monsterData.size();
