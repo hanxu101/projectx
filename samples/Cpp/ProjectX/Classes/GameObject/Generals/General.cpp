@@ -1,7 +1,6 @@
 #include "CommonHeaders.h"
 
 #include "GameObject/Generals/General.h"
-#include "CocoImageView.h"
 #include "GameObject/GameObjectManager/GameObjectManager.h"
 #include "GameObject/MagicMatrix/MagicCircle.h"
 

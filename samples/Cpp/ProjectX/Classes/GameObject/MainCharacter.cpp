@@ -27,8 +27,8 @@ void MainCharacter::onEnter()
     m_pMainSprite->setScale(4.0f);
     addChild(m_pMainSprite);
 
-    cs::CocoButton* buttonLeft = DynamicCast<cs::CocoButton*>(UiManager::Singleton().GetChildByName("ButtonLeft"));
-    cs::CocoButton* buttonRight = DynamicCast<cs::CocoButton*>(UiManager::Singleton().GetChildByName("ButtonRight"));
+    UIButton* buttonLeft = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("ButtonLeft"));
+    UIButton* buttonRight = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("ButtonRight"));
 
     buttonLeft->addPushDownEvent(this, coco_releaseselector(MainCharacter::BottonLeftPushDown));
     buttonLeft->addCancelEvent(this, coco_releaseselector(MainCharacter::BottonLeftCacel));
@@ -61,7 +61,7 @@ void MainCharacter::BottonLeftPushDown( CCObject* pSender )
     
     m_isLeftButtonPushedDown = true;
     m_isRightButtonPushedDown = false;
-    m_pPushedButton = DynamicCast<cs::CocoButton*>(UiManager::Singleton().GetChildByName("ButtonLeft"));
+    m_pPushedButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("ButtonLeft"));
 }
 
 void MainCharacter::BottonLeftCacel( CCObject* pSender )
@@ -89,7 +89,7 @@ void MainCharacter::BottonRightPushDown( CCObject* pSender )
 
     m_isLeftButtonPushedDown = false;
     m_isRightButtonPushedDown = true;
-    m_pPushedButton = DynamicCast<cs::CocoButton*>(UiManager::Singleton().GetChildByName("ButtonRight"));
+    m_pPushedButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("ButtonRight"));
 }
 
 void MainCharacter::BottonRightCacel( CCObject* pSender )

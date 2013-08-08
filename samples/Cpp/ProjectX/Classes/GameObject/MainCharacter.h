@@ -3,8 +3,7 @@
 
 #include "GameObject/GameObject.h"
 
-USING_NS_CC;
-namespace cs{ class CocoButton;};
+USING_NS_CC_EXT;
 
 class MainCharacter : public GameObject, public CCTargetedTouchDelegate 
 {
@@ -43,7 +42,7 @@ private:
     float m_speed;
     bool m_isLeftButtonPushedDown;
     bool m_isRightButtonPushedDown;
-    cs::CocoButton* m_pPushedButton;
+    UIButton* m_pPushedButton;
 };
 
 #endif // _APP_MainCharacter_H_

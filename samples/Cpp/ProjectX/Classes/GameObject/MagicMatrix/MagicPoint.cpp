@@ -1,8 +1,7 @@
 #include "CommonHeaders.h"
 
 #include "GameObject/MagicMatrix/MagicPoint.h"
-#include "CocoImageView.h"
-#include "UISystem.h"
+#include "Ui/UiManager.h"
 
 MagicPoint::MagicPoint()
     : GameObject(0.0f, eGOT_MagicMatrix,10.0f)
@@ -20,13 +19,13 @@ void MagicPoint::onEnter()
     CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, false);
 
 #ifdef TestPoint
-    m_pPointImage = cs::CocoImageView::create();
+    m_pPointImage = UIImageView::create();
     m_pPointImage->setTexture("ball.png");
     m_pPointImage->setScale(3.0f);
     m_pPointImage->setPosition(getPosition());
 #endif
 
-    COCOUISYSTEM->getCurScene()->addWidget(m_pPointImage);
+    UiManager::Singleton().AddChildWidget(m_pPointImage);
 }
 
 void MagicPoint::onExit()

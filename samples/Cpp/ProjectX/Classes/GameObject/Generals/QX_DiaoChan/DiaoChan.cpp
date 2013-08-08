@@ -2,8 +2,7 @@
 
 #include "GameObject/Generals/QX_DiaoChan/DiaoChan.h"
 #include "Gamelogic/MainPlayerLogic.h"
-#include "CocoImageView.h"
-#include "UISystem.h"
+#include "Ui/UiManager.h"
 
 DiaoChan::DiaoChan()
 {
@@ -23,7 +22,7 @@ void DiaoChan::onEnter()
     m_pMainSprite->setVisible(false);
     addChild(m_pMainSprite);
 
-    m_pProfileImage = cs::CocoImageView::create();
+    m_pProfileImage = UIImageView::create();
     m_pProfileImage->setTexture("Eye_DiaoChan.png");
     m_pProfileImage->setVisible(false);
 
@@ -32,7 +31,7 @@ void DiaoChan::onEnter()
     m_magicPointVec.push_back(centerPoint);
     m_magicPointVec.push_back(ccp(centerPoint.x + 50, centerPoint.y));
 
-    COCOUISYSTEM->getCurScene()->addWidget(m_pProfileImage);
+     UiManager::Singleton().AddChildWidget(m_pProfileImage);
 }
 
 void DiaoChan::onExit()

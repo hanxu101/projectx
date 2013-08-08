@@ -1,14 +1,7 @@
 #ifndef  _APP_UIManager_H_
 #define  _APP_UIManager_H_
 
-#include "CocoPanel.h"
-#include "CocoWidget.h"
-#include "UISystem.h"
-#include "CocoLabelAtlas.h"
-#include "CocoLoadingBar.h"
-#include "CocoButton.h"
-
-using namespace cs;
+USING_NS_CC_EXT;
 
 class UiManager
 {
@@ -18,14 +11,14 @@ public:
     void Init(CCNode* pNode);
     void Update(float dt);
 
-    CocoWidget* GetChildByName(const char *name);
-    void AddChildWidget(CocoWidget* child);
+    UIWidget* GetChildByName(const char *name);
+    void AddChildWidget(UIWidget* child);
     bool IsInUi() const;
     void SetIsInUi(bool isInUi);
 
 private:
-    CocoPanel*  m_pPanel;
-    CocoWidget* m_pWidget;
+    UILayer* m_pUiLayer;
+
     bool m_isInUi;
 
 };

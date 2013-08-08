@@ -32,8 +32,8 @@ void SkillManager::Init(CCLayer* layer)
 
     m_commonSkill = SetupSkill(eST_Common, false, 0.0f);
 
-    cs::CocoButton* buttonSkill1 = DynamicCast<cs::CocoButton*>(UiManager::Singleton().GetChildByName("ButtonSkill1"));
-    cs::CocoButton* buttonSkill2 = DynamicCast<cs::CocoButton*>(UiManager::Singleton().GetChildByName("ButtonSkill2"));
+    UIButton* buttonSkill1 = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("ButtonSkill1"));
+    UIButton* buttonSkill2 = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("ButtonSkill2"));
 
     buttonSkill1->addReleaseEvent(this, coco_releaseselector(SkillManager::Skill1BottonClicked));
     buttonSkill2->addReleaseEvent(this, coco_releaseselector(SkillManager::Skill2BottonClicked));
@@ -119,7 +119,7 @@ void SkillManager::AddSkillNum( ESkillType type, int num )
 
 bool SkillManager::LaunchSecondarySkill( ESkillType type, bool hasTimeLimit, float time )
 {
-    bool hadSecondarySkill = m_secondarySkill;
+    bool hadSecondarySkill = m_secondarySkill != NULL;
     if (hadSecondarySkill)
     {
         if (m_skillNum[type] > 0) // switch to a new skill

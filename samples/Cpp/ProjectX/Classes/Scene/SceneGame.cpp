@@ -105,7 +105,6 @@ void GameLayer::onEnter()
 
 void GameLayer::onExit()
 {
-    COCOUISYSTEM->cleanUIScene();
     CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 
     // Destroy singletons after base layer exit. (After all children exit)

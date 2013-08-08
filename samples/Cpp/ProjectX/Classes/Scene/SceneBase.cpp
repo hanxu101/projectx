@@ -27,8 +27,6 @@ void SceneBase::onEnter()
 #endif
 }
 
-#include "Skill/SkillManager.h"
-
 void SceneBase::MainMenuCallback(CCObject* pSender)
 {
     CCScene* pScene = CCScene::create();

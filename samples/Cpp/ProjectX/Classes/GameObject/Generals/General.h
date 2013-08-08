@@ -6,7 +6,7 @@
 namespace cs{class CocoImageView;}
 class MagicCircle;
 
-USING_NS_CC;
+USING_NS_CC_EXT;
 
 typedef std::vector<CCPoint> TPointVector;
 
@@ -32,7 +32,7 @@ protected:
     EGeneralType m_type;
 
     CCSprite* m_pMainSprite;
-    cs::CocoImageView* m_pProfileImage;
+    UIImageView* m_pProfileImage;
 
     float m_elapasedTime;
     float m_deltaTime;

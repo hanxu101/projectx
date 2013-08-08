@@ -3,12 +3,10 @@
 
 #include "GameObject/GameObjectEnum.h"
 
-USING_NS_CC;
-
-namespace cs{class CocoPanel; class CocoButton;}
+USING_NS_CC_EXT;
 
 typedef std::vector< EGeneralType > TGeneralDataVec;
-typedef std::map< cs::CocoButton*, float > TButtonCdMap;
+typedef std::map< UIButton*, float > TButtonCdMap;
 
 class GeneralGroupLogic : public CCNode
 {

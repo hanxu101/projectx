@@ -33,8 +33,8 @@ void MainPlayerLogic::Init(CCLayer* layer)
     m_originalCoin = g_originalCoinNum;
     m_currentCoin = g_originalCoinNum;
 
-    m_pHpBar = DynamicCast<cs::CocoLoadingBar*>(UiManager::Singleton().GetChildByName("HpBar"));
-    m_pCoinNumLableAtlas = DynamicCast<cs::CocoLabelAtlas*>(UiManager::Singleton().GetChildByName("Gold"));
+    m_pHpBar = DynamicCast<UILoadingBar*>(UiManager::Singleton().GetChildByName("HpBar"));
+    m_pCoinNumLableAtlas = DynamicCast<UILabelAtlas*>(UiManager::Singleton().GetChildByName("Gold"));
 
     // TODO. Temporary create it here.
     m_pMC = new MainCharacter();

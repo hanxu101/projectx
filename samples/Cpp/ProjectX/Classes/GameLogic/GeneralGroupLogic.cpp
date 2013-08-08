@@ -47,10 +47,10 @@ void GeneralGroupLogic::onEnter()
     // Create general buttons in game.
     for (UINT i = 0; i < m_generalData.size(); ++i)
     {
-        CocoButton* pButton = CocoButton::create();
+        UIButton* pButton = UIButton::create();
         pButton->setWidgetTag(static_cast<int>(i));
         pButton->setPosition(ccp(VisibleRect::right().x - 10, 30 * (1 + i) + 50));
-        pButton->setBeTouchAble(true);
+        pButton->setTouchEnable(true);
         // Set relationship between these picture with generalType.
         EGeneralType type = m_generalData[i];
         pButton->setTextures(NormalPng[type], SelectedPng[type], DisablePng[type]);
@@ -71,17 +71,17 @@ void GeneralGroupLogic::onExit()
 
 void GeneralGroupLogic::GeneralBottonClicked( CCObject* pSender )
 {
-    cs::CocoButton* pButton = DynamicCast<cs::CocoButton*>(pSender);
+    UIButton* pButton = DynamicCast<UIButton*>(pSender);
     int widgetTag = pButton->getWidgetTag();
     EGeneralType type = m_generalData[widgetTag];
 
     GeneralFactory::Get().CreateGeneral(this, type, ccp(240,200));
 
-    pButton->setBeTouchAble(false);
-    pButton->setPressState(2);
+    pButton->setTouchEnable(false);
+    pButton->setPressState(WidgetStateDisabled);
 
     if (m_buttonCdMap.find(pButton) == m_buttonCdMap.end())
-        m_buttonCdMap.insert(std::pair<cs::CocoButton*, float>(pButton, 0.0f));
+        m_buttonCdMap.insert(std::pair<UIButton*, float>(pButton, 0.0f));
 }
 
 void GeneralGroupLogic::GeneralBottonPushDown( CCObject* pSender )
@@ -97,8 +97,8 @@ void GeneralGroupLogic::Update( float dt )
 
         if (iter->second > g_generalCdTime && iter->first)
         {
-            iter->first->setBeTouchAble(true);
-            iter->first->setPressState(0);
+            iter->first->setTouchEnable(true);
+            iter->first->setPressState(WidgetStateNormal);
 
             m_buttonCdMap.erase(iter);
             break;

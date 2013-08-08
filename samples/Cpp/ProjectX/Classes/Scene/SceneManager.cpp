@@ -3,7 +3,6 @@
 #include "SceneManager.h"
 #include "SceneGame.h"
 #include "SceneCredits.h"
-#include "UISystem.h"
 
 USING_NS_CC;
 
@@ -30,9 +29,6 @@ static SceneBase* CreateScene(int nIdx)
 
 SceneManager::SceneManager()
 {
-    // UI Init
-    COCOUISYSTEM->init();
-
      // add close menu
     CCMenuItemImage *pCloseItem = CCMenuItemImage::create(s_pPathClose, s_pPathCloseSelected, this, menu_selector(SceneManager::closeCallback) );
     CCMenu* pMenu =CCMenu::create(pCloseItem, NULL);

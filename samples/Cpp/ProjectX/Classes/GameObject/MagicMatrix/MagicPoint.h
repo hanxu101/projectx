@@ -5,7 +5,7 @@
 
 namespace cs{class CocoImageView;}
 
-USING_NS_CC;
+USING_NS_CC_EXT;
 
 class MagicPoint : public GameObject, public CCTargetedTouchDelegate
 {
@@ -20,7 +20,7 @@ protected:
     virtual bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
     virtual void ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent);
     
-    cs::CocoImageView* m_pPointImage;
+    UIImageView* m_pPointImage;
 };
 
 #endif // _APP_MagicPoint_H_

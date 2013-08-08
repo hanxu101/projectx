@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Version>0.0.2.1</Version>
+  <Version>0.3.0.0</Version>
   <Name>UIGame</Name>
   <ProjectDir>D:\ProjectX\trunk\samples\Cpp\ProjectX\UI</ProjectDir>
   <SceneJson>UIGame.json</SceneJson>

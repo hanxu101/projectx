@@ -1,7 +1,8 @@
 #ifndef  _APP_MAINPLAYERLOGIC_H_
 #define  _APP_MAINPLAYERLOGIC_H_
 
-namespace cs{class CocoWidget; class CocoLoadingBar; class CocoLabelAtlas;}
+USING_NS_CC_EXT;
+
 class MainCharacter;
 class FireBall;
 
@@ -25,8 +26,8 @@ private:
     void AdjustHpBar();
     void DrawCoinValue();
 
-    cs::CocoLoadingBar* m_pHpBar;
-    cs::CocoLabelAtlas* m_pCoinNumLableAtlas;
+    UILoadingBar* m_pHpBar;
+    UILabelAtlas* m_pCoinNumLableAtlas;
 
     int m_originalHp;
     int m_currentHp;
