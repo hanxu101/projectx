@@ -16,7 +16,6 @@ USING_NS_CC;
 SceneManager::SceneManager()
 {
     // UI Init
-    COCOUISYSTEM->init();
     if (!UiManager::IsSingletonCreated())
         UiManager::CreateSingleton();
 

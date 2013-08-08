@@ -2,6 +2,7 @@
 #define COMMON_HEADERS_H
 
 #include "cocos2d.h"
+#include "cocos-ext.h"
 
 #include "AppMacros.h"
 #include "VisibleRect.h"

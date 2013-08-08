@@ -62,7 +62,6 @@ void GameLayer::onEnter()
 
 void GameLayer::onExit()
 {
-    COCOUISYSTEM->cleanUIScene();
     CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 
     CCLayer::onExit();

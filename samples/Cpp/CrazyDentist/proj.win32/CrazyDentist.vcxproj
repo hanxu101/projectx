@@ -65,7 +65,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\cocos2dx;$(ProjectDir)..\..\..\..\cocos2dx\kazmath\include;$(ProjectDir)..\..\..\..\cocos2dx\platform\win32;$(ProjectDir)..\..\..\..\cocos2dx\platform\third_party\win32\OGLES;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\BaseClasses\Graphics;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\BaseClasses\Widget;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\Component;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\System;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\UIElements;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\json;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\lib_json;..\Classes;$(ProjectDir)..\..\..\..\cocos2dx\include;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\System\Json;$(ProjectDir)..\..\..\..\extensions\GUI\CCControlExtension;$(ProjectDir)..\..\..\..\extensions;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\cocos2dx;$(ProjectDir)..\..\..\..\cocos2dx\kazmath\include;$(ProjectDir)..\..\..\..\cocos2dx\platform\win32;$(ProjectDir)..\..\..\..\cocos2dx\platform\third_party\win32\OGLES;..\Classes;$(ProjectDir)..\..\..\..\cocos2dx\include;$(ProjectDir)..\..\..\..\extensions\GUI\CCControlExtension;$(ProjectDir)..\..\..\..\extensions;$(ProjectDir)..\..\extensions\CocoGUILIB\BaseClasses;$(ProjectDir)..\..\extensions\CocoGUILIB\Drawable;$(ProjectDir)..\..\extensions\CocoGUILIB\UIWidgets;$(ProjectDir)..\..\extensions\CocoGUILIB\Action;$(ProjectDir)..\..\extensions\CocoGUILIB\System;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -93,7 +93,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\cocos2dx;$(ProjectDir)..\..\..\..\cocos2dx\kazmath\include;$(ProjectDir)..\..\..\..\cocos2dx\platform\win32;$(ProjectDir)..\..\..\..\cocos2dx\platform\third_party\win32\OGLES;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\BaseClasses\Graphics;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\BaseClasses\Widget;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\Component;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\System;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\UIElements;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\json;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\lib_json;..\Classes;$(ProjectDir)..\..\..\..\cocos2dx\include;$(ProjectDir)..\..\..\..\extensions\GUI\CocoGUILIB\System\Json;$(ProjectDir)..\..\..\..\extensions\GUI\CCControlExtension;$(ProjectDir)..\..\..\..\extensions;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\cocos2dx;$(ProjectDir)..\..\..\..\cocos2dx\kazmath\include;$(ProjectDir)..\..\..\..\cocos2dx\platform\win32;$(ProjectDir)..\..\..\..\cocos2dx\platform\third_party\win32\OGLES;..\Classes;$(ProjectDir)..\..\..\..\cocos2dx\include;$(ProjectDir)..\..\..\..\extensions\GUI\CCControlExtension;$(ProjectDir)..\..\..\..\extensions;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -119,50 +119,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\BaseClasses\Graphics\UIElement.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\BaseClasses\Widget\CocoContainerWidget.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\BaseClasses\Widget\CocoRootWidget.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\BaseClasses\Widget\CocoWidget.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics\CClipAbleLayerColor.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics\CClipAbleSprite.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics\CLabelAtlas.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics\CPrimitivesNode.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics\CRenderNode.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics\CTextField.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics\GUINodeRGBA.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics\GUIScale9Sprite.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoButton.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoCheckBox.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoImageButton.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoImageView.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoLabel.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoLabelAtlas.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoListView.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoLoadingBar.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoNodeContainer.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoPanel.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoScrollView.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoSlider.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoTextArea.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoTextButton.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoTextField.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\CCSReader.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\CocosGUI.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\DictionaryHelper.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\InputLayer.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\CSContentJsonDictionary.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\lib_json\json_reader.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\lib_json\json_value.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\lib_json\json_writer.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\UIInputManager.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\UIScene.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\UISystem.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\UIElements\UILabelAtlas.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\UIElements\UIScale9Sprite.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\UIElements\UISprite.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\UIElements\UIText.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\UIElements\UITextArea.cpp" />
-    <ClCompile Include="..\..\..\..\extensions\GUI\CocoGUILIB\UIElements\UITextField.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Scene\SceneBase.cpp" />
     <ClCompile Include="..\Classes\Scene\SceneCredits.cpp" />
@@ -177,57 +133,6 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\BaseClasses\Graphics\UIElement.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\BaseClasses\Widget\CocoContainerWidget.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\BaseClasses\Widget\CocoRootWidget.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\BaseClasses\Widget\CocoWidget.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics\CClipAbleLayerColor.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics\CClipAbleSprite.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics\CLabelAtlas.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics\CPrimitivesNode.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics\CRenderNode.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics\CTextField.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics\GUINodeRGBA.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\CGraphics\GUIScale9Sprite.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoButton.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoCheckBox.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoImageButton.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoImageView.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoLabel.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoLabelAtlas.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoListView.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoLoadingBar.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoNodeContainer.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoPanel.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoScrollView.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoSlider.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoTextArea.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoTextButton.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\Component\CocoTextField.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\CCSReader.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\CocosGUI.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\DictionaryHelper.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\InputLayer.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\CSContentJsonDictionary.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\json\autolink.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\json\config.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\json\features.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\json\forwards.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\json\json_lib.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\json\reader.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\json\value.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\json\writer.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\lib_json\json_batchallocator.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\lib_json\json_tool.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\UIInputManager.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\UIScene.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\UISystem.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\UIElements\UILabelAtlas.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\UIElements\UIScale9Sprite.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\UIElements\UISprite.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\UIElements\UIText.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\UIElements\UITextArea.h" />
-    <ClInclude Include="..\..\..\..\extensions\GUI\CocoGUILIB\UIElements\UITextField.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\AppMacros.h" />
     <ClInclude Include="..\Classes\CommonHeaders.h" />
@@ -263,12 +168,6 @@
       <Project>{f8edd7fa-9a51-4e80-baeb-860825d2eac6}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\lib_json\json_internalarray.inl" />
-    <None Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\lib_json\json_internalmap.inl" />
-    <None Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\lib_json\json_valueiterator.inl" />
-    <None Include="..\..\..\..\extensions\GUI\CocoGUILIB\System\Json\lib_json\sconscript" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

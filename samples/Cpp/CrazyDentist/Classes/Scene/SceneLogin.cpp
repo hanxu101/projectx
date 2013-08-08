@@ -30,7 +30,7 @@ void LoginLayer::onEnter()
     addChild(pUiNode, 1);
     UiManager::Singleton().Init(pUiNode);
 
-    cs::CocoButton* buttonOK = DynamicCast<cs::CocoButton*>(UiManager::Singleton().GetChildByName("ButtonLoginOK"));
+    UIButton* buttonOK = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("ButtonLoginOK"));
     buttonOK->addReleaseEvent(this, coco_releaseselector(LoginLayer::BottonOKClicked));
 }
 
