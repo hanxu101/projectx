@@ -53,7 +53,7 @@ void SkillManager::Update(float deltaTime)
     }
 
     // If there is no Secondary skill, update common skill.
-    if (!m_secondarySkill)
+    if (!m_secondarySkill && m_commonSkill)
         m_commonSkill->Update(deltaTime);
     
 }

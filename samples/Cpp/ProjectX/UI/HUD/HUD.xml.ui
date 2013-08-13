@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Version>0.3.0.0</Version>
+  <Name>HUD</Name>
+  <ProjectDir>D:\ProjectX\trunk\samples\Cpp\ProjectX\UI\HUD</ProjectDir>
+  <SceneJson>HUD.json</SceneJson>
+  <Resources>D:\ProjectX\trunk\samples\Cpp\ProjectX\UI\HUD\Resources</Resources>
+  <JsonFolder>D:\ProjectX\trunk\samples\Cpp\ProjectX\UI\HUD\Json</JsonFolder>
+  <JsonList>
+    <string>HUD.json</string>
+  </JsonList>
+  <imageFileList />
+  <bBatchImage>false</bBatchImage>
+  <JsonSuffix>.json</JsonSuffix>
+  <CanvasSize>
+    <Width>480</Width>
+    <Height>320</Height>
+  </CanvasSize>
+  <CurrentUIJson>HUD.json</CurrentUIJson>
+</UIProject>
