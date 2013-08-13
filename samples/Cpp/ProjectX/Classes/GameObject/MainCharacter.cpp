@@ -7,9 +7,8 @@ MainCharacter::MainCharacter()
     : GameObject(10.0f, eGOT_MainCharacter,10.0f)
     , m_pMainSprite(NULL)
     , m_speed(0.0f)
-    , m_isLeftButtonPushedDown(false)
-    , m_isRightButtonPushedDown(false)
-    , m_pPushedButton(false)
+    , m_pLeftButton(false)
+    , m_pRightButton(false)
 {
 }
 
@@ -21,25 +20,25 @@ void MainCharacter::onEnter()
 {
     GameObject::onEnter();
 
-    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this,0,true); 
+    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, false); 
 
     m_pMainSprite = CCSprite::create("Hero01_0.png");
     m_pMainSprite->setScale(4.0f);
     addChild(m_pMainSprite);
 
-    UIButton* buttonLeft = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("ButtonLeft"));
-    UIButton* buttonRight = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("ButtonRight"));
+    m_pLeftButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("ButtonLeft"));
+    m_pRightButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("ButtonRight"));
 
-    buttonLeft->addPushDownEvent(this, coco_releaseselector(MainCharacter::BottonLeftPushDown));
-    buttonLeft->addCancelEvent(this, coco_releaseselector(MainCharacter::BottonLeftCacel));
-    buttonLeft->addReleaseEvent(this, coco_releaseselector(MainCharacter::BottonLeftRelease));
-    buttonLeft->addMoveEvent(this, coco_releaseselector(MainCharacter::BottonLeftMove));
+    m_pLeftButton->addPushDownEvent(this, coco_releaseselector(MainCharacter::BottonLeftPushDown));
+    m_pLeftButton->addCancelEvent(this, coco_releaseselector(MainCharacter::BottonLeftCacel));
+    m_pLeftButton->addReleaseEvent(this, coco_releaseselector(MainCharacter::BottonLeftRelease));
+    m_pLeftButton->addMoveEvent(this, coco_releaseselector(MainCharacter::BottonLeftMove));
 
-    buttonRight->addPushDownEvent(this, coco_releaseselector(MainCharacter::BottonRightPushDown));
-    buttonRight->addCancelEvent(this, coco_releaseselector(MainCharacter::BottonRightCacel));
-    buttonRight->addReleaseEvent(this, coco_releaseselector(MainCharacter::BottonRightRelease));
-    buttonRight->addMoveEvent(this, coco_releaseselector(MainCharacter::BottonRightMove));
-
+    m_pRightButton->addPushDownEvent(this, coco_releaseselector(MainCharacter::BottonRightPushDown));
+    m_pRightButton->addCancelEvent(this, coco_releaseselector(MainCharacter::BottonRightCacel));
+    m_pRightButton->addReleaseEvent(this, coco_releaseselector(MainCharacter::BottonRightRelease));
+    m_pRightButton->addMoveEvent(this, coco_releaseselector(MainCharacter::BottonRightMove));
+    
     INIT_FSM(Idle);
 }
 
@@ -58,24 +57,16 @@ void MainCharacter::StateUpdate(float deltaTime)
 void MainCharacter::BottonLeftPushDown( CCObject* pSender )
 {
     CCLOG("BottonLeftPushDown");
-    
-    m_isLeftButtonPushedDown = true;
-    m_isRightButtonPushedDown = false;
-    m_pPushedButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("ButtonLeft"));
 }
 
 void MainCharacter::BottonLeftCacel( CCObject* pSender )
 {
     CCLOG("BottonLeftCacel");
-
-    m_isLeftButtonPushedDown = false;
 }
 
 void MainCharacter::BottonLeftRelease( CCObject* pSender )
 {
     CCLOG("BottonLeftRelease");
-
-    m_isLeftButtonPushedDown = false;
 }
 
 void MainCharacter::BottonLeftMove( CCObject* pSender )
@@ -86,24 +77,16 @@ void MainCharacter::BottonLeftMove( CCObject* pSender )
 void MainCharacter::BottonRightPushDown( CCObject* pSender )
 {
     CCLOG("BottonRightPushDown");
-
-    m_isLeftButtonPushedDown = false;
-    m_isRightButtonPushedDown = true;
-    m_pPushedButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("ButtonRight"));
 }
 
 void MainCharacter::BottonRightCacel( CCObject* pSender )
 {
     CCLOG("BottonRightCacel"); 
-
-    m_isRightButtonPushedDown = false;
 }
 
 void MainCharacter::BottonRightRelease( CCObject* pSender )
 {
     CCLOG("BottonRightRelease");
-
-    m_isRightButtonPushedDown = false;
 }
 
 void MainCharacter::BottonRightMove( CCObject* pSender )
@@ -113,33 +96,31 @@ void MainCharacter::BottonRightMove( CCObject* pSender )
 
 bool MainCharacter::ccTouchBegan( CCTouch *pTouch, CCEvent *pEvent )
 {
-    if (!m_isLeftButtonPushedDown && !m_isRightButtonPushedDown)
-        return false;
-
     CCPoint p = pTouch->getLocation();  
-    if (m_pPushedButton->getRect().containsPoint(p))
+    if (m_pRightButton->getRect().containsPoint(p))
     {
-        if (m_isLeftButtonPushedDown)
-            m_speed = -10.0f;
-        else
-            m_speed = 10.0f;
+        m_speed = 10.0f;
     }
+    else if(m_pLeftButton->getRect().containsPoint(p))
+    {        
+        m_speed = -10.0f;
+    }
+    else
+        m_speed = 0.0f;
 
     return true;
 }
 
 void MainCharacter::ccTouchMoved( CCTouch *pTouch, CCEvent *pEvent )
 {
-    if (!m_isLeftButtonPushedDown && !m_isRightButtonPushedDown)
-        return ;
-
     CCPoint p = pTouch->getLocation();  
-    if (m_pPushedButton->getRect().containsPoint(p))
+    if (m_pRightButton->getRect().containsPoint(p))
     {
-        if (m_isLeftButtonPushedDown)
-            m_speed = -10.0f;
-        else
-            m_speed = 10.0f;
+        m_speed = 10.0f;
+    }
+    else if(m_pLeftButton->getRect().containsPoint(p))
+    {        
+        m_speed = -10.0f;
     }
     else
         m_speed = 0.0f;

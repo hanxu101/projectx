@@ -40,9 +40,9 @@ private:
 private:
     CCSprite* m_pMainSprite;
     float m_speed;
-    bool m_isLeftButtonPushedDown;
-    bool m_isRightButtonPushedDown;
-    UIButton* m_pPushedButton;
+    
+    UIButton* m_pLeftButton;
+    UIButton* m_pRightButton;
 };
 
 #endif // _APP_MainCharacter_H_
