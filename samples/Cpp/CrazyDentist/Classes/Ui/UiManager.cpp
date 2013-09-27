@@ -21,7 +21,7 @@ void UiManager::Init( CCNode* pNode )
     m_pUiLayer = UILayer::create();
     m_pUiLayer->scheduleUpdate();
     pNode->addChild(m_pUiLayer);
-    m_pUiLayer->addWidget(CCUIHELPER->createWidgetFromJsonFile("../UI/Json/UIGame.json"));
+    m_pUiLayer->addWidget(CCUIHELPER->createWidgetFromJsonFile("../UIProject/Json/Login.json"));
 }
 
 void UiManager::Update( float dt )

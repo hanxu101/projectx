@@ -2,10 +2,11 @@
 #define _LOGIN_SCENE_H_
 
 #include "SceneBase.h"
+#include "Ui/TextFieldTTFLayer/TextFieldTTFLayer.h"
 
 USING_NS_CC;
 
-class LoginLayer: public CCLayer
+class LoginLayer: public TextFieldTTFLayer
 {
 protected:
 

@@ -128,6 +128,7 @@
     <ClCompile Include="..\Classes\Scene\SceneLogin.cpp" />
     <ClCompile Include="..\Classes\Scene\SceneManager.cpp" />
     <ClCompile Include="..\Classes\Scene\SceneTartar.cpp" />
+    <ClCompile Include="..\Classes\Ui\TextFieldTTFLayer\TextFieldTTFLayer.cpp" />
     <ClCompile Include="..\Classes\Ui\UiManager.cpp" />
     <ClCompile Include="..\Classes\VisibleRect.cpp" />
     <ClCompile Include="main.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="..\Classes\Scene\SceneLogin.h" />
     <ClInclude Include="..\Classes\Scene\SceneManager.h" />
     <ClInclude Include="..\Classes\Scene\SceneTartar.h" />
+    <ClInclude Include="..\Classes\Ui\TextFieldTTFLayer\TextFieldTTFLayer.h" />
     <ClInclude Include="..\Classes\Ui\UiManager.h" />
     <ClInclude Include="..\Classes\utilities\FSM\Fsm.h" />
     <ClInclude Include="..\Classes\utilities\FSM\Fsm.hpp" />
