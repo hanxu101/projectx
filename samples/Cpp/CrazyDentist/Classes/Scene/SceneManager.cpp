@@ -17,7 +17,10 @@ SceneManager::SceneManager()
 {
     // UI Init
     if (!UiManager::IsSingletonCreated())
+    {
         UiManager::CreateSingleton();
+        UiManager::Singleton().Init(pUiNode);
+    }
 
      // add close menu
     CCMenuItemImage *pCloseItem = CCMenuItemImage::create(s_pPathClose, s_pPathCloseSelected, this, menu_selector(SceneManager::closeCallback) );
@@ -30,7 +33,7 @@ SceneManager::SceneManager()
     m_pItemMenu = CCMenu::create();
     for (int i = 0; i <= MainMenu_Credits; ++i)
     {
-        CCLabelTTF* label = CCLabelTTF::create(g_MainMenuNames[i].c_str(), "Arial", 20);
+        CCLabelTTF* label = CCLabelTTF::create(g_MainMenuNames[i].c_str(), COMMON_FONT_NAME, 20);
         label->setColor(ccBLACK);
         CCMenuItemLabel* pMenuItem = CCMenuItemLabel::create(label, this, menu_selector(SceneManager::menuCallback));
 
@@ -46,7 +49,7 @@ SceneManager::SceneManager()
 
     addChild(pMenu, 1);
 
-    CCLabelTTF* pLabel = CCLabelTTF::create("CrazyDentist", "Arial", TITLE_FONT_SIZE);
+    CCLabelTTF* pLabel = CCLabelTTF::create("CrazyDentist", COMMON_FONT_NAME, TITLE_FONT_SIZE);
     pLabel->setColor(ccBLACK);
 
     // position the label on the center of the screen

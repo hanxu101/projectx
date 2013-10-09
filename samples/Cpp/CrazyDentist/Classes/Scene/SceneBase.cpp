@@ -14,7 +14,7 @@ void SceneBase::onEnter()
 
 #ifndef DEBUG_NO_BACK_TO_MAIN_MENU
     //add the menu item for back to main menu
-    CCLabelTTF* label = CCLabelTTF::create("MainMenu", "Arial", 20);
+    CCLabelTTF* label = CCLabelTTF::create("MainMenu", COMMON_FONT_NAME, COMMON_FONT_SIZE);
 
     CCMenuItemLabel* pMenuItem = CCMenuItemLabel::create(label, this, menu_selector(SceneBase::MainMenuCallback));
 

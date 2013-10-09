@@ -6,6 +6,7 @@ IMPLEMENT_SINGLETON(UiManager);
 
 UiManager::UiManager()
     : m_pUiLayer(NULL)
+    , m_pCurrentWidget(NULL)
     , m_isInUi(false)
 {
 
@@ -21,7 +22,20 @@ void UiManager::Init( CCNode* pNode )
     m_pUiLayer = UILayer::create();
     m_pUiLayer->scheduleUpdate();
     pNode->addChild(m_pUiLayer);
-    m_pUiLayer->addWidget(CCUIHELPER->createWidgetFromJsonFile("../UIProject/Json/Login.json"));
+    
+}
+
+void UiManager::SetupWidget(const char* fileName)
+{
+    //m_pCurrentWidget = CCUIHELPER->createWidgetFromJsonFile("../UIProject/Json/Login.json");
+    if (m_pCurrentWidget)
+    {
+        m_pUiLayer->removeWidgetAndCleanUp(m_pCurrentWidget, true);
+        m_pCurrentWidget = NULL;
+    }
+
+    m_pCurrentWidget = CCUIHELPER->createWidgetFromJsonFile(fileName);
+    m_pUiLayer->addWidget(m_pCurrentWidget);
 }
 
 void UiManager::Update( float dt )

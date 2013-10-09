@@ -6,9 +6,6 @@
 //////////////////////////////////////////////////////////////////////////
 // local function
 //////////////////////////////////////////////////////////////////////////
-#define FONT_NAME                       "Thonburi"
-#define FONT_SIZE                       20
-
 static CCRect getRect(CCNode * pNode)
 {
     CCRect rc;
@@ -136,7 +133,7 @@ void TextFieldTTFLayer::onEnter()
 {
     KeyboardNotificationLayer::onEnter();
 
-    m_nCharLimit = 12;
+    m_nCharLimit = 18;
 
     m_pTextFieldAction = CCRepeatForever::create(
         CCSequence::create(
@@ -150,10 +147,9 @@ void TextFieldTTFLayer::onEnter()
     // add CCTextFieldTTF
     CCSize s = CCDirector::sharedDirector()->getWinSize();
 
-    m_pTextField = CCTextFieldTTF::textFieldWithPlaceHolder("<click here for input>",
-        FONT_NAME,
-        FONT_SIZE);
-    addChild(m_pTextField);
+    m_pTextField = CCTextFieldTTF::textFieldWithPlaceHolder("--- click for input ---", COMMON_FONT_NAME, COMMON_FONT_SIZE);
+    m_pTextField->setColor(ccBLACK);
+    addChild(m_pTextField, 2);
 
     m_pTextField->setDelegate(this);
     
@@ -211,7 +207,7 @@ bool TextFieldTTFLayer::onTextFieldInsertText(CCTextFieldTTF * pSender, const ch
     }
 
     // create a insert text sprite and do some action
-    CCLabelTTF * label = CCLabelTTF::create(text, FONT_NAME, FONT_SIZE);
+    CCLabelTTF * label = CCLabelTTF::create(text, COMMON_FONT_NAME, COMMON_FONT_SIZE);
     this->addChild(label);
     ccColor3B color = { 226, 121, 7};
     label->setColor(color);
@@ -244,7 +240,7 @@ bool TextFieldTTFLayer::onTextFieldInsertText(CCTextFieldTTF * pSender, const ch
 bool TextFieldTTFLayer::onTextFieldDeleteBackward(CCTextFieldTTF * pSender, const char * delText, int nLen)
 {
     // create a delete text sprite and do some action
-    CCLabelTTF * label = CCLabelTTF::create(delText, FONT_NAME, FONT_SIZE);
+    CCLabelTTF * label = CCLabelTTF::create(delText, COMMON_FONT_NAME, COMMON_FONT_SIZE);
     this->addChild(label);
 
     // move the sprite to fly out

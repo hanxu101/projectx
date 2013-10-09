@@ -51,5 +51,9 @@ static cocos2d::CCSize designResolutionSize = cocos2d::CCSizeMake(1536, 2048);
 // The font size 24 is designed for small resolution, so we should change it to fit for current design resolution
 #define TITLE_FONT_SIZE  (cocos2d::CCEGLView::sharedOpenGLView()->getDesignResolutionSize().width / smallResource.size.width * 24)
 
+#define COMMON_FONT_NAME        "Arial"
+#define COMMON_BIG_FONT_SIZE    32
+#define COMMON_FONT_SIZE        20
+
 
 #endif /* __APPMACROS_H__ */

@@ -28,7 +28,8 @@ void LoginLayer::onEnter()
 
     CCNode* pUiNode = CCNode::create();
     addChild(pUiNode, 1);
-    UiManager::Singleton().Init(pUiNode);
+    
+    UiManager::Singleton().SetupWidget("../UIProject/Json/Login.json");
 
     UIButton* pButtonOK = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("TextButton_OK"));
     pButtonOK->addReleaseEvent(this, coco_releaseselector(LoginLayer::BottonOKClicked));

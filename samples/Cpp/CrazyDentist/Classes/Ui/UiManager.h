@@ -11,6 +11,8 @@ public:
     void Init(CCNode* pNode);
     void Update(float dt);
 
+    void SetupWidget(const char* fileName);
+
     UIWidget* GetChildByName(const char *name);
     void AddChildWidget(UIWidget* child);
     bool IsInUi() const;
@@ -18,6 +20,7 @@ public:
 
 private:
     UILayer* m_pUiLayer;
+    UIWidget* m_pCurrentWidget;
 
     bool m_isInUi;
 };
