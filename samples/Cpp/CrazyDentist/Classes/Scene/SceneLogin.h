@@ -19,6 +19,9 @@ public:
 
 private:
     void BottonOKClicked( CCObject* pSender );
+    void BottonYesClicked( CCObject* pSender );
+    void BottonNoClicked( CCObject* pSender );
+    
 };
 
 class SceneLogin : public SceneBase

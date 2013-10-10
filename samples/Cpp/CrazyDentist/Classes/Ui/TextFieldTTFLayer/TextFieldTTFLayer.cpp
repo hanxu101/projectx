@@ -195,7 +195,7 @@ bool TextFieldTTFLayer::onTextFieldDetachWithIME(CCTextFieldTTF * pSender)
 bool TextFieldTTFLayer::onTextFieldInsertText(CCTextFieldTTF * pSender, const char * text, int nLen)
 {
     // if insert enter, treat as default to detach with ime
-    if ('\n' == *text)
+    if (!m_bAction || '\n' == *text)
     {
         return false;
     }
@@ -279,4 +279,16 @@ bool TextFieldTTFLayer::onDraw(CCTextFieldTTF * pSender)
 void TextFieldTTFLayer::callbackRemoveNodeWhenDidAction(CCNode * pNode)
 {
     this->removeChild(pNode, true);
+}
+
+void TextFieldTTFLayer::EnableTextField( bool enable )
+{
+    m_pTextField->setVisible(enable);
+    m_pTrackNode = enable ? m_pTextField : NULL;
+    
+    if (!enable)
+    {
+        m_pTextField->detachWithIME();
+        //m_pTextField->attachWithIME();
+    }
 }

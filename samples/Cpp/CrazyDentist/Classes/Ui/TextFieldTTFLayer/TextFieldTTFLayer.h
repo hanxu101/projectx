@@ -49,6 +49,8 @@ public:
     virtual bool onTextFieldDeleteBackward(CCTextFieldTTF * pSender, const char * delText, int nLen);
     virtual bool onDraw(CCTextFieldTTF * pSender);
 
+    void EnableTextField(bool enable);
+
 protected:
     CCTextFieldTTF *    m_pTextField;
     CCAction *          m_pTextFieldAction;

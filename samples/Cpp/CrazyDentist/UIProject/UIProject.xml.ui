@@ -17,5 +17,5 @@
     <Width>320</Width>
     <Height>480</Height>
   </CanvasSize>
-  <CurrentUIJson>F:\ProjectX\trunk\samples\Cpp\CrazyDentist\UIProject\Json\LoginConfirm.json</CurrentUIJson>
+  <CurrentUIJson>Login.json</CurrentUIJson>
 </UIProject>
