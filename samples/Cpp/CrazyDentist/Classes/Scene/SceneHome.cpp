@@ -2,6 +2,7 @@
 
 #include "SceneHome.h"
 #include "SceneManager.h"
+#include "Ui/UiManager.h"
 
 //------------------------------------------------------------------
 //
@@ -25,27 +26,34 @@ void HomeLayer::onEnter()
 {
     CCLayer::onEnter();
 
-    CCLabelTTF* label = CCLabelTTF::create(title().c_str(), COMMON_FONT_NAME, COMMON_BIG_FONT_SIZE);
-    addChild(label, 1);
-    label->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y-50) );
+    // UI setup
+    UiManager::Singleton().Init(this);
+    UiManager::Singleton().SetupWidget("../UIProject/Json/Home.json");
 
-    std::string content = "HomeLayer1.";
-    CCLabelTTF* labelContent = CCLabelTTF::create(content.c_str(), COMMON_FONT_NAME, COMMON_FONT_SIZE);
-    addChild(labelContent, 1);
-    labelContent->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y-150) );
-    
-    CCMenu* pItemMenu = CCMenu::create();
-    CCLabelTTF* nextLabel = CCLabelTTF::create("next", COMMON_FONT_NAME, COMMON_FONT_SIZE);
-    CCMenuItemLabel* pMenuItem = CCMenuItemLabel::create(nextLabel, this, menu_selector(HomeLayer::menuCallback));
-    pItemMenu->addChild(pMenuItem);
-    pMenuItem->setPosition( ccp( VisibleRect::center().x, VisibleRect::center().y ));
-    pItemMenu->setPosition(CCPointZero);
-    addChild(pItemMenu);
+    UIButton* pButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("TextButton_Game"));
+    pButton->addReleaseEvent(this, coco_releaseselector(HomeLayer::BottonGameClicked));
+
+    pButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("TextButton_Tartar"));
+    pButton->addReleaseEvent(this, coco_releaseselector(HomeLayer::BottonTartarClicked));
+
+    pButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("TextButton_Doctor"));
+    pButton->addReleaseEvent(this, coco_releaseselector(HomeLayer::BottonDoctorClicked));
+
 }
 
-void HomeLayer::menuCallback(CCObject * pSender)
-{ 
+void HomeLayer::BottonGameClicked( CCObject* pSender )
+{
     SceneManager::CreateScene(MainMenu_Game);
+}
+
+void HomeLayer::BottonTartarClicked( CCObject* pSender )
+{
+    SceneManager::CreateScene(MainMenu_Tartar);
+}
+
+void HomeLayer::BottonDoctorClicked( CCObject* pSender )
+{
+    
 }
 
 //------------------------------------------------------------------

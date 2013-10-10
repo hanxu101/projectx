@@ -8,7 +8,8 @@
   <JsonFolder>F:\ProjectX\trunk\samples\Cpp\CrazyDentist\UIProject\Json</JsonFolder>
   <JsonList>
     <string>Login.json</string>
-    <string>LoginConfirm.json</string>
+    <string>Home.json</string>
+    <string>Tartar.json</string>
   </JsonList>
   <imageFileList />
   <bBatchImage>false</bBatchImage>
@@ -17,5 +18,5 @@
     <Width>320</Width>
     <Height>480</Height>
   </CanvasSize>
-  <CurrentUIJson>Login.json</CurrentUIJson>
+  <CurrentUIJson>Tartar.json</CurrentUIJson>
 </UIProject>

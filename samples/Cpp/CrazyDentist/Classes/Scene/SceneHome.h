@@ -17,7 +17,10 @@ public:
     virtual void onEnter();
 
 private:
-    void menuCallback(CCObject * pSender);
+    void BottonGameClicked( CCObject* pSender );
+    void BottonTartarClicked( CCObject* pSender );
+    void BottonDoctorClicked( CCObject* pSender );
+
 };
 
 class SceneHome : public SceneBase

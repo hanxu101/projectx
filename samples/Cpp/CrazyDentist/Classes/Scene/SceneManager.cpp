@@ -16,7 +16,8 @@ USING_NS_CC;
 SceneManager::SceneManager()
 {
     // UI Init
-    UiManager::CreateSingleton();    
+    if (!UiManager::IsSingletonCreated())
+        UiManager::CreateSingleton();    
 
      // add close menu
     CCMenuItemImage *pCloseItem = CCMenuItemImage::create(s_pPathClose, s_pPathCloseSelected, this, menu_selector(SceneManager::closeCallback) );

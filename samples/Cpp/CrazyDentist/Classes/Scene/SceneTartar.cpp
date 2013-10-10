@@ -1,6 +1,7 @@
 #include "CommonHeaders.h"
 
 #include "SceneTartar.h"
+#include "Ui/UiManager.h"
 
 //------------------------------------------------------------------
 //
@@ -24,15 +25,9 @@ void TartarLayer::onEnter()
 {
     CCLayer::onEnter();
 
-    CCLabelTTF* label = CCLabelTTF::create(title().c_str(), COMMON_FONT_NAME, COMMON_BIG_FONT_SIZE);
-    addChild(label, 1);
-    label->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y-50) );
+    UiManager::Singleton().Init(this);
+    UiManager::Singleton().SetupWidget("../UIProject/Json/Tartar.json");
 
-    std::string content = "TartarLayer1.";
-    CCLabelTTF* labelContent = CCLabelTTF::create(content.c_str(), COMMON_FONT_NAME, COMMON_FONT_SIZE);
-
-    addChild(labelContent, 1);
-    labelContent->setPosition( ccp(VisibleRect::center().x, VisibleRect::top().y-150) );
 }
 
 //------------------------------------------------------------------

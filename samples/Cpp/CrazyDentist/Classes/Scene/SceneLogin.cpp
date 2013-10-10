@@ -26,8 +26,8 @@ void LoginLayer::onEnter()
 {
     TextFieldTTFLayer::onEnter();
 
-    CCNode* pUiNode = CCNode::create();
-    addChild(pUiNode, 1);
+    //CCNode* pUiNode = CCNode::create();
+    //addChild(pUiNode, 1);
     
     // UI setup
     UiManager::Singleton().Init(this);
