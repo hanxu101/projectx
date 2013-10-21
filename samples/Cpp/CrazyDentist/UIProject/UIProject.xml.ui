@@ -2,10 +2,10 @@
 <UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Version>0.3.0.0</Version>
   <Name>UIProject</Name>
-  <ProjectDir>F:\ProjectX\trunk\samples\Cpp\CrazyDentist\UIProject</ProjectDir>
+  <ProjectDir>D:\ProjectX\trunk\samples\Cpp\CrazyDentist\UIProject</ProjectDir>
   <SceneJson>UIProject.json</SceneJson>
-  <Resources>F:\ProjectX\trunk\samples\Cpp\CrazyDentist\UIProject\Resources</Resources>
-  <JsonFolder>F:\ProjectX\trunk\samples\Cpp\CrazyDentist\UIProject\Json</JsonFolder>
+  <Resources>D:\ProjectX\trunk\samples\Cpp\CrazyDentist\UIProject\Resources</Resources>
+  <JsonFolder>D:\ProjectX\trunk\samples\Cpp\CrazyDentist\UIProject\Json</JsonFolder>
   <JsonList>
     <string>Login.json</string>
     <string>Home.json</string>

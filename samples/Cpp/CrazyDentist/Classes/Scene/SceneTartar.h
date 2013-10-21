@@ -7,14 +7,16 @@ USING_NS_CC;
 
 class TartarLayer: public CCLayer
 {
-protected:
-
 public:
     TartarLayer(void);
     ~TartarLayer(void);
 
     virtual std::string title();
     virtual void onEnter();
+
+private:
+    void TextFieldInserted( CCObject* pSender );
+    void BottonOKClicked( CCObject* pSender );
 };
 
 class SceneTartar : public SceneBase
