@@ -30,6 +30,12 @@ void TartarLayer::onEnter()
 
     UILabel* pUILabel = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_Warning"));
     pUILabel->setVisible(false);
+    
+    pUILabel = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_DayDiff"));
+    pUILabel->setVisible(false);
+
+    pUILabel = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_PastDay"));
+    pUILabel->setVisible(false);
 
     UITextField* pUITextField = DynamicCast<UITextField*>(UiManager::Singleton().GetChildByName("TextField_Year"));
     pUITextField->setMaxLengthEnable(true);
@@ -96,6 +102,27 @@ void TartarLayer::BottonOKClicked( CCObject* pSender )
         pUILabel->setVisible(true);
         return;
     }
+
+    tm curTime = GetDate();
+    curTime.tm_hour = 0;
+    curTime.tm_min = 0;
+    curTime.tm_sec = 0;
+
+    tm inputTime;
+    inputTime.tm_year = year;
+    inputTime.tm_mon = mon;
+    inputTime.tm_mday = day;
+
+    UINT dayDiff = GetElapseDayNum(curTime, inputTime);
+
+    UILabel* pUILabelDayDiff = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_DayDiff"));
+    char str[10];
+    sprintf(str,"%d",dayDiff);
+    pUILabelDayDiff->setText(str);
+    pUILabelDayDiff->setVisible(true);
+
+    pUILabelDayDiff = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_PastDay"));
+    pUILabelDayDiff->setVisible(true);
 }
 
 //------------------------------------------------------------------
