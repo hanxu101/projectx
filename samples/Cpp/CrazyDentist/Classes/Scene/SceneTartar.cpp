@@ -54,6 +54,9 @@ void TartarLayer::onEnter()
 
     UIButton* pButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("TextButton_Start"));
     pButton->addReleaseEvent(this, coco_releaseselector(TartarLayer::BottonOKClicked));
+
+    UIImageView* pImage = DynamicCast<UIImageView*>(UiManager::Singleton().GetChildByName("ImageView2"));
+    pImage->setVisible(false);
 }
 
 void TartarLayer::TextFieldInserted( CCObject* pSender )
@@ -76,53 +79,78 @@ void TartarLayer::TextFieldInserted( CCObject* pSender )
 
 void TartarLayer::BottonOKClicked( CCObject* pSender )
 {
+    bool dateFormatIsValid = true;
     UITextField* pUITextField = DynamicCast<UITextField*>(UiManager::Singleton().GetChildByName("TextField_Year"));
     int year = atoi(pUITextField->getStringValue());
+    int mon = 0;
+    int day = 0;
     if (year != 2013)
     {
-        UILabel* pUILabel = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_Warning"));
-        pUILabel->setVisible(true);
-        return;
+        dateFormatIsValid = false;
     }
+    if (dateFormatIsValid)
+    {
+        pUITextField = DynamicCast<UITextField*>(UiManager::Singleton().GetChildByName("TextField_Mon"));
+        mon = atoi(pUITextField->getStringValue());
+        if (mon < 1 || mon > 12)
+        {
+            dateFormatIsValid = false;
+        }
+    }
+    if (dateFormatIsValid)
+    {
+        pUITextField = DynamicCast<UITextField*>(UiManager::Singleton().GetChildByName("TextField_Day"));
+        day = atoi(pUITextField->getStringValue());
+        if (day < 1 || day > 31)
+        {
+            dateFormatIsValid = false;
+        }
+    }
+    
 
-    pUITextField = DynamicCast<UITextField*>(UiManager::Singleton().GetChildByName("TextField_Mon"));
-    int mon = atoi(pUITextField->getStringValue());
-    if (mon < 1 || mon > 12)
+    if (!dateFormatIsValid)
     {
         UILabel* pUILabel = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_Warning"));
         pUILabel->setVisible(true);
-        return;
     }
-
-    pUITextField = DynamicCast<UITextField*>(UiManager::Singleton().GetChildByName("TextField_Day"));
-    int day = atoi(pUITextField->getStringValue());
-    if (day < 1 || day > 31)
+    else
     {
-        UILabel* pUILabel = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_Warning"));
-        pUILabel->setVisible(true);
-        return;
+        // Get Current Date
+        tm curTime = GetDate();
+        curTime.tm_hour = 0;
+        curTime.tm_min = 0;
+        curTime.tm_sec = 0;
+
+        tm inputTime;
+        inputTime.tm_year = year;
+        inputTime.tm_mon = mon;
+        inputTime.tm_mday = day;
+
+        int dayDiff = GetElapseDayNum(curTime, inputTime);
+        if (dayDiff < 0)
+        {
+            UILabel* pUILabel = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_Warning"));
+            pUILabel->setVisible(true);
+        }
+        else
+        {
+            UILabel* pUILabelDayDiff = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_DayDiff"));
+            char str[10];
+            sprintf(str,"%d",dayDiff);
+            pUILabelDayDiff->setText(str);
+            pUILabelDayDiff->setVisible(true);
+
+            pUILabelDayDiff = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_PastDay"));
+            pUILabelDayDiff->setVisible(true);
+
+            // Set Image
+            bool needCheck = dayDiff > 31;
+            UIImageView* pImage = DynamicCast<UIImageView*>(UiManager::Singleton().GetChildByName("ImageView1"));
+            pImage->setVisible(!needCheck);
+            pImage = DynamicCast<UIImageView*>(UiManager::Singleton().GetChildByName("ImageView2"));
+            pImage->setVisible(needCheck);
+        }
     }
-
-    tm curTime = GetDate();
-    curTime.tm_hour = 0;
-    curTime.tm_min = 0;
-    curTime.tm_sec = 0;
-
-    tm inputTime;
-    inputTime.tm_year = year;
-    inputTime.tm_mon = mon;
-    inputTime.tm_mday = day;
-
-    UINT dayDiff = GetElapseDayNum(curTime, inputTime);
-
-    UILabel* pUILabelDayDiff = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_DayDiff"));
-    char str[10];
-    sprintf(str,"%d",dayDiff);
-    pUILabelDayDiff->setText(str);
-    pUILabelDayDiff->setVisible(true);
-
-    pUILabelDayDiff = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_PastDay"));
-    pUILabelDayDiff->setVisible(true);
 }
 
 //------------------------------------------------------------------

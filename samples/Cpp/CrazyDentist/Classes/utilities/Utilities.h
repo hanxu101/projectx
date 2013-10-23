@@ -114,13 +114,12 @@ inline UINT GetDaysOfMonth(UINT month)
     return curDaysOfYear;
 }
 
-inline UINT GetElapseDayNum(tm curTm, tm oldTm)
+inline int GetElapseDayNum(tm curTm, tm oldTm)
 {
     int yearDay = (curTm.tm_year - oldTm.tm_year) * 365;
     int curDaysOfYear = GetDaysOfMonth(curTm.tm_mon) + curTm.tm_mday;
     int oldDaysOfYear = GetDaysOfMonth(oldTm.tm_mon) + oldTm.tm_mday;
     return yearDay - oldDaysOfYear + curDaysOfYear;
-    
 }
 
 #endif //Utilities_H
