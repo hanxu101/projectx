@@ -17,6 +17,7 @@ public:
 private:
     void TextFieldInserted( CCObject* pSender );
     void BottonOKClicked( CCObject* pSender );
+    void BottonFinishClicked( CCObject* pSender );    
 };
 
 class SceneTartar : public SceneBase

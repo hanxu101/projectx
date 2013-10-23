@@ -1,6 +1,7 @@
 #include "CommonHeaders.h"
 
 #include "SceneTartar.h"
+#include "SceneManager.h"
 #include "Ui/UiManager.h"
 
 //------------------------------------------------------------------
@@ -27,6 +28,11 @@ void TartarLayer::onEnter()
 
     UiManager::Singleton().Init(this);
     UiManager::Singleton().SetupWidget("../UIProject/Json/Tartar.json");
+
+    UIWidget* pUIWidget = UiManager::Singleton().GetChildByName("Panel1");
+    pUIWidget->setVisible(true);
+    pUIWidget = UiManager::Singleton().GetChildByName("Panel2");
+    pUIWidget->setVisible(false);
 
     UILabel* pUILabel = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_Warning"));
     pUILabel->setVisible(false);
@@ -55,6 +61,9 @@ void TartarLayer::onEnter()
     UIButton* pButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("TextButton_Start"));
     pButton->addReleaseEvent(this, coco_releaseselector(TartarLayer::BottonOKClicked));
 
+    pButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("TextButton_Finish"));
+    pButton->addReleaseEvent(this, coco_releaseselector(TartarLayer::BottonFinishClicked));
+
     UIImageView* pImage = DynamicCast<UIImageView*>(UiManager::Singleton().GetChildByName("ImageView2"));
     pImage->setVisible(false);
 }
@@ -79,6 +88,7 @@ void TartarLayer::TextFieldInserted( CCObject* pSender )
 
 void TartarLayer::BottonOKClicked( CCObject* pSender )
 {
+    // Check date Format is correct or not
     bool dateFormatIsValid = true;
     UITextField* pUITextField = DynamicCast<UITextField*>(UiManager::Singleton().GetChildByName("TextField_Year"));
     int year = atoi(pUITextField->getStringValue());
@@ -107,7 +117,6 @@ void TartarLayer::BottonOKClicked( CCObject* pSender )
         }
     }
     
-
     if (!dateFormatIsValid)
     {
         UILabel* pUILabel = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_Warning"));
@@ -134,6 +143,11 @@ void TartarLayer::BottonOKClicked( CCObject* pSender )
         }
         else
         {
+            UIWidget* pUIWidget = UiManager::Singleton().GetChildByName("Panel1");
+            pUIWidget->setVisible(false);
+            pUIWidget = UiManager::Singleton().GetChildByName("Panel2");
+            pUIWidget->setVisible(true);
+
             UILabel* pUILabelDayDiff = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_DayDiff"));
             char str[10];
             sprintf(str,"%d",dayDiff);
@@ -149,8 +163,17 @@ void TartarLayer::BottonOKClicked( CCObject* pSender )
             pImage->setVisible(!needCheck);
             pImage = DynamicCast<UIImageView*>(UiManager::Singleton().GetChildByName("ImageView2"));
             pImage->setVisible(needCheck);
+
+            // Set NeedCheck label
+            UILabel* pUILabelWarning = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_NeedCheck"));
+            pUILabelWarning->setVisible(needCheck);
         }
     }
+}
+
+void TartarLayer::BottonFinishClicked( CCObject* pSender )
+{
+    SceneManager::CreateScene(MainMenu_Home);
 }
 
 //------------------------------------------------------------------
