@@ -64,6 +64,9 @@ void TartarLayer::onEnter()
     pButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("TextButton_Finish"));
     pButton->addReleaseEvent(this, coco_releaseselector(TartarLayer::BottonFinishClicked));
 
+    pButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("TextButton_Order"));
+    pButton->addReleaseEvent(this, coco_releaseselector(TartarLayer::BottonOrderClicked));
+
     UIImageView* pImage = DynamicCast<UIImageView*>(UiManager::Singleton().GetChildByName("ImageView2"));
     pImage->setVisible(false);
 }
@@ -174,6 +177,11 @@ void TartarLayer::BottonOKClicked( CCObject* pSender )
 void TartarLayer::BottonFinishClicked( CCObject* pSender )
 {
     SceneManager::CreateScene(MainMenu_Home);
+}
+
+void TartarLayer::BottonOrderClicked( CCObject* pSender )
+{
+    SceneManager::CreateScene(MainMenu_Doctor);
 }
 
 //------------------------------------------------------------------

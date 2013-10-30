@@ -7,7 +7,7 @@ USING_NS_CC;
 
 enum
 {
-    MainMenu_Login =0 ,
+    MainMenu_Login = 0,
     MainMenu_Credits,
 
     MainMenu_Home,
