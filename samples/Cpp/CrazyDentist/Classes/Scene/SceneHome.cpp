@@ -53,7 +53,7 @@ void HomeLayer::BottonTartarClicked( CCObject* pSender )
 
 void HomeLayer::BottonDoctorClicked( CCObject* pSender )
 {
-    
+    SceneManager::CreateScene(MainMenu_Doctor);
 }
 
 //------------------------------------------------------------------

@@ -42,6 +42,26 @@ void DoctorLayer::onEnter()
 
     pUILabel = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_Website"));
     pUILabel->setText("www.google.com");
+
+    UIButton* pButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("TextButton_Go"));
+    pButton->addReleaseEvent(this, coco_releaseselector(DoctorLayer::BottonGoClicked));
+}
+
+void DoctorLayer::BottonGoClicked( CCObject* pSender )
+{
+    UILabel* pUILabel = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_Website"));
+    const char* url = pUILabel->getStringValue();
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    // Please Refer to: http://www.cocos2d-x.org/forums/6/topics/11290
+    //void CCApplication::openURL(const char* pszUrl)
+    //{
+    //    [[UIApplication sharedApplication] openURL:pszUrl];
+    //}
+    XAssert(false, "Function is not added yet. Please refer to http://www.cocos2d-x.org/forums/6/topics/11290");
+#else
+    ShellExecuteA(NULL, "open", url, NULL, NULL, SW_SHOWNORMAL);
+#endif
 }
 
 //------------------------------------------------------------------

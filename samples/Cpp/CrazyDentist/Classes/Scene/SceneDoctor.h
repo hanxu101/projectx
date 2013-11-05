@@ -7,14 +7,16 @@ USING_NS_CC;
 
 class DoctorLayer: public CCLayer
 {
-protected:
-
 public:
     DoctorLayer(void);
     ~DoctorLayer(void);
 
     virtual std::string title();
     virtual void onEnter();
+
+private:
+    void BottonGoClicked( CCObject* pSender );
+
 };
 
 class SceneDoctor : public SceneBase
