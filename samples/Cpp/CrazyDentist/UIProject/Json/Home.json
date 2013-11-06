@@ -56,9 +56,9 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "宋体",
+          "fontName": "微软雅黑",
           "fontSize": 14,
-          "fontType": 0,
+          "fontType": 2,
           "normal": null,
           "normalData": {
             "path": "btn-common-0.png",
@@ -74,7 +74,7 @@
           "scale9Enable": false,
           "scale9Height": 48,
           "scale9Width": 150,
-          "text": "世田谷通り歯科医院（牙医名）"
+          "text": "世田谷通り歯科医院"
         }
       },
       {
@@ -111,9 +111,9 @@
           "yProportion": 0.745833337,
           "areaHeight": 100,
           "areaWidth": 200,
-          "fontName": "宋体",
+          "fontName": "微软雅黑",
           "fontSize": 20,
-          "fontType": 0,
+          "fontType": 2,
           "hAlignment": 0,
           "text": "Notify Content",
           "vAlignment": 1
@@ -161,9 +161,9 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "宋体",
+          "fontName": "微软雅黑",
           "fontSize": 14,
-          "fontType": 0,
+          "fontType": 2,
           "normal": null,
           "normalData": {
             "path": "btn-common-0.png",
@@ -179,7 +179,7 @@
           "scale9Enable": false,
           "scale9Height": 48,
           "scale9Width": 150,
-          "text": "歯垢タイマー（牙垢时间）"
+          "text": "歯垢タイマー"
         }
       },
       {
@@ -212,8 +212,8 @@
           "width": 150,
           "x": 149,
           "xProportion": 0.465625,
-          "y": 247,
-          "yProportion": 0.514583349,
+          "y": 248,
+          "yProportion": 0.516666651,
           "capInsetsHeight": 16,
           "capInsetsWidth": 50,
           "capInsetsX": 50,
@@ -224,9 +224,9 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "宋体",
+          "fontName": "微软雅黑",
           "fontSize": 14,
-          "fontType": 0,
+          "fontType": 2,
           "normal": null,
           "normalData": {
             "path": "btn-common-0.png",
@@ -263,7 +263,7 @@
           "colorR": 255,
           "flipX": false,
           "flipY": false,
-          "height": 23,
+          "height": 27,
           "opacity": 255,
           "rotation": 0,
           "scaleX": 1,
@@ -272,14 +272,14 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 80,
+          "width": 134,
           "x": 96,
           "xProportion": 0.3,
           "y": 435,
           "yProportion": 0.90625,
-          "fontName": "宋体",
+          "fontName": "微软雅黑",
           "fontSize": 20,
-          "fontType": 0,
+          "fontType": 2,
           "text": "お知らせ(通知)",
           "touchSacleEnable": false
         }
