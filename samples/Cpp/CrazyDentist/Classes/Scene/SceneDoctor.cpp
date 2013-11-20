@@ -2,6 +2,7 @@
 
 #include "SceneDoctor.h"
 #include "Ui/UiManager.h"
+#include "GameData.h"
 
 //------------------------------------------------------------------
 //
@@ -29,8 +30,8 @@ void DoctorLayer::onEnter()
     UiManager::Singleton().SetupWidget("../UIProject/Json/Doctor.json");
 
     UILabel* pUILabel = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_Hospital"));
-    pUILabel->setText("Tokyo Hospital");
-    
+    pUILabel->setText(GameData::Singleton().GetClinicName().c_str());
+
     pUILabel = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_Doctor"));
     pUILabel->setText("Takashi");
     
@@ -41,10 +42,27 @@ void DoctorLayer::onEnter()
     pUILabel->setText("03-3333-3333");
 
     pUILabel = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_Website"));
-    pUILabel->setText("www.google.com");
+    pUILabel->setText(GameData::Singleton().GetHomePageUrl().c_str());
 
     UIButton* pButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("TextButton_Go"));
     pButton->addReleaseEvent(this, coco_releaseselector(DoctorLayer::BottonGoClicked));
+
+    // Request Map file
+    std::string mapPath = GameData::Singleton().GetMapPath();
+    CCHttpRequest* request = new CCHttpRequest();
+    std::string url = "http://localhost:8000/media/" + mapPath;
+    request->setUrl(url.c_str());
+    request->setRequestType(CCHttpRequest::kHttpGet);
+    request->setResponseCallback(this, httpresponse_selector(DoctorLayer::onHttpRequestCompleted));
+    request->setTag("GET IMAGE");
+    CCHttpClient::getInstance()->send(request);
+    request->release();
+
+    int index = mapPath.find_last_of(".");
+    if (index != -1)
+    {
+        m_mapTextureFormat = mapPath.substr(index);
+    }
 }
 
 void DoctorLayer::BottonGoClicked( CCObject* pSender )
@@ -64,6 +82,49 @@ void DoctorLayer::BottonGoClicked( CCObject* pSender )
 #endif
 }
 
+void DoctorLayer::onHttpRequestCompleted(CCHttpClient *sender, CCHttpResponse *response)
+{
+    if (!response)
+    {
+        return;
+    }
+    
+    int statusCode = response->getResponseCode();
+    char statusString[64] = {};
+    sprintf(statusString, "HTTP Status Code: %d, tag = %s", statusCode, response->getHttpRequest()->getTag());
+    CCLog("response code: %d", statusCode);
+    
+    if (!response->isSucceed())
+    {
+        CCLog("response failed");
+        CCLog("error buffer: %s", response->getErrorBuffer());
+        return;
+    }
+    
+    // dump data
+    std::vector<char> *buffer = response->getResponseData();
+    std::string bufferStr(buffer->begin(),buffer->end());
+
+    std::string path = CCFileUtils::sharedFileUtils()->getWritablePath();
+
+    // Save it locally
+    path += "map";
+    path += m_mapTextureFormat;
+        
+    CCLOG("path: %s",path.c_str());
+    FILE *fp = fopen(path.c_str(), "wb+");
+    fwrite(bufferStr.c_str(), 1,buffer->size(), fp);
+    fclose(fp);
+    
+    // Display
+    UIImageView* pImage = DynamicCast<UIImageView*>(UiManager::Singleton().GetChildByName("ImageView"));
+    pImage->setTexture(path.c_str());
+    CCRect rect = pImage->getRect();
+    float normalWidth = cocos2d::CCEGLView::sharedOpenGLView()->getDesignResolutionSize().width - 10.0f;
+    float normalHeight = normalWidth * 0.6f;
+    pImage->setScaleX(normalWidth / rect.size.width * pImage->getScaleX());
+    pImage->setScaleY(normalHeight / rect.size.height * pImage->getScaleY());    
+}
 //------------------------------------------------------------------
 //
 // SceneDoctor

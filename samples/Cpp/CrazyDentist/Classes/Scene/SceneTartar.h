@@ -4,6 +4,7 @@
 #include "SceneBase.h"
 
 USING_NS_CC;
+USING_NS_CC_EXT;
 
 class TartarLayer: public CCLayer
 {
@@ -19,6 +20,11 @@ private:
     void BottonOKClicked( CCObject* pSender );
     void BottonFinishClicked( CCObject* pSender );    
     void BottonOrderClicked( CCObject* pSender );
+
+    void onHttpRequestCompleted(CCHttpClient *sender, CCHttpResponse *response);
+
+private:
+    std::string m_textureFormat;
 };
 
 class SceneTartar : public SceneBase

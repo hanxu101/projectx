@@ -67,8 +67,15 @@ void TartarLayer::onEnter()
     pButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("TextButton_Order"));
     pButton->addReleaseEvent(this, coco_releaseselector(TartarLayer::BottonOrderClicked));
 
-    UIImageView* pImage = DynamicCast<UIImageView*>(UiManager::Singleton().GetChildByName("ImageView2"));
-    pImage->setVisible(false);
+    UILabel* pUILabelWarning = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_NeedCheck"));
+    pUILabelWarning->setVisible(false);
+
+    UIImageView* pImage = DynamicCast<UIImageView*>(UiManager::Singleton().GetChildByName("ImageView"));
+    CCRect rect = pImage->getRect();
+    float normalWidth = cocos2d::CCEGLView::sharedOpenGLView()->getDesignResolutionSize().width - 10.0f;
+    float normalHeight = normalWidth * 0.6f;
+    pImage->setScaleX(normalWidth / rect.size.width * pImage->getScaleX());
+    pImage->setScaleY(normalHeight / rect.size.height * pImage->getScaleY());
 }
 
 void TartarLayer::TextFieldInserted( CCObject* pSender )
@@ -160,16 +167,15 @@ void TartarLayer::BottonOKClicked( CCObject* pSender )
             pUILabelDayDiff = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_PastDay"));
             pUILabelDayDiff->setVisible(true);
 
-            // Set Image
-            bool needCheck = dayDiff > 31;
-            UIImageView* pImage = DynamicCast<UIImageView*>(UiManager::Singleton().GetChildByName("ImageView1"));
-            pImage->setVisible(!needCheck);
-            pImage = DynamicCast<UIImageView*>(UiManager::Singleton().GetChildByName("ImageView2"));
-            pImage->setVisible(needCheck);
-
-            // Set NeedCheck label
-            UILabel* pUILabelWarning = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_NeedCheck"));
-            pUILabelWarning->setVisible(needCheck);
+            // Request info according the diffDay.
+            CCHttpRequest* request = new CCHttpRequest();
+            std::string url = "http://localhost:8000/plaque/" + std::string(str);
+            request->setUrl(url.c_str());
+            request->setRequestType(CCHttpRequest::kHttpGet);
+            request->setResponseCallback(this, httpresponse_selector(TartarLayer::onHttpRequestCompleted));
+            request->setTag("GET INFO");
+            CCHttpClient::getInstance()->send(request);
+            request->release();
         }
     }
 }
@@ -182,6 +188,91 @@ void TartarLayer::BottonFinishClicked( CCObject* pSender )
 void TartarLayer::BottonOrderClicked( CCObject* pSender )
 {
     SceneManager::CreateScene(MainMenu_Doctor);
+}
+
+void TartarLayer::onHttpRequestCompleted(CCHttpClient *sender, CCHttpResponse *response)
+{
+    if (!response)
+    {
+        return;
+    }
+    
+    int statusCode = response->getResponseCode();
+    char statusString[64] = {};
+    sprintf(statusString, "HTTP Status Code: %d, tag = %s", statusCode, response->getHttpRequest()->getTag());
+    CCLog("response code: %d", statusCode);
+    
+    if (!response->isSucceed())
+    {
+        CCLog("response failed");
+        CCLog("error buffer: %s", response->getErrorBuffer());
+        return;
+    }
+    
+    // dump data
+    std::vector<char> *buffer = response->getResponseData();
+    std::string bufferStr(buffer->begin(),buffer->end());
+
+    if (std::string(response->getHttpRequest()->getTag()) == std::string("GET INFO"))
+    {
+        // Display the memberId and name.
+        cJSON* json;
+        json = cJSON_Parse(bufferStr.c_str());
+        if (json) 
+        {
+            cJSON* messageJSON = cJSON_GetObjectItem(json, "message");
+            if (messageJSON)
+            {
+                // Set NeedCheck label
+                UILabel* pUILabelWarning = DynamicCast<UILabel*>(UiManager::Singleton().GetChildByName("Label_NeedCheck"));
+                pUILabelWarning->setVisible(true);
+                pUILabelWarning->setText(messageJSON->valuestring);
+            }
+
+            cJSON* imageJSON = cJSON_GetObjectItem(json, "image");
+            if (imageJSON)
+            {
+                std::string imagePath = imageJSON->valuestring;
+                CCHttpRequest* request = new CCHttpRequest();
+                std::string url = "http://localhost:8000/media/" + imagePath;
+                request->setUrl(url.c_str());
+                request->setRequestType(CCHttpRequest::kHttpGet);
+                request->setResponseCallback(this, httpresponse_selector(TartarLayer::onHttpRequestCompleted));
+                request->setTag("GET IMAGE");
+                CCHttpClient::getInstance()->send(request);
+                request->release();
+
+                int index = imagePath.find_last_of(".");
+                if (index != -1)
+                {
+                    m_textureFormat = imagePath.substr(index);
+                }
+            }
+        }
+    }
+    else
+    {
+        std::string path = CCFileUtils::sharedFileUtils()->getWritablePath();
+
+        // Save it locally
+        path += "currentTeeth";
+        path += m_textureFormat;
+        
+        CCLOG("path: %s",path.c_str());
+        FILE *fp = fopen(path.c_str(), "wb+");
+        fwrite(bufferStr.c_str(), 1,buffer->size(), fp);
+        fclose(fp);
+    
+        // Display
+        UIImageView* pImage = DynamicCast<UIImageView*>(UiManager::Singleton().GetChildByName("ImageView"));
+        pImage->setTexture(path.c_str());            
+        CCRect rect = pImage->getRect();
+        float normalWidth = cocos2d::CCEGLView::sharedOpenGLView()->getDesignResolutionSize().width - 10.0f;
+        float normalHeight = normalWidth * 0.6f;
+        pImage->setScaleX(normalWidth / rect.size.width * pImage->getScaleX());
+        pImage->setScaleY(normalHeight / rect.size.height * pImage->getScaleY());
+    }
+    
 }
 
 //------------------------------------------------------------------

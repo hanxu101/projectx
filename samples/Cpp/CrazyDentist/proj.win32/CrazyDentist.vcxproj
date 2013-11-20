@@ -77,7 +77,7 @@
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libExtensions.lib;opengl32.lib;glew32.lib;libcocos2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libExtensions.lib;opengl32.lib;glew32.lib;libcocos2d.lib;libcurl_imp.lib;pthreadVCE2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -104,7 +104,7 @@
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;libcocos2d.lib;libExtensions.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;libcocos2d.lib;libExtensions.lib;libcurl_imp.lib;pthreadVCE2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -120,6 +120,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\GameData.cpp" />
     <ClCompile Include="..\Classes\Scene\SceneBase.cpp" />
     <ClCompile Include="..\Classes\Scene\SceneCredits.cpp" />
     <ClCompile Include="..\Classes\Scene\SceneDoctor.cpp" />
@@ -130,6 +131,7 @@
     <ClCompile Include="..\Classes\Scene\SceneTartar.cpp" />
     <ClCompile Include="..\Classes\Ui\TextFieldTTFLayer\TextFieldTTFLayer.cpp" />
     <ClCompile Include="..\Classes\Ui\UiManager.cpp" />
+    <ClCompile Include="..\Classes\utilities\cJSON\cJSON.c" />
     <ClCompile Include="..\Classes\VisibleRect.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -137,6 +139,7 @@
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\AppMacros.h" />
     <ClInclude Include="..\Classes\CommonHeaders.h" />
+    <ClInclude Include="..\Classes\GameData.h" />
     <ClInclude Include="..\Classes\ResourceDefines.h" />
     <ClInclude Include="..\Classes\Scene\SceneBase.h" />
     <ClInclude Include="..\Classes\Scene\SceneCredits.h" />
@@ -148,6 +151,7 @@
     <ClInclude Include="..\Classes\Scene\SceneTartar.h" />
     <ClInclude Include="..\Classes\Ui\TextFieldTTFLayer\TextFieldTTFLayer.h" />
     <ClInclude Include="..\Classes\Ui\UiManager.h" />
+    <ClInclude Include="..\Classes\utilities\cJSON\cJSON.h" />
     <ClInclude Include="..\Classes\utilities\FSM\Fsm.h" />
     <ClInclude Include="..\Classes\utilities\FSM\Fsm.hpp" />
     <ClInclude Include="..\Classes\utilities\FSM\FsmInclude.h" />

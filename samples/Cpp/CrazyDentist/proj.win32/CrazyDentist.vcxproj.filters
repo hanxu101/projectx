@@ -24,6 +24,9 @@
     <Filter Include="Classes\UI\TextFieldTTFLayer">
       <UniqueIdentifier>{d8fba6dd-8e40-4f62-aaa7-1983ba9eb9fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Utilities\cJSON">
+      <UniqueIdentifier>{e9c156fa-1c06-4d21-b23f-d9e8c1ab5849}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -64,6 +67,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Ui\TextFieldTTFLayer\TextFieldTTFLayer.cpp">
       <Filter>Classes\UI\TextFieldTTFLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\utilities\cJSON\cJSON.c">
+      <Filter>Classes\Utilities\cJSON</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameData.cpp">
+      <Filter>Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +153,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Ui\TextFieldTTFLayer\TextFieldTTFLayer.h">
       <Filter>Classes\UI\TextFieldTTFLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\utilities\cJSON\cJSON.h">
+      <Filter>Classes\Utilities\cJSON</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameData.h">
+      <Filter>Classes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

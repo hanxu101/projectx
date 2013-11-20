@@ -8,7 +8,7 @@ USING_NS_CC;
 enum
 {
     MainMenu_Login = 0,
-    MainMenu_Credits,
+    //MainMenu_Credits,
 
     MainMenu_Home,
     MainMenu_Game,
@@ -20,8 +20,8 @@ enum
 };
 
 const std::string g_MainMenuNames[MainMenu_Count] = {
-    "Enter",
-    "Credits"
+    "Enter"
+    //"Credits"
 };
 
 class SceneBase;

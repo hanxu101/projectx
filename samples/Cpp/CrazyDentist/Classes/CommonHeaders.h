@@ -10,5 +10,6 @@
 #include "utilities/Utilities.h"
 #include "utilities/Singleton.h"
 #include "utilities/TypeDefines.h"
+#include "utilities/cJSON/cJSON.h"
 
 #endif  //COMMON_HEADERS_H

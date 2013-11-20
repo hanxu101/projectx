@@ -4,6 +4,7 @@
 #include "SceneBase.h"
 
 USING_NS_CC;
+USING_NS_CC_EXT;
 
 class DoctorLayer: public CCLayer
 {
@@ -16,7 +17,10 @@ public:
 
 private:
     void BottonGoClicked( CCObject* pSender );
+    void onHttpRequestCompleted(CCHttpClient *sender, CCHttpResponse *response);
 
+private:
+    std::string m_mapTextureFormat;
 };
 
 class SceneDoctor : public SceneBase

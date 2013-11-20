@@ -10,6 +10,7 @@
 #include "SceneDoctor.h"
 
 #include "Ui/UiManager.h"
+#include "GameData.h"
 
 USING_NS_CC;
 
@@ -17,7 +18,10 @@ SceneManager::SceneManager()
 {
     // UI Init
     if (!UiManager::IsSingletonCreated())
-        UiManager::CreateSingleton();    
+        UiManager::CreateSingleton();
+    // GamdData Init
+    if (!GameData::IsSingletonCreated())
+        GameData::CreateSingleton();
 
      // add close menu
     CCMenuItemImage *pCloseItem = CCMenuItemImage::create(s_pPathClose, s_pPathCloseSelected, this, menu_selector(SceneManager::closeCallback) );
@@ -28,7 +32,7 @@ SceneManager::SceneManager()
 
     // add menu items for Main Menu
     m_pItemMenu = CCMenu::create();
-    for (int i = 0; i <= MainMenu_Credits; ++i)
+    for (int i = 0; i < MainMenu_Home; ++i)
     {
         CCLabelTTF* label = CCLabelTTF::create(g_MainMenuNames[i].c_str(), COMMON_FONT_NAME, COMMON_FONT_SIZE);
         label->setColor(ccWHITE);
@@ -65,6 +69,32 @@ SceneManager::SceneManager()
     // add the sprite as a child to this layer
     this->addChild(pSprite, 0);
 
+
+    
+    // Check if it's the 1st time to run the application. if it is. send the info.
+    std::string path = CCFileUtils::sharedFileUtils()->getWritablePath();
+    path += "installlogfile";
+        
+    FILE *fp = fopen(path.c_str(), "r");
+    if (fp)
+        fclose(fp);
+    else
+    {
+        // send the info
+        /*CCHttpRequest* request = new CCHttpRequest();
+        std::string url = "http://127.0.0.1:8000/member/" + std::string(m_pTextField->getString());
+        request->setUrl(url.c_str());
+        request->setRequestType(CCHttpRequest::kHttpGet);
+        request->setResponseCallback(this, httpresponse_selector(LoginLayer::onHttpRequestCompleted));
+        request->setTag("GET test1");
+        CCHttpClient::getInstance()->send(request);
+        request->release();
+        */
+
+        fp = fopen(path.c_str(), "w");
+        fclose(fp);
+    }
+        
 }
 
 void SceneManager::menuCallback(CCObject * pSender)
@@ -106,8 +136,8 @@ SceneBase* SceneManager::CreateScene( int nIdx )
     {
     case MainMenu_Login:
         pScene = new SceneLogin(); break;
-    case MainMenu_Credits:
-        pScene = new SceneCredits(); break;
+//     case MainMenu_Credits:
+//         pScene = new SceneCredits(); break;
     case MainMenu_Home:
         pScene = new SceneHome(); break;
     case MainMenu_Game:

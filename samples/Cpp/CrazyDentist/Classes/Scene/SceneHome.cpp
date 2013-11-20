@@ -3,6 +3,7 @@
 #include "SceneHome.h"
 #include "SceneManager.h"
 #include "Ui/UiManager.h"
+#include "GameData.h"
 
 //------------------------------------------------------------------
 //
@@ -30,15 +31,15 @@ void HomeLayer::onEnter()
     UiManager::Singleton().Init(this);
     UiManager::Singleton().SetupWidget("../UIProject/Json/Home.json");
 
-    UIButton* pButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("TextButton_Game"));
+    UITextButton* pButton = DynamicCast<UITextButton*>(UiManager::Singleton().GetChildByName("TextButton_Game"));
     pButton->addReleaseEvent(this, coco_releaseselector(HomeLayer::BottonGameClicked));
 
-    pButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("TextButton_Tartar"));
+    pButton = DynamicCast<UITextButton*>(UiManager::Singleton().GetChildByName("TextButton_Tartar"));
     pButton->addReleaseEvent(this, coco_releaseselector(HomeLayer::BottonTartarClicked));
 
-    pButton = DynamicCast<UIButton*>(UiManager::Singleton().GetChildByName("TextButton_Doctor"));
+    pButton = DynamicCast<UITextButton*>(UiManager::Singleton().GetChildByName("TextButton_Doctor"));
     pButton->addReleaseEvent(this, coco_releaseselector(HomeLayer::BottonDoctorClicked));
-
+    pButton->setText(GameData::Singleton().GetClinicName().c_str());
 }
 
 void HomeLayer::BottonGameClicked( CCObject* pSender )
